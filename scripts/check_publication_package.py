@@ -53,6 +53,19 @@ REQUIRED_PATHS = {
         "training_logs/experiments_dedup_regularized/publication_summary.json",
         "training_logs/experiments_perceptual_regularized/publication_summary.json",
     ],
+    "explainability_review": [
+        "docs/review_bundle/DR_COCKROFT_DRAFT_PACKET.md",
+        "docs/review_bundle/output/pdf/Dr_Cockroft_review_memo.pdf",
+        "docs/review_bundle/explainability/index.html",
+        "docs/review_bundle/explainability/SUMMARY.md",
+        "docs/review_bundle/explainability/per_image.csv",
+        "docs/review_bundle/explainability/provenance.json",
+        "docs/review_bundle/explainability/summary.json",
+        "docs/review_bundle/explainability/figure8a_gradcam.png",
+        "docs/review_bundle/explainability/figure8b_gradcam.png",
+        "scripts/build_explainability_bundle.py",
+        "scripts/check_explainability_bundle.py",
+    ],
     "source_scripts": [
         "scripts/build_publication_tables.py",
         "scripts/build_publication_evidence.py",
@@ -393,6 +406,7 @@ def write_status_doc(
             "- Probability evidence: `training_logs/publication_evidence/`.",
             "- Leakage audits: `training_logs/publication_audit/`.",
             "- Grounded report path: `docs/GROUNDED_REPORTING.md` and `src/grounded_report.py`.",
+            "- Mentor review and explainability: `docs/review_bundle/DR_COCKROFT_DRAFT_PACKET.md`, `docs/review_bundle/explainability/index.html`, and `docs/review_bundle/explainability/SUMMARY.md`.",
             "",
             "## Regeneration Commands",
             "",
@@ -438,6 +452,14 @@ def write_status_doc(
 
 def main() -> None:
     checks = check_required_paths()
+    # Validate explainability contents, not just presence of generated files.
+    import runpy
+    try:
+        review_check = runpy.run_path(str(PROJECT_ROOT / 'scripts/check_explainability_bundle.py'))
+        review_check['main']()
+        checks.append(Check('PASS', 'Explainability integrity', 'Sample counts, aggregates, source hashes and accepted probability agreement verified', 'Exploratory attribution only; no anatomical or external validation.'))
+    except (AssertionError, OSError, ValueError, KeyError) as exc:
+        checks.append(Check('FAIL', 'Explainability integrity', str(exc) or 'Integrity assertion failed', 'Regenerate and inspect the explainability bundle.'))
     cnn_rows = read_csv("docs/publication_cnn_results.csv")
     audit_rows = read_csv("docs/publication_audit_checks.csv")
     vlm_rows = read_csv("docs/publication_vlm_results.csv")

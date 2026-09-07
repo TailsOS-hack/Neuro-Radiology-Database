@@ -481,6 +481,18 @@ CAPTIONS = {
 }
 
 
+CAPTIONS.update({
+    "figure8a_gradcam.png": (
+        "Figure 8a. Dementia Specialist Grad-CAM",
+        "Figure 8a. Predicted-class Grad-CAM from the accepted MobileNetV3 dementia checkpoint on strict-test images. Each class contributes its lowest-confidence correct prediction and, when available, highest-confidence error. Panels show the resized input, native-resolution CAM, and overlay. Selection is diagnostic, not representative. Confidence denotes softmax model confidence; attribution is not anatomically validated and does not establish clinical validity."
+    ),
+    "figure8b_gradcam.png": (
+        "Figure 8b. Tumor Specialist Grad-CAM",
+        "Figure 8b. Corresponding diagnostic gallery for the accepted EfficientNet-B3 tumor specialist, using the same class-wise selection rule as Figure 8a. These public-dataset examples are distinct from the seeded class-balanced perturbation sample. Heatmaps do not exclude source bias or establish lesion localization."
+    ),
+})
+
+
 def write_caption_doc(paths: list[Path]) -> Path:
     lines = [
         "# Figure Captions",
@@ -513,6 +525,10 @@ def main() -> None:
         figure6_calibration_confidence(),
         figure7_roc_pr(),
     ]
+    for name in ['figure8a_gradcam.png', 'figure8b_gradcam.png']:
+        extra = DOCS_DIR / 'review_bundle' / 'explainability' / name
+        if extra.exists():
+            paths.append(extra)
     caption_doc = write_caption_doc(paths)
     for path in paths:
         print(f"Wrote {path.relative_to(PROJECT_ROOT)}")

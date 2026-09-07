@@ -30,3 +30,12 @@ This manifest maps the manuscript draft to the final generated figure files and 
 - Publication evidence plots are generated from the accepted checkpoint probability outputs in `training_logs/publication_evidence/`.
 - For journal submission, export final panels at the journal-required resolution and adjust lettering or panel sizing to match the target journal style guide.
 - Keep `docs/PUBLICATION_RESULTS_TABLES.md` and `docs/PUBLICATION_EVIDENCE_RESULTS.md` as the source of truth for numeric values in figure captions.
+
+## Explainability review figures (supplement candidates)
+
+| Figure | Artifact | Source evidence |
+| --- | --- | --- |
+| 8a: Dementia Grad-CAM | `docs/review_bundle/explainability/figure8a_gradcam.png` | Accepted dementia checkpoint; diagnostic strict-test selection recorded in `per_image.csv` |
+| 8b: Tumor Grad-CAM | `docs/review_bundle/explainability/figure8b_gradcam.png` | Accepted tumor checkpoint; diagnostic strict-test selection recorded in `per_image.csv` |
+
+Regenerate first with `python3 scripts/build_explainability_bundle.py`; then run the ordinary figure builder to refresh all captions. [The full-resolution HTML gallery](review_bundle/explainability/index.html) is the preferred mentor review format. [The quantitative summary](review_bundle/explainability/SUMMARY.md) describes the separately seeded sample, denominators and interpretation limits. No expert anatomical annotations or external validation are implied.

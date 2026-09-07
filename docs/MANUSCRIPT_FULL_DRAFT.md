@@ -94,6 +94,12 @@ The application includes a deterministic report generator that converts structur
 
 Accuracy confidence intervals are reported in `docs/PUBLICATION_RESULTS_TABLES.md`. Probability-level evidence is stored under `training_logs/publication_evidence/`. Figure assets and captions are stored under `docs/figures/` and `docs/FIGURE_CAPTIONS.md`. The reproducibility gate is `python3 scripts/check_publication_package.py`.
 
+### 2.9 Exploratory Specialist Explainability
+
+Predicted-class Grad-CAM was computed from the last convolutional feature block of the accepted exact-deduplicated EfficientNet-B3 tumor and MobileNetV3 dementia checkpoints, using gradients of the predicted logit (Selvaraju et al., reference 11). Evaluation preprocessing and class mappings were preserved. A seeded class-balanced strict-test sample comprised 32 images per class (128 per specialist). A separate diagnostic gallery selected the lowest-confidence correct prediction and highest-confidence error in each true class, where such cases existed, from the archived strict-test probabilities. No heatmap appearance informed selection.
+
+For each valid map, the top 20% of upsampled CAM pixels were replaced with the ImageNet mean RGB baseline. The change in original predicted-class softmax score was compared with the mean change from five seeded random masks of equal pixel count. The paired difference is a single-fraction perturbation diagnostic, not deletion AUC or anatomical localization accuracy. CAM mass in the outer 10% image frame was also measured. The frame is not a brain/background segmentation. Means and sample SDs are descriptive; image dependence and unavailable patient identifiers preclude patient-independent statistical inference. Failure counts, per-class summaries, software versions and content hashes are included in `docs/review_bundle/explainability/`. Sampled unperturbed probabilities were checked against the accepted archive with a maximum absolute tolerance of 0.0001. No model was retrained for this attribution analysis.
+
 ## 3. Results
 
 ### 3.1 Leakage Audit And Corrected Training
@@ -128,6 +134,12 @@ Multimodal VLMs were substantially weaker than CNNs for direct MRI image classif
 
 Figure 5 compares CNN and VLM results. These findings support keeping CNNs as the diagnostic image classifiers and using language models only for constrained report or metadata assistance.
 
+### 3.6 Exploratory Grad-CAM And Perturbation Diagnostics
+
+All 128 sampled images per specialist yielded non-flat Grad-CAM maps. The dementia sample was drawn from 8,806 strict-test images and the tumor sample from 1,445. Mean predicted-class confidence drops after masking the highest-CAM 20% of pixels were 0.4453 for dementia and 0.3027 for tumor, compared with 0.6901 and 0.6808 for equal-count random pixel masking. Thus the mean paired top-CAM-minus-random drop was negative (−0.2448 dementia; −0.3780 tumor). This diagnostic does not support preferential sensitivity to the highlighted regions. Because the random controls are spatially scattered rather than shape matched, these differences cannot establish an attribution-faithfulness ranking or biological mechanism.
+
+Mean CAM mass in the outer image frame was 0.1992 for dementia and 0.0754 for tumor. These are geometric descriptors, not evidence of correct brain or lesion localization. Figures 8a–8b show seven dementia and eight tumor diagnostic examples selected independently of heatmap appearance; the quantitative aggregates exclude gallery-only cases. Per-image results, class-specific means and SDs, and selection records are available in `docs/review_bundle/explainability/`. The negative perturbation comparison is retained without post hoc selection, retraining, or test-based tuning.
+
 ## 4. Discussion
 
 This study shows that strong internal public-dataset performance remains possible after correcting exact duplicate leakage and testing a stricter perceptual-hash sensitivity split. The single 8-class CNN slightly outperformed the hierarchical CNN in both the accepted exact-deduplicated run and the conservative dHash sensitivity run. The hierarchical design remains useful for interpretability because it separates broad-domain routing from domain-specific subtype prediction, but the single-head baseline should be reported as the top strict-test classifier.
@@ -137,6 +149,8 @@ The most important methodological lesson is that near-perfect performance should
 The dHash sensitivity run is also important. Exact duplicate removal is necessary but may not address visually similar augmented images. Grouping by identical dHash fingerprints is conservative and may group clinically distinct but visually similar MRI slices. Performance decreased modestly but remained high, especially for the integrated classifiers, which supports the robustness of the primary result while still warning that patient-level validation is unavailable.
 
 The VLM experiments provide a negative but useful result. Current open multimodal VLMs tested here did not approach CNN performance for direct MRI labeling. Even LoRA adaptation improved only modestly and collapsed some labels. This supports a non-hallucinating design in which deterministic CNN outputs are used for classification and language models, if used at all, are constrained to style or metadata tasks with strict fact preservation.
+
+Grad-CAM adds an inspectable record of model behavior, but the perturbation controls are not shape matched, and mean replacement can create out-of-distribution images. No anatomical ground truth, expert localization scoring, parameter-randomization analysis, or external explainability validation was performed. These diagnostics cannot establish biological relevance or rule out source-domain shortcuts.
 
 ## 5. Limitations
 
@@ -163,6 +177,7 @@ After leakage correction and robustness testing, CNN classifiers achieved strong
 - Figure 5: CNN versus VLM comparison.
 - Figure 6: Calibration and confidence evidence.
 - Figure 7: ROC and precision-recall evidence.
+- Figures 8a–8b: Dementia and tumor diagnostic Grad-CAM galleries (supplement candidate).
 
 ## Table Callouts
 
@@ -186,6 +201,7 @@ Replace this section with the target venue's required reference style.
 8. Add Qwen/Qwen2.5-VL references if VLM experiments remain in the main manuscript.
 9. Add LoRA reference if LoRA experiments remain in the main manuscript.
 10. Add calibration/ECE reference if the target venue expects methodological citations.
+11. Selvaraju RR, Cogswell M, Das A, Vedantam R, Parikh D, Batra D. Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization. ICCV 2017; extended version IJCV 2019. https://arxiv.org/abs/1610.02391.
 
 ## Final Editing Notes
 

@@ -43,3 +43,15 @@ Figure 6. Calibration and confidence evidence. Domain specialists show lower exp
 Artifact: `docs/figures/figure7_roc_pr_curves.png`
 
 Figure 7. One-vs-rest ROC and precision-recall evidence for accepted CNN checkpoints, generated from full strict-test probability outputs.
+
+## Figure 8a. Dementia Specialist Grad-CAM
+
+Artifact: `docs/review_bundle/explainability/figure8a_gradcam.png`
+
+Figure 8a. Predicted-class Grad-CAM from the accepted MobileNetV3 dementia checkpoint on strict-test images. Each class contributes its lowest-confidence correct prediction and, when available, highest-confidence error. Panels show the resized input, native-resolution CAM, and overlay. Selection is diagnostic, not representative. Confidence denotes softmax model confidence; attribution is not anatomically validated and does not establish clinical validity.
+
+## Figure 8b. Tumor Specialist Grad-CAM
+
+Artifact: `docs/review_bundle/explainability/figure8b_gradcam.png`
+
+Figure 8b. Corresponding diagnostic gallery for the accepted EfficientNet-B3 tumor specialist, using the same class-wise selection rule as Figure 8a. These public-dataset examples are distinct from the seeded class-balanced perturbation sample. Heatmaps do not exclude source bias or establish lesion localization.

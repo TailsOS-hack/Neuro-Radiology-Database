@@ -39,3 +39,7 @@ Model folders:
 ## Interpretation
 
 The tumor and dementia specialists show strong discrimination and low calibration error. The single 8-class and hierarchical models keep high ROC AUC and AP, but their ECE values are higher than the domain specialists, so the paper should report confidence calibration as a limitation and avoid treating softmax confidence as calibrated clinical probability.
+
+## Specialist explainability review supplement
+
+The accepted specialist checkpoints are evaluated without retraining using `scripts/build_explainability_bundle.py`. Figures 8a–8b provide separately selected error/low-confidence galleries; a seeded sample of 32 images per class per specialist supports descriptive perturbation and image-border diagnostics. Results and methods are in [the review bundle](review_bundle/README.md) and [quantitative summary](review_bundle/explainability/SUMMARY.md). The full manuscript contains the corresponding Methods and Results additions. These diagnostics do not establish anatomical correctness, calibrated clinical probabilities, absence of source bias, or external validity. Public-data, patient-metadata, and external-validation limitations remain unchanged.

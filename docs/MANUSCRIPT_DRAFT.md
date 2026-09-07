@@ -94,3 +94,7 @@ The raw images are not redistributed in this repository. They can be obtained fr
 - Include the initial leakage audit as a methodological correction, not as a final result.
 - Report VLM experiments as negative direct-classification results.
 - Avoid clinical claims beyond this dataset.
+
+## Specialist explainability review supplement
+
+The accepted specialist checkpoints are evaluated without retraining using `scripts/build_explainability_bundle.py`. Figures 8a–8b provide separately selected error/low-confidence galleries; a seeded sample of 32 images per class per specialist supports descriptive perturbation and image-border diagnostics. Results and methods are in [the review bundle](review_bundle/README.md) and [quantitative summary](review_bundle/explainability/SUMMARY.md). The full manuscript contains the corresponding Methods and Results additions. These diagnostics do not establish anatomical correctness, calibrated clinical probabilities, absence of source bias, or external validity. Public-data, patient-metadata, and external-validation limitations remain unchanged.
