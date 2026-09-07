@@ -1,0 +1,51 @@
+{
+  "run_id": "validation-v2-20260907",
+  "protocol_sha256": "979968fff9fde9f91333631f7518a35ee9e76360f29124e1df222abf3fed022d",
+  "selection_sha256": "4fe0c92d3248e9668dda918ec01c231956a8232712134a78f5f1ff49bca9cd45",
+  "device": "mps",
+  "torch": "2.14.0",
+  "checkpoints": {
+    "tumor": {
+      "sha256": "3d4f5b00ed8f432845385a165ab1050460181bc420259c363c1a98567a8c8c84",
+      "classes": [
+        "glioma",
+        "meningioma",
+        "notumor",
+        "pituitary"
+      ]
+    },
+    "dementia": {
+      "sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+      "classes": [
+        "MildDemented",
+        "ModerateDemented",
+        "NonDemented",
+        "VeryMildDemented"
+      ]
+    }
+  },
+  "randomized_state_sha256": {
+    "tumor|42|head": "02591ae0a7e294f67de02d4c8cbf82b55c7a2598570bf6ebd2ac25fc1c3f4b38",
+    "tumor|42|head_final": "44462894bcd3c7e4c089c2375bdcced39d5b3610752c1c77752a0795cb062757",
+    "tumor|42|full": "23d5d2be4b1bbc751cd53d17e0de5c1049f7eaafda821a0257e58a0275b06759",
+    "tumor|43|head": "e6b38e9e9e1b13b1fd44e3e4ccad28fed44d8a60ac1da3b8f087ff62deba0d41",
+    "tumor|43|head_final": "c1e60245372ea602472a3aa4e6765a51386d49b74b491f0c2dce407349116e8c",
+    "tumor|43|full": "b2c825469045e0de64058336cfaf9710be125b68dcf4ae78d49f1cf6dc577d1d",
+    "tumor|44|head": "4980324d71f2673bf6465c042f74f938e79281b4346ad2b58db626da52b68a38",
+    "tumor|44|head_final": "253bcdf10781e2bdc2625c2a85700fa83c087d95148cc743d2cdbe6cfaf1e842",
+    "tumor|44|full": "ea7b87e7168e6c7389769ebc92bb5ccd6ced40066f68f36e8b3407915567c531",
+    "dementia|42|head": "067ed418167e9527dfa0c07d4ed95ff2c34942957b23de532aa9e4318f5d7a76",
+    "dementia|42|head_final": "550fe5d32d8de997b30e80bbc4b06663fcced60c30a8bcac08de7520999b594a",
+    "dementia|42|full": "67f0943f4ac0c1928eea14a22376b7ef5d59e57b29a49b0ba623a4cfed569097",
+    "dementia|43|head": "78e1474cd907840e6fcd76ef58b84416135e93e46ff8c8470b1c2defff08aaf1",
+    "dementia|43|head_final": "341f2aa067d719c89a73fe9dc66ab3fa99e2fcc4ca11f86960bbeba1356bb5ab",
+    "dementia|43|full": "9edebed0ef9360de0e559f387b21baf2edf77fe6858a9839f1c7732cc04ad2e2",
+    "dementia|44|head": "6508f2ee2321fe1a3b04b03e10c3bd4d41828302d17777690eef9f732a51f063",
+    "dementia|44|head_final": "c9b6691fd5d7537fa3ae196a672b718c4470215729013e1afcb201ae9a0adc88",
+    "dementia|44|full": "7931d933c17ab98a768fa484fd35eeaf2d43c209bc0c1b01ae4998f0fcc8ed27"
+  },
+  "source_sha256": {
+    "src/explainability_validation.py": "314437bcfc580e80b8d48297027f147b1bd2a9b64c85bf273587491c6490168a",
+    "src/grad_cam.py": "0a94b4d643b13d6cc86a1943d476628c02e9da374548b67a44dc386a3e74d462"
+  }
+}

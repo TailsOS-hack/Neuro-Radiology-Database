@@ -1,0 +1,4 @@
+# Lightweight evidence verification; no models, GUI, training or network at runtime.
+numpy==2.5.3
+scipy==1.18.1
+Pillow==12.3.0

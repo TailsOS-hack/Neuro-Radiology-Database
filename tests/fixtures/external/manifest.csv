@@ -1,0 +1,7 @@
+image_path,patient_id,reference_label,cohort_id
+synthetic_0.png,synthetic_patient_0,mild,synthetic_fixture
+synthetic_1.png,synthetic_patient_0,mild,synthetic_fixture
+synthetic_2.png,synthetic_patient_1,moderate,synthetic_fixture
+synthetic_3.png,synthetic_patient_2,normal,synthetic_fixture
+synthetic_4.png,synthetic_patient_3,very_mild,synthetic_fixture
+synthetic_5.png,synthetic_patient_3,very_mild,synthetic_fixture

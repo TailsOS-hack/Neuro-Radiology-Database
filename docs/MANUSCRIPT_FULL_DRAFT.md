@@ -100,6 +100,14 @@ Predicted-class Grad-CAM was computed from the last convolutional feature block 
 
 For each valid map, the top 20% of upsampled CAM pixels were replaced with the ImageNet mean RGB baseline. The change in original predicted-class softmax score was compared with the mean change from five seeded random masks of equal pixel count. The paired difference is a single-fraction perturbation diagnostic, not deletion AUC or anatomical localization accuracy. CAM mass in the outer 10% image frame was also measured. The frame is not a brain/background segmentation. Means and sample SDs are descriptive; image dependence and unavailable patient identifiers preclude patient-independent statistical inference. Failure counts, per-class summaries, software versions and content hashes are included in `docs/review_bundle/explainability/`. Sampled unperturbed probabilities were checked against the accepted archive with a maximum absolute tolerance of 0.0001. No model was retrained for this attribution analysis.
 
+<!-- validation-v2-methods:start -->
+### 2.10 Follow-up Explainability Controls And Research Calibration
+
+The frozen follow-up protocol (validation-v2-20260907) reused the original 256-image sample and gallery selection. Top-CAM masking at 10%, 20% and 30% was compared with five scattered-random masks and up to five distinct nonidentity rotations/reflections of the same binary mask, using ImageNet-mean and Gaussian-blur replacement (kernel 31, sigma 10). Progressive randomization of the classifier head, head plus final feature block, and full model used seeds 42–44 with the original predicted target held fixed; native-map Spearman correlation and top-20% IoU were summarized only for valid maps, with failures counted. These diagnostics do not validate anatomy.
+
+Four scalar temperatures were fitted by minimizing validation NLL over [0.05, 20] and frozen before complete strict-test inference. Unsuccessful or non-improving fits retain temperature 1. Hard-routed hierarchical classification and joint-probability argmax are reported separately. The validation split had already influenced checkpoint selection, and the test set had already been inspected; this is not independent validation. The application and accepted model weights were unchanged. Reproduction and external-cohort readiness are documented in `docs/VALIDATION_V2_REPRODUCTION.md` and `docs/EXTERNAL_VALIDATION_READINESS.md`.
+<!-- validation-v2-methods:end -->
+
 ## 3. Results
 
 ### 3.1 Leakage Audit And Corrected Training
@@ -139,6 +147,14 @@ Figure 5 compares CNN and VLM results. These findings support keeping CNNs as th
 All 128 sampled images per specialist yielded non-flat Grad-CAM maps. The dementia sample was drawn from 8,806 strict-test images and the tumor sample from 1,445. Mean predicted-class confidence drops after masking the highest-CAM 20% of pixels were 0.4453 for dementia and 0.3027 for tumor, compared with 0.6901 and 0.6808 for equal-count random pixel masking. Thus the mean paired top-CAM-minus-random drop was negative (−0.2448 dementia; −0.3780 tumor). This diagnostic does not support preferential sensitivity to the highlighted regions. Because the random controls are spatially scattered rather than shape matched, these differences cannot establish an attribution-faithfulness ranking or biological mechanism.
 
 Mean CAM mass in the outer image frame was 0.1992 for dementia and 0.0754 for tumor. These are geometric descriptors, not evidence of correct brain or lesion localization. Figures 8a–8b show seven dementia and eight tumor diagnostic examples selected independently of heatmap appearance; the quantitative aggregates exclude gallery-only cases. Per-image results, class-specific means and SDs, and selection records are available in `docs/review_bundle/explainability/`. The negative perturbation comparison is retained without post hoc selection, retraining, or test-based tuning.
+
+<!-- validation-v2-results:start -->
+### 3.7 Follow-up Controls And Calibration
+
+In the follow-up run validation-v2-20260907, top-CAM masking at 20% with ImageNet-mean replacement exceeded shape-preserving control confidence drops by 0.2037 for dementia and 0.0873 for tumor. The random-pixel comparisons remained control dependent; the original negative comparison is retained as historical evidence. Figures 9 and 10 show masking-control and randomization diagnostics, with all flat/failed-map counts in the supplement. These results do not establish anatomical correctness or absence of source shortcuts.
+
+Dementia ECE changed from 0.038596 to 0.000581, and tumor ECE from 0.037228 to 0.012143, on the complete internal strict test. Component class predictions were unchanged. Figure 11 presents reliability diagrams; full NLL, Brier, ECE, accuracy and fitting-status records are in the [generated follow-up results](review_bundle_v2/validation-v2-20260907/RESULTS.md). Lower internal ECE does not establish calibrated clinical probability. External validation remains not performed.
+<!-- validation-v2-results:end -->
 
 ## 4. Discussion
 

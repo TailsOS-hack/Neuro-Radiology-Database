@@ -1,0 +1,19 @@
+{
+  "run_id": "validation-v2-20260907",
+  "status": "frozen_before_followup_execution",
+  "baseline": "docs/review_bundle/explainability",
+  "seed": 42,
+  "fractions": [0.1, 0.2, 0.3],
+  "replacements": ["imagenet_mean", "gaussian_blur"],
+  "blur_kernel": 31,
+  "blur_sigma": 10.0,
+  "random_controls": 5,
+  "shape_controls": "up to five distinct nonidentity D4 rotations/reflections, exact area, no clipping; spatial reorientation may retain central support",
+  "randomization_seeds": [42, 43, 44],
+  "randomization_stages": ["head", "head_final", "full"],
+  "target": "original accepted predicted-class logit, held fixed",
+  "native_overlap_fraction": 0.2,
+  "calibration": {"method": "scalar_temperature", "bounds": [0.05, 20.0], "objective": "validation NLL", "fallback": 1.0, "bins": 10},
+  "external_validation": "not performed",
+  "claim_limits": "Follow-up on an already inspected public-image test set; validation influenced checkpoint selection. No patient independence, anatomical validation, absence of source bias, calibrated clinical probability or external validity is established. No retraining or application changes."
+}

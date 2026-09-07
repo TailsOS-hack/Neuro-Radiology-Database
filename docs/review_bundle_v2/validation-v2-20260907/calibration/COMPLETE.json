@@ -1,0 +1,22 @@
+{
+  "files": {
+    "binary_test_logits.npy": "d7fdcac55c505d85d184ac14b0e508e0996dc29983ba465bffd4cfc26944120d",
+    "binary_val_logits.npy": "93976919cbaaaa4693e5984b4a67faffc9061ab12e27971284f77bc5a1062668",
+    "dementia_test_logits.npy": "b6dd84a15de59987f8ed41393fe95b0a8777d7f4814ec07c7e2d408955efaa4a",
+    "dementia_val_logits.npy": "1a9a84507bd1e7182d94962eebc1798dbac9d6b1cd7cbf71e4078405936de022",
+    "eight_class_test_logits.npy": "7579755e8f8364b7750373016552c594133db3671838e3de12e6d0b659dcfe6a",
+    "eight_class_val_logits.npy": "6f5a8ee10fd2e925ecbc2df7d80f420824f15a7a62d8db3e4488cc373c858c16",
+    "hierarchical_calibrated_probabilities.npy": "9116234e8028eb8abc26c95336d735d51c5dabe028a16c595a598b16ef732bfd",
+    "hierarchical_calibrated_routed.npy": "277367fba908040621e8b76acb9174e7a9bf6d252d8e815421c83ee0e78393e8",
+    "hierarchical_original_probabilities.npy": "04f24f7a393bf6bcffa12f728da55762b07591d5fed9a1840d2a830c2408e5b1",
+    "hierarchical_original_routed.npy": "277367fba908040621e8b76acb9174e7a9bf6d252d8e815421c83ee0e78393e8",
+    "provenance.json": "45a134ad3732109ff171eba8499e99607283a1825c5d9f1142ff7d8442ea24bb",
+    "reliability.png": "948688f50c0b09284d1a71bff3f773f1c9d0f837b3cd4237bc7a85a3699c1b98",
+    "summary.json": "db4b98700a25ca037a55e96bde029b5565d053a0f6a964fb6c3f178086d68a17",
+    "temperatures.json": "93180ba77c0b1b1c99d8505b76d96970352843d3cd81c6d2428ac2d4d0a537d3",
+    "test_index.csv": "545c04f09ff8b95901a7d5f5e0287d552b61581e81cbf4172c1328ca4df5625d",
+    "tumor_test_logits.npy": "9c2af523bd147404c3e488a4b1fe05a3c474e1b05ee1502fea7249fd37cb3073",
+    "tumor_val_logits.npy": "d25f59675f70b04716d2f51bdfd8522e71e8f5140b46269b623b70acd1f65806",
+    "val_index.csv": "3388d758969357fa24796b43c539a968d4ad41c1a1a772f1884812ccd866a52e"
+  }
+}

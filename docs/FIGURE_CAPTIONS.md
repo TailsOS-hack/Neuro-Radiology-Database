@@ -55,3 +55,17 @@ Figure 8a. Predicted-class Grad-CAM from the accepted MobileNetV3 dementia check
 Artifact: `docs/review_bundle/explainability/figure8b_gradcam.png`
 
 Figure 8b. Corresponding diagnostic gallery for the accepted EfficientNet-B3 tumor specialist, using the same class-wise selection rule as Figure 8a. These public-dataset examples are distinct from the seeded class-balanced perturbation sample. Heatmaps do not exclude source bias or establish lesion localization.
+
+<!-- validation-v2-reference:start -->
+## Versioned validation follow-up — validation-v2-20260907
+
+The original results and mentor packet remain the historical baseline. [Follow-up results](review_bundle_v2/validation-v2-20260907/RESULTS.md), [Figures 9–11 and gallery](review_bundle_v2/validation-v2-20260907/index.html), and the [updated mentor memo](review_bundle_v2/validation-v2-20260907/MENTOR_MEMO.md) are generated from the same completed run. These research-only analyses retain all public-data, patient-metadata, source-bias, calibration and absent-external-validation limitations.
+### Follow-up figure captions — validation-v2-20260907
+
+Figure 9. Paired top-CAM-minus-control confidence drops across three masking fractions, two replacement baselines and two control types. Means use the fixed class-balanced sample of 128 images per specialist. Geometric controls preserve binary-mask shape and area, not anatomical meaning.
+
+Figure 10. Native CAM Spearman correlations after progressive model randomization, with the original predicted target held fixed. Means include valid maps only; flat/failed counts are reported in RESULTS.md. This is not a clinical attribution-validation test.
+
+Figure 11. Original and temperature-scaled internal strict-test reliability diagrams for four component models and both hierarchical prediction rules. Temperatures were fitted on validation data only. Internal reliability does not establish calibrated clinical probability.
+
+<!-- validation-v2-reference:end -->

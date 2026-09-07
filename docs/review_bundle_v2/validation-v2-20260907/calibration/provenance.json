@@ -1,0 +1,78 @@
+{
+  "run_id": "validation-v2-20260907",
+  "protocol_sha256": "979968fff9fde9f91333631f7518a35ee9e76360f29124e1df222abf3fed022d",
+  "manifest_sha256": "5b910d6e822192de06f4f2610c0041671da9326591b32505374226f7326383fc",
+  "torch": "2.14.0",
+  "device": "mps",
+  "checkpoints": {
+    "binary": {
+      "sha256": "697cdd23fa6b6a97a68323d64aefcc4e51215dd2829097931684b0c099815c1f",
+      "classes": [
+        "tumor",
+        "dementia"
+      ],
+      "image_size": 224
+    },
+    "tumor": {
+      "sha256": "3d4f5b00ed8f432845385a165ab1050460181bc420259c363c1a98567a8c8c84",
+      "classes": [
+        "glioma",
+        "meningioma",
+        "notumor",
+        "pituitary"
+      ],
+      "image_size": 224
+    },
+    "dementia": {
+      "sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+      "classes": [
+        "MildDemented",
+        "ModerateDemented",
+        "NonDemented",
+        "VeryMildDemented"
+      ],
+      "image_size": 224
+    },
+    "eight_class": {
+      "sha256": "79087cae3cbeaaae67ef5adbb5260c234140b4e8c2954c62ed140bcad4e4a220",
+      "classes": [
+        "tumor_glioma",
+        "tumor_meningioma",
+        "tumor_notumor",
+        "tumor_pituitary",
+        "dementia_MildDemented",
+        "dementia_ModerateDemented",
+        "dementia_NonDemented",
+        "dementia_VeryMildDemented"
+      ],
+      "image_size": 224
+    }
+  },
+  "source_sha256": {
+    "scripts/evaluate_calibration.py": "d1de4ac61528a1ee4667ec157c890e90f046d8064bb46fa33cc3bbbc53affdb7",
+    "src/research_validation.py": "051c2c33fde7fd10b7daff72f775e299f47a6a083b21137d079acc1cb559969c"
+  },
+  "frozen_temperatures_sha256": "93180ba77c0b1b1c99d8505b76d96970352843d3cd81c6d2428ac2d4d0a537d3",
+  "concordance": {
+    "binary": {
+      "max_probability_difference": 5.537767756580436e-07,
+      "prediction_disagreements": 0,
+      "n": 10251
+    },
+    "tumor": {
+      "max_probability_difference": 5.157507975184217e-05,
+      "prediction_disagreements": 0,
+      "n": 1445
+    },
+    "dementia": {
+      "max_probability_difference": 1.5650589273774607e-05,
+      "prediction_disagreements": 0,
+      "n": 8806
+    },
+    "eight_class": {
+      "max_probability_difference": 5.1211219740388e-06,
+      "prediction_disagreements": 0,
+      "n": 10251
+    }
+  }
+}

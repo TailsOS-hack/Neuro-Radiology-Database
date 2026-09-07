@@ -1,0 +1,112 @@
+{
+  "binary": {
+    "method": "scalar_temperature",
+    "temperature": 0.051175363781693003,
+    "candidate_temperature": 0.051175363781693003,
+    "optimization_success": true,
+    "optimization_message": "Solution found.",
+    "boundary_solution": false,
+    "status": "fitted",
+    "original_val_nll": 0.1320128638267198,
+    "fitted_val_nll": 2.1522901931343906e-18,
+    "n": 4952,
+    "split": "val",
+    "bounds": [
+      0.05,
+      20.0
+    ],
+    "objective": "NLL",
+    "checkpoint_sha256": "697cdd23fa6b6a97a68323d64aefcc4e51215dd2829097931684b0c099815c1f",
+    "validation_manifest_sha256": "3388d758969357fa24796b43c539a968d4ad41c1a1a772f1884812ccd866a52e",
+    "validation_logits_sha256": "93976919cbaaaa4693e5984b4a67faffc9061ab12e27971284f77bc5a1062668",
+    "classes": [
+      "tumor",
+      "dementia"
+    ]
+  },
+  "tumor": {
+    "method": "scalar_temperature",
+    "temperature": 0.6324299099372417,
+    "candidate_temperature": 0.6324299099372417,
+    "optimization_success": true,
+    "optimization_message": "Solution found.",
+    "boundary_solution": false,
+    "status": "fitted",
+    "original_val_nll": 0.08159884772304862,
+    "fitted_val_nll": 0.052946386488254005,
+    "n": 553,
+    "split": "val",
+    "bounds": [
+      0.05,
+      20.0
+    ],
+    "objective": "NLL",
+    "checkpoint_sha256": "3d4f5b00ed8f432845385a165ab1050460181bc420259c363c1a98567a8c8c84",
+    "validation_manifest_sha256": "3388d758969357fa24796b43c539a968d4ad41c1a1a772f1884812ccd866a52e",
+    "validation_logits_sha256": "d25f59675f70b04716d2f51bdfd8522e71e8f5140b46269b623b70acd1f65806",
+    "classes": [
+      "glioma",
+      "meningioma",
+      "notumor",
+      "pituitary"
+    ]
+  },
+  "dementia": {
+    "method": "scalar_temperature",
+    "temperature": 0.4612128611899062,
+    "candidate_temperature": 0.4612128611899062,
+    "optimization_success": true,
+    "optimization_message": "Solution found.",
+    "boundary_solution": false,
+    "status": "fitted",
+    "original_val_nll": 0.04249463960603022,
+    "fitted_val_nll": 0.005178330444372615,
+    "n": 4399,
+    "split": "val",
+    "bounds": [
+      0.05,
+      20.0
+    ],
+    "objective": "NLL",
+    "checkpoint_sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+    "validation_manifest_sha256": "3388d758969357fa24796b43c539a968d4ad41c1a1a772f1884812ccd866a52e",
+    "validation_logits_sha256": "1a9a84507bd1e7182d94962eebc1798dbac9d6b1cd7cbf71e4078405936de022",
+    "classes": [
+      "MildDemented",
+      "ModerateDemented",
+      "NonDemented",
+      "VeryMildDemented"
+    ]
+  },
+  "eight_class": {
+    "method": "scalar_temperature",
+    "temperature": 0.4078295392248171,
+    "candidate_temperature": 0.4078295392248171,
+    "optimization_success": true,
+    "optimization_message": "Solution found.",
+    "boundary_solution": false,
+    "status": "fitted",
+    "original_val_nll": 0.1549619723798281,
+    "fitted_val_nll": 0.013282246059974035,
+    "n": 4952,
+    "split": "val",
+    "bounds": [
+      0.05,
+      20.0
+    ],
+    "objective": "NLL",
+    "checkpoint_sha256": "79087cae3cbeaaae67ef5adbb5260c234140b4e8c2954c62ed140bcad4e4a220",
+    "validation_manifest_sha256": "3388d758969357fa24796b43c539a968d4ad41c1a1a772f1884812ccd866a52e",
+    "validation_logits_sha256": "6f5a8ee10fd2e925ecbc2df7d80f420824f15a7a62d8db3e4488cc373c858c16",
+    "classes": [
+      "tumor_glioma",
+      "tumor_meningioma",
+      "tumor_notumor",
+      "tumor_pituitary",
+      "dementia_MildDemented",
+      "dementia_ModerateDemented",
+      "dementia_NonDemented",
+      "dementia_VeryMildDemented"
+    ]
+  }
+}

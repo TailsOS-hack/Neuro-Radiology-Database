@@ -16,3 +16,8 @@ training_logs/splits/*
 notebooks/.ipynb_checkpoints/
 __pycache__/
 *.py[cod]
+
+# Unpublished transactional research outputs
+.validation-staging-*/
+.external-staging-*/
+*.zip.partial

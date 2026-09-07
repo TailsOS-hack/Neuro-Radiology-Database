@@ -1,0 +1,12 @@
+{
+  "python": "3.13.13",
+  "packages": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "torch": "2.14.0",
+    "torchvision": "0.29.0",
+    "Pillow": "12.3.0",
+    "matplotlib": "3.11.1",
+    "reportlab": "4.4.9"
+  }
+}

@@ -39,3 +39,9 @@ This manifest maps the manuscript draft to the final generated figure files and 
 | 8b: Tumor Grad-CAM | `docs/review_bundle/explainability/figure8b_gradcam.png` | Accepted tumor checkpoint; diagnostic strict-test selection recorded in `per_image.csv` |
 
 Regenerate first with `python3 scripts/build_explainability_bundle.py`; then run the ordinary figure builder to refresh all captions. [The full-resolution HTML gallery](review_bundle/explainability/index.html) is the preferred mentor review format. [The quantitative summary](review_bundle/explainability/SUMMARY.md) describes the separately seeded sample, denominators and interpretation limits. No expert anatomical annotations or external validation are implied.
+
+<!-- validation-v2-reference:start -->
+## Versioned validation follow-up — validation-v2-20260907
+
+The original results and mentor packet remain the historical baseline. [Follow-up results](review_bundle_v2/validation-v2-20260907/RESULTS.md), [Figures 9–11 and gallery](review_bundle_v2/validation-v2-20260907/index.html), and the [updated mentor memo](review_bundle_v2/validation-v2-20260907/MENTOR_MEMO.md) are generated from the same completed run. These research-only analyses retain all public-data, patient-metadata, source-bias, calibration and absent-external-validation limitations.
+<!-- validation-v2-reference:end -->

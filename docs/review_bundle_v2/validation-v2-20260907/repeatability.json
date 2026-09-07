@@ -1,0 +1,9 @@
+{
+  "status": "pass",
+  "rtol": 0.0001,
+  "atol": 1e-05,
+  "arrays": 2187,
+  "max_array_absolute_difference": 0.0,
+  "csv_rows": 19313,
+  "note": "Same protocol, sample, checkpoint identities and device; compare numeric outputs, not image metadata."
+}

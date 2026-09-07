@@ -73,14 +73,14 @@ def main():
         if checkpoint_path.stat().st_size < 1024:
             raise RuntimeError(f'{checkpoint_path}: missing trained weights (LFS pointer)')
         model, ckpt = ep.load_checkpoint_model(checkpoint_path, torch.device('cpu'))
-        assert ckpt['task']==task and ckpt['class_names']==ep.TASK_CLASS_NAMES[task]
+        if not (ckpt['task'] == task and ckpt['class_names'] == ep.TASK_CLASS_NAMES[task]): raise ValueError("Explainability invariant failed: ckpt['task'] == task and ckpt['class_names'] == ep.TASK_CLASS_NAMES[task]")
         evidence_path=ROOT/f'training_logs/publication_evidence/{task}/probabilities.csv'
         evidence=list(csv.DictReader(evidence_path.open()))
-        assert len({r['image_path'] for r in evidence})==len(evidence)
+        if not (len({r['image_path'] for r in evidence}) == len(evidence)): raise ValueError("Explainability invariant failed: len({r['image_path'] for r in evidence}) == len(evidence)")
         expected={r['path'] for r in manifest if r['split']=='test' and r['domain']==task}
-        assert {r['image_path'] for r in evidence}==expected, 'Evidence/manifest mismatch'
+        if not ({r['image_path'] for r in evidence} == expected): raise ValueError('Evidence/manifest mismatch')
         for r in evidence:
-            assert test_paths[r['image_path']]['subtype']==r['true_label']
+            if not (test_paths[r['image_path']]['subtype'] == r['true_label']): raise ValueError("Explainability invariant failed: test_paths[r['image_path']]['subtype'] == r['true_label']")
         rng=random.Random(args.seed)
         quantitative=[]
         display={}
@@ -115,7 +115,7 @@ def main():
             if target!=int(ref['pred_index']) or delta>1e-4:
                 raise RuntimeError(f'Checkpoint does not reproduce accepted probabilities: {path}, max difference {delta}')
             cam=GradCAM(model,layer).generate(x,target)
-            assert not layer._forward_hooks and not layer._backward_hooks
+            if not (not layer._forward_hooks and (not layer._backward_hooks)): raise ValueError('Explainability invariant failed: not layer._forward_hooks and (not layer._backward_hooks)')
             row={'task':task,'path':path,'image_sha256':sha(ROOT/path),'true_label':ref['true_label'],
                  'predicted_label':ckpt['class_names'][target],'confidence':float(probs[target]),
                  'correct':int(ref['correct']),'quantitative_sample':int(path in qpaths),
@@ -125,7 +125,7 @@ def main():
                  'border_mass':None}
             case_id=task+'_'+hashlib.sha256(path.encode()).hexdigest()[:12]
             if cam is not None:
-                assert np.isfinite(cam).all() and cam.min()>=0 and cam.max()<=1
+                if not (np.isfinite(cam).all() and cam.min() >= 0 and (cam.max() <= 1)): raise ValueError('Explainability invariant failed: np.isfinite(cam).all() and cam.min() >= 0 and (cam.max() <= 1)')
                 provenance['checkpoints'][task]['native_cam_shape']=list(cam.shape)
                 np.save(out/'maps'/f'{case_id}.npy',cam)
                 row['cam_path']=f'maps/{case_id}.npy'
@@ -208,4 +208,10 @@ def main():
     print(json.dumps(summaries,indent=2),flush=True)
 
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    if '--followup' in sys.argv:
+        sys.argv.remove('--followup')
+        from src.explainability_validation import main as followup_main
+        followup_main()
+    else:
+        main()

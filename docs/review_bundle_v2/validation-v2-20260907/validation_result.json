@@ -1,0 +1,16 @@
+{
+  "run_id": "validation-v2-20260907",
+  "mode": "full",
+  "external_validation": "not performed",
+  "explainability": {
+    "sample_n": 256,
+    "perturbations": 1536,
+    "randomizations": 2304
+  },
+  "calibration": {
+    "validation_n": 4952,
+    "test_n": 10251,
+    "models": 4
+  },
+  "status": "pass"
+}

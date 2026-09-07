@@ -511,6 +511,12 @@ def write_caption_doc(paths: list[Path]) -> Path:
         lines.append("")
     output = DOCS_DIR / "FIGURE_CAPTIONS.md"
     output.write_text("\n".join(lines), encoding="utf-8")
+    followup = DOCS_DIR / 'review_bundle_v2/validation-v2-20260907'
+    if followup.exists():
+        import sys
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.update_validation_manuscript import update
+        update(followup)
     return output
 
 

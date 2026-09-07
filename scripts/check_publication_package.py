@@ -451,6 +451,10 @@ def write_status_doc(
 
 
 def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--no-write', action='store_true', help='Verify without rewriting historical status documentation')
+    args = parser.parse_args()
     checks = check_required_paths()
     # Validate explainability contents, not just presence of generated files.
     import runpy
@@ -472,11 +476,23 @@ def main() -> None:
     checks.extend(evidence_checks)
     checks.extend(check_vlm(vlm_rows, primary))
 
-    write_status_doc(checks, primary, sensitivity, evidence)
+    followup = PROJECT_ROOT / 'docs/review_bundle_v2/validation-v2-20260907'
+    if followup.exists():
+        from scripts.check_validation_review import check as check_followup
+        try:
+            result = check_followup(followup)
+            from scripts.update_validation_manuscript import update
+            update(followup, verify=True)
+            checks.append(Check('PASS', 'Follow-up validation integrity', result['run_id'], 'Research-only; external validation not performed.'))
+        except (ValueError, OSError, KeyError) as exc:
+            checks.append(Check('FAIL', 'Follow-up validation integrity', str(exc), 'Regenerate the versioned evidence.'))
+    if not args.no_write:
+        write_status_doc(checks, primary, sensitivity, evidence)
 
     failures = [check for check in checks if check.status == "FAIL"]
     warnings = [check for check in checks if check.status == "WARN"]
-    print(f"Wrote {rel(OUTPUT_PATH)}")
+    if not args.no_write:
+        print(f"Wrote {rel(OUTPUT_PATH)}")
     print(f"Checks: {len(checks)} total, {len(failures)} fail, {len(warnings)} warn")
     if failures:
         raise SystemExit(1)

@@ -43,3 +43,9 @@ The tumor and dementia specialists show strong discrimination and low calibratio
 ## Specialist explainability review supplement
 
 The accepted specialist checkpoints are evaluated without retraining using `scripts/build_explainability_bundle.py`. Figures 8a–8b provide separately selected error/low-confidence galleries; a seeded sample of 32 images per class per specialist supports descriptive perturbation and image-border diagnostics. Results and methods are in [the review bundle](review_bundle/README.md) and [quantitative summary](review_bundle/explainability/SUMMARY.md). The full manuscript contains the corresponding Methods and Results additions. These diagnostics do not establish anatomical correctness, calibrated clinical probabilities, absence of source bias, or external validity. Public-data, patient-metadata, and external-validation limitations remain unchanged.
+
+<!-- validation-v2-reference:start -->
+## Versioned validation follow-up — validation-v2-20260907
+
+The original results and mentor packet remain the historical baseline. [Follow-up results](review_bundle_v2/validation-v2-20260907/RESULTS.md), [Figures 9–11 and gallery](review_bundle_v2/validation-v2-20260907/index.html), and the [updated mentor memo](review_bundle_v2/validation-v2-20260907/MENTOR_MEMO.md) are generated from the same completed run. These research-only analyses retain all public-data, patient-metadata, source-bias, calibration and absent-external-validation limitations.
+<!-- validation-v2-reference:end -->

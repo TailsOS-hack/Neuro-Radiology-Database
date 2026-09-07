@@ -1,0 +1,22 @@
+{
+  "status": "synthetic_fixture_only",
+  "external_validation": "not performed",
+  "images": 6,
+  "warnings": [
+    "site unavailable for 6/6 images",
+    "scanner unavailable for 6/6 images",
+    "sequence unavailable for 6/6 images",
+    "acquisition_date unavailable for 6/6 images",
+    "reference_standard unavailable for 6/6 images"
+  ],
+  "manifest_sha256": "40a023b8b3455125c18e7d13dc19babaf2db05e8d5f50fa3e0d4c605af5dfc38",
+  "label_mapping_sha256": "5850635182bdeb43edfa2a05fea74ad0456a925a225eafbed9156149d2968775",
+  "internal_manifest_sha256": "9cf9e88990f5dd30af4ef48bac1d066afce1be16cfed820e70143dedd4f29ce7",
+  "classes": [
+    "MildDemented",
+    "ModerateDemented",
+    "NonDemented",
+    "VeryMildDemented"
+  ],
+  "task": "dementia"
+}

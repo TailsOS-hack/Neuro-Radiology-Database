@@ -1,0 +1,43 @@
+name: Validation evidence integrity
+on:
+  pull_request:
+    paths: ['src/**', 'scripts/**', 'tests/**', 'docs/**', 'training_logs/**', 'requirements-verification.txt', '.github/workflows/validation-evidence.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /src/
+            /scripts/
+            /tests/
+            /docs/
+            /training_logs/
+            /models/*.pt
+            /requirements-verification.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-verification.txt
+      - run: python -m pip install -r requirements-verification.txt
+      - name: Offline contracts and deliberate corruption checks
+        run: python -m unittest discover -s tests -p 'test_validation*.py' -v
+      - name: Frozen baseline integrity
+        run: python -O scripts/check_explainability_bundle.py
+      - name: Follow-up numerical evidence and generated text
+        run: python -O scripts/check_validation_review.py docs/review_bundle_v2/validation-v2-20260907 --json-output /tmp/validation-result.json
+      - name: Publication cross-references
+        run: python scripts/check_publication_package.py --no-write
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-evidence-check
+          path: /tmp/validation-result.json

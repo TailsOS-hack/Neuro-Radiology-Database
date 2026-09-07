@@ -1,0 +1,25 @@
+test_corruption_and_incomplete_staging (test_validation.ArtifactTests.test_corruption_and_incomplete_staging) ... ok
+test_each_artifact_type_is_hash_checked (test_validation.ArtifactTests.test_each_artifact_type_is_hash_checked) ... ok
+test_hierarchy_routes_and_probability_argmax_are_distinct (test_validation.CalibrationTests.test_hierarchy_routes_and_probability_argmax_are_distinct) ... ok
+test_identity_and_fallback (test_validation.CalibrationTests.test_identity_and_fallback) ... ok
+test_validation_only_and_improvement (test_validation.CalibrationTests.test_validation_only_and_improvement) ... ok
+test_control_area_geometry_and_determinism (test_validation.ExplainabilityTests.test_control_area_geometry_and_determinism) ... ok
+test_similarity_and_flat_maps (test_validation.ExplainabilityTests.test_similarity_and_flat_maps) ... ok
+test_symmetric_masks_report_no_controls (test_validation.ExplainabilityTests.test_symmetric_masks_report_no_controls) ... ok
+test_cluster_bootstrap_and_missing_class (test_validation.ExternalTests.test_cluster_bootstrap_and_missing_class) ... ok
+test_fixture_and_missing_optional_metadata (test_validation.ExternalTests.test_fixture_and_missing_optional_metadata) ... ok
+test_internal_duplicate_and_unreadable_rejected (test_validation.ExternalTests.test_internal_duplicate_and_unreadable_rejected) ... ok
+test_pixel_identical_reencoding_rejected (test_validation.ExternalTests.test_pixel_identical_reencoding_rejected) ... ok
+test_unknown_label_and_patient_rejected (test_validation.ExternalTests.test_unknown_label_and_patient_rejected) ... ok
+test_calibration_split_corruption_after_reseal (test_validation_artifacts.CompletedEvidenceTests.test_calibration_split_corruption_after_reseal) ... ok
+test_count_corruption_after_reseal (test_validation_artifacts.CompletedEvidenceTests.test_count_corruption_after_reseal) ... ok
+test_document_link_corruption_after_reseal (test_validation_artifacts.CompletedEvidenceTests.test_document_link_corruption_after_reseal) ... ok
+test_manuscript_number_corruption_after_reseal (test_validation_artifacts.CompletedEvidenceTests.test_manuscript_number_corruption_after_reseal) ... ok
+test_native_map_corruption_after_reseal (test_validation_artifacts.CompletedEvidenceTests.test_native_map_corruption_after_reseal) ... ok
+test_sd_corruption_after_reseal (test_validation_artifacts.CompletedEvidenceTests.test_sd_corruption_after_reseal) ... ok
+test_shape_identity_corruption_after_reseal (test_validation_artifacts.CompletedEvidenceTests.test_shape_identity_corruption_after_reseal) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 7.497s
+
+OK
