@@ -1,0 +1,224 @@
+{
+  "strict_manifest": {
+    "n": 51023,
+    "unique_paths": 51023,
+    "counts": {
+      "dementia/test/MildDemented": 2006,
+      "dementia/test/ModerateDemented": 2001,
+      "dementia/test/NonDemented": 2560,
+      "dementia/test/VeryMildDemented": 2239,
+      "tumor/test/glioma": 300,
+      "tumor/test/meningioma": 308,
+      "tumor/test/notumor": 530,
+      "tumor/test/pituitary": 307,
+      "dementia/train/MildDemented": 6997,
+      "dementia/train/ModerateDemented": 6994,
+      "dementia/train/NonDemented": 8962,
+      "dementia/train/VeryMildDemented": 7842,
+      "tumor/train/glioma": 1189,
+      "tumor/train/meningioma": 1204,
+      "tumor/train/notumor": 1326,
+      "tumor/train/pituitary": 1306,
+      "dementia/val/MildDemented": 997,
+      "dementia/val/ModerateDemented": 1005,
+      "dementia/val/NonDemented": 1278,
+      "dementia/val/VeryMildDemented": 1119,
+      "tumor/val/glioma": 132,
+      "tumor/val/meningioma": 133,
+      "tumor/val/notumor": 144,
+      "tumor/val/pituitary": 144
+    },
+    "unreadable": [],
+    "cross_split": {
+      "file": {
+        "groups": 0,
+        "rows": 0,
+        "split_patterns": {},
+        "dementia_rows": 0,
+        "examples": []
+      },
+      "pixels": {
+        "groups": 125,
+        "rows": 301,
+        "split_patterns": {
+          "test,train": 111,
+          "test,val": 14
+        },
+        "dementia_rows": 0,
+        "examples": [
+          [
+            {
+              "path": "data/brain_tumor/Testing/meningioma/Te-meTr_0001.jpg",
+              "split": "test",
+              "subtype": "meningioma"
+            },
+            {
+              "path": "data/brain_tumor/Training/meningioma/Tr-me_0196.jpg",
+              "split": "train",
+              "subtype": "meningioma"
+            }
+          ],
+          [
+            {
+              "path": "data/brain_tumor/Testing/meningioma/Te-meTr_0003.jpg",
+              "split": "test",
+              "subtype": "meningioma"
+            },
+            {
+              "path": "data/brain_tumor/Training/meningioma/Tr-me_0195.jpg",
+              "split": "train",
+              "subtype": "meningioma"
+            }
+          ],
+          [
+            {
+              "path": "data/brain_tumor/Testing/meningioma/Te-meTr_0004.jpg",
+              "split": "test",
+              "subtype": "meningioma"
+            },
+            {
+              "path": "data/brain_tumor/Training/meningioma/Tr-me_0595.jpg",
+              "split": "val",
+              "subtype": "meningioma"
+            }
+          ]
+        ]
+      },
+      "dhash": {
+        "groups": 3290,
+        "rows": 22304,
+        "split_patterns": {
+          "test,val": 114,
+          "test,train": 1722,
+          "test,train,val": 735,
+          "train,val": 719
+        },
+        "dementia_rows": 21186,
+        "examples": [
+          [
+            {
+              "path": "data/alzheimers/MildDemented/002cb9c1-b160-4c76-b7e4-5fb2f1b527f7.jpg",
+              "split": "test",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/84f6c8c7-80c3-4458-b142-769245dab4a9.jpg",
+              "split": "test",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/3523d8ab-beb4-4e7d-bc94-ea773ac98672.jpg",
+              "split": "val",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          [
+            {
+              "path": "data/alzheimers/MildDemented/013c7086-9972-4193-8544-31c9fbb49072.jpg",
+              "split": "test",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/06b13257-4ec2-4eef-a281-c52366e56712.jpg",
+              "split": "test",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/30b46873-e074-4bc6-aa16-6fba24cbc180.jpg",
+              "split": "test",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/f23f5dae-b5e2-4da0-a7a6-2417ddf27f76.jpg",
+              "split": "test",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/32 (22).jpg",
+              "split": "val",
+              "subtype": "MildDemented"
+            }
+          ],
+          [
+            {
+              "path": "data/alzheimers/MildDemented/018bbc21-7957-4714-9466-9f96430249c7.jpg",
+              "split": "test",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/698ec94c-be95-4939-bb6a-790c652a0559.jpg",
+              "split": "train",
+              "subtype": "MildDemented"
+            }
+          ]
+        ]
+      }
+    },
+    "conflicting_label_groups": {
+      "file": 0,
+      "pixels": 0,
+      "dhash": 1899
+    },
+    "manifest_sha256": "5b910d6e822192de06f4f2610c0041671da9326591b32505374226f7326383fc"
+  },
+  "perceptual_strict_manifest": {
+    "n": 51023,
+    "unique_paths": 51023,
+    "counts": {
+      "dementia/test/MildDemented": 1890,
+      "dementia/test/ModerateDemented": 2088,
+      "dementia/test/NonDemented": 2670,
+      "dementia/test/VeryMildDemented": 2233,
+      "tumor/test/glioma": 300,
+      "tumor/test/meningioma": 418,
+      "tumor/test/notumor": 987,
+      "tumor/test/pituitary": 314,
+      "dementia/train/MildDemented": 6992,
+      "dementia/train/ModerateDemented": 6957,
+      "dementia/train/NonDemented": 8658,
+      "dementia/train/VeryMildDemented": 7654,
+      "tumor/train/glioma": 1189,
+      "tumor/train/meningioma": 1104,
+      "tumor/train/notumor": 907,
+      "tumor/train/pituitary": 1298,
+      "dementia/val/MildDemented": 1118,
+      "dementia/val/ModerateDemented": 955,
+      "dementia/val/NonDemented": 1472,
+      "dementia/val/VeryMildDemented": 1313,
+      "tumor/val/glioma": 132,
+      "tumor/val/meningioma": 123,
+      "tumor/val/notumor": 106,
+      "tumor/val/pituitary": 145
+    },
+    "unreadable": [],
+    "cross_split": {
+      "file": {
+        "groups": 0,
+        "rows": 0,
+        "split_patterns": {},
+        "dementia_rows": 0,
+        "examples": []
+      },
+      "pixels": {
+        "groups": 0,
+        "rows": 0,
+        "split_patterns": {},
+        "dementia_rows": 0,
+        "examples": []
+      },
+      "dhash": {
+        "groups": 0,
+        "rows": 0,
+        "split_patterns": {},
+        "dementia_rows": 0,
+        "examples": []
+      }
+    },
+    "conflicting_label_groups": {
+      "file": 0,
+      "pixels": 0,
+      "dhash": 1899
+    },
+    "manifest_sha256": "fe8c0d51ff4e690bf20768fd4982a265001bab1d3d980770c2efb2e97f10ae88"
+  }
+}

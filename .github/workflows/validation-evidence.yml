@@ -29,7 +29,7 @@ jobs:
           cache-dependency-path: requirements-verification.txt
       - run: python -m pip install -r requirements-verification.txt
       - name: Offline contracts and deliberate corruption checks
-        run: python -m unittest discover -s tests -p 'test_validation*.py' -v
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Frozen baseline integrity
         run: python -O scripts/check_explainability_bundle.py
       - name: Follow-up numerical evidence and generated text

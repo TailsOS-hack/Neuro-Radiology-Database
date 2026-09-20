@@ -1,0 +1,240 @@
+{
+  "primary": {
+    "binary": {
+      "n": 10251,
+      "correct": 10251,
+      "errors": 0,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "metrics_path": "training_logs/experiments_dedup_regularized/binary/20260512_013727/test/metrics.json",
+      "predictions_sha256": "1675ae164438ebadb006dab1cfbad7a0a727d810597f87ebfe91836836f1fc5d",
+      "epochs": 5,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 0.2551246043342508,
+        "train_accuracy": 0.9945840312674483,
+        "val_loss": 0.400421388278774,
+        "val_accuracy": 1.0
+      },
+      "final_epoch": {
+        "epoch": 5,
+        "train_loss": 0.24692357583195054,
+        "train_accuracy": 1.0,
+        "val_loss": 0.3999844568274518,
+        "val_accuracy": 1.0
+      },
+      "best_validation_epoch_last_tie": 5,
+      "history_path": "training_logs/experiments_dedup_regularized/binary/20260512_013727/history.json",
+      "history_sha256": "0dd3919e20aa4701d78a2ee294fb5e5b07373b4cf3a89b53f869a0570e2ad048"
+    },
+    "tumor": {
+      "n": 1445,
+      "correct": 1415,
+      "errors": 30,
+      "accuracy": 0.9792387543252595,
+      "macro_f1": 0.9790887528139313,
+      "metrics_path": "training_logs/experiments_dedup_regularized/tumor/20260512_021514/test/metrics.json",
+      "predictions_sha256": "1700049f590b6dd665897f5cf958f9611dd9093381bda638e6b2aa743b9eb0d9",
+      "epochs": 10,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 0.9254533499390332,
+        "train_accuracy": 0.7122388059701492,
+        "val_loss": 0.47451828061779844,
+        "val_accuracy": 0.9113924050632911
+      },
+      "final_epoch": {
+        "epoch": 10,
+        "train_loss": 0.23563005480600233,
+        "train_accuracy": 0.9924378109452736,
+        "val_loss": 0.246013923482481,
+        "val_accuracy": 0.9819168173598554
+      },
+      "best_validation_epoch_last_tie": 8,
+      "history_path": "training_logs/experiments_dedup_regularized/tumor/20260512_021514/history.json",
+      "history_sha256": "434784a4bf88058f228b5be84d6d4a6d63e7c05c431c35aaf18a521366b1bad3"
+    },
+    "dementia": {
+      "n": 8806,
+      "correct": 8798,
+      "errors": 8,
+      "accuracy": 0.9990915285032932,
+      "macro_f1": 0.9991357771694546,
+      "metrics_path": "training_logs/experiments_dedup_regularized/dementia/20260512_022515/test/metrics.json",
+      "predictions_sha256": "7d00c086147a8f7d6f22712e3a3e8f675166f6f872e525abcd2d4ec3e46d989d",
+      "epochs": 16,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 0.8389451178797539,
+        "train_accuracy": 0.659392758564702,
+        "val_loss": 0.6681555842887166,
+        "val_accuracy": 0.7576721982268697
+      },
+      "final_epoch": {
+        "epoch": 16,
+        "train_loss": 0.2152999326995604,
+        "train_accuracy": 0.9964604643610976,
+        "val_loss": 0.2115528650292214,
+        "val_accuracy": 0.9984087292566493
+      },
+      "best_validation_epoch_last_tie": 15,
+      "history_path": "training_logs/experiments_dedup_regularized/dementia/20260512_022515/history.json",
+      "history_sha256": "7e5664c8653a1b9cd4f10f7f406daeb138435bc2ec9cb505e67ad073832c3890"
+    },
+    "hierarchical": {
+      "n": 10251,
+      "correct": 10213,
+      "errors": 38,
+      "accuracy": 0.9962930445810165,
+      "macro_f1": 0.9891122649916929,
+      "metrics_path": "training_logs/experiments_dedup_regularized/hierarchical/test_evaluation/metrics.json",
+      "predictions_sha256": "ab1e974b7d7c0d7461fa9697d9b52a1a90d3b3bab6a6586ae98a5eccffcf6c34"
+    },
+    "eight_class": {
+      "n": 10251,
+      "correct": 10222,
+      "errors": 29,
+      "accuracy": 0.9971710077065652,
+      "macro_f1": 0.990524913231328,
+      "metrics_path": "training_logs/experiments_dedup_regularized/eight_class/20260512_025559/test/metrics.json",
+      "predictions_sha256": "7dc9dfd4339ce5c9130c0617f7872452525cf9cde0eb74d66fc3e6901de582a7",
+      "epochs": 17,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 1.1822678521982721,
+        "train_accuracy": 0.5921831379117811,
+        "val_loss": 1.2360796456575778,
+        "val_accuracy": 0.7358642972536349
+      },
+      "final_epoch": {
+        "epoch": 17,
+        "train_loss": 0.49558764734060523,
+        "train_accuracy": 0.9940256839754327,
+        "val_loss": 0.7172117391194973,
+        "val_accuracy": 0.9979806138933764
+      },
+      "best_validation_epoch_last_tie": 15,
+      "history_path": "training_logs/experiments_dedup_regularized/eight_class/20260512_025559/history.json",
+      "history_sha256": "8f0ab1def8086d3ed24034ec9482e28bcec5714a72d531962e659eafd7785dfb"
+    }
+  },
+  "sensitivity": {
+    "binary": {
+      "n": 10900,
+      "correct": 10900,
+      "errors": 0,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "metrics_path": "training_logs/experiments_perceptual_regularized/binary/20260513_155157/test/metrics.json",
+      "predictions_sha256": "4f1982e489b92c7078ab814e1c0c4e4c27a2fffbd7b98eaa872daadf5621c122",
+      "epochs": 5,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 0.2719764944905773,
+        "train_accuracy": 0.9975833597054,
+        "val_loss": 0.43490937443298694,
+        "val_accuracy": 1.0
+      },
+      "final_epoch": {
+        "epoch": 5,
+        "train_loss": 0.26298922602743274,
+        "train_accuracy": 1.0,
+        "val_loss": 0.43440966162550015,
+        "val_accuracy": 1.0
+      },
+      "best_validation_epoch_last_tie": 5,
+      "history_path": "training_logs/experiments_perceptual_regularized/binary/20260513_155157/history.json",
+      "history_sha256": "27c62424abf9333ecf2b5dc456a4874d0e79370ba2d0c4f52260d805628494f2"
+    },
+    "tumor": {
+      "n": 2019,
+      "correct": 1926,
+      "errors": 93,
+      "accuracy": 0.9539375928677564,
+      "macro_f1": 0.9534675062461679,
+      "metrics_path": "training_logs/experiments_perceptual_regularized/tumor/20260513_162514/test/metrics.json",
+      "predictions_sha256": "ad035720f19d3bb92766de4c6b005e817187801a2e6931ffa1d78b6e379124ff",
+      "epochs": 12,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 0.9167471508176235,
+        "train_accuracy": 0.7180969319697643,
+        "val_loss": 0.5786309536737887,
+        "val_accuracy": 0.9031620553359684
+      },
+      "final_epoch": {
+        "epoch": 12,
+        "train_loss": 0.23488996818946595,
+        "train_accuracy": 0.9919964428634949,
+        "val_loss": 2.1191253612635164,
+        "val_accuracy": 0.9802371541501976
+      },
+      "best_validation_epoch_last_tie": 10,
+      "history_path": "training_logs/experiments_perceptual_regularized/tumor/20260513_162514/history.json",
+      "history_sha256": "fa7a6ec51dfbdb5fc857b713c9166e92f67006bda44e0144a9cbde716c73b341"
+    },
+    "dementia": {
+      "n": 8881,
+      "correct": 8859,
+      "errors": 22,
+      "accuracy": 0.9975228014863191,
+      "macro_f1": 0.9976208412432706,
+      "metrics_path": "training_logs/experiments_perceptual_regularized/dementia/20260513_163515/test/metrics.json",
+      "predictions_sha256": "a59b1fb8007e69821cf99a678d8f352d2ec743dcaf74b9c179a9f85c3d83b5aa",
+      "epochs": 17,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 0.8327262474616739,
+        "train_accuracy": 0.6635934040514193,
+        "val_loss": 0.7163758180719582,
+        "val_accuracy": 0.7235487855084397
+      },
+      "final_epoch": {
+        "epoch": 17,
+        "train_loss": 0.21442874675563503,
+        "train_accuracy": 0.9961666831895839,
+        "val_loss": 0.2120452755490857,
+        "val_accuracy": 0.9977356937011116
+      },
+      "best_validation_epoch_last_tie": 13,
+      "history_path": "training_logs/experiments_perceptual_regularized/dementia/20260513_163515/history.json",
+      "history_sha256": "018aa98ad261c3cbb61acea1f6e80171a98a8e68289a5ac61d24dfe2235605f2"
+    },
+    "hierarchical": {
+      "n": 10900,
+      "correct": 10785,
+      "errors": 115,
+      "accuracy": 0.9894495412844037,
+      "macro_f1": 0.9755441737447192,
+      "metrics_path": "training_logs/experiments_perceptual_regularized/hierarchical/test_evaluation/metrics.json",
+      "predictions_sha256": "ad09e5c6b5e61386232f1263b4b3978eb765135d40a17982dda02978530e7da7"
+    },
+    "eight_class": {
+      "n": 10900,
+      "correct": 10797,
+      "errors": 103,
+      "accuracy": 0.9905504587155963,
+      "macro_f1": 0.9740263997773021,
+      "metrics_path": "training_logs/experiments_perceptual_regularized/eight_class/20260513_170749/test/metrics.json",
+      "predictions_sha256": "363a7f35d6f6d8a2d5740bb58801dda5cd795771c9ffda99814176ff9f1af8d2",
+      "epochs": 17,
+      "first_epoch": {
+        "epoch": 1,
+        "train_loss": 1.2416748575965466,
+        "train_accuracy": 0.5665007623924739,
+        "val_loss": 1.8842402934850284,
+        "val_accuracy": 0.7002237136465325
+      },
+      "final_epoch": {
+        "epoch": 17,
+        "train_loss": 0.5280982645014638,
+        "train_accuracy": 0.9931528524986335,
+        "val_loss": 0.7845308380638993,
+        "val_accuracy": 0.9979492915734527
+      },
+      "best_validation_epoch_last_tie": 16,
+      "history_path": "training_logs/experiments_perceptual_regularized/eight_class/20260513_170749/history.json",
+      "history_sha256": "3f602991b4aebca6a4bbdb909fbac2cc9f3668ac4ee1a5ef239d500928b501ee"
+    }
+  }
+}

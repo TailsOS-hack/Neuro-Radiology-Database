@@ -1,10 +1,12 @@
 # ML Execution Flow
 
+> September 2026: future exact deduplication includes decoded RGB hashes. Keep historical manifests frozen; use a new manifest/output path for new runs. See `FINAL_REVIEW_20260920.md`.
+
 This is the clean restart plan for the tumor/dementia project. Training and large multimodal work should run in Colab or a remote runner, not on the MacBook.
 
 ## Order of Operations
 
-1. Create strict splits before augmentation.
+1. Create strict splits before additional training-time augmentation; upstream dementia augmentation has already occurred.
 
    ```bash
    python -m src.experiment_pipeline create-manifest
@@ -103,7 +105,7 @@ This is the clean restart plan for the tumor/dementia project. Training and larg
 
 ## Leakage Controls
 
-- The manifest is created before augmentation.
+- The manifest precedes additional training-time augmentation, not the upstream augmentation already present in the dementia source.
 - Training transforms include horizontal flips, rotations, and contrast jitter.
 - Validation and test transforms only resize, tensorize, and normalize.
 - Tumor images in `data/brain_tumor/Testing` are always held out as test images.

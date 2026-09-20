@@ -117,6 +117,31 @@ def read_json(path: str):
     return json.loads((PROJECT_ROOT / path).read_text(encoding="utf-8"))
 
 
+def check_decoded_pixel_audit() -> list[Check]:
+    """Keep the fresh source-image finding visible in every package regeneration."""
+    import hashlib
+    path = PROJECT_ROOT / 'docs/final_review_20260920/data_audit.json'
+    if not path.exists():
+        return [Check('FAIL', 'Decoded-pixel audit', 'Missing source-image audit',
+                      'Run scripts/audit_review_data.py.')]
+    audit = json.loads(path.read_text())
+    checks = []
+    for name, item in audit.items():
+        manifest = PROJECT_ROOT / f'training_logs/splits/{name}.csv'
+        current = hashlib.sha256(manifest.read_bytes()).hexdigest()
+        if current != item['manifest_sha256']:
+            checks.append(Check('FAIL', f'{name} audit provenance', 'Manifest changed',
+                                'Rerun scripts/audit_review_data.py.'))
+        overlap = item['cross_split']['pixels']
+        checks.append(Check('FAIL' if overlap['rows'] or item['unreadable'] else 'PASS',
+                            f'{name} decoded-pixel independence',
+                            f"{overlap['groups']} cross-split groups / {overlap['rows']} rows; "
+                            f"{len(item['unreadable'])} unreadable images",
+                            'Historical primary results are not leakage-free; see docs/FINAL_REVIEW_20260920.md.'
+                            if overlap['rows'] else 'Does not establish patient or augmentation-family independence.'))
+    return checks
+
+
 def as_float(row: dict[str, str], key: str, default: float = 0.0) -> float:
     value = row.get(key, "")
     if value in {"", "NA", "None", None}:
@@ -335,7 +360,7 @@ def write_status_doc(
 ) -> None:
     failures = [check for check in checks if check.status == "FAIL"]
     warnings = [check for check in checks if check.status == "WARN"]
-    overall = "BLOCKED" if failures else "READY_WITH_LIMITATIONS"
+    overall = "BLOCKED" if failures else "INTERNAL_REVIEW_ONLY"
     generated = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
     lines = [
@@ -346,15 +371,19 @@ def write_status_doc(
         f"Overall status: `{overall}`",
         "",
         (
-            "The package is ready for internal manuscript drafting and advisor review. "
-            "It is not ready for clinical-deployment claims because external validation and patient-level metadata are still absent."
+            "Evidence integrity failures must be resolved before internal review."
+            if failures else
+            "The automated evidence checks pass for internal manuscript drafting and advisor review. "
+            "This is not submission approval: author/reference/license work remains, upstream augmentation "
+            "and patient independence are unresolved, and external MRI validation has not been performed."
         ),
         "",
         "## Primary Claim",
         "",
         (
-            "The exact-deduplicated CNN suite is the primary result set. The single 8-class CNN is the top strict-test classifier, "
-            "while the hierarchical CNN remains useful for interpretable routing and specialist analysis."
+            "The following are historical primary results, not a leakage-free performance claim. "
+            "The 2026-09-20 decoded-pixel audit found cross-split tumor duplicates despite distinct file hashes. "
+            "See docs/FINAL_REVIEW_20260920.md for the current interpretation."
         ),
         "",
     ]
@@ -472,9 +501,19 @@ def main() -> None:
     cnn_checks, primary, sensitivity = check_cnn_results(cnn_rows)
     checks.extend(cnn_checks)
     checks.extend(check_audits(audit_rows))
+    checks.extend(check_decoded_pixel_audit())
     evidence_checks, evidence = check_evidence(evidence_json)
     checks.extend(evidence_checks)
     checks.extend(check_vlm(vlm_rows, primary))
+    checks.extend([
+        Check('WARN', 'Patient and augmentation-family independence',
+              'Dementia images were augmented upstream; patient and original-image family IDs are unavailable',
+              'Exact/dHash deduplication does not establish patient or augmentation-family independence.'),
+        Check('WARN', 'Independent MRI validation', 'Not performed; external fixture is synthetic',
+              'Do not interpret internal accuracy as independent clinical performance.'),
+        Check('WARN', 'Grad-CAM interpretation', 'Native 7x7 attribution; control-dependent masking results',
+              'No anatomical localization or clinical explanation validity is established.'),
+    ])
 
     followup = PROJECT_ROOT / 'docs/review_bundle_v2/validation-v2-20260907'
     if followup.exists():

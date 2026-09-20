@@ -1,0 +1,47 @@
+{
+  "dataset_doi": "10.17632/kcjt4v658x.2",
+  "source_url": "https://data.mendeley.com/datasets/kcjt4v658x/2",
+  "download_url": "https://data.mendeley.com/public-api/zip/kcjt4v658x/download/2",
+  "retrieved_utc_date": "2026-09-20",
+  "license": "CC BY 4.0",
+  "attribution": "Fathi, Sina; Ahmadi, Ali; Almasi-Dooghaee, Mostafa; Sadegh, Melika (2023), Alzheimer's disease MRI images, Mendeley Data, V2, doi:10.17632/kcjt4v658x.2",
+  "archive_bytes": 71145268,
+  "archive_sha256": "62b3b1244077e927e3ac2af8ba5c6fc2ba24c02507ccd07a2a200421cabc2851",
+  "dicom_files_decoded": 474,
+  "dicom_errors": [],
+  "jpg_thumbnails": 4,
+  "subject_folder_counts": {
+    "AD": 10,
+    "MCI": 10,
+    "NC": 4
+  },
+  "modality_counts": {
+    "MR": 474
+  },
+  "pixel_shapes": {
+    "(512, 512)": 399,
+    "(256, 256)": 20,
+    "(384, 384)": 28,
+    "(400, 362)": 27
+  },
+  "series_description_counts": {
+    "BRAIN      AX_T2": 78,
+    "F/BRAIN    T2W/3-VIEW": 170,
+    "BRAIN/AD   FLAIR /AX": 20,
+    "BRAIN-ST   T2W/3-VIEW": 18,
+    "BRAIN      AX T2 #": 68,
+    "F/BRAIN    T2W AX#": 65,
+    "t2_tse_tra_320": 28,
+    "t2_tse_tra": 27
+  },
+  "nonempty_identifier_field_counts": {
+    "PatientName": 474,
+    "PatientID": 474,
+    "PatientBirthDate": 474,
+    "AccessionNumber": 0,
+    "InstitutionName": 474
+  },
+  "stage_mapping": "Not established: AD/MCI/NC are not the four training stage labels.",
+  "independence": "Separately described hospital source; training-patient independence not established.",
+  "external_performance": "Not evaluated; raw files kept local and excluded from Git."
+}

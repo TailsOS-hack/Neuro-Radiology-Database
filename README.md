@@ -1,5 +1,7 @@
 # AI-Powered Neuro-Radiology Report Generator
 
+> **2026-09-20 review: submission blocked.** A fresh decoded-RGB audit found 125 cross-split duplicate groups (301 tumor-image rows) in the historical primary manifest. Dementia has no decoded-pixel overlap, but upstream augmentation and patient independence remain unresolved. The perceptual sensitivity manifest has zero file/pixel/identical-dHash cross-split overlap. See [the final review](docs/FINAL_REVIEW_20260920.md) before interpreting historical tables.
+
 This project is an advanced medical imaging analysis tool. It uses deep learning to analyze MRI scans for both **Brain Tumors** and **Alzheimer's/Dementia** signs, then generates grounded draft reports from structured classifier evidence. The reporting path is deterministic by default so it does not ask an LLM to invent lesion measurements, locations, mass effect, atrophy measurements, or other unsupported clinical findings.
 
 ## Features

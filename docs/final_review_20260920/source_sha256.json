@@ -1,0 +1,7 @@
+{
+  "scripts/audit_review_data.py": "87bf48abe68a66b7da4b207a03d53ba96bc8af9cb40c5e0bc761a6557341c517",
+  "scripts/build_training_review.py": "4a80a5128b0ee05e64691499848f484f9059ea4ddb7a3c592a60c9dbaf3a1450",
+  "scripts/inspect_external_mendeley.py": "7287b8263428abb8b25a3bed75f291c463db1318edec2a106a65b8dcd85d9aab",
+  "src/experiment_pipeline.py": "4fe109a6469695e77732e563d8dc2e4cfb0a6ad592cc5c4b1b58e990d2360db0",
+  "scripts/check_publication_package.py": "9e7f041c098fc392066209a43457aa783e42ea8042bb5b076c6c3dcf50d6b54d"
+}

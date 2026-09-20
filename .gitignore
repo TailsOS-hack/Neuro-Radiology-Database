@@ -21,3 +21,6 @@ __pycache__/
 .validation-staging-*/
 .external-staging-*/
 *.zip.partial
+
+# Acquired external cohorts remain local; only review summaries are published.
+data/external/

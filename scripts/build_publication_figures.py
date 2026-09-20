@@ -152,7 +152,7 @@ def figure1_workflow() -> Path:
         2600,
         1550,
         "Figure 1. Dataset splitting and leakage-audit workflow",
-        "Strict splits were created before augmentation; exact duplicate leakage was corrected before final claims.",
+        "Splits preceded additional training augmentation; the dementia source was already augmented.",
     )
 
     boxes = [
@@ -177,8 +177,8 @@ def figure1_workflow() -> Path:
         (
             (1770, 230, 2200, 470),
             "Exact-dedup retrain",
-            f"{audit_by_name['Accepted exact-deduplicated']['exact_hash_overlaps']} exact overlaps. Accepted baseline checkpoints and metrics.",
-            GREEN,
+            "0 file-hash overlaps, but 125 cross-split decoded-pixel groups found in the 20 Sep review. Historical results only.",
+            RED,
         ),
         (
             (1010, 750, 1440, 990),
@@ -452,7 +452,7 @@ def figure7_roc_pr() -> Path:
 CAPTIONS = {
     "figure1_workflow.png": (
         "Figure 1. Dataset And Audit Workflow",
-        "Figure 1. Dataset splitting and leakage-audit workflow. Brain tumor and dementia MRI images were split before augmentation, audited for exact and perceptual cross-split overlap, then retrained after exact duplicate grouping. The dHash-grouped run is reported as a conservative sensitivity analysis.",
+        "Figure 1. Dataset splitting and leakage-audit workflow. Brain tumor and dementia MRI images were split before additional training-time augmentation (the dementia source was already augmented), audited for exact and perceptual cross-split overlap, then retrained after exact duplicate grouping. The dHash-grouped run is reported as a conservative sensitivity analysis.",
     ),
     "figure2_architecture.png": (
         "Figure 2. Model Architecture",

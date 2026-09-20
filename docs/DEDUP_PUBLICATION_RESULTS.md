@@ -1,5 +1,7 @@
 # De-duplicated CNN Publication Summary
 
+> **2026-09-20 review: submission blocked.** A fresh decoded-RGB audit found 125 cross-split duplicate groups (301 tumor-image rows) in the historical primary manifest. Dementia has no decoded-pixel overlap, but upstream augmentation and patient independence remain unresolved. The perceptual sensitivity manifest has zero file/pixel/identical-dHash cross-split overlap. See [the final review](FINAL_REVIEW_20260920.md) before interpreting historical tables.
+
 These are the accepted strict-test CNN results from the Kaggle de-duplicated, regularized retrain. The dataset images are brain MRI scans. Exact SHA-256 duplicate leakage was removed before this run by assigning duplicate image groups to a single split.
 
 | Model | Status | Accuracy | Macro F1 | Weighted F1 | Metrics Path |

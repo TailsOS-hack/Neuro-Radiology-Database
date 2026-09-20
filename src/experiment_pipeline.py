@@ -108,6 +108,15 @@ def dhash_file(path: Path, hash_size: int = 8) -> str:
     return f"{value:0{hash_size * hash_size // 4}x}"
 
 
+def decoded_pixel_sha256(path: Path) -> str:
+    """Match the RGB pixels consumed by training despite different file encodings."""
+    from PIL import Image
+
+    with Image.open(path) as image:
+        rgb = image.convert("RGB")
+        return hashlib.sha256(str(rgb.size).encode() + rgb.tobytes()).hexdigest()
+
+
 def collect_records(data_root: Path = DATA_ROOT) -> list[ImageRecord]:
     records: list[ImageRecord] = []
 
@@ -206,6 +215,7 @@ def build_split_units(
         keys: list[tuple[str, str]] = []
         if dedupe_exact_hash:
             keys.append(("sha256", sha256_file(record.path)))
+            keys.append(("rgb_sha256", decoded_pixel_sha256(record.path)))
         if dedupe_perceptual_hash:
             keys.append(("dhash", dhash_file(record.path)))
         for key in keys:
@@ -229,12 +239,14 @@ def assign_split(
     dedupe_exact_hash: bool = True,
     dedupe_perceptual_hash: bool = False,
 ) -> list[ImageRecord]:
-    """Create strict splits before any augmentation is applied.
+    """Create strict splits before this project's additional training augmentation.
 
     Tumor images use the dataset's official Testing folder as the strict test
     set. Dementia images do not ship with an official split here, so they get a
-    stratified deterministic train/val/test split. Exact duplicate image hashes
-    are assigned as an indivisible group so the same pixels cannot cross splits.
+    stratified deterministic train/val/test split. File hashes and decoded RGB
+    hashes are grouped together so different encodings of identical pixels cannot
+    cross splits. Historical manifests used file hashes alone and are not changed
+    by this code update. Upstream augmentation families/patients remain unknown.
     Optional perceptual dHash grouping is intended for sensitivity analysis,
     because dHash can be too coarse for MRI slices and may group distinct labels.
     """
