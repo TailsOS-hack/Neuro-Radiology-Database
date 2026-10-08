@@ -1,0 +1,221 @@
+{
+  "device": "cpu",
+  "source_sha256": "b96976bccd9e2dd642c02ca1c1b19a7d1b06fc46574a79c68ae07b31d6d4b0ec",
+  "validation_scope": "mechanics and prediction preservation, not clinical localization",
+  "specialists": {
+    "tumor": {
+      "checkpoint": "/Users/armankazi/Desktop/Neuro-Radiology-Database/models/brain_tumor_classifier.pt",
+      "checkpoint_sha256": "3d4f5b00ed8f432845385a165ab1050460181bc420259c363c1a98567a8c8c84",
+      "architecture": "efficientnet_b3",
+      "samples": [
+        {
+          "image": "data/brain_tumor/Testing/glioma/Te-glTr_0000.jpg",
+          "image_sha256": "b513a83f68e486f45159b004d356782e782840145321511f99dd38399251b6d7",
+          "predicted": "glioma",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_glioma_Te-glTr_0000.png"
+        },
+        {
+          "image": "data/brain_tumor/Testing/glioma/Te-glTr_0001.jpg",
+          "image_sha256": "5b4e4a0f482cb68955c340205d475f25c3a30718bd3b48925cf8ca8858e3d31e",
+          "predicted": "glioma",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_glioma_Te-glTr_0001.png"
+        },
+        {
+          "image": "data/brain_tumor/Testing/meningioma/Te-meTr_0000.jpg",
+          "image_sha256": "32e58268a4a9d3f82caec378c1065311360f4212c2ab72a1ca6f1ef8ffcca92b",
+          "predicted": "meningioma",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_meningioma_Te-meTr_0000.png"
+        },
+        {
+          "image": "data/brain_tumor/Testing/meningioma/Te-meTr_0001.jpg",
+          "image_sha256": "39cabdc25d698ca1fbb4db79efa72184c0f92d854c553ee098d74ccbcfa38fef",
+          "predicted": "meningioma",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_meningioma_Te-meTr_0001.png"
+        },
+        {
+          "image": "data/brain_tumor/Testing/notumor/Te-noTr_0000.jpg",
+          "image_sha256": "3a4344d358c8faf37824a990ee88b70b6af511ac1925c3d96a831dc579d620db",
+          "predicted": "notumor",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_notumor_Te-noTr_0000.png"
+        },
+        {
+          "image": "data/brain_tumor/Testing/notumor/Te-noTr_0001.jpg",
+          "image_sha256": "9af05acd768793e89fc6776c3af838b0bf0747cfc3a3737e1cd3af44ea09c930",
+          "predicted": "notumor",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_notumor_Te-noTr_0001.png"
+        },
+        {
+          "image": "data/brain_tumor/Testing/pituitary/Te-piTr_0000.jpg",
+          "image_sha256": "97a04c2e1d1994e8a0bd27662e357f3fa3ec7fd847e0f0773f7ef013abe7e167",
+          "predicted": "pituitary",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_pituitary_Te-piTr_0000.png"
+        },
+        {
+          "image": "data/brain_tumor/Testing/pituitary/Te-piTr_0001.jpg",
+          "image_sha256": "3e802dd22f483ce4d442fe2c7f1890c1c810ec8c1131b364fd4e4593bf0f268a",
+          "predicted": "pituitary",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "tumor_pituitary_Te-piTr_0001.png"
+        }
+      ],
+      "repeat_calls": 3,
+      "classification_unchanged": true,
+      "parameter_gradients_untouched": true,
+      "hooks_clean": true
+    },
+    "dementia": {
+      "checkpoint": "/Users/armankazi/Desktop/Neuro-Radiology-Database/models/alzheimers_classifier.pt",
+      "checkpoint_sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+      "architecture": "mobilenet_v3_large",
+      "samples": [
+        {
+          "image": "data/alzheimers/MildDemented/00046ff7-0fae-4796-9a2b-2df47095bfe6.jpg",
+          "image_sha256": "3ac825fe1004a905006eea5c3d78a02afe26d37f8e6e63a690b63437fe1002f6",
+          "predicted": "MildDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_MildDemented_00046ff7-0fae-4796-9a2b-2df47095bfe6.png"
+        },
+        {
+          "image": "data/alzheimers/MildDemented/000cdcc4-3e54-4034-a538-203c8047b564.jpg",
+          "image_sha256": "e35279eefc7731a626a089cf2b4c04ce420cb923edca279d41bfeee5838d52e7",
+          "predicted": "MildDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_MildDemented_000cdcc4-3e54-4034-a538-203c8047b564.png"
+        },
+        {
+          "image": "data/alzheimers/ModerateDemented/001ef5a6-893b-4ede-9cf8-60b7fb94a541.jpg",
+          "image_sha256": "a8a0544452cf2820e78aa9c510fee2d1842445a9a4f0ff430de27afc1e73f60b",
+          "predicted": "ModerateDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_ModerateDemented_001ef5a6-893b-4ede-9cf8-60b7fb94a541.png"
+        },
+        {
+          "image": "data/alzheimers/ModerateDemented/0021740c-fbc2-405c-b0d7-0c7176217933.jpg",
+          "image_sha256": "68e2cea4a705e6db08e70bcfcae04de80ea13e3e9e3a5fd889a566896dd2d622",
+          "predicted": "ModerateDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_ModerateDemented_0021740c-fbc2-405c-b0d7-0c7176217933.png"
+        },
+        {
+          "image": "data/alzheimers/NonDemented/00005576-2b76-44ca-8572-a5057201433f.jpg",
+          "image_sha256": "0507fff8620530555dc906b0d8414d109107416cb883fda68424a91d20c9f393",
+          "predicted": "NonDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_NonDemented_00005576-2b76-44ca-8572-a5057201433f.png"
+        },
+        {
+          "image": "data/alzheimers/NonDemented/0007d7c8-609f-4339-b810-727535907c42.jpg",
+          "image_sha256": "b65cfd01279966d2392b30fface9cdeb48939f7ec8e3ac0181284df58e5be13b",
+          "predicted": "NonDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_NonDemented_0007d7c8-609f-4339-b810-727535907c42.png"
+        },
+        {
+          "image": "data/alzheimers/VeryMildDemented/0001b959-d622-4311-acab-84633370c892.jpg",
+          "image_sha256": "83d8854aedf4a4a12b632d0f68b861e42713ecbddab90c0a419208428ef190a0",
+          "predicted": "VeryMildDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_VeryMildDemented_0001b959-d622-4311-acab-84633370c892.png"
+        },
+        {
+          "image": "data/alzheimers/VeryMildDemented/0003659d-f8db-4ce4-9230-2ba24506df68.jpg",
+          "image_sha256": "7247b5a2e6d009f6b7a46988089e9d341290f9b2a9394db9628430f92b648802",
+          "predicted": "VeryMildDemented",
+          "cam_shape": [
+            7,
+            7
+          ],
+          "cam_min": 0.0,
+          "cam_max": 1.0,
+          "overlay": "dementia_VeryMildDemented_0003659d-f8db-4ce4-9230-2ba24506df68.png"
+        }
+      ],
+      "repeat_calls": 3,
+      "classification_unchanged": true,
+      "parameter_gradients_untouched": true,
+      "hooks_clean": true
+    }
+  }
+}

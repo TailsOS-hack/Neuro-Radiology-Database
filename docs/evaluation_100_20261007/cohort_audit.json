@@ -1,0 +1,4787 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-08T00:00:41+00:00",
+  "cohort_directory": "data/evaluation/images",
+  "labels_path": "data/evaluation/ground_truth/radiologist_test_key.csv",
+  "labels_sha256": "067b3b6bd3f7d1224e50befe7dcb11c43dff878aeb1aac6c6f3f9dd6eabdb9af",
+  "cohort_size": 100,
+  "class_counts": {
+    "MildDemented": 23,
+    "ModerateDemented": 23,
+    "NonDemented": 27,
+    "VeryMildDemented": 27
+  },
+  "unique_file_hashes": 100,
+  "unique_decoded_rgb_hashes": 100,
+  "source_files_decoded": 51023,
+  "manifests": {
+    "training_logs/splits/strict_manifest.csv": {
+      "manifest_sha256": "5b910d6e822192de06f4f2610c0041671da9326591b32505374226f7326383fc",
+      "source_rows": 51023,
+      "file_sha256": {
+        "matched_images": 100,
+        "matched_source_rows": 104,
+        "unmatched_images": [],
+        "split_combinations": {
+          "test": 25,
+          "train": 66,
+          "val": 9
+        },
+        "train_exposed_images": 66,
+        "validation_exposed_images": 9,
+        "test_only_images": 25,
+        "label_conflict_images": []
+      },
+      "decoded_rgb_sha256": {
+        "matched_images": 100,
+        "matched_source_rows": 104,
+        "unmatched_images": [],
+        "split_combinations": {
+          "test": 25,
+          "train": 66,
+          "val": 9
+        },
+        "train_exposed_images": 66,
+        "validation_exposed_images": 9,
+        "test_only_images": 25,
+        "label_conflict_images": []
+      }
+    },
+    "training_logs/splits/perceptual_strict_manifest.csv": {
+      "manifest_sha256": "fe8c0d51ff4e690bf20768fd4982a265001bab1d3d980770c2efb2e97f10ae88",
+      "source_rows": 51023,
+      "file_sha256": {
+        "matched_images": 100,
+        "matched_source_rows": 104,
+        "unmatched_images": [],
+        "split_combinations": {
+          "test": 25,
+          "train": 63,
+          "val": 12
+        },
+        "train_exposed_images": 63,
+        "validation_exposed_images": 12,
+        "test_only_images": 25,
+        "label_conflict_images": []
+      },
+      "decoded_rgb_sha256": {
+        "matched_images": 100,
+        "matched_source_rows": 104,
+        "unmatched_images": [],
+        "split_combinations": {
+          "test": 25,
+          "train": 63,
+          "val": 12
+        },
+        "train_exposed_images": 63,
+        "validation_exposed_images": 12,
+        "test_only_images": 25,
+        "label_conflict_images": []
+      }
+    }
+  },
+  "limitations": [
+    "This cohort is not independent when its images match training or validation rows.",
+    "A manifest match documents exposure in that split, not proof of which manifest trained a checkpoint.",
+    "No patient or augmentation-family identifiers are available; different hashes do not establish independence.",
+    "Repeated model selection using this cohort makes it a development benchmark, even for unmatched images."
+  ],
+  "images": [
+    {
+      "filename": "image_001.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "fba2ada3195367e4af361747066474b6f7268ecee8210ecb8567a94179b1d6a7",
+      "decoded_rgb_sha256": "d49df06cb5368903a43d31da515db71b5a57aa3a0a792e300ac405c4ddb82bbd",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/eddd3220-3e2e-4d75-bbd9-b65563cc6892.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/eddd3220-3e2e-4d75-bbd9-b65563cc6892.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/eddd3220-3e2e-4d75-bbd9-b65563cc6892.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/eddd3220-3e2e-4d75-bbd9-b65563cc6892.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_002.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "79f0e97e4de640ff503fbd524c4b334a67af37ae7f65cfe243791b7b3298ae92",
+      "decoded_rgb_sha256": "7e0d961585ca6e620e1e7415c9ece8184234b66a0c2fc945975079fe81351198",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9a57ccbc-42d7-4245-b7e2-cf3faea6292f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9a57ccbc-42d7-4245-b7e2-cf3faea6292f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9a57ccbc-42d7-4245-b7e2-cf3faea6292f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9a57ccbc-42d7-4245-b7e2-cf3faea6292f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_003.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "7dcec8ed845642a299146400f053c6c6255858abb461bc2ae5da6122e900faf5",
+      "decoded_rgb_sha256": "c5d81e9d41cbdf59baaeef0bacdc7ffe4d1447e906e0eff8f4f5c8a9ed2ccdf6",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/b93db2d1-ec4e-4bd7-9e65-fece1e9b261f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/b93db2d1-ec4e-4bd7-9e65-fece1e9b261f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/b93db2d1-ec4e-4bd7-9e65-fece1e9b261f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/b93db2d1-ec4e-4bd7-9e65-fece1e9b261f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_004.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "07269d33683ed16d2d7825b1b41a3b79490d3a5ae5d7382c91387efe60172865",
+      "decoded_rgb_sha256": "a0323cec6a044d61cf78094d960e714efc13bbf385b5db23dd6d21fbef748998",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/42300069-2b69-4e65-a2bc-741e3fde3dba.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/42300069-2b69-4e65-a2bc-741e3fde3dba.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/42300069-2b69-4e65-a2bc-741e3fde3dba.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/42300069-2b69-4e65-a2bc-741e3fde3dba.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_005.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "5e2d5bb5d64d26709199f03ac8d4b8802bc0e44fbaf300e0bfe9ff0bc057f655",
+      "decoded_rgb_sha256": "91016ad660f8ec1edea29c46df93cb4b77acc77061fc6418a67081d3868bda5c",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8de97fb9-89b9-4731-b3ff-2003fdead0dd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8de97fb9-89b9-4731-b3ff-2003fdead0dd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8de97fb9-89b9-4731-b3ff-2003fdead0dd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8de97fb9-89b9-4731-b3ff-2003fdead0dd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_006.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "ccc39f60c947b586457e63bf80b28dc23134b3c385f48ac947b1a3de0065be6c",
+      "decoded_rgb_sha256": "13861b5fc1c09a654fdacca3fc64f252bdc49b5a98e06acba5966f5f337c57b5",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem903.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem903.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem903.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem903.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_007.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "58bc0b1db314abfca3f654454609834de18da8c6ba0b925cc680c7cb05c4c6fd",
+      "decoded_rgb_sha256": "7c58481f27cb8124aa4c6b15d3ea842de773e2b75d325f52c9f8fdf8d0e51a3c",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem700.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem700.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem700.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem700.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_008.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "7276ba7c7cfae17175265f441f78da9065985698f7c2fc8ee059918ec1026613",
+      "decoded_rgb_sha256": "8fd402c486cde6bd34b368cf5daed8368775d45b34ded9afb9ea113829b7c1ce",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/0ac3e244-1497-42fe-84fc-3f86217382ff.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/0ac3e244-1497-42fe-84fc-3f86217382ff.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/0ac3e244-1497-42fe-84fc-3f86217382ff.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/0ac3e244-1497-42fe-84fc-3f86217382ff.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_009.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "20825955136ac7e515f8870dffc59c8400d04bfafa831c0a88de64b72d19dedb",
+      "decoded_rgb_sha256": "ac0c7701137199784d5dcb5da4b5dbf4aed9f2549525cfacb5eb896037c3ef62",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6945b69a-1823-41d5-baee-f77a612b3632.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6945b69a-1823-41d5-baee-f77a612b3632.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6945b69a-1823-41d5-baee-f77a612b3632.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6945b69a-1823-41d5-baee-f77a612b3632.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_010.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "449b10b5fdb44f7d60e6b3212fa7e2b9446bf3e4d5d273eed16575824851b90a",
+      "decoded_rgb_sha256": "9a2a9ba1e027cd5d7499e2c881b67c6a1ee9ac7453c40500df9ded33da1d7555",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c1212a91-184f-4ff0-a4ff-fd7ecc06186b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c1212a91-184f-4ff0-a4ff-fd7ecc06186b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c1212a91-184f-4ff0-a4ff-fd7ecc06186b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c1212a91-184f-4ff0-a4ff-fd7ecc06186b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_011.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "950b8634583b12536752a1aace57303910daf28c448261686730b753ab3a8ff4",
+      "decoded_rgb_sha256": "6b9b3f3b5ea2d1d8e91eafeb5180c6e87f8ab8e14bb56fc349a8b0dc9d1cf52a",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/59fcc3bd-1621-4431-a0c6-6e70622cf780.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/59fcc3bd-1621-4431-a0c6-6e70622cf780.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/59fcc3bd-1621-4431-a0c6-6e70622cf780.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/59fcc3bd-1621-4431-a0c6-6e70622cf780.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_012.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "d6a6c7e75dd331ba8af48ce241ea12ff1d62600061b45bf7fc614d6e422b78ec",
+      "decoded_rgb_sha256": "3d409745af96ea64a7b9e245b036af950d9f7ffddfc4f8825fa11a79f73a9451",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/63dac2bf-adb8-465e-8c73-58ecaeeb8ed6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/63dac2bf-adb8-465e-8c73-58ecaeeb8ed6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/63dac2bf-adb8-465e-8c73-58ecaeeb8ed6.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/63dac2bf-adb8-465e-8c73-58ecaeeb8ed6.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_013.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "977b832bc50422190d306c44579cbfac1357a4dd9d87ca07aab669e4ef2010b3",
+      "decoded_rgb_sha256": "7d80016e065a30db539366ef9e9552b7944190bfdbc8ee097b3661e76d96d11b",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a629433d-dd42-40df-b04e-a5c3f19d8922.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a629433d-dd42-40df-b04e-a5c3f19d8922.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a629433d-dd42-40df-b04e-a5c3f19d8922.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a629433d-dd42-40df-b04e-a5c3f19d8922.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_014.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "30b30ff97c73238050c890baaf6861961f8a2cfb245d8cdd21d3eb82701f533c",
+      "decoded_rgb_sha256": "d9b1c99450203cf277f7960acd52ee0915df961e23e88c65e32a2afb62d01901",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/91c56f19-53b1-44c2-a3f1-7c2b3b4d71b2.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/91c56f19-53b1-44c2-a3f1-7c2b3b4d71b2.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/91c56f19-53b1-44c2-a3f1-7c2b3b4d71b2.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/91c56f19-53b1-44c2-a3f1-7c2b3b4d71b2.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_015.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "fb3482f720d57fc157b634f79f369efd61dd0977f22344cf68f0c4b7b6ce8bb4",
+      "decoded_rgb_sha256": "90d095bac4b58d3322f37e03d1bc6e57e2f6a8f66045bdf64980ef6d1220786c",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/19677dd3-c5a8-4163-ae1a-89e1d7f0413d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/19677dd3-c5a8-4163-ae1a-89e1d7f0413d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/19677dd3-c5a8-4163-ae1a-89e1d7f0413d.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/19677dd3-c5a8-4163-ae1a-89e1d7f0413d.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_016.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "b435b89fe6817852f8f88669a50419daa59c64af1789f81777cbecb4288a0a46",
+      "decoded_rgb_sha256": "a9538f0a4f024bff05a82da10a4a690301fe1b7924b259ed9d3e916e45a64cb5",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem939.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem939.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem939.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem939.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_017.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "3138c8aa14426d565ce34246fc7966a2bfba83048e72ebd6f321287f8481e8cc",
+      "decoded_rgb_sha256": "6936122c8cac748b2c97779f31fef383afb5b7605dae025b0eaec7a9ebfbf480",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/829e0deb-5f8a-41ec-b438-c12fcef944be.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/829e0deb-5f8a-41ec-b438-c12fcef944be.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/829e0deb-5f8a-41ec-b438-c12fcef944be.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/829e0deb-5f8a-41ec-b438-c12fcef944be.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_018.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "8ab68eafcf075309222c5afcfaca3d5be392aa5493a2d9da5204a9c56bb48463",
+      "decoded_rgb_sha256": "b8c698f3e89db16a9b639404f0fd0422ae1f30a6487e6719b9b26db57c60a77e",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/e08321a2-b83e-4482-964e-0cba0ee14bf5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/e08321a2-b83e-4482-964e-0cba0ee14bf5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/e08321a2-b83e-4482-964e-0cba0ee14bf5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/e08321a2-b83e-4482-964e-0cba0ee14bf5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_019.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "f282d307fdcfff72c03c4b913e2da58ba9bccc72b5e57ef10d6feefe9c8c7e23",
+      "decoded_rgb_sha256": "d971144989b9b62ea6e2e0f6cc581e3326a86c0890cb64671eaa634d706519d9",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/05d93a03-55d5-41e9-b1fc-a6ceebab90e3.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/05d93a03-55d5-41e9-b1fc-a6ceebab90e3.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/05d93a03-55d5-41e9-b1fc-a6ceebab90e3.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/05d93a03-55d5-41e9-b1fc-a6ceebab90e3.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_020.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "d59d69936bcfe80f9c8da6bfbe10f1be7c866d13301196cf1b4fc3126bbd9c4b",
+      "decoded_rgb_sha256": "0b547afa7a0d3e139e18a9e9a9bdce5f4d790349e820a8eea4db40e7db3025bb",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem614.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem614.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem614.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/mildDem614.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_021.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "e22735890e3bdd49ef957166685370e6c2a77f1d7a73d00a17bcde0feb856c58",
+      "decoded_rgb_sha256": "f730a0be356ad1e2cb110bff1b1b458b5330913d475f0cccaf1568be02cc5d1f",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5df758b8-1274-4b63-be7f-7136d1361edd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5df758b8-1274-4b63-be7f-7136d1361edd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5df758b8-1274-4b63-be7f-7136d1361edd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5df758b8-1274-4b63-be7f-7136d1361edd.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_022.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "d4594c5b9b9749e7a6595aef0b50da6f2b59a5ab9bab651069356db1ff2253d9",
+      "decoded_rgb_sha256": "37d01e30302a91a39c58610061d1b7604c5723b02be569ea76d6f5d6fc93927d",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e9b0ec4a-24a1-4887-a447-1375d27465e6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e9b0ec4a-24a1-4887-a447-1375d27465e6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e9b0ec4a-24a1-4887-a447-1375d27465e6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e9b0ec4a-24a1-4887-a447-1375d27465e6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_023.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "decdd0c5ca624ba60a5906ed41b06dff5f6971fa54f26e59c2cd71511ad42c69",
+      "decoded_rgb_sha256": "32d759de911dd789d5f9cd6926fd965846c482ea4f90c4aa1d0cf5eca906e8f7",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/3ed26afa-0eee-4e8b-963a-2245a5e6185a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/3ed26afa-0eee-4e8b-963a-2245a5e6185a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/3ed26afa-0eee-4e8b-963a-2245a5e6185a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/3ed26afa-0eee-4e8b-963a-2245a5e6185a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_024.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "b2f809c189696dec1c2a06b120fb92f46de6dbd0b0309fcead3c87c3192f2bd9",
+      "decoded_rgb_sha256": "e49247b47169859a9ed814ceed80d999a07d1abad09a7f15f1a2a6358b5ed061",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/99a19e93-f180-430d-b905-282cbaad5f1d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/dee455bb-f1be-463d-86a6-0ce0357cc5d2.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/99a19e93-f180-430d-b905-282cbaad5f1d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/dee455bb-f1be-463d-86a6-0ce0357cc5d2.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/99a19e93-f180-430d-b905-282cbaad5f1d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/dee455bb-f1be-463d-86a6-0ce0357cc5d2.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/99a19e93-f180-430d-b905-282cbaad5f1d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            },
+            {
+              "path": "data/alzheimers/MildDemented/dee455bb-f1be-463d-86a6-0ce0357cc5d2.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_025.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "cee4825bf5ae5ca66a7066b027ac82535e9e3c11645597ac7dbe37e9209bd2ef",
+      "decoded_rgb_sha256": "9b6ed0442b7df46e3fbbc4e62993170c188d31fd13ff10e61394a871159245ec",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/de3c38b9-984b-4400-86b9-6ce461aab455.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/de3c38b9-984b-4400-86b9-6ce461aab455.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/de3c38b9-984b-4400-86b9-6ce461aab455.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/de3c38b9-984b-4400-86b9-6ce461aab455.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_026.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "787e7800a1833a4d678832aa106466419cfc6fb3d96b5525c2cda35113a7c624",
+      "decoded_rgb_sha256": "d7e489a39e8b6269dcc8d8bd20462df5008ff311a35f25cb30d7cd2c48180093",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/26af243b-03b0-4136-ac7f-8e3391f4ac41.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/26af243b-03b0-4136-ac7f-8e3391f4ac41.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/26af243b-03b0-4136-ac7f-8e3391f4ac41.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/26af243b-03b0-4136-ac7f-8e3391f4ac41.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_027.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "a99595222793f41d742000bdfa5b5e2bc3c357bc96085fbd5890ad08c3523376",
+      "decoded_rgb_sha256": "3e1913f6ac0477d5ae37f43a8bbd3ca666e30ab17e153f82d55c54fa0bbe1230",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/0b203611-08e4-4400-a9d9-0624524fc1a9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/0b203611-08e4-4400-a9d9-0624524fc1a9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/0b203611-08e4-4400-a9d9-0624524fc1a9.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/0b203611-08e4-4400-a9d9-0624524fc1a9.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_028.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "57b7fa0606c9452cb7d6a028f720acb30f7faab1ee03908323b5be402c7d010e",
+      "decoded_rgb_sha256": "836e69db6b599c61e65633087b4d10562e5c97e2999a2ad60233acc4540a0f0f",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/239a9671-86d5-42d7-82a5-f70300b0a11a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/239a9671-86d5-42d7-82a5-f70300b0a11a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/239a9671-86d5-42d7-82a5-f70300b0a11a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/239a9671-86d5-42d7-82a5-f70300b0a11a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_029.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "85f02a7a9d1afde20a4882b7f6d12ccf804bbe6d86f6abbb9ae8bf22deebc5c5",
+      "decoded_rgb_sha256": "5102864be865fe3f5c85803370fa983bcf35c7bf29e881eb191298f4cbed74d6",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/dad06bbf-b912-4af3-8ee0-7147e86f6d8c.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/dad06bbf-b912-4af3-8ee0-7147e86f6d8c.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/dad06bbf-b912-4af3-8ee0-7147e86f6d8c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/dad06bbf-b912-4af3-8ee0-7147e86f6d8c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_030.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "9daf37c93fc7f950ad7939a9020653617d57b609114d72f0ce416c98056d8fa6",
+      "decoded_rgb_sha256": "ada9491681439b0e760431837564ad8a84645bb56330934a65ae9ce35d2287ba",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem705.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem705.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem705.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem705.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_031.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "c95c354648dcf1d4f4dfd4e0b4e89b091aa011cee8b8442566f030fcede431bf",
+      "decoded_rgb_sha256": "703edc340f15a0c52b2c15c18f9bf639b39754672dd6f08a0140930bb0785356",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/708ca1d2-4e2e-45aa-8f72-4bc96a700007.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/708ca1d2-4e2e-45aa-8f72-4bc96a700007.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/708ca1d2-4e2e-45aa-8f72-4bc96a700007.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/708ca1d2-4e2e-45aa-8f72-4bc96a700007.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_032.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "6d18d78805a368cb955129e1c70f3e9687c9609651033639ce401111d7af5e3f",
+      "decoded_rgb_sha256": "2fc2e2243cf17b50c852a5c72dd850519add08ec8a8895289011e97ac7ccbaed",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem272.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem272.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem272.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem272.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_033.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "9c710b0579687b6a6ae92b179c3c37f98148a42ac7721baeb2c608c7bc6b8bbd",
+      "decoded_rgb_sha256": "2b23f30e9c80f9962658429630c7def0f0cb1ac13451689fb9b4560853da1ffe",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/b26d2997-1b0a-4cf0-978a-f85c18cb0cf7.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/b26d2997-1b0a-4cf0-978a-f85c18cb0cf7.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/b26d2997-1b0a-4cf0-978a-f85c18cb0cf7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/b26d2997-1b0a-4cf0-978a-f85c18cb0cf7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_034.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "c61d243062e7cf8c1ef72799ee7380ad5a04d2b088be135d4a29b709dda6ad1d",
+      "decoded_rgb_sha256": "98b365a10414ae15b03313cf5e6be25c40df775bd4b8411b70f47cbeb49d0c1c",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/270507e3-12e6-4b60-abf7-599551130285.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/270507e3-12e6-4b60-abf7-599551130285.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/270507e3-12e6-4b60-abf7-599551130285.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/270507e3-12e6-4b60-abf7-599551130285.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_035.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "bc197bd4f06dd4c707c4967c26f4f0e05dd11e1e2e58cca19cc7e1b52eced86a",
+      "decoded_rgb_sha256": "f3c396833157ea8b8eca6c54675096098f07ce0f257fa2b5ba28541a933d6797",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/27 (83).jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/27 (83).jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/27 (83).jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/27 (83).jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_036.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "740cee9c972899cd7e88c58404ad38ed4f854b05e0f80c983bce57474da26e40",
+      "decoded_rgb_sha256": "7ed43837180bf456b64f4b9bda76b7868c8b9240af1d67d704ab1bafe49b7d9b",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/85d98b08-ef3d-4f72-976b-17f012ee2545.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/85d98b08-ef3d-4f72-976b-17f012ee2545.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/85d98b08-ef3d-4f72-976b-17f012ee2545.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/85d98b08-ef3d-4f72-976b-17f012ee2545.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_037.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "fc1f02b1dced796bc0db1cfcbbf6f13f862a0557c182b876bb45f21f30a0f3f2",
+      "decoded_rgb_sha256": "60ecf457f5d968467f80913df5c3f69870f6803c8da4bf1bf0e282501531d81c",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a0a2d263-5a14-4202-a7dd-7f297f3ff82b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a0a2d263-5a14-4202-a7dd-7f297f3ff82b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a0a2d263-5a14-4202-a7dd-7f297f3ff82b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a0a2d263-5a14-4202-a7dd-7f297f3ff82b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_038.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "13f896bea1a656c7fc09b12380cfa074074817df21f31676a359c45aa62c0c23",
+      "decoded_rgb_sha256": "f7fc091653428bc529ffec93f8f5f4e63235865b23a441d0ba8a6fc0f6c8cf70",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/27 (50).jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/27 (50).jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/27 (50).jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/27 (50).jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_039.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "8c6eb21aea46431593a757b4214de762c0014e88f5ec9284ad945f4164250ad3",
+      "decoded_rgb_sha256": "f57009c766e883653abcadfcaa39e66805d685aaa7e0e90a15ce831f09ee3c2d",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e0f879a4-1b27-4c7e-aee4-b38241b7bea8.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e0f879a4-1b27-4c7e-aee4-b38241b7bea8.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e0f879a4-1b27-4c7e-aee4-b38241b7bea8.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/e0f879a4-1b27-4c7e-aee4-b38241b7bea8.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_040.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "c07dcdda8df365d656aa2d3e58f2e5ce76e81a851e776e1ac60fd1b17be1f510",
+      "decoded_rgb_sha256": "f8818ec5235aa3e17a7a5dfdef5b6e97d7a8cf61efe3c131407648ed72e82cfa",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5bc0d139-9fdf-4868-b1cd-c35bae5431a7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5bc0d139-9fdf-4868-b1cd-c35bae5431a7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5bc0d139-9fdf-4868-b1cd-c35bae5431a7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5bc0d139-9fdf-4868-b1cd-c35bae5431a7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_041.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "6edc1a25d2ad6d621958326779ed29fbab6cc8758e3d68f94c28edc0cd0aaff9",
+      "decoded_rgb_sha256": "d6f3a84f3416c97f4bcf8116b440aa7ebf18151ea228b22c057672ce4ecacebd",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7355_08dd5364-9105-415b-b943-998d0e733382.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7355_08dd5364-9105-415b-b943-998d0e733382.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7355_08dd5364-9105-415b-b943-998d0e733382.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7355_08dd5364-9105-415b-b943-998d0e733382.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_042.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "6a0752091fa47842562eba1c17de42ea1d7761735486c682c6a800e7c148ab7d",
+      "decoded_rgb_sha256": "c613e15e97a5d8bbbc37106094c1c765c631af9c0f6e982571567d9f5bae5c36",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/40d8d0b4-aee7-4b95-a99c-639361096754.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/40d8d0b4-aee7-4b95-a99c-639361096754.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/40d8d0b4-aee7-4b95-a99c-639361096754.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/40d8d0b4-aee7-4b95-a99c-639361096754.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_043.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "4de62a669e6df9c41f0854f6813c093ff7f81b992f80d5d677456414499ca820",
+      "decoded_rgb_sha256": "72111bb565f42cac2299abd5ab81dd7812a3c3473a9e6c1e160276a7669d2211",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/ea22e809-3a53-49ec-b906-af31388c7ae9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/ea22e809-3a53-49ec-b906-af31388c7ae9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/ea22e809-3a53-49ec-b906-af31388c7ae9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/ea22e809-3a53-49ec-b906-af31388c7ae9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_044.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "768be4ae174c22ec17518245d90f3b70a5c5713428b40afc23152e292680b0af",
+      "decoded_rgb_sha256": "962416e5ca58ef69d29f687447810d31f6eeb1c58a665348eac2cfbc110cb00d",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem766.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem766.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem766.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem766.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_045.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "c223b5a2b7e3b38146e248130088728c7018f591123f0e64fcd085c741174a35",
+      "decoded_rgb_sha256": "85d44fc0f755fe1d9636eaf664a49ec0e07fbdf3ad8d1a073e4c5620e0387076",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9274_0ca3d55b-6e80-434a-9158-4d6c532660db.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9274_0ca3d55b-6e80-434a-9158-4d6c532660db.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9274_0ca3d55b-6e80-434a-9158-4d6c532660db.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9274_0ca3d55b-6e80-434a-9158-4d6c532660db.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_046.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "6623372919e108a5cbf6d8a13e407f771ab447a90b9e636fa644a1411765e255",
+      "decoded_rgb_sha256": "2b94e02be8c48dda0c4bbabbd68b77f198639e259a1d7952b139f6fd4bb0b13c",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5b6d3f08-5bbc-4886-8fb0-b01340e13730.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5b6d3f08-5bbc-4886-8fb0-b01340e13730.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5b6d3f08-5bbc-4886-8fb0-b01340e13730.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5b6d3f08-5bbc-4886-8fb0-b01340e13730.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_047.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "5673cf4199e806e77f44792b5f20448a7bb9e74f277a349cbb8651545c877635",
+      "decoded_rgb_sha256": "ad6dd444cab44fc98d8b4fb46982bc199dd8416269b9c209285eac347c147bcc",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/9e599bed-1594-4ad2-a01d-330844ef68fc.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/9e599bed-1594-4ad2-a01d-330844ef68fc.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/9e599bed-1594-4ad2-a01d-330844ef68fc.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/9e599bed-1594-4ad2-a01d-330844ef68fc.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_048.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "59fb99466ae6ae4df326cc21e8ef0a54e97cbba2674adaadb7464cd7d1005478",
+      "decoded_rgb_sha256": "399104489da34095b479fb2f4ea06780c86e9e97da74998e37131422e7acdcd1",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a1043954-f53a-4c2f-bee0-ae82aadf22df.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a1043954-f53a-4c2f-bee0-ae82aadf22df.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a1043954-f53a-4c2f-bee0-ae82aadf22df.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/a1043954-f53a-4c2f-bee0-ae82aadf22df.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_049.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "dbb682bc8775db9131ce4980cb4eb7eae132244e404bbb7fa678ead93a216087",
+      "decoded_rgb_sha256": "3d61bb378f427ebbaf47320896767b6180c1640b47d07b0d00ea274abfbd8fea",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/26309f46-6abd-48ba-8d10-7a07a1bb0337.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/26309f46-6abd-48ba-8d10-7a07a1bb0337.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/26309f46-6abd-48ba-8d10-7a07a1bb0337.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/26309f46-6abd-48ba-8d10-7a07a1bb0337.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_050.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "91d0d50d53fc40612aa8c74b3033f3a628d7cf4eeb515d0c82850ed11d1aee57",
+      "decoded_rgb_sha256": "6900baa56e105cfe6dee8a9d3a41d6e6a405869e8e3ba9b719a20677b0edc9d8",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cf0ff519-9e62-4537-a272-a167e327e1ba.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cf0ff519-9e62-4537-a272-a167e327e1ba.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cf0ff519-9e62-4537-a272-a167e327e1ba.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cf0ff519-9e62-4537-a272-a167e327e1ba.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_051.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "c015b891ccd1270a25cd87f8b55154cb5e25c3fa526c6eb9d0020b6c70246079",
+      "decoded_rgb_sha256": "e79ecd43938971a1287c08edca8ed25feea7a344ff8552ed973f1a64cf453f33",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/23d33884-1108-4df0-95ee-cecf04355c04.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/23d33884-1108-4df0-95ee-cecf04355c04.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/23d33884-1108-4df0-95ee-cecf04355c04.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/23d33884-1108-4df0-95ee-cecf04355c04.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_052.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "111246feb7bcf3c7d9e1bb475f34c1c385d5c66b5420dbe760acb6ebe9420678",
+      "decoded_rgb_sha256": "afaa0298ca441e52d45c696f05d6783ac9911c71d209afd8f383da10c94e8d10",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/982bdafb-1d24-4769-95e8-1378a497557c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/982bdafb-1d24-4769-95e8-1378a497557c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/982bdafb-1d24-4769-95e8-1378a497557c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/982bdafb-1d24-4769-95e8-1378a497557c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_053.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "be2d42ca7f032566eac2ddb4f44255b472b7da38dbffd59daa219296d39d36f4",
+      "decoded_rgb_sha256": "86c61e817b720bb4ea5b6e824d4e64d74db82ba769fe8473a2712a561b1d330d",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/0a5a964b-d17e-4df2-b98a-913777609568.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/3873fb90-b44a-49c7-93e4-f9266de9352e.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/b2f0de45-0df9-4c9d-b909-95512ba4cf59.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/bfff2dc1-2212-42c8-962f-20dc8993d043.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/0a5a964b-d17e-4df2-b98a-913777609568.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/3873fb90-b44a-49c7-93e4-f9266de9352e.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/b2f0de45-0df9-4c9d-b909-95512ba4cf59.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/bfff2dc1-2212-42c8-962f-20dc8993d043.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/0a5a964b-d17e-4df2-b98a-913777609568.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/3873fb90-b44a-49c7-93e4-f9266de9352e.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/b2f0de45-0df9-4c9d-b909-95512ba4cf59.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/bfff2dc1-2212-42c8-962f-20dc8993d043.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/0a5a964b-d17e-4df2-b98a-913777609568.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/3873fb90-b44a-49c7-93e4-f9266de9352e.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/b2f0de45-0df9-4c9d-b909-95512ba4cf59.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            },
+            {
+              "path": "data/alzheimers/ModerateDemented/bfff2dc1-2212-42c8-962f-20dc8993d043.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_054.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "21e441286d57f1f05b08ef8c0573a325183dac74da4c4c9dc2d9d19732877a7a",
+      "decoded_rgb_sha256": "f440b10b676eac4c1917c8b78dab87b17f0974501bf761e056b3262ef7ebea6b",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a1099a27-9247-44ba-9624-e0b93d32d0a1.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a1099a27-9247-44ba-9624-e0b93d32d0a1.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a1099a27-9247-44ba-9624-e0b93d32d0a1.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/a1099a27-9247-44ba-9624-e0b93d32d0a1.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_055.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "09017f3c8215b6b55a099a247ba5a57da160d226e53a424de6fe6658c0a8a27b",
+      "decoded_rgb_sha256": "95b051a8dd53a0800e8a90f65500a73eddf890c11e351e124d0db998f8494260",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cc0ffcf5-9104-4ef3-90e9-cb628322255d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cc0ffcf5-9104-4ef3-90e9-cb628322255d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cc0ffcf5-9104-4ef3-90e9-cb628322255d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/cc0ffcf5-9104-4ef3-90e9-cb628322255d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_056.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "fe9b7813596c36cbf0bbeab76a46a7b77493ac9d08bcef4e19bff60747e29bc6",
+      "decoded_rgb_sha256": "0fd4e566b9de5000dbb3bcf1759a6807c46cca30dea7cb8ed43634c021cfed8b",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/f6968e80-4053-4efc-8424-cb455ea1497d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/f6968e80-4053-4efc-8424-cb455ea1497d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/f6968e80-4053-4efc-8424-cb455ea1497d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/f6968e80-4053-4efc-8424-cb455ea1497d.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_057.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "c7e6488134f59bd2697c743cd3365bf1563f4e1aeec0b03ddb7d77116c356eaf",
+      "decoded_rgb_sha256": "5e5cd31b348393144895b6ceb00d610365d9a88f44aacb7bedb1c4b8e2810c9e",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/58e21d99-bf69-4b58-90d6-d34eff3862d5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/58e21d99-bf69-4b58-90d6-d34eff3862d5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/58e21d99-bf69-4b58-90d6-d34eff3862d5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/58e21d99-bf69-4b58-90d6-d34eff3862d5.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_058.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "d3eaf9dabcb59b36bf0a91e3d422985bfa4b32d984a3e89c4d41ee1944fcbbec",
+      "decoded_rgb_sha256": "9250b3d921f733fdc997f2f13f09c2c299d277e4e81804e5320c1817e8321040",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6ab40f9f-3c88-4e11-97c0-fc1d6d306cea.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6ab40f9f-3c88-4e11-97c0-fc1d6d306cea.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6ab40f9f-3c88-4e11-97c0-fc1d6d306cea.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6ab40f9f-3c88-4e11-97c0-fc1d6d306cea.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_059.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "db50a4e602dfe231d812530db2ee9c9ac2f2fac3c175e06581af48072e2893d8",
+      "decoded_rgb_sha256": "1fecb9bd5aa4725cf11ba5ecb099af8c431846862698dac85dc9be60b0c910b0",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_6552_274f02e0-6d82-4099-ab41-a6dad83fe19b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_6552_274f02e0-6d82-4099-ab41-a6dad83fe19b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_6552_274f02e0-6d82-4099-ab41-a6dad83fe19b.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_6552_274f02e0-6d82-4099-ab41-a6dad83fe19b.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_060.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "6880d33407358d317ddafe87696818e93d3d74d0e92d8d1f0ff9fde78d2c8f7a",
+      "decoded_rgb_sha256": "72d1b29e6e46c52eb99a8694c72a6304edbc2b31d853726cd2c33652202b9e5d",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/69706198-4d25-4d0b-86f1-476f6eb2a1c9.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/69706198-4d25-4d0b-86f1-476f6eb2a1c9.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/69706198-4d25-4d0b-86f1-476f6eb2a1c9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/69706198-4d25-4d0b-86f1-476f6eb2a1c9.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_061.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "182a672fc7d26f4fd47ff8bba5c4dadaa0586d25dfb5c41fb0c2e28e4158035d",
+      "decoded_rgb_sha256": "b9d10acdbd04b9462fcdd0dc2742a0840e84d41bbf526435e5381435c4cff5d6",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/98b64835-43bf-4341-ad3f-719b9e9104da.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/98b64835-43bf-4341-ad3f-719b9e9104da.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/98b64835-43bf-4341-ad3f-719b9e9104da.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/98b64835-43bf-4341-ad3f-719b9e9104da.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_062.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "e64a5eb45cec2770ed02c6abb4a77af4d686f2b900ed937710f9f68652beffeb",
+      "decoded_rgb_sha256": "da6d93bcedc91885d791d301d0391b3499110bd9b94812c99a91bd2dd063a8ca",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/020bd37f-26e2-4a52-9f9b-a7f8a09bba06.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/020bd37f-26e2-4a52-9f9b-a7f8a09bba06.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/020bd37f-26e2-4a52-9f9b-a7f8a09bba06.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/020bd37f-26e2-4a52-9f9b-a7f8a09bba06.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_063.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "c9de7b451a490d608c6e60716d993564268330a5343757694d4e139dc7583971",
+      "decoded_rgb_sha256": "b3d713e5e9b1d01bdb6cf7b0cc535728fcd92e224f5af2300d21e9e94016cee6",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9269_ed3f50ac-c9fa-4b3f-ba12-2f9ca4183f44.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9269_ed3f50ac-c9fa-4b3f-ba12-2f9ca4183f44.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9269_ed3f50ac-c9fa-4b3f-ba12-2f9ca4183f44.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9269_ed3f50ac-c9fa-4b3f-ba12-2f9ca4183f44.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_064.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "dc91c2fe138026ea661b3dec60eb9adfb04ab2a80866e6767524143d58889603",
+      "decoded_rgb_sha256": "13f021e6582552e71ca423d68ebbe5200cfc1b7f38e43b76adcb7922f5c1f1cf",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5892cb00-872b-42bb-b084-355989f6a621.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5892cb00-872b-42bb-b084-355989f6a621.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5892cb00-872b-42bb-b084-355989f6a621.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5892cb00-872b-42bb-b084-355989f6a621.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_065.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "b90ccf990fd86f3d45c436ae17add061039fbcce00285523ad552467732dee68",
+      "decoded_rgb_sha256": "582701e3614274b4c51016a59c699fb0f2213aeb99caa863f4ce52e6a08972ae",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5c862734-84ad-4e25-8b01-d7f31d2ac69e.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5c862734-84ad-4e25-8b01-d7f31d2ac69e.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5c862734-84ad-4e25-8b01-d7f31d2ac69e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/5c862734-84ad-4e25-8b01-d7f31d2ac69e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_066.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "fcb34cf924047a12770ac1e40368dace5474d884549efd29cb6270ecb2422430",
+      "decoded_rgb_sha256": "453fe46b531d975160fb489b105f347a60874e4461c1d5709313c3cf0aa4caba",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8a64c455-fe9d-4511-b0dd-2eccba23e171.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8a64c455-fe9d-4511-b0dd-2eccba23e171.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8a64c455-fe9d-4511-b0dd-2eccba23e171.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8a64c455-fe9d-4511-b0dd-2eccba23e171.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_067.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "f58c11e9cd264caa2b8208ee1ddc9825b657a173d951bace801a3a0c0beda1cf",
+      "decoded_rgb_sha256": "0ce29084c02529f32ac791aaa7f61f1977fc64ae05dbc20cb764f5c37c893e5f",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/b469c9b3-e0c9-4f29-ab3d-ab39b5ca6434.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/b469c9b3-e0c9-4f29-ab3d-ab39b5ca6434.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/b469c9b3-e0c9-4f29-ab3d-ab39b5ca6434.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/b469c9b3-e0c9-4f29-ab3d-ab39b5ca6434.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_068.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "6040e0cc538242ee8f42b59e87d2d9756795badf5df4cd35a49930f68a496dbf",
+      "decoded_rgb_sha256": "8b1ab4c119c62611958a305b7504d53b34f4b26b734d7eebcb346aa831df8635",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c4396a72-c913-41a4-ba7a-cec334c10e5f.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c4396a72-c913-41a4-ba7a-cec334c10e5f.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c4396a72-c913-41a4-ba7a-cec334c10e5f.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/c4396a72-c913-41a4-ba7a-cec334c10e5f.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_069.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "300307e7b48309eb138f44d61919e39d778d848c826914299564589d5c1fb22a",
+      "decoded_rgb_sha256": "ba920c2b6a4042ca4ed435a79bb7ca71b58ddb452b1330c95a119e4c13180af1",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6bf620de-9168-4d91-92c7-da342c0b76f6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6bf620de-9168-4d91-92c7-da342c0b76f6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6bf620de-9168-4d91-92c7-da342c0b76f6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/6bf620de-9168-4d91-92c7-da342c0b76f6.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_070.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "a9dac511ae0fa0f01054aeddec51a298baef321d9073158894ba1e97b58a5142",
+      "decoded_rgb_sha256": "0b8dfbd2295a9c50e5cd2bc3bf768439b7fcf174682f67fbbfae590684ae4336",
+      "width": 180,
+      "height": 180,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/4b36271a-e617-4782-b948-dde49ed95197.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/4b36271a-e617-4782-b948-dde49ed95197.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/4b36271a-e617-4782-b948-dde49ed95197.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/4b36271a-e617-4782-b948-dde49ed95197.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_071.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "c46e298144d6f22edfbd7dfb60a5f4791c5de49cac6550ee81ec395434ce1784",
+      "decoded_rgb_sha256": "0901bec85bd631f5ee26c366ab48e88d580c4e6aaad352bfd7b86193cc745b16",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9e3cd691-1fca-44af-91d6-4a91239b73d7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9e3cd691-1fca-44af-91d6-4a91239b73d7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9e3cd691-1fca-44af-91d6-4a91239b73d7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/9e3cd691-1fca-44af-91d6-4a91239b73d7.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_072.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "1a445fde34e9fa34f1381094366bbc92ce74181f498dd325a313310121d3ba6f",
+      "decoded_rgb_sha256": "a0379f56a59149dba4be0b47c55119f1220b19fb0d8cd96f008a137647554a3c",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/0c05056b-ab57-4756-a618-7c179dca0e37.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/0c05056b-ab57-4756-a618-7c179dca0e37.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/0c05056b-ab57-4756-a618-7c179dca0e37.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/0c05056b-ab57-4756-a618-7c179dca0e37.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_073.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "a5df18a1ca04639bf0f481069efc9787e8bbe9d5d7746bc250e02dc9ac22b055",
+      "decoded_rgb_sha256": "e30df20fc35e57c28634f87c07253e081c8a1b88a467f23ce8dd9e99f3ca89b0",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/66ab060a-1c36-479e-ae0b-0ceea5d4f67f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/66ab060a-1c36-479e-ae0b-0ceea5d4f67f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/66ab060a-1c36-479e-ae0b-0ceea5d4f67f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/66ab060a-1c36-479e-ae0b-0ceea5d4f67f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_074.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "6363c5c93ca4795409f2bdc1d452eec692208103ad82b1ab6bcd40be557369d1",
+      "decoded_rgb_sha256": "e12c8e8954e9e8ec9a9278ee7a7248cda2dd82477e2db05577c955b1e9ca5c80",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/1968a9be-c0fd-42a2-a968-b8ca13f21c50.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/1968a9be-c0fd-42a2-a968-b8ca13f21c50.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/1968a9be-c0fd-42a2-a968-b8ca13f21c50.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/1968a9be-c0fd-42a2-a968-b8ca13f21c50.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_075.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "8c3f40a0b143c072a2434d2ac2e6503feb052c054abfd9c2d1ec78b226e6924f",
+      "decoded_rgb_sha256": "31082bb8740380aa56d5a279ebeb7fd865e443d30c36996369c7594c90612b35",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9862_07181258-1611-44ed-9158-3621cf977560.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9862_07181258-1611-44ed-9158-3621cf977560.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9862_07181258-1611-44ed-9158-3621cf977560.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_9862_07181258-1611-44ed-9158-3621cf977560.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_076.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "d9d1c15ec69d1e04cbad4da9db068b69ff3b897ba9b5caefe694d013064f8a3a",
+      "decoded_rgb_sha256": "f90548aa4f3b05d97ca3502a2ec08646a675d9a11c861aed035ab71b6007247b",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7965_e0320124-0e97-4837-b3e8-4b6aa58b1c65.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7965_e0320124-0e97-4837-b3e8-4b6aa58b1c65.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7965_e0320124-0e97-4837-b3e8-4b6aa58b1c65.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7965_e0320124-0e97-4837-b3e8-4b6aa58b1c65.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_077.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "70e416ba70d3da55717f21c8160a74cd66b57e48eda24e4aa46e1f9ff34b32a0",
+      "decoded_rgb_sha256": "ae878ad1ad683ef9f6bc762b2fba435bc9802d7a5a9f8cc3eac03fb3d4eed20c",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem1183.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem1183.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem1183.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/nonDem1183.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_078.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "6b4eb3456831637cfecd28cd4d1a5af7cbfee9c5113e0325a5cfe542279df04a",
+      "decoded_rgb_sha256": "4fb680a1b825438bf958dbd32a88dce70d776f4fc12319486824be9c03c90e77",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fd991f44-b7fc-4050-ae14-b9ff7604080d.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fd991f44-b7fc-4050-ae14-b9ff7604080d.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fd991f44-b7fc-4050-ae14-b9ff7604080d.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fd991f44-b7fc-4050-ae14-b9ff7604080d.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_079.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "80c6b2ac1a3025b2d67d19fcff4681d8245b190d222e200c0a5718b06de65ad8",
+      "decoded_rgb_sha256": "f5dc75c1978b0ab93e1bc959119cfd5818d40b168ba5b8823d38aadcd782e8af",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6d4fc158-a963-4239-8b46-433da0dccf2f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6d4fc158-a963-4239-8b46-433da0dccf2f.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6d4fc158-a963-4239-8b46-433da0dccf2f.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/6d4fc158-a963-4239-8b46-433da0dccf2f.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_080.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "de0c48b4f9f03f0227e66851dfd963b93147698de25531e080057b128c4274f0",
+      "decoded_rgb_sha256": "684c713dadef0bb72a4a3604f0d68338500eb18631c29c400a279ccc17c39689",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/196c3584-197b-4aea-a8d9-8f9a9c237ff4.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/196c3584-197b-4aea-a8d9-8f9a9c237ff4.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/196c3584-197b-4aea-a8d9-8f9a9c237ff4.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/196c3584-197b-4aea-a8d9-8f9a9c237ff4.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_081.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "258e8d439b16f8a0c85930bbd9e8a97627b41c06f3365e6289ccabd95da8eecd",
+      "decoded_rgb_sha256": "75f8ce942180c36a839df872126d99716aa4812c680cfeabac5fc346385f834b",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8d9b5862-6e7c-4b30-a3d9-28b9b48cf67c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8d9b5862-6e7c-4b30-a3d9-28b9b48cf67c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8d9b5862-6e7c-4b30-a3d9-28b9b48cf67c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/8d9b5862-6e7c-4b30-a3d9-28b9b48cf67c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_082.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "b2bc2917c5737395a3babf09ad575414560eab9e37e3865a84c0fb89dba9aafd",
+      "decoded_rgb_sha256": "ab33003e10c1f3321ae8d7cbd91a892b1a340004822e084805be727e26554a91",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/788bd856-1506-408c-b763-302df57d5585.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/788bd856-1506-408c-b763-302df57d5585.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/788bd856-1506-408c-b763-302df57d5585.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/788bd856-1506-408c-b763-302df57d5585.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_083.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "4f7074613ea15a353006b18c8c1891fe376202e43b0592b8c9912bcb94fe6806",
+      "decoded_rgb_sha256": "7afb23c11ca3d5a8e424e0005e501e0e79a24db15ee98243c50f36ae5e258284",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/4e837d81-952f-4d0b-a483-659e75e32ab0.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/4e837d81-952f-4d0b-a483-659e75e32ab0.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/4e837d81-952f-4d0b-a483-659e75e32ab0.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/4e837d81-952f-4d0b-a483-659e75e32ab0.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_084.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "095a8c6e5939b3d8a1a8c0e9e3ec37700a13f222f66b98d7599a85f5914b52ce",
+      "decoded_rgb_sha256": "b206853cf600570dd7cdac2f8a9c710d3db91390d5acbf5dee60fdc8a250d4c0",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5da17b85-6d1f-44ed-af7b-8c7fbd5f40e3.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5da17b85-6d1f-44ed-af7b-8c7fbd5f40e3.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5da17b85-6d1f-44ed-af7b-8c7fbd5f40e3.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/5da17b85-6d1f-44ed-af7b-8c7fbd5f40e3.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_085.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "779e2c0cee0b6b9657f1f6b9c0ce9a544383820481a4aea8f77f48c1fbf3c367",
+      "decoded_rgb_sha256": "29c91a9d8aa2cf650cc71323e0875880fb8ad92a4a65e4ec709e2f0b0e29f92b",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/11f62881-9a02-4fa4-b4fd-55b6e28b447b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/11f62881-9a02-4fa4-b4fd-55b6e28b447b.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/11f62881-9a02-4fa4-b4fd-55b6e28b447b.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/11f62881-9a02-4fa4-b4fd-55b6e28b447b.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_086.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "93f0ccaf026f8dc278d6765f564650434cd8aa310aa8692e33c17a02f7760a90",
+      "decoded_rgb_sha256": "8dfd19ec96d41a61a81e83dff8b0d8d2225ede9a86b3e47f37396fd23b48e0fe",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/4383f12b-65ea-40ba-af52-f967c29c5f01.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/4383f12b-65ea-40ba-af52-f967c29c5f01.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/4383f12b-65ea-40ba-af52-f967c29c5f01.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/4383f12b-65ea-40ba-af52-f967c29c5f01.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_087.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "a9063620b14f8ce0818f28f7e680d4f26302898ff548296081a245abf5d8d1d0",
+      "decoded_rgb_sha256": "1cca62ff62f49698a4f6a40152277860d4e2003d8401fd48ac2876cb8e50da3f",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/7d9b4d25-dc9f-45c5-a486-fb12d7fb925a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/7d9b4d25-dc9f-45c5-a486-fb12d7fb925a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/7d9b4d25-dc9f-45c5-a486-fb12d7fb925a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/7d9b4d25-dc9f-45c5-a486-fb12d7fb925a.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_088.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "20af08b869b31da046089945b89f6b21d4a33c750ed4d4f078651c06bd983a07",
+      "decoded_rgb_sha256": "0b39ce2c9d27122b3fb38da2024b7e8340a398af79e5909cb72f581f9b0d43ea",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/296c2501-9be8-4908-9501-3a7102f90933.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/296c2501-9be8-4908-9501-3a7102f90933.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/296c2501-9be8-4908-9501-3a7102f90933.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/296c2501-9be8-4908-9501-3a7102f90933.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_089.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "ec937e9971450d67adf4afe91b81569b66a4f4cb301117e05d1d897ab6678219",
+      "decoded_rgb_sha256": "aec347a1148b349a582fe27a9c12e37741517bb80712796ca455a8b0cf790e56",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7782_6c7ae902-5810-49a3-880d-78c2339cdf1e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7782_6c7ae902-5810-49a3-880d-78c2339cdf1e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7782_6c7ae902-5810-49a3-880d-78c2339cdf1e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/aug_7782_6c7ae902-5810-49a3-880d-78c2339cdf1e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_090.jpg",
+      "true_category": "NonDemented",
+      "file_sha256": "21e65b57dbcffe71b76c6269a1a90a3178f9028987b254ade668b2819a653b5c",
+      "decoded_rgb_sha256": "3103f5568eb55f2d233cc7a677e9c1ec78c81a8f7af0843b42595aac63ee8ee9",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/bdf984a9-8a11-4e2e-b49b-b5558e46e50e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/bdf984a9-8a11-4e2e-b49b-b5558e46e50e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/bdf984a9-8a11-4e2e-b49b-b5558e46e50e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/NonDemented/bdf984a9-8a11-4e2e-b49b-b5558e46e50e.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "NonDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_091.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "4641d0473a4595e68a988410f0036e478a776933194f961e3d234dd3529c95d0",
+      "decoded_rgb_sha256": "aacb81da85ed64a09ca73ae610f15e18935c97a07c0e524d514d85b34f57885f",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem1191.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem1191.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem1191.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem1191.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_092.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "81cb6f80cdc4557b7b8638aec088caca1c8ae497879c99cee2ca294945736e8e",
+      "decoded_rgb_sha256": "aece2ae5eebc0a7afb4b32ae6d410b3a4a20f4c4d4eeaae141fea09e817626f1",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8f200fcd-9c41-478c-a9d1-3518e419f326.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8f200fcd-9c41-478c-a9d1-3518e419f326.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8f200fcd-9c41-478c-a9d1-3518e419f326.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/8f200fcd-9c41-478c-a9d1-3518e419f326.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_093.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "dcf26737268314b12554742b3f01915ec85a8b1a5dd7d23605b0eaa5d131d0d9",
+      "decoded_rgb_sha256": "81102e64046a48ad23a98f2dd50ab83073b970687d4f70451935969195618b61",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/faf8d4c8-bac6-45da-b8e8-90935b50ad11.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/faf8d4c8-bac6-45da-b8e8-90935b50ad11.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/faf8d4c8-bac6-45da-b8e8-90935b50ad11.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/faf8d4c8-bac6-45da-b8e8-90935b50ad11.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_094.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "8f44f1398b1ac84898b1c9c9a9a01cd8646fc8cc9c3fffd18cbd1c6dedbf60cd",
+      "decoded_rgb_sha256": "3f37e65006ae9115d9966947eacb8b74c35e212fad2a6681321236aec2971e38",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/516f8d1e-c80a-42d7-b0b4-81295b5520cf.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/516f8d1e-c80a-42d7-b0b4-81295b5520cf.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/516f8d1e-c80a-42d7-b0b4-81295b5520cf.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/516f8d1e-c80a-42d7-b0b4-81295b5520cf.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_095.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "1be293072bd84d7bba5cd53586aff812d23fbbda53c20a838f99a4dfef575a5a",
+      "decoded_rgb_sha256": "f66e5b3e4949cad3b972285e26426edb8f327f35ef3c39d7fc0fa99f1e8fcf00",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/c04674e5-17c7-4050-b986-0903f381e38a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/c04674e5-17c7-4050-b986-0903f381e38a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/c04674e5-17c7-4050-b986-0903f381e38a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/c04674e5-17c7-4050-b986-0903f381e38a.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_096.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "8a06113749af0ad61f57166757394a49fcc36cc1b347fddf6a0bbce149dfb792",
+      "decoded_rgb_sha256": "b85ad00cda9919ada8af2e7ef6fa23504a55ea5e0c1992febca857c62cc03ce1",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/dfc100b4-1a83-4261-8070-3f449e86445c.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/dfc100b4-1a83-4261-8070-3f449e86445c.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/dfc100b4-1a83-4261-8070-3f449e86445c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/dfc100b4-1a83-4261-8070-3f449e86445c.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_097.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "e76f2b186563976364c48df64c08f6de7a4145dc14dfbc5b1cde769b5b0a660b",
+      "decoded_rgb_sha256": "e3a8c08d11ae628605575cc49428809ac2b6011b024452fa394067058aa605f1",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem60.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem60.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem60.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem60.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_098.jpg",
+      "true_category": "ModerateDemented",
+      "file_sha256": "d14e785045cbd4edc74b3ca226474ea51a583dd9542c120e7febbb982040881a",
+      "decoded_rgb_sha256": "472b97f8bb600c8ac7a752a2ba61a81281ca04d52c111b44f15c5e1ae2642f6b",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/fcc6777b-e056-4272-a75a-e6edbda73ce1.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/fcc6777b-e056-4272-a75a-e6edbda73ce1.jpg",
+              "split": "val",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/fcc6777b-e056-4272-a75a-e6edbda73ce1.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/ModerateDemented/fcc6777b-e056-4272-a75a-e6edbda73ce1.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "ModerateDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_099.jpg",
+      "true_category": "MildDemented",
+      "file_sha256": "adb88eabe76b5fbc74bc101dd0d1f6700daf595f804e42d952a9a757e2fe5ce0",
+      "decoded_rgb_sha256": "9285598223bd5df85800b9bd5ee329a21298ac78980fb10550719ddf04d8986f",
+      "width": 200,
+      "height": 190,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fbc5a469-51a7-4030-9a62-1b9d46cc54cf.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fbc5a469-51a7-4030-9a62-1b9d46cc54cf.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fbc5a469-51a7-4030-9a62-1b9d46cc54cf.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/MildDemented/fbc5a469-51a7-4030-9a62-1b9d46cc54cf.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "MildDemented"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "filename": "image_100.jpg",
+      "true_category": "VeryMildDemented",
+      "file_sha256": "1cddf1ef2f16e17265598d5f3e8fb5a0a620f928b6321de855c8bb1410d8a6cb",
+      "decoded_rgb_sha256": "95721ed8379025259133b2e6bd4d48b32763ce39b4c0eaa4cd85688cf6d8cf91",
+      "width": 176,
+      "height": 208,
+      "manifest_matches": {
+        "training_logs/splits/strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem322.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem322.jpg",
+              "split": "train",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        },
+        "training_logs/splits/perceptual_strict_manifest.csv": {
+          "file_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem322.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ],
+          "decoded_rgb_sha256": [
+            {
+              "path": "data/alzheimers/VeryMildDemented/verymildDem322.jpg",
+              "split": "test",
+              "domain": "dementia",
+              "subtype": "VeryMildDemented"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

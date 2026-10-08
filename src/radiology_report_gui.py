@@ -359,6 +359,7 @@ class App(ttk.Frame):
         if os.path.isfile(TUMOR_MODEL_PATH):
             try:
                 checkpoint = torch.load(TUMOR_MODEL_PATH, map_location=self.device, weights_only=False)
+                tumor_tfms = get_tumor_transform()
                 
                 # Check if it's a dictionary (checkpoint) or a full model
                 if isinstance(checkpoint, dict) and "model_state" in checkpoint:
@@ -366,6 +367,12 @@ class App(ttk.Frame):
                     self.tumor_classes = checkpoint.get("class_names", ["glioma", "meningioma", "notumor", "pituitary"])
                     model = build_tumor_model(arch, len(self.tumor_classes))
                     model.load_state_dict(checkpoint["model_state"])
+                    if build_pipeline_transforms is None:
+                        raise RuntimeError("Pipeline preprocessing is unavailable")
+                    tumor_tfms = build_pipeline_transforms(
+                        train=False,
+                        image_size=int(checkpoint.get("image_size", 224)),
+                    )
                 else:
                     # Assume it's a full model object or state dict
                     # If it's a state dict, we need to know the arch. If it's a full model, just use it.
@@ -381,6 +388,7 @@ class App(ttk.Frame):
 
                 model.eval().to(self.device)
                 self.tumor_model = model
+                self.tumor_tfms = tumor_tfms
                 status_texts.append("Tumor: Ready")
             except Exception as e:
                 print(f"Error loading tumor model: {e}")
@@ -392,17 +400,26 @@ class App(ttk.Frame):
         if os.path.isfile(ALZHEIMERS_MODEL_PATH):
             try:
                 checkpoint = torch.load(ALZHEIMERS_MODEL_PATH, map_location=self.device, weights_only=False)
+                alz_tfms = get_alzheimers_transform()
                 if isinstance(checkpoint, dict) and "model_state" in checkpoint:
                     arch = checkpoint.get("arch", "mobilenet_v3_large")
                     self.alz_classes = checkpoint.get("class_names", ALZ_CLASSES_4)
-                    self.alz_model = build_alzheimers_model(arch, len(self.alz_classes))
-                    self.alz_model.load_state_dict(checkpoint["model_state"])
+                    model = build_alzheimers_model(arch, len(self.alz_classes))
+                    model.load_state_dict(checkpoint["model_state"])
+                    if build_pipeline_transforms is None:
+                        raise RuntimeError("Pipeline preprocessing is unavailable")
+                    alz_tfms = build_pipeline_transforms(
+                        train=False,
+                        image_size=int(checkpoint.get("image_size", 224)),
+                    )
                 else:
                     # Older training scripts saved the full model object.
-                    self.alz_model = checkpoint
-                    output_count = infer_linear_outputs(self.alz_model, 4)
+                    model = checkpoint
+                    output_count = infer_linear_outputs(model, 4)
                     self.alz_classes = ALZ_CLASSES_3 if output_count == 3 else ALZ_CLASSES_4
-                self.alz_model.eval().to(self.device)
+                model.eval().to(self.device)
+                self.alz_model = model
+                self.alz_tfms = alz_tfms
                 status_texts.append("Alzheimer's: Ready")
             except Exception as e:
                 print(f"Error loading alzheimer model: {e}")

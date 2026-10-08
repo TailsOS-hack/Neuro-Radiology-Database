@@ -1,0 +1,120 @@
+{
+  "total": 100,
+  "correct": 100,
+  "accuracy": 1.0,
+  "threshold_strictly_greater_than": 0.95,
+  "accuracy_target_met": true,
+  "gradcam_valid": 100,
+  "gradcam_failed_or_flat": 0,
+  "predictions_unchanged_after_cam": 100,
+  "technical_checks_passed": true,
+  "class_order": [
+    "MildDemented",
+    "ModerateDemented",
+    "NonDemented",
+    "VeryMildDemented"
+  ],
+  "confusion_matrix": [
+    [
+      23,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      23,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      27,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      27
+    ]
+  ],
+  "per_class": {
+    "MildDemented": {
+      "total": 23,
+      "correct": 23
+    },
+    "ModerateDemented": {
+      "total": 23,
+      "correct": 23
+    },
+    "NonDemented": {
+      "total": 27,
+      "correct": 27
+    },
+    "VeryMildDemented": {
+      "total": 27,
+      "correct": 27
+    }
+  },
+  "evaluated_at_utc": "2026-10-08T00:00:59.913234+00:00",
+  "evaluation_type": "reused_internal_benchmark_not_independent_test",
+  "limitations": [
+    "This cohort overlaps historical training and validation images.",
+    "No retraining or checkpoint selection was performed on this cohort.",
+    "Finite nonflat Grad-CAM checks test software behavior, not anatomical validity."
+  ],
+  "key_sha256": "067b3b6bd3f7d1224e50befe7dcb11c43dff878aeb1aac6c6f3f9dd6eabdb9af",
+  "checkpoints": {
+    "binary": {
+      "path": "models/binary_router.pt",
+      "sha256": "697cdd23fa6b6a97a68323d64aefcc4e51215dd2829097931684b0c099815c1f",
+      "arch": "resnet50",
+      "image_size": 224,
+      "class_names": [
+        "tumor",
+        "dementia"
+      ]
+    },
+    "tumor": {
+      "path": "models/brain_tumor_classifier.pt",
+      "sha256": "3d4f5b00ed8f432845385a165ab1050460181bc420259c363c1a98567a8c8c84",
+      "arch": "efficientnet_b3",
+      "image_size": 224,
+      "class_names": [
+        "glioma",
+        "meningioma",
+        "notumor",
+        "pituitary"
+      ]
+    },
+    "dementia": {
+      "path": "models/alzheimers_classifier.pt",
+      "sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+      "arch": "mobilenet_v3_large",
+      "image_size": 224,
+      "class_names": [
+        "MildDemented",
+        "ModerateDemented",
+        "NonDemented",
+        "VeryMildDemented"
+      ]
+    }
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.14.1",
+    "torchvision": "0.29.1",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "device": "cpu",
+    "threads": 4
+  },
+  "source_sha256": {
+    "scripts/evaluate_radiologist_cohort.py": "235df9398d65908f9df347b1401b570ee93c4627156020beee8d0361b51cc707",
+    "src/hierarchical_inference.py": "f0b7d3b2f255f20c8f48c315e270f56123e848912ad0f1c6e3313d91fb1cf7b6",
+    "src/experiment_pipeline.py": "4fe109a6469695e77732e563d8dc2e4cfb0a6ad592cc5c4b1b58e990d2360db0",
+    "src/grad_cam.py": "b96976bccd9e2dd642c02ca1c1b19a7d1b06fc46574a79c68ae07b31d6d4b0ec"
+  }
+}

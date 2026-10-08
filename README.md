@@ -2,16 +2,18 @@
 
 > **2026-09-20 review: submission blocked.** A fresh decoded-RGB audit found 125 cross-split duplicate groups (301 tumor-image rows) in the historical primary manifest. Dementia has no decoded-pixel overlap, but upstream augmentation and patient independence remain unresolved. The perceptual sensitivity manifest has zero file/pixel/identical-dHash cross-split overlap. See [the final review](docs/FINAL_REVIEW_20260920.md) before interpreting historical tables.
 
+> **2026-10-07 current-checkpoint check:** The existing models score **100/100** on the radiologist image benchmark, with 100 finite, nonflat Grad-CAM maps and unchanged predictions after explanation. This is a reused benchmark: its images match 66 training, 9 validation, and 25 test images in the historical strict manifest. No new training or independent accuracy improvement is claimed. See [results, fixes, and reproduction](docs/evaluation_100_20261007/README.md).
+
 This project is an advanced medical imaging analysis tool. It uses deep learning to analyze MRI scans for both **Brain Tumors** and **Alzheimer's/Dementia** signs, then generates grounded draft reports from structured classifier evidence. The reporting path is deterministic by default so it does not ask an LLM to invent lesion measurements, locations, mass effect, atrophy measurements, or other unsupported clinical findings.
 
 ## Features
 
 -   **Hierarchical Classification:** Uses a multi-stage AI pipeline for maximum accuracy:
-    -   **Gatekeeper Model:** A `ResNet50` 3-way classifier that first determines if an MRI is **Normal**, **Tumor**, or **Dementia**.
+    -   **Current Router:** A `ResNet50` binary classifier routes an MRI to the **Tumor** or **Dementia** specialist. The GUI also supports older three-way gatekeeper checkpoints.
     -   **Specialized Classifiers:**
-        -   **Brain Tumor Classifier:** `EfficientNet-B3` (PyTorch) for specific tumor types (Glioma, Meningioma, Pituitary).
-        -   **Alzheimer's Classifier:** `MobileNetV3-Large` (PyTorch) for dementia stages (Mild, Moderate, Very Mild).
-    -   **Unified Normal Class:** The system intelligently identifies healthy scans from both datasets as a single "Normal" category.
+        -   **Brain Tumor Classifier:** `EfficientNet-B3` (PyTorch) for Glioma, Meningioma, Pituitary, or No Tumor.
+        -   **Alzheimer's Classifier:** `MobileNetV3-Large` (PyTorch) for Mild, Moderate, Very Mild, or NonDemented.
+    -   **Checkpoint Preprocessing:** Classification and Grad-CAM use the specialist checkpoint's image size and training normalization.
 -   **Grounded Report Maker:** Generates draft reports from the classifier label, confidence, user-entered exam details, and model validation context. Unsupported findings are explicitly marked as not assessed instead of being hallucinated.
 -   **Optional AI Metadata Assist:** The GUI can use a multimodal AI model only for basic acquisition metadata. The prompt refuses diagnosis/pathology inference and falls back to manual entry when uncertain.
 -   **Standardized Reporting:** Generates reports with a strict evidence schema for consistency across Findings, Impression, Technique, classifier evidence, and safety limitations.
@@ -29,7 +31,7 @@ This project is an advanced medical imaging analysis tool. It uses deep learning
     -   `compare_rad_vs_ai.py`: Script to compare AI accuracy vs human radiologist.
     -   `evaluate_tumor_only.py`: Dedicated evaluation script for the Brain Tumor classifier.
 -   `models/`:
-    -   `gatekeeper_classifier.pt`: ResNet50 router model.
+    -   `binary_router.pt`: Current ResNet50 binary router model (`gatekeeper_classifier.pt` is a legacy GUI fallback).
     -   `brain_tumor_classifier.pt`: EfficientNet-B3 model.
     -   `alzheimers_classifier.pt`: MobileNetV3 model.
 -   `data/`:
