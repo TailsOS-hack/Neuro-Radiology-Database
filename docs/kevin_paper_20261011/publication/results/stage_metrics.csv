@@ -1,0 +1,64 @@
+cohort,model,metric,estimate,ci95_low,ci95_high,n,n_resampling_units,resampling_unit,bootstrap_valid,degenerate
+internal_same_case,candidate_1,accuracy,0.997164461247637,0.993414863593603,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_1,balanced_accuracy,0.9968340234644583,0.9927802110547616,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_1,macro_f1,0.9968808645570439,0.9928402940559327,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_2,accuracy,0.996219281663516,0.9916119103745878,0.9990680552446108,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_2,balanced_accuracy,0.996031746031746,0.9914441529724702,0.999060238376841,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_2,macro_f1,0.9961112015484253,0.9915475971872162,0.9990671925606442,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_3,accuracy,0.999054820415879,0.997046389683376,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_3,balanced_accuracy,0.9990974729241877,0.9968602483639095,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_3,macro_f1,0.9990528709290458,0.9968781610356361,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_4,accuracy,0.998109640831758,0.9952561669829222,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_4,balanced_accuracy,0.998015873015873,0.9949377157031924,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_4,macro_f1,0.9981047034882055,0.9952078318376567,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_5,accuracy,0.999054820415879,0.9971153152069298,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_5,balanced_accuracy,0.9990974729241877,0.9970927404759751,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_5,macro_f1,0.9990056210847555,0.9968922780519794,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_6,accuracy,0.997164461247637,0.9941573130933544,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_6,balanced_accuracy,0.9968340234644583,0.9931184733437619,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,candidate_6,macro_f1,0.9969726979779295,0.993466392609774,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,old_baseline,accuracy,0.999054820415879,0.9971401334604385,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,old_baseline,balanced_accuracy,0.9989130434782609,0.9966059491978609,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+internal_same_case,old_baseline,macro_f1,0.9989602881856813,0.9968066032527113,1.0,1058,966,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+original100,candidate_1,accuracy,0.99,0.97,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_1,balanced_accuracy,0.9907407407407407,0.96875,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_1,macro_f1,0.99073756432247,0.9690463148880885,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_2,accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_2,balanced_accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_2,macro_f1,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_3,accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_3,balanced_accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_3,macro_f1,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_4,accuracy,0.99,0.97,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_4,balanced_accuracy,0.9907407407407407,0.96875,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_4,macro_f1,0.99073756432247,0.9690463148880885,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_5,accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_5,balanced_accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_5,macro_f1,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,candidate_6,accuracy,0.99,0.97,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_6,balanced_accuracy,0.9907407407407407,0.9696732954545455,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,candidate_6,macro_f1,0.9907375643224701,0.969182389937107,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,False
+original100,old_baseline,accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,old_baseline,balanced_accuracy,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+original100,old_baseline,macro_f1,1.0,1.0,1.0,100,100,image; no supported patient/augmentation-family clusters,2000,True
+old_hash_group_unexposed_sensitivity,candidate_1,accuracy,0.996031746031746,0.9908133465084276,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_1,balanced_accuracy,0.9958924349881797,0.9909450770569944,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_1,macro_f1,0.9959214735893249,0.9910926901173274,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_2,accuracy,0.9947089947089947,0.9893190921228304,0.9986910994764397,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_2,balanced_accuracy,0.9946808510638298,0.9888888888888889,0.9987980769230769,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_2,macro_f1,0.9947489829918399,0.9890573012008588,0.9987633255668744,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_3,accuracy,0.9986772486772487,0.9959893048128342,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_3,balanced_accuracy,0.9987437185929648,0.9957865168539326,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_3,macro_f1,0.9987071471046108,0.9958653409085751,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_4,accuracy,0.9973544973544973,0.9933510638297872,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_4,balanced_accuracy,0.9973404255319149,0.9930536048689139,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_4,macro_f1,0.9974131016042781,0.9933885967859348,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_5,accuracy,0.9986772486772487,0.9959839357429718,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_5,balanced_accuracy,0.9987437185929648,0.9958327513966481,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_5,macro_f1,0.9986777563024625,0.9956599215887157,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_6,accuracy,0.9973544973544973,0.9933774834437086,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_6,balanced_accuracy,0.9972813238770686,0.9930945110875378,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,candidate_6,macro_f1,0.9973472675198338,0.9932812038529328,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,old_baseline,accuracy,0.9986772486772487,0.9960051930758987,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,old_baseline,balanced_accuracy,0.9986111111111111,0.9954819277108433,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False
+old_hash_group_unexposed_sensitivity,old_baseline,macro_f1,0.9986404911964416,0.9956987393789636,1.0,756,733,prepared exact-pixel/dHash connected group; NOT patient identity,2000,False

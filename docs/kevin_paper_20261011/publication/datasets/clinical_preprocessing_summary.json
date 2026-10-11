@@ -1,0 +1,220 @@
+{
+  "protocol_version": "exploratory_t1_axial_v1",
+  "status": "frozen_exploratory_preprocessing_visual_qc_complete",
+  "data_root": "data",
+  "manifest": "data/external/clinical_t1_preprocessed_v1/clinical_slices.csv",
+  "seed": 1729,
+  "subjects_processed": 74,
+  "slices_written": 666,
+  "bipolar_subjects_retained_raw_excluded_primary": 24,
+  "subject_counts": [
+    {
+      "cohort": "besga_zenodo_3935636",
+      "split": "test",
+      "diagnosis": "AD",
+      "subjects": 7,
+      "slices": 63
+    },
+    {
+      "cohort": "besga_zenodo_3935636",
+      "split": "test",
+      "diagnosis": "CN",
+      "subjects": 4,
+      "slices": 36
+    },
+    {
+      "cohort": "besga_zenodo_3935636",
+      "split": "train",
+      "diagnosis": "AD",
+      "subjects": 21,
+      "slices": 189
+    },
+    {
+      "cohort": "besga_zenodo_3935636",
+      "split": "train",
+      "diagnosis": "CN",
+      "subjects": 11,
+      "slices": 99
+    },
+    {
+      "cohort": "besga_zenodo_3935636",
+      "split": "val",
+      "diagnosis": "AD",
+      "subjects": 7,
+      "slices": 63
+    },
+    {
+      "cohort": "besga_zenodo_3935636",
+      "split": "val",
+      "diagnosis": "CN",
+      "subjects": 4,
+      "slices": 36
+    },
+    {
+      "cohort": "openneuro_ds007561",
+      "split": "external",
+      "diagnosis": "AD",
+      "subjects": 1,
+      "slices": 9
+    },
+    {
+      "cohort": "openneuro_ds007561",
+      "split": "external",
+      "diagnosis": "CN",
+      "subjects": 14,
+      "slices": 126
+    },
+    {
+      "cohort": "openneuro_ds007561",
+      "split": "external",
+      "diagnosis": "MCI",
+      "subjects": 5,
+      "slices": 45
+    }
+  ],
+  "checks": {
+    "all_images_224_rgb": true,
+    "all_pixels_finite": true,
+    "all_rgb_channels_equal": true,
+    "source_clinical_join_complete": true,
+    "patient_split_disjoint": true,
+    "nine_slices_per_subject": true,
+    "exact_cross_patient_processed_pixel_duplicates": 0,
+    "all_openneuro_held_external": true,
+    "mci_binary_labels_blank": true,
+    "independent_final_manifest_and_pixels_rechecked": true,
+    "no_superseded_sampling_fractions_in_final_manifest": true,
+    "exactly_666_final_pngs_and_9_final_qa_montages": true
+  },
+  "image_normalization": "Per-volume 1st/99th percentiles of intensity-thresholded largest connected cranial foreground; no cohort-fitted preprocessing.",
+  "orientation": "Canonical RAS then orthogonal 1.5 mm isotropic RAS resampling; axial neurological display.",
+  "cranial_foreground": "Largest connected component above 8% of 98th percentile of positive intensities. Longest axial run with area at least 35% of maximum; nine fixed 45\u201385% fractions of cranial extent. This heuristic is not validated brain segmentation.",
+  "resize": "Fixed per-volume xy crop with 6 mm margin; preserve aspect ratio with black square padding, resize 224 bilinear, repeat grayscale RGB.",
+  "selection_policy": "Besga provider groups ea=AD,crl=CN; tb bipolar excluded. Deterministic subject-stratified 60/20/20 using seed 1729; OpenNeuro entire cohort external. No forced dementia-severity mapping.",
+  "clinical_metadata_policy": "Age and source sex/gender retained locally for subgroup descriptions only, not image model inputs. Besga gender coding not inferred. Original NIfTI headers and private biomarker tables are not exported.",
+  "evaluation_policy": "Only Besga validation may guide auxiliary model selection. Besga test and all OpenNeuro labels are excluded from selection. MCI may be predicted but excluded from binary AD/CN scoring.",
+  "limitations": [
+    "Exploratory preprocessing only; visual review is gross QC, not validated anatomical or clinical quality assurance.",
+    "No atlas registration, validated skull stripping, bias-field correction, scanner harmonization or clinical validation.",
+    "Preprocessing failures stop the pipeline rather than silently dropping cases.",
+    "Small single-source Besga development sample and only one OpenNeuro AD case; no robust external validation claim.",
+    "Source/cohort overlap and patient-identity deduplication beyond exact image pixels remain unresolved.",
+    "No model training or label harmonization to the existing severity task performed.",
+    "Visible intercohort intensity differences and within-cohort head-pitch/sharpness variation remain; the sampling rule does not provide anatomically registered slices."
+  ],
+  "visual_qc": {
+    "reviewed_utc": "2026-10-11T20:11:31.361514+00:00",
+    "reviewer": "Codex gross visual QC; no radiologist review",
+    "montages_reviewed": 9,
+    "central_subjects_reviewed": 74,
+    "complete_nine_slice_subjects_reviewed": 6,
+    "label_policy": "Final sheets show only source subject IDs and slice fraction. Representative full grids selected by subject-ID order, independent of diagnosis.",
+    "findings": [
+      "All reviewed central images contain recognizable axial brain anatomy; no blank image, gross orientation failure, or obvious brain clipping in inspected sheets.",
+      "Six representative nine-slice grids show progression from inferior temporal/brainstem levels through ventricular and upper cerebral levels.",
+      "Source head pitch and axial anatomy differ across participants; no atlas registration was performed.",
+      "OpenNeuro scans generally have darker brain intensities relative to extracranial tissue than Besga; no scanner harmonization was performed.",
+      "Variable sharpness remains; no subject was excluded based on visual appearance."
+    ],
+    "model_outcomes_inspected": false,
+    "scope": "Gross image rendering and anatomical plausibility only; not clinical or validated anatomical quality assurance."
+  },
+  "preprocessing_script_sha256": "bc3e1c7012cc54e9453af38d554073b3666cbc115fbb2a2072ed10a822f49475",
+  "clinical_manifest_sha256": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+  "final_slice_fractions": [
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85
+  ],
+  "protocol_history": [
+    {
+      "pass": "superseded draft",
+      "slice_fractions": [
+        0.2,
+        0.275,
+        0.35,
+        0.425,
+        0.5,
+        0.575,
+        0.65,
+        0.725,
+        0.8
+      ],
+      "reason_changed": "Gross visual anatomical QC showed excess inferior cerebellum/neck slices; initial sheets displayed source diagnoses but no model predictions or outcomes were inspected.",
+      "model_training_performed": false,
+      "files_retained": false
+    },
+    {
+      "pass": "final before model training",
+      "slice_fractions": [
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85
+      ],
+      "applied_uniformly_to_both_cohorts": true,
+      "qa_labels": "Subject IDs and slice fraction only; no diagnoses or model outcomes.",
+      "png_policy": "Every manifest PNG regenerated; superseded QA sheets removed."
+    }
+  ],
+  "clinical_age_summary": [
+    {
+      "cohort": "besga_zenodo_3935636",
+      "diagnosis": "AD",
+      "subjects": 35,
+      "age_min": 68.0,
+      "age_max": 88.0,
+      "age_mean": 79.086
+    },
+    {
+      "cohort": "besga_zenodo_3935636",
+      "diagnosis": "CN",
+      "subjects": 19,
+      "age_min": 56.0,
+      "age_max": 89.0,
+      "age_mean": 73.632
+    },
+    {
+      "cohort": "openneuro_ds007561",
+      "diagnosis": "AD",
+      "subjects": 1,
+      "age_min": 77.6,
+      "age_max": 77.6,
+      "age_mean": 77.6
+    },
+    {
+      "cohort": "openneuro_ds007561",
+      "diagnosis": "CN",
+      "subjects": 14,
+      "age_min": 61.2,
+      "age_max": 84.2,
+      "age_mean": 70.064
+    },
+    {
+      "cohort": "openneuro_ds007561",
+      "diagnosis": "MCI",
+      "subjects": 5,
+      "age_min": 70.4,
+      "age_max": 78.7,
+      "age_mean": 73.8
+    }
+  ],
+  "freeze": {
+    "preprocessing_script_sha256": "bc3e1c7012cc54e9453af38d554073b3666cbc115fbb2a2072ed10a822f49475",
+    "clinical_manifest_sha256": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+    "private_qc_sha256": "6011c8730a08bd651ccc3de4412db058739b034f47460eff71c295205b75de45",
+    "subject_manifest_sha256": "7ef68ae7b2ff9f8428306b9801a79f7b84d32f1fade2b270d45b7b8dbb9d6bb7",
+    "before_training_on_these_clinical_images": true
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "dataset": "UCB-J PET and T1W Images for Synapse Project Cohort",
+  "dataset_id": "ds007561",
+  "version": "1.0.0",
+  "doi": "10.18112/openneuro.ds007561.v1.0.0",
+  "commit": "4e23a0f47e955268df458729778f4d0ef1f2575a",
+  "completed_at_utc": "2026-10-11T20:04:57.511649+00:00",
+  "status": "complete",
+  "official_dataset_url": "https://openneuro.org/datasets/ds007561/versions/1.0.0",
+  "inventory_url": "https://api.github.com/repos/OpenNeuroDatasets/ds007561/git/trees/4e23a0f47e955268df458729778f4d0ef1f2575a?recursive=1",
+  "raw_image_host": "https://s3.amazonaws.com/openneuro.org/ds007561/",
+  "public_access": "No login, authorization token, data access application or credential used. Public release only.",
+  "license": "CC0",
+  "downloaded_source_file_count": 45,
+  "downloaded_source_bytes": 297880860,
+  "t1_volume_count": 20,
+  "t1_compressed_bytes": 297843590,
+  "t1_sidecar_count": 20,
+  "metadata_file_count": 5,
+  "provenance_file_excluded_from_source_counts": "source_inventory.json",
+  "unique_participants": 20,
+  "diagnosis_counts": {
+    "Control": 14,
+    "AD": 1,
+    "MCI": 5
+  },
+  "age_range": [
+    61.2,
+    84.2
+  ],
+  "all_image_ids_join_participants": true,
+  "validation": {
+    "release_pin": "Git tag 1.0.0 resolved to commit; metadata blob SHA1 verified",
+    "images": "Every downloaded T1 compressed file SHA256 and byte size matched the content-addressed annex pointer in pinned commit",
+    "format": "Full gzip decompression CRC plus NIfTI-1 magic/dimensions/voxel size/datatype/payload checks; all voxels finite",
+    "clinical": "20 unique participant IDs matched one T1 image each; source labels preserved"
+  },
+  "limitations": [
+    "Only one AD participant and five MCI participants; pilot or technical validation only, insufficient for robust stand-alone training or AD performance estimates.",
+    "SYNAPSE/Wisconsin ADRC/WRAP origins; check participant overlap before treating as independent of WRAP/NACC.",
+    "No label harmonization, preprocessing, training, model evaluation, or external validation claims performed.",
+    "Only T1 images, paired JSON and five documentation/metadata files acquired; PET and derivatives excluded."
+  ],
+  "errors": []
+}

@@ -1,0 +1,163 @@
+{
+  "ensemble_stage_only": {
+    "mode": "stage_only",
+    "head": "stage",
+    "class_order": [
+      "MildDemented",
+      "ModerateDemented",
+      "NonDemented",
+      "VeryMildDemented"
+    ],
+    "members": [
+      {
+        "evaluation_name": "candidate_1",
+        "mode": "stage_only",
+        "seed": 20261011,
+        "checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+        "checkpoint_path_in_primary_record": "results/stage_only_seed20261011/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      },
+      {
+        "evaluation_name": "candidate_3",
+        "mode": "stage_only",
+        "seed": 20261012,
+        "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+        "checkpoint_path_in_primary_record": "results/stage_only_seed20261012/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      },
+      {
+        "evaluation_name": "candidate_5",
+        "mode": "stage_only",
+        "seed": 20261013,
+        "checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+        "checkpoint_path_in_primary_record": "results/stage_only_seed20261013/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      }
+    ],
+    "aggregation": "Arithmetic mean of the three exported softmax probability vectors; fixed-order argmax",
+    "shared_input_transform": {
+      "frozen_trainer_sha256": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+      "function": "dataset(rows, root, train=False, image_size=224)",
+      "steps": [
+        "PIL convert RGB",
+        "torchvision Resize((224,224), antialias=True), frozen default interpolation",
+        "ToTensor",
+        "Normalize mean [0.485,0.456,0.406], std [0.229,0.224,0.225]"
+      ],
+      "test_augmentation": false
+    },
+    "applicability": "Four legacy image-stage categories only; no binary clinical interpretation of this head",
+    "stage_manifest_sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+    "no_production_wrapper_or_deployment": true
+  },
+  "ensemble_multitask": {
+    "mode": "multitask",
+    "head": "stage",
+    "class_order": [
+      "MildDemented",
+      "ModerateDemented",
+      "NonDemented",
+      "VeryMildDemented"
+    ],
+    "members": [
+      {
+        "evaluation_name": "candidate_2",
+        "mode": "multitask",
+        "seed": 20261011,
+        "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+        "checkpoint_path_in_primary_record": "results/multitask_seed20261011/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      },
+      {
+        "evaluation_name": "candidate_4",
+        "mode": "multitask",
+        "seed": 20261012,
+        "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+        "checkpoint_path_in_primary_record": "results/multitask_seed20261012/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      },
+      {
+        "evaluation_name": "candidate_6",
+        "mode": "multitask",
+        "seed": 20261013,
+        "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+        "checkpoint_path_in_primary_record": "results/multitask_seed20261013/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      }
+    ],
+    "aggregation": "Arithmetic mean of the three exported softmax probability vectors; fixed-order argmax",
+    "shared_input_transform": {
+      "frozen_trainer_sha256": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+      "function": "dataset(rows, root, train=False, image_size=224)",
+      "steps": [
+        "PIL convert RGB",
+        "torchvision Resize((224,224), antialias=True), frozen default interpolation",
+        "ToTensor",
+        "Normalize mean [0.485,0.456,0.406], std [0.229,0.224,0.225]"
+      ],
+      "test_augmentation": false
+    },
+    "applicability": "Four legacy image-stage categories only; no binary clinical interpretation of this head",
+    "stage_manifest_sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+    "no_production_wrapper_or_deployment": true
+  },
+  "ensemble_multitask_AD_CN": {
+    "mode": "multitask",
+    "head": "aux",
+    "class_order": [
+      "CN",
+      "AD"
+    ],
+    "members": [
+      {
+        "evaluation_name": "candidate_2",
+        "mode": "multitask",
+        "seed": 20261011,
+        "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+        "checkpoint_path_in_primary_record": "results/multitask_seed20261011/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      },
+      {
+        "evaluation_name": "candidate_4",
+        "mode": "multitask",
+        "seed": 20261012,
+        "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+        "checkpoint_path_in_primary_record": "results/multitask_seed20261012/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      },
+      {
+        "evaluation_name": "candidate_6",
+        "mode": "multitask",
+        "seed": 20261013,
+        "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+        "checkpoint_path_in_primary_record": "results/multitask_seed20261013/best.pt",
+        "weight": 0.3333333333333333,
+        "weight_fraction": "1/3"
+      }
+    ],
+    "aggregation": "Average slice probabilities per source subject (already performed by evaluator), then arithmetic mean across all three multitask seeds",
+    "shared_input_transform": {
+      "frozen_trainer_sha256": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+      "function": "dataset(rows, root, train=False, image_size=224)",
+      "steps": [
+        "PIL convert RGB",
+        "torchvision Resize((224,224), antialias=True), frozen default interpolation",
+        "ToTensor",
+        "Normalize mean [0.485,0.456,0.406], std [0.229,0.224,0.225]"
+      ],
+      "test_augmentation": false
+    },
+    "applicability": "Clinical AD/CN only; MCI has predictions but no binary target; stage-only auxiliary heads are inapplicable",
+    "stage_manifest_sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+    "no_production_wrapper_or_deployment": true,
+    "clinical_manifest_sha256": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1"
+  }
+}

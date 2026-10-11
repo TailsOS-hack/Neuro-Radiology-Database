@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "specified_date": "2026-10-11",
+  "bootstrap_resamples": 2000,
+  "base_seed": 1729,
+  "confidence_level": 0.95,
+  "bootstrap": "paired, unstratified, percentile; sample clusters uniformly with replacement",
+  "cluster_estimand": "image-weighted metric; all images of each sampled hash group travel together",
+  "internal_same_case_unit": "prepared exact-pixel/dHash connected group; NOT patient identity",
+  "internal_same_case_interpretation": "Exact-row-held-out comparison only; prepared similarity groups can contain old strict-train/validation rows",
+  "old_hash_group_unexposed_sensitivity": "Prespecified secondary subset of unchanged primary: exclude every primary row whose prepared hash group contains any old strict train/val row; derive only from existing primary predictions; retain and report the full primary",
+  "original100_unit": "image; no supported patient/augmentation-family clusters",
+  "clinical_unit": "one source subject after the evaluator averages slice probabilities",
+  "clinical_interval": "two-sided Clopper-Pearson for accuracy, AD sensitivity and CN specificity",
+  "paired_difference": "candidate minus reference, using the same resampled cases/groups",
+  "macro_f1": "fixed class vocabulary, zero division contributes zero",
+  "balanced_accuracy": "mean class recall; undefined when a target class is absent",
+  "bootstrap_missing_class": "omit undefined replicate only for that metric; suppress CI if <95% valid",
+  "decision_threshold": "argmax in published class order; binary tie predicts CN",
+  "multiplicity": "no adjusted significance testing; all candidates/readers reported, none selected here",
+  "reader_missingness": "strict complete labels by default; explicit opt-in reports paired complete cases",
+  "planned_modes": [
+    "stage_only",
+    "multitask"
+  ],
+  "planned_seeds": [
+    20261011,
+    20261012,
+    20261013
+  ],
+  "primary_conditions": "Report all three seeds per mode: arithmetic mean, sample SD and range of each metric; all six checkpoints remain visible",
+  "validation_preference": "Before any held-out evaluation, prefer mode with lowest mean stage validation NLL across the three seeds; lowest validation NLL seed within that mode is an exploratory representative, never a test-selected winner",
+  "original100_old_exposure": {
+    "train_images": 66,
+    "validation_images": 9,
+    "test_images": 25
+  },
+  "sources": [
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html",
+    "https://docs.scipy.org/doc/scipy-1.16.1/reference/generated/scipy.stats._result_classes.BinomTestResult.proportion_ci.html"
+  ]
+}

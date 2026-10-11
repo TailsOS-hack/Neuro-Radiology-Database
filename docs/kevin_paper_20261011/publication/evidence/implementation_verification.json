@@ -1,0 +1,26 @@
+{
+  "created_utc": "2026-10-11T23:27:27.182293+00:00",
+  "script_sha256": "7955b7ad5c0d564bc25745e84f157c8544901d25ff2adb86f31bcc8e1b3d9f9a",
+  "synthetic_tests_passed": 5,
+  "tests": [
+    "exact clean/no source mutation",
+    "noise reproducibility/case distinction/shared channels",
+    "scenario shape/range/pixel contract",
+    "probability rejection guards",
+    "known metric/flip-count alignment"
+  ],
+  "test_module_sha256": "25f20528bc35601641340d9e0e35f98653029e823bf63d6ed2431311736ae71f",
+  "guard_dry_run": {
+    "image_rows": 1158,
+    "models": 7,
+    "protected_files": 30,
+    "status": "passed"
+  },
+  "test_results_are_not_clinical_evidence": true,
+  "visual_grid": {
+    "path": "docs/kevin_paper_20261011/posthoc_robustness/visual_qa/fixed_scenario_grid.png",
+    "sha256": "9acfd06384d25abd7ae0a45d4ae5d2ca12eda68ae23890246a508cc0c665f2e6",
+    "case_selection": "first original100 key row, fixed without using model outcomes",
+    "case": "image_001.jpg"
+  }
+}

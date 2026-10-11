@@ -1,0 +1,87 @@
+{
+  "protocol": {
+    "role": "Post-hoc descriptive software and attribution diagnostics, not independent clinical validation",
+    "models": {
+      "old_baseline": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+      "candidate_3": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e"
+    },
+    "representative_selection": "candidate_3 chosen from stage-validation before original evaluation; unchanged here",
+    "case_count": 115,
+    "control_case_count": 8,
+    "control_selection": "The eight fixed historical class-balanced specialist examples; no new outcome selection",
+    "mask_fractions": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "replacement": [
+      "imagenet_mean",
+      "gaussian_blur_sigma5"
+    ],
+    "random_masks": 5,
+    "shape_controls": "Up to five nonduplicate dihedral transforms of each top-CAM mask",
+    "randomization_seeds": [
+      42,
+      43,
+      44
+    ],
+    "randomization_stages": [
+      "head",
+      "head_final",
+      "full"
+    ],
+    "class_target": "Original unmodified model argmax; held fixed through perturbation and randomization",
+    "native_layer": "features[-1]",
+    "clean_probability_tolerance": 0.0001,
+    "sources": {
+      "data/evaluation/ground_truth/radiologist_test_key.csv": "067b3b6bd3f7d1224e50befe7dcb11c43dff878aeb1aac6c6f3f9dd6eabdb9af",
+      "docs/evaluation_100_20261007/specialist_gradcam/verification.json": "bd12c4d8e7949ef60a78033405e37225ef9b756d9ff8472c3aec498b51c866e0",
+      "docs/review_bundle/explainability/per_image.csv": "4fe0c92d3248e9668dda918ec01c231956a8232712134a78f5f1ff49bca9cd45",
+      "docs/kevin_paper_20261011/posthoc_explainability/run_attribution_audit.py": "00360574518ae04ab3b437b32d049ffa02d669b457d402beb3860c4d9d0b5479",
+      "src/grad_cam.py": "b96976bccd9e2dd642c02ca1c1b19a7d1b06fc46574a79c68ae07b31d6d4b0ec",
+      "src/explainability_validation.py": "314437bcfc580e80b8d48297027f147b1bd2a9b64c85bf273587491c6490168a"
+    }
+  },
+  "models": {
+    "old_baseline": {
+      "checkpoint_sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+      "state_restored": true,
+      "archived_clean_max_probability_difference": 0.0011910200119018555,
+      "archived_prediction_disagreements": 0,
+      "archived_probability_tolerance_failures": 38,
+      "valid_case_maps": 115,
+      "designated_control_cases": 8,
+      "valid_control_cases": 8
+    },
+    "candidate_3": {
+      "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "state_restored": true,
+      "archived_clean_max_probability_difference": 0.0019955039024353027,
+      "archived_prediction_disagreements": 0,
+      "archived_probability_tolerance_failures": 5,
+      "valid_case_maps": 115,
+      "designated_control_cases": 8,
+      "valid_control_cases": 8
+    }
+  },
+  "case_panels": 115,
+  "total_case_maps": 230,
+  "finite_nonflat_maps": 230,
+  "unchanged_predictions_and_logits": 230,
+  "perturbation_rows": 96,
+  "randomization_rows": 144,
+  "randomization_failed_or_flat": 2,
+  "limitations": [
+    "Post-hoc diagnostics; no checkpoint tuning or test-based reselection.",
+    "Historical extra examples are not new independent samples.",
+    "Random and dihedral mask controls have different spatial properties; masking can create out-of-distribution inputs.",
+    "Per-map normalization and coarse native resolution prevent quantitative anatomical claims.",
+    "Valid maps, score drops and randomization sensitivity do not establish faithful anatomy or clinical readiness."
+  ],
+  "environment": {
+    "torch": "2.12.1",
+    "device": "cpu",
+    "threads": 4
+  },
+  "source_sha256": "00360574518ae04ab3b437b32d049ffa02d669b457d402beb3860c4d9d0b5479"
+}

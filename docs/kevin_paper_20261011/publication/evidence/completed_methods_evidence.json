@@ -1,0 +1,96 @@
+{
+  "scope": "Completed training methods accounting from verified local retrieval; no held-out outcome metrics inspected for this addendum. Parent verified guarded seven-model evaluation completion.",
+  "archive_retrieval_evidence": {
+    "path": "docs/kevin_paper_20261011/training/results_retrieval_verification.json",
+    "sha256": "1381d276b2706b13828f8b7cf99f60782624aea18777d4505eee1a915dbb33da",
+    "archive_sha256": "3b73c98a8c9c2445cb327edf2999d1519eb257ccf123ca3f070d1043f636d2f1",
+    "verified_payload_files": 415,
+    "destination_readback_verified": true
+  },
+  "suite": {
+    "path": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/suite_status.json",
+    "sha256": "40400a103ddce71e8b3322e1313723caf4f5838d43debc2acacf8d035c7519e3",
+    "training_started_at": "2026-10-11T20:32:18.322925+00:00",
+    "training_finished_at": "2026-10-11T23:06:43.735371+00:00"
+  },
+  "selection": {
+    "path": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/validation_selection_before_evaluation.json",
+    "sha256": "5ba9de51fe339ab6e470de496571430ab6f463a814efc858c228db954241c0c7",
+    "frozen_at_utc": "2026-10-11T23:10:27.325271+00:00",
+    "preferred_mode": "stage_only",
+    "representative_candidate": "candidate_3"
+  },
+  "completed_runs": [
+    {
+      "candidate": "candidate_1",
+      "mode": "stage_only",
+      "seed": 20261011,
+      "completed_epochs": 38,
+      "selected_epoch": 23,
+      "validation_nll": 0.03747158972872587,
+      "checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+      "history_sha256": "a7fbc496f1499dec90aa44c63139aa93b5ff8163afab1c7d79f9509f5584447c",
+      "config_sha256": "1b58ef2dd52399f870ebe56ad78bf834633f51559e74b6ea50145d325f90d0db"
+    },
+    {
+      "candidate": "candidate_2",
+      "mode": "multitask",
+      "seed": 20261011,
+      "completed_epochs": 43,
+      "selected_epoch": 28,
+      "validation_nll": 0.051600637482635964,
+      "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "history_sha256": "d5218898c3836eda877f00db29b282c113e499ac7837809ce53417d87097214f",
+      "config_sha256": "c116739f4100cdb2eefcd3b30c07804bb0bd4aaebca91098d4c79c8b29dfd9cd"
+    },
+    {
+      "candidate": "candidate_3",
+      "mode": "stage_only",
+      "seed": 20261012,
+      "completed_epochs": 52,
+      "selected_epoch": 37,
+      "validation_nll": 0.03477062228208098,
+      "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "history_sha256": "cde2bf8293810ccdd1841ee3b77fbc9a320e83437f0558d75ba8b966167e959b",
+      "config_sha256": "c1ae1c92cc2376aee1b065a3c3d72648155c7947f152357321591f5d8bec0a32"
+    },
+    {
+      "candidate": "candidate_4",
+      "mode": "multitask",
+      "seed": 20261012,
+      "completed_epochs": 74,
+      "selected_epoch": 59,
+      "validation_nll": 0.04531075374947832,
+      "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "history_sha256": "930c0e52f834884a14c8b071b9bd2205977668d8b8be846d9f3795fddb105d50",
+      "config_sha256": "870c7b504c2dbd5641e782547e36eb12fc64d5d541ef18594eaa7f908e743e16"
+    },
+    {
+      "candidate": "candidate_5",
+      "mode": "stage_only",
+      "seed": 20261013,
+      "completed_epochs": 54,
+      "selected_epoch": 39,
+      "validation_nll": 0.03694202273338021,
+      "checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+      "history_sha256": "928442f2e32203e5f472a81c298a22f0e1387d49e9b69b28b210cb99756236ed",
+      "config_sha256": "eb14f8d52b4b1c170599bda6d83481325017b1bf5e0bb27dc2b94533d5f2cec5"
+    },
+    {
+      "candidate": "candidate_6",
+      "mode": "multitask",
+      "seed": 20261013,
+      "completed_epochs": 44,
+      "selected_epoch": 29,
+      "validation_nll": 0.05403342983790774,
+      "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "history_sha256": "07339957333fe8516655721a1d369c8708c8611658adf2b0e019ad13662a206e",
+      "config_sha256": "cf65ea5795ef5605b404811d6f6a7bcea49df62439ae23fdb02b9256b6883f2d"
+    }
+  ],
+  "total_completed_training_epochs": 305,
+  "all_six_selected_checkpoint_sha_verified": true,
+  "all_six_histories_contiguous": true,
+  "all_six_stopped_15epochs_after_selected_checkpoint": true,
+  "historical_suite_status_note": "suite_status.json is the training-only orchestrator output; its heldout_inference_performed=false and awaiting_frozen_evaluation state are historical training-phase fields, not current end-to-end status."
+}

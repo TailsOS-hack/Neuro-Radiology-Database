@@ -1,0 +1,155 @@
+{
+  "audit_date": "2026-10-11",
+  "mode": "read-only current filesystem inventory plus explicitly dated archived evidence",
+  "local_dementia_manifests": {
+    "training_logs/splits/strict_manifest.csv": {
+      "manifest_rows": 51023,
+      "dementia_image_rows": 44000,
+      "dementia_class_counts": {
+        "MildDemented": 10000,
+        "ModerateDemented": 10000,
+        "NonDemented": 12800,
+        "VeryMildDemented": 11200
+      },
+      "dementia_split_counts": {
+        "test": 8806,
+        "train": 30795,
+        "val": 4399
+      },
+      "dementia_missing_paths": 0,
+      "columns": [
+        "path",
+        "split",
+        "domain",
+        "subtype",
+        "binary_label",
+        "eight_class",
+        "source_split"
+      ],
+      "unit": "2D image rows, not patients or volumes",
+      "patient_ids_available": false,
+      "original_image_family_ids_available": false
+    },
+    "training_logs/splits/perceptual_strict_manifest.csv": {
+      "manifest_rows": 51023,
+      "dementia_image_rows": 44000,
+      "dementia_class_counts": {
+        "MildDemented": 10000,
+        "ModerateDemented": 10000,
+        "NonDemented": 12800,
+        "VeryMildDemented": 11200
+      },
+      "dementia_split_counts": {
+        "test": 8881,
+        "train": 30261,
+        "val": 4858
+      },
+      "dementia_missing_paths": 0,
+      "columns": [
+        "path",
+        "split",
+        "domain",
+        "subtype",
+        "binary_label",
+        "eight_class",
+        "source_split"
+      ],
+      "unit": "2D image rows, not patients or volumes",
+      "patient_ids_available": false,
+      "original_image_family_ids_available": false
+    }
+  },
+  "mendeley_candidate": {
+    "local_path": "data/external/mendeley_kcjt4v658x_v2",
+    "exists": true,
+    "current_file_extension_counts": {
+      ".zip": 1,
+      ".json": 1,
+      ".dcm": 474,
+      ".jpg": 4
+    },
+    "archived_inspection_source": "docs/final_review_20260920/external_acquisition.json",
+    "archived_inspection_date": "2026-09-20",
+    "archived_subject_folder_counts": {
+      "AD": 10,
+      "MCI": 10,
+      "NC": 4
+    },
+    "archived_dicom_decoded_count": 474,
+    "archived_sequences": "T2-weighted/FLAIR",
+    "archived_license": "CC BY 4.0",
+    "archived_reference_labels": "AD/MCI/NC; not approved mappings to current four-stage classes",
+    "external_performance": "Not evaluated; raw files kept local and excluded from Git.",
+    "limitations": [
+      "DICOM files were counted, not redecoded or clinically reviewed today.",
+      "Folder counts are candidate subject groups; clinical adjudication and patient identity remain unverified.",
+      "Archived inspection found nonempty identity fields; de-identification has not been cleared.",
+      "No age distribution, scan independence, or matching reference standard is established."
+    ]
+  },
+  "historical_radiologist_arm": {
+    "images": 100,
+    "class_counts": {
+      "MildDemented": 23,
+      "ModerateDemented": 23,
+      "NonDemented": 27,
+      "VeryMildDemented": 27
+    },
+    "source_paths": [
+      "data/evaluation/images",
+      "data/evaluation/ground_truth/radiologist_test_key.csv",
+      "docs/evaluation_100_20261007/cohort_audit.json",
+      "docs/evaluation_100_20261007/current/metrics.json"
+    ],
+    "strict_manifest_image_overlap": {
+      "test": 25,
+      "train": 66,
+      "val": 9
+    },
+    "use": "Preserve as historical descriptive comparison; not an untouched independent test.",
+    "counts_evidence_date": "2026-10-08T00:00:41+00:00"
+  },
+  "checkpoint_hydration_current": {
+    "models/alzheimers_classifier.pt": {
+      "bytes": 17040243,
+      "is_git_lfs_pointer": false,
+      "exists": true,
+      "note": "File size/header inspection only; not loaded into a model in this audit."
+    },
+    "models/binary_router.pt": {
+      "bytes": 94369443,
+      "is_git_lfs_pointer": false,
+      "exists": true,
+      "note": "File size/header inspection only; not loaded into a model in this audit."
+    },
+    "models/brain_tumor_classifier.pt": {
+      "bytes": 43375103,
+      "is_git_lfs_pointer": false,
+      "exists": true,
+      "note": "File size/header inspection only; not loaded into a model in this audit."
+    },
+    "models/single_8class_classifier.pt": {
+      "bytes": 43401543,
+      "is_git_lfs_pointer": false,
+      "exists": true,
+      "note": "File size/header inspection only; not loaded into a model in this audit."
+    }
+  },
+  "reusable_paths": [
+    "scripts/evaluate_external_cohort.py",
+    "src/external_validation.py",
+    "scripts/audit_radiologist_cohort.py",
+    "scripts/inspect_external_mendeley.py",
+    "docs/EXTERNAL_VALIDATION_READINESS.md",
+    "docs/DATASET_PROVENANCE.md",
+    "docs/EXTERNAL_COHORT_SEARCH_20260920.md",
+    "docs/FINAL_REVIEW_20260920.md"
+  ],
+  "limitations": [
+    "No new cohort acquisition, training, inference, image decoding, hash deduplication, patient linkage, or external validation performed in this audit.",
+    "Existing 44,000-image training source was augmented upstream and lacks patient/family/clinical/acquisition metadata.",
+    "Current checkpoints are hydrated; September document statement describing LFS pointers is stale.",
+    "Current external evaluator is a 2D image interface, not a clinically specified volumetric MRI pipeline.",
+    "This inventory does not make any new dataset ready for training."
+  ]
+}

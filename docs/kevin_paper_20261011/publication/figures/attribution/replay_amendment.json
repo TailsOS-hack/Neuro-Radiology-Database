@@ -1,0 +1,10 @@
+{
+  "observed_at_utc": "2026-10-11T23:25:57.619063+00:00",
+  "initial_attempt_stopped": "Strict probability-replay assertion exceeded on baseline image001 before any map was saved.",
+  "delta": 0.00034356117248535156,
+  "unchanged_argmax": true,
+  "original_tolerance": 0.0001,
+  "correction": "Audit now records every tolerance failure and class discrepancy without changing the tolerance or archived predictions; continue attribution diagnosis.",
+  "cause": "Not established; local CPU Torch2.12.1 differs from archived CUDA Torch2.8.0.",
+  "no_model_tuning_or_reselection": true
+}

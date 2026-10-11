@@ -1,0 +1,153 @@
+{
+  "status": "all_six_raw_histories_rendered",
+  "created_utc": "2026-10-11T23:14:26.874118+00:00",
+  "script_sha256": "6c9e95cf4ccd343edafe992743369dcc7b73c6132fffb54e5bdca9ff19618ef4",
+  "selection_path": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/validation_selection_before_evaluation.json",
+  "selection_sha256": "5ba9de51fe339ab6e470de496571430ab6f463a814efc858c228db954241c0c7",
+  "heldout_data_read": false,
+  "smoothing": false,
+  "epoch_filtering": false,
+  "y_axis_starts_at_zero": true,
+  "shared_stage_axes": true,
+  "shared_clinical_axes": true,
+  "selection_source": "frozen candidates[].epoch; no new checkpoint selection",
+  "training_stage_loss": "Unweighted cross-entropy on augmented stage images, before label smoothing; excludes auxiliary loss.",
+  "validation_stage_loss": "Unweighted NLL on stage validation images.",
+  "training_clinical_loss": "Unweighted cross-entropy on sampled augmented slices.",
+  "validation_clinical_loss": "Subject-level NLL from mean probabilities across nine slices.",
+  "clinical_comparison_limit": "Different slice-versus-subject units; curve gaps do not directly measure generalization gaps.",
+  "runs": {
+    "candidate_1": {
+      "candidate": "candidate_1",
+      "record": {
+        "checkpoint_path": "results/stage_only_seed20261011/best.pt",
+        "checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+        "mode": "stage_only",
+        "seed": 20261011,
+        "epoch": 23,
+        "stage_validation_nll": 0.03747158972872587
+      },
+      "inputs": {
+        "directory": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261011",
+        "config_sha256": "1b58ef2dd52399f870ebe56ad78bf834633f51559e74b6ea50145d325f90d0db",
+        "history_sha256": "a7fbc496f1499dec90aa44c63139aa93b5ff8163afab1c7d79f9509f5584447c",
+        "best_checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771"
+      },
+      "epochs_plotted": 38,
+      "selected_epoch": 23
+    },
+    "candidate_2": {
+      "candidate": "candidate_2",
+      "record": {
+        "checkpoint_path": "results/multitask_seed20261011/best.pt",
+        "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+        "mode": "multitask",
+        "seed": 20261011,
+        "epoch": 28,
+        "stage_validation_nll": 0.051600637482635964
+      },
+      "inputs": {
+        "directory": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261011",
+        "config_sha256": "c116739f4100cdb2eefcd3b30c07804bb0bd4aaebca91098d4c79c8b29dfd9cd",
+        "history_sha256": "d5218898c3836eda877f00db29b282c113e499ac7837809ce53417d87097214f",
+        "best_checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9"
+      },
+      "epochs_plotted": 43,
+      "selected_epoch": 28
+    },
+    "candidate_3": {
+      "candidate": "candidate_3",
+      "record": {
+        "checkpoint_path": "results/stage_only_seed20261012/best.pt",
+        "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+        "mode": "stage_only",
+        "seed": 20261012,
+        "epoch": 37,
+        "stage_validation_nll": 0.03477062228208098
+      },
+      "inputs": {
+        "directory": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261012",
+        "config_sha256": "c1ae1c92cc2376aee1b065a3c3d72648155c7947f152357321591f5d8bec0a32",
+        "history_sha256": "cde2bf8293810ccdd1841ee3b77fbc9a320e83437f0558d75ba8b966167e959b",
+        "best_checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e"
+      },
+      "epochs_plotted": 52,
+      "selected_epoch": 37
+    },
+    "candidate_4": {
+      "candidate": "candidate_4",
+      "record": {
+        "checkpoint_path": "results/multitask_seed20261012/best.pt",
+        "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+        "mode": "multitask",
+        "seed": 20261012,
+        "epoch": 59,
+        "stage_validation_nll": 0.04531075374947832
+      },
+      "inputs": {
+        "directory": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261012",
+        "config_sha256": "870c7b504c2dbd5641e782547e36eb12fc64d5d541ef18594eaa7f908e743e16",
+        "history_sha256": "930c0e52f834884a14c8b071b9bd2205977668d8b8be846d9f3795fddb105d50",
+        "best_checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac"
+      },
+      "epochs_plotted": 74,
+      "selected_epoch": 59
+    },
+    "candidate_5": {
+      "candidate": "candidate_5",
+      "record": {
+        "checkpoint_path": "results/stage_only_seed20261013/best.pt",
+        "checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+        "mode": "stage_only",
+        "seed": 20261013,
+        "epoch": 39,
+        "stage_validation_nll": 0.03694202273338021
+      },
+      "inputs": {
+        "directory": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261013",
+        "config_sha256": "eb14f8d52b4b1c170599bda6d83481325017b1bf5e0bb27dc2b94533d5f2cec5",
+        "history_sha256": "928442f2e32203e5f472a81c298a22f0e1387d49e9b69b28b210cb99756236ed",
+        "best_checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b"
+      },
+      "epochs_plotted": 54,
+      "selected_epoch": 39
+    },
+    "candidate_6": {
+      "candidate": "candidate_6",
+      "record": {
+        "checkpoint_path": "results/multitask_seed20261013/best.pt",
+        "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+        "mode": "multitask",
+        "seed": 20261013,
+        "epoch": 29,
+        "stage_validation_nll": 0.05403342983790774
+      },
+      "inputs": {
+        "directory": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261013",
+        "config_sha256": "cf65ea5795ef5605b404811d6f6a7bcea49df62439ae23fdb02b9256b6883f2d",
+        "history_sha256": "07339957333fe8516655721a1d369c8708c8611658adf2b0e019ad13662a206e",
+        "best_checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe"
+      },
+      "epochs_plotted": 44,
+      "selected_epoch": 29
+    }
+  },
+  "figures": {
+    "stage_loss_all_six_runs.png": {
+      "sha256": "ac21c8a72f39a204db9d2a683672a9d6413e89529de2208f49917da05b7ca110",
+      "bytes": 415259
+    },
+    "stage_loss_all_six_runs.pdf": {
+      "sha256": "363293137300d5c7aa81a05a35161b66b995c4e15840d0eb20b754347b390a1e",
+      "bytes": 64215
+    },
+    "clinical_loss_all_three_multitask_seeds.png": {
+      "sha256": "fbb6b57cde4bf084c57761abc6eb07c4f26a4f6637f125284f82dbe73580955e",
+      "bytes": 310796
+    },
+    "clinical_loss_all_three_multitask_seeds.pdf": {
+      "sha256": "83d67318d90f1ae554f138bd68f772bd9e9a7475531905b47713466698ff02c7",
+      "bytes": 79696
+    }
+  }
+}

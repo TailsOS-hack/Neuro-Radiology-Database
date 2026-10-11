@@ -1,0 +1,66 @@
+{
+  "status": "completed_posthoc_descriptive_audit",
+  "finished_utc": "2026-10-11T23:28:54.336698+00:00",
+  "elapsed_seconds": 167.7006381250685,
+  "total_image_model_scenarios": 105378,
+  "scenario_timings": [
+    {
+      "scenario": "clean",
+      "seconds": 13.810582374921069
+    },
+    {
+      "scenario": "brightness_0.90",
+      "seconds": 11.825261666905135
+    },
+    {
+      "scenario": "brightness_1.10",
+      "seconds": 11.638597375014797
+    },
+    {
+      "scenario": "contrast_0.90",
+      "seconds": 11.676383167039603
+    },
+    {
+      "scenario": "contrast_1.10",
+      "seconds": 12.224515332956798
+    },
+    {
+      "scenario": "noise_sd0.01",
+      "seconds": 12.896014457917772
+    },
+    {
+      "scenario": "noise_sd0.02",
+      "seconds": 12.924433790962212
+    },
+    {
+      "scenario": "blur_sigma0.5",
+      "seconds": 12.263969415915199
+    },
+    {
+      "scenario": "blur_sigma1.0",
+      "seconds": 12.091746875084937
+    },
+    {
+      "scenario": "downsample_192",
+      "seconds": 11.558089666999876
+    },
+    {
+      "scenario": "downsample_160",
+      "seconds": 11.390598958008923
+    },
+    {
+      "scenario": "jpeg_quality90",
+      "seconds": 11.465581167023629
+    },
+    {
+      "scenario": "jpeg_quality70",
+      "seconds": 11.336226040963084
+    }
+  ],
+  "output_manifest_sha256": "ef8f0714038b6df9a1b356f0b7708638fa234941681830306de62f109af3be07",
+  "script_sha256": "7955b7ad5c0d564bc25745e84f157c8544901d25ff2adb86f31bcc8e1b3d9f9a",
+  "protected_input_rechecks_passed": true,
+  "output_readbacks_passed": true,
+  "models_reselected": false,
+  "cloud_resources_used": false
+}

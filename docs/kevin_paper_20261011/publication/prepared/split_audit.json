@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "source_rows": 44000,
+  "kept_rows": 27178,
+  "excluded_rows": 16822,
+  "exclusion_counts": {
+    "mixed_label_hash_group": 14959,
+    "original100_pixel_or_dhash_connected_group": 1863
+  },
+  "excluded_by_split_class": {
+    "test::MildDemented": 548,
+    "test::ModerateDemented": 550,
+    "test::NonDemented": 1346,
+    "test::VeryMildDemented": 987,
+    "train::MildDemented": 2361,
+    "train::NonDemented": 3930,
+    "train::VeryMildDemented": 3217,
+    "train::ModerateDemented": 1730,
+    "val::MildDemented": 431,
+    "val::NonDemented": 800,
+    "val::VeryMildDemented": 662,
+    "val::ModerateDemented": 260
+  },
+  "remaining_by_split_class": {
+    "test::MildDemented": 1342,
+    "test::ModerateDemented": 1538,
+    "test::NonDemented": 1324,
+    "test::VeryMildDemented": 1246,
+    "train::MildDemented": 4631,
+    "train::ModerateDemented": 5227,
+    "train::NonDemented": 4728,
+    "train::VeryMildDemented": 4437,
+    "val::MildDemented": 687,
+    "val::ModerateDemented": 695,
+    "val::NonDemented": 672,
+    "val::VeryMildDemented": 651
+  },
+  "remaining_hash_groups_by_split": {
+    "train": 14956,
+    "val": 2128,
+    "test": 4273
+  },
+  "newly_connected_rows_moved_to_protected_split": 0,
+  "same_case_test_intersection_rows": 1058,
+  "same_case_test_intersection_by_class": {
+    "MildDemented": 277,
+    "ModerateDemented": 299,
+    "NonDemented": 230,
+    "VeryMildDemented": 252
+  },
+  "manifest_sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+  "original100_image_count": 100,
+  "test_used_for_selection": false,
+  "limitations": [
+    "Legacy patient IDs and upstream augmentation provenance remain unavailable.",
+    "Exact-pixel/dHash grouping is a conservative image-similarity sensitivity analysis, not proof of patient or augmentation-family independence.",
+    "Original100 was historically inspected and old checkpoint saw66 training images; excluding it now does not make the historical benchmark prospectively blind.",
+    "Same-case intersection excludes old strict train/val rows, but cannot erase old checkpoint exposure to unidentified related images.",
+    "dHash collisions can group different people; mixed-label groups are removed, and no disease label is inferred from image similarity."
+  ],
+  "same_case_test_intersection_sha256": "7cf400fe66e8edc9bf86b784976ab1682e1ee8e933ee0d90b15cfd785b36ac05"
+}

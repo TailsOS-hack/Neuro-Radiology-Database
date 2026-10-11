@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-11T21:11:28.416752+00:00",
+  "assessment_scope": "Code, frozen protocol and pre-training data-provenance readiness review only. No model inference or held-out results were read; no frozen pipeline was changed. Training completion and final measured performance were not assessed here.",
+  "readiness": {
+    "current_category": "research experiment",
+    "real_world_clinical_readiness_established": false,
+    "stronger_overall_established_by_this_review": false,
+    "regulatory_determination": "not assessed; no authorization or approval claim"
+  },
+  "current_data_context": {
+    "legacy_target": "Four supplied augmented-image labels, not verified CDR clinical stages",
+    "legacy_patient_independence": "not established; patient and original augmentation-family identifiers unavailable",
+    "legacy_prepared_rows": 27178,
+    "legacy_train_rows": 19023,
+    "legacy_validation_rows": 2705,
+    "legacy_test_rows": 5450,
+    "clinical_target": "AD versus control; MCI prediction-only",
+    "clinical_besga_source_subjects": {
+      "training": 32,
+      "validation": 11,
+      "internal_test": 11
+    },
+    "external_openneuro_source_subjects": {
+      "AD": 1,
+      "CN": 14,
+      "MCI_prediction_only": 5
+    },
+    "original100_role": "historically reused descriptive model-reader benchmark; strict-manifest matches 66 train / 9 validation / 25 test images",
+    "main_old_new_comparison": {
+      "images": 1058,
+      "hash_groups": 966,
+      "images_with_old_train_or_validation_group_mate": 302
+    },
+    "secondary_sensitivity_comparison": {
+      "images": 756,
+      "hash_groups": 733,
+      "patient_independence_established": false
+    },
+    "abid_recommended_sources": {
+      "tracked": 10,
+      "approved_official_raw_releases_newly_acquired_in_this_workflow": 0
+    }
+  },
+  "implemented_protections": [
+    {
+      "id": "endpoint_separation",
+      "status": "implemented_in_frozen_code",
+      "protection": "Separate four-stage and binary clinical heads; MCI excluded from binary scoring; untrained stage-only clinical head is not evaluated.",
+      "limit": "Does not validate the source clinical labels or establish clinical staging.",
+      "evidence": [
+        "training/train_candidate.py",
+        "training/evaluate_candidates.py"
+      ]
+    },
+    {
+      "id": "supported_grouping",
+      "status": "implemented_and_manifest_audited",
+      "protection": "All slices of a supplied clinical source subject remain in one split; prepared legacy pixel/dHash groups remain in one new split; original100-connected and mixed-label groups excluded from new training.",
+      "limit": "Source IDs are not a verified cross-repository patient crosswalk; coarse dHash is not patient identity. Old baseline similarity exposure remains.",
+      "evidence": [
+        "clinical_preprocessing_summary.json",
+        "analysis/old_hash_group_unexposed_sensitivity_audit.json"
+      ]
+    },
+    {
+      "id": "selection_integrity",
+      "status": "implemented_as_protocol_and_guards",
+      "protection": "Six fixed condition/seed runs, validation-NLL checkpoint rule, finite epoch budget, guarded resume, frozen pre-evaluation preference, original100 and other test data excluded from fitting/selection.",
+      "limit": "Completion and execution provenance must still be verified; software guards cannot prove nobody viewed outcomes outside the guarded path.",
+      "evidence": [
+        "training/run_training_suite.py",
+        "training/train_candidate.py",
+        "analysis/freeze_validation_selection.py"
+      ]
+    },
+    {
+      "id": "external_source_role",
+      "status": "implemented_in_manifest_and_loader",
+      "protection": "OpenNeuro remains outside fitting and checkpoint selection, with separate source/split reporting.",
+      "limit": "Only one AD case, unresolved source overlap, and both sources inspected while preparing preprocessing. Not robust external clinical validation.",
+      "evidence": [
+        "clinical_preprocessing_summary.json",
+        "training/train_candidate.py"
+      ]
+    },
+    {
+      "id": "transparent_uncertainty",
+      "status": "implemented_analysis_not_a_claim_of_observed_robustness",
+      "protection": "All seeds and raw curves retained; case-aligned reader comparisons; paired hash-group/image intervals and clinical subject denominators with exact intervals.",
+      "limit": "Conditional intervals omit training/source uncertainty; fixed readers do not represent a population of neuroradiologists.",
+      "evidence": [
+        "analysis/summarize_frozen_evaluation.py"
+      ]
+    },
+    {
+      "id": "research_preprocessing_qc",
+      "status": "implemented_exploratory_checks",
+      "protection": "Finite pixel, dimension, source-join, source-subject split and gross image-rendering checks with frozen preprocessing history.",
+      "limit": "Not validated skull stripping/registration or radiologist QC; no deployed modality or out-of-distribution rejection gate.",
+      "evidence": [
+        "clinical_preprocessing_summary.json"
+      ]
+    }
+  ],
+  "planned_or_unfinished_checks": [
+    {
+      "id": "complete_frozen_experiment",
+      "status": "not_verified_complete_by_this_review",
+      "check": "Finish or transparently account for all six runs; freeze preference before one-pass evaluation; verify local retrieval/checksums; report all outcomes and class regressions.",
+      "success_evidence": "Complete run provenance, raw curves, frozen selection/evaluation, all-seed uncertainty analysis and independent input/output digest checks.",
+      "restriction": "No tuning or new winner selection using held-out performance."
+    },
+    {
+      "id": "source_heldout_validation",
+      "status": "not_established",
+      "check": "Acquire approved original MRI with source-person linkage and matched clinical labels; reconcile overlap before reserving clinically relevant cohorts/sites/scanners entirely outside development.",
+      "success_evidence": "Verified source-subject/visit grouping, nonoverlap audit, prespecified endpoint and adequate class/subgroup counts to support the planned uncertainty analysis.",
+      "restriction": "Repository names and more slices do not establish independence or adequate sample size."
+    },
+    {
+      "id": "subgroups_and_failures",
+      "status": "not_implemented_as_a_complete_clinical_robustness_analysis",
+      "check": "Prespecify age, verified sex/gender, site/scanner/protocol and other relevant supported subgroups; report missingness, confidence intervals and all failures, including quality and excluded/rejected cases.",
+      "success_evidence": "Clinically meaningful subgroup denominators and source-specific error analysis on frozen independent evaluation data; clinically justified acceptance criteria specified before looking at results.",
+      "restriction": "Do not infer missing demographics or claim subgroup equivalence from sparse groups."
+    },
+    {
+      "id": "calibration_and_abstention",
+      "status": "not_implemented",
+      "check": "For a future frozen model version, fit any calibration method and confidence/abstention rule using appropriate independent development/validation data only; evaluate on newly reserved untouched cohorts.",
+      "success_evidence": "Frozen calibration/decision rule; reliability and proper scoring measures; selective risk versus coverage; subgroup/source behavior; explicit handling of uncertain or unsupported inputs.",
+      "restriction": "Current softmax plus argmax is not calibrated confidence. No automatic abstention or validated numeric threshold exists. Do not tune these components on the current held-out results."
+    },
+    {
+      "id": "input_contract_and_quality_rejection",
+      "status": "not_implemented_as_a_deployed_gate",
+      "check": "Define the supported clinical T1 acquisition/protocol, orientation, resolution and quality requirements; verify provenance/metadata and reject unsupported modalities, corrupt/poor-quality inputs and incompatible processing.",
+      "success_evidence": "Clinician-reviewed input specification, detectable failure conditions, tested rejection behavior and transparent rejection counts on representative data.",
+      "restriction": "Existing RGB image loading does not identify MRI modality or prove anatomical adequacy. T2/FLAIR, CT and arbitrary screenshots are not supported by this clinical T1 experiment."
+    },
+    {
+      "id": "stress_and_repeatability",
+      "status": "not_established",
+      "check": "Assess repeat scans and clinically plausible changes in acquisition/quality/preprocessing, with ranges chosen on development data and reviewed for anatomical validity.",
+      "success_evidence": "Prespecified paired consistency and failure analysis, alongside genuinely source-heldout clinical data.",
+      "restriction": "Synthetic corruption/software tests can diagnose sensitivity or implementation errors; they do not establish real-world clinical robustness."
+    }
+  ],
+  "clinical_readiness_blockers": [
+    {
+      "id": "intended_use_reference_standard",
+      "blocker": "An operational clinical intended use, intended population, supported inputs, reference standard and acceptable failure costs have not been established. Legacy stage labels and source AD/CN are different endpoints.",
+      "required_milestone": "Clinical collaborators define the use and independently adjudicate appropriate MRI-linked clinical labels, timing, ambiguous cases and data quality; freeze clinically justified performance and failure criteria before evaluation."
+    },
+    {
+      "id": "independent_clinical_evidence",
+      "blocker": "Legacy patient independence is unknown, original100 is reused, the primary old/new comparison has observed similarity exposure, and the external pilot has only one AD participant.",
+      "required_milestone": "Larger approved clinically representative, source-heldout and person-grouped cohorts with verified labels/overlap and sufficient class counts for the prespecified precision goals. Existing benchmarks remain exploratory evidence."
+    },
+    {
+      "id": "clinical_generalization_and_quality",
+      "blocker": "Age/source confounding, cross-cohort identity overlap, heuristic preprocessing, absent modality rejection and untested scanner/population shifts remain unresolved.",
+      "required_milestone": "Clinician/radiologist review of preprocessing and failure cases; independent source/subgroup/quality evaluation; validated input and uncertainty handling without claiming unseen-category recognition from softmax."
+    },
+    {
+      "id": "workflow_evaluation",
+      "blocker": "No prospective silent evaluation or evaluated human workflow is established by this work. A fixed three-reader image benchmark is not prospective clinical decision performance.",
+      "required_milestone": "After retrospective gates are met, qualified clinical partners oversee a prospective silent evaluation in the intended workflow without directing patient care, with prespecified failure capture, adjudication, drift monitoring and human review before any clinical deployment decision."
+    }
+  ],
+  "milestone_rule": "A claim may advance only when its matching evidence is verified; completed epochs, better training curves, bigger GPUs, extra augmented images, software tests or a favorable historical benchmark alone cannot satisfy a clinical-readiness milestone. No numeric acceptance threshold or sample-size target is invented here.",
+  "evidence_files": {
+    "current_local_audit.json": {
+      "path": "docs/kevin_paper_20261011/current_local_audit.json",
+      "sha256": "3b819084b3f2d6e10e308ff282804b45927d52c0a2447413c154a90de1199046"
+    },
+    "clinical_preprocessing_summary.json": {
+      "path": "docs/kevin_paper_20261011/clinical_preprocessing_summary.json",
+      "sha256": "06ff44cc979c0940daa460499dd81cbf2b66fd582438c4fb0d88991e2cd30ba9"
+    },
+    "abid_dataset_crosswalk.json": {
+      "path": "docs/kevin_paper_20261011/abid_dataset_crosswalk.json",
+      "sha256": "6b700534f2ba632d7ebfcad43df91726446e9a0823ebe05651d49da7712ee9c9"
+    },
+    "training/train_candidate.py": {
+      "path": "docs/kevin_paper_20261011/training/train_candidate.py",
+      "sha256": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2"
+    },
+    "training/evaluate_candidates.py": {
+      "path": "docs/kevin_paper_20261011/training/evaluate_candidates.py",
+      "sha256": "7ecebb4db2843ab90152ee31d859e03e725d9c2d476637fada1d3b557bf8231d"
+    },
+    "training/run_training_suite.py": {
+      "path": "docs/kevin_paper_20261011/training/run_training_suite.py",
+      "sha256": "0b9f58da8406db49f86ae0a600d1d14fadba99e1491171f348640a98166c0122"
+    },
+    "training/local_verification.json": {
+      "path": "docs/kevin_paper_20261011/training/local_verification.json",
+      "sha256": "82f0ddde0c4b9c695644ead23204168975538cb4a4ce5b6b49b81564fabace68"
+    },
+    "analysis/summarize_frozen_evaluation.py": {
+      "path": "docs/kevin_paper_20261011/analysis/summarize_frozen_evaluation.py",
+      "sha256": "74b2e8659238d234034c0a442e9609506045f7b971ab73bb4e7fd4182f80335e"
+    },
+    "analysis/freeze_validation_selection.py": {
+      "path": "docs/kevin_paper_20261011/analysis/freeze_validation_selection.py",
+      "sha256": "c68ecc085264449b06bc6065eb6e3ef54ad3797e9b5eddd41fe9f8909f1a330d"
+    },
+    "analysis/old_hash_group_unexposed_sensitivity_audit.json": {
+      "path": "docs/kevin_paper_20261011/analysis/old_hash_group_unexposed_sensitivity_audit.json",
+      "sha256": "44db9789f8f5479fef700abfdeb45e1a1cb2cef487ccde2f5a2907b6c731576c"
+    },
+    "analysis/methods_protocol_snapshot.md": {
+      "path": "docs/kevin_paper_20261011/analysis/methods_protocol_snapshot.md",
+      "sha256": "b43207ee9a77d3b91136c691f5c5c8546fe540d103e620b0ae8d587ed45bd5b9"
+    }
+  },
+  "reporting_reference": {
+    "title": "CLAIM 2024 update",
+    "url": "https://pubs.rsna.org/doi/10.1148/ryai.240300",
+    "relevant_items": {
+      "30": "robustness",
+      "33": "external testing",
+      "37": "subgroups",
+      "38": "uncertainty/calibration"
+    },
+    "verification": "Primary source verified by parent agent during this task; used as reporting support, not certification."
+  }
+}

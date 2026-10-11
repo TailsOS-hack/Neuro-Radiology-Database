@@ -1,0 +1,19 @@
+cohort_and_split,candidate,metric,estimate,ci95_low,ci95_high,successes,n,n_mci_prediction_only,method
+external__openneuro_ds007561,candidate_2,accuracy_exact,0.9333333333333333,0.6805154334216967,0.9983135697586473,14,15,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_2,AD_sensitivity_exact,0.0,0.0,0.975,0,1,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_2,CN_specificity_exact,1.0,0.7683642383498835,1.0,14,14,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_4,accuracy_exact,0.4666666666666667,0.21266672951930793,0.7341386527226034,7,15,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_4,AD_sensitivity_exact,1.0,0.025000000000000022,1.0,1,1,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_4,CN_specificity_exact,0.42857142857142855,0.17661108998211783,0.7113905999616925,6,14,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_6,accuracy_exact,0.8666666666666667,0.5953973033966279,0.9834240865599164,13,15,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_6,AD_sensitivity_exact,0.0,0.0,0.975,0,1,5,Clopper-Pearson exact subject-level conditional binomial interval
+external__openneuro_ds007561,candidate_6,CN_specificity_exact,0.9285714285714286,0.6613155100681787,0.9981932193408746,13,14,5,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_2,accuracy_exact,0.45454545454545453,0.16748809406370715,0.7662064023406548,5,11,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_2,AD_sensitivity_exact,0.14285714285714285,0.0036102968619005867,0.5787231970431952,1,7,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_2,CN_specificity_exact,1.0,0.3976353643835254,1.0,4,4,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_4,accuracy_exact,0.6363636363636364,0.3079047150116772,0.8907365561809019,7,11,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_4,AD_sensitivity_exact,0.5714285714285714,0.18405156764008307,0.9010117215574921,4,7,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_4,CN_specificity_exact,0.75,0.19412044968324343,0.9936905367902901,3,4,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_6,accuracy_exact,0.36363636363636365,0.10926344381909812,0.6920952849883228,4,11,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_6,AD_sensitivity_exact,0.14285714285714285,0.0036102968619005867,0.5787231970431952,1,7,0,Clopper-Pearson exact subject-level conditional binomial interval
+test__besga_zenodo_3935636,candidate_6,CN_specificity_exact,0.75,0.19412044968324343,0.9936905367902901,3,4,0,Clopper-Pearson exact subject-level conditional binomial interval

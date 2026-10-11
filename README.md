@@ -4,6 +4,8 @@
 
 > **2026-10-07 current-checkpoint check:** The existing models score **100/100** on the radiologist image benchmark, with 100 finite, nonflat Grad-CAM maps and unchanged predictions after explanation. This is a reused benchmark: its images match 66 training, 9 validation, and 25 test images in the historical strict manifest. No new training or independent accuracy improvement is claimed. See [results, fixes, and reproduction](docs/evaluation_100_20261007/README.md).
 
+> **2026-10-11 Kevin dementia experiment:** Six research runs completed 305 epochs. The validation-selected new checkpoint and the old baseline both score 100/100 on the reused reader benchmark; the new checkpoint falls to 96/100 under one fixed added-noise diagnostic. The separate clinical pilot performed poorly. Overall superiority and clinical readiness are not established, and the production checkpoint is unchanged. See the [complete paper materials](docs/kevin_paper_20261011/publication/README.md), [recreated figures](docs/kevin_paper_20261011/publication/FIGURES.md), and [all six research checkpoints](models/kevin_20261011/README.md).
+
 This project is an advanced medical imaging analysis tool. It uses deep learning to analyze MRI scans for both **Brain Tumors** and **Alzheimer's/Dementia** signs, then generates grounded draft reports from structured classifier evidence. The reporting path is deterministic by default so it does not ask an LLM to invent lesion measurements, locations, mass effect, atrophy measurements, or other unsupported clinical findings.
 
 ## Features

@@ -2,5 +2,9 @@
 * text=auto
 # Store trained PyTorch checkpoints with Git LFS.
 models/*.pt filter=lfs diff=lfs merge=lfs -text
+models/kevin_20261011/*.pt filter=lfs diff=lfs merge=lfs -text
+# Preserve frozen experiment and export checksums across Git checkouts.
+docs/kevin_paper_20261011/** -text
+training_logs/experiments/kevin_20261011/prepared/** -text
 models/**/*.safetensors filter=lfs diff=lfs merge=lfs -text
 models/**/tokenizer.json filter=lfs diff=lfs merge=lfs -text

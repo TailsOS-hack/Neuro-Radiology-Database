@@ -1,0 +1,374 @@
+{
+  "source_script": "docs/kevin_paper_20261011/paper_figures/recreate_quantitative_figures.py",
+  "source_script_sha256": "c95cd1ed83b6650258c549d07de07e062159744c9eb4b32e9015bb8047b5c770",
+  "inputs_sha256": {
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/evaluation.json": "2ad94f62c20b3505f3585abb6165e75aa4a532e916f41d482f7f7f288f2a56d0",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/validation_selection_before_evaluation.json": "5ba9de51fe339ab6e470de496571430ab6f463a814efc858c228db954241c0c7",
+    "training_logs/experiments/kevin_20261011/prepared/stage_manifest.csv": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+    "training_logs/experiments/kevin_20261011/prepared/same_case_test_intersection.csv": "7cf400fe66e8edc9bf86b784976ab1682e1ee8e933ee0d90b15cfd785b36ac05",
+    "training_logs/experiments/kevin_20261011/prepared/split_audit.json": "7b497f425532309ff8c6dac33383bf0c3fff387db9f056f24988413e2ea57fe4",
+    "data/evaluation/ground_truth/radiologist_test_key.csv": "067b3b6bd3f7d1224e50befe7dcb11c43dff878aeb1aac6c6f3f9dd6eabdb9af",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/old_baseline_original100_predictions.csv": "f23a5373b85a7e6610450429062096dc89e2ea476fa57b6890d2d6984739de4e",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_1_original100_predictions.csv": "0969a84e99bf4d1bdc937d269a15d8b5db79fd0a1c013c62404275b179f543f2",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_3_original100_predictions.csv": "0606d6ef4e48b1aea5c8ca30e49a26578db67e1f963aed9ac5b05e1ae857dbba",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_5_original100_predictions.csv": "634cbc5f79bf48a1463ac0d379e48807be6cd1bbb204310752828900560a5080",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_original100_predictions.csv": "5d5968367644f82bda763a9e8759351ae283fc565222127852c34ed2d8e5b6f8",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_original100_predictions.csv": "741514166bccc279d5429e3c89ca26b125838117ff445fb0b01ce54d94d0e124",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_original100_predictions.csv": "21173e84fb78980f84b00aae1fd9126cef2b72bc8629b560b414ec5b31f74af8",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/old_baseline_internal_same_case_predictions.csv": "f9044f6274a4abc0cf1a0b7d2acb5b35b382cfee6d1ade18524621c52282cb7b",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_1_internal_same_case_predictions.csv": "11894e3a11cc666b8a19e4acd577e485e863a41d0257d8019c37882377310667",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_3_internal_same_case_predictions.csv": "6c0da9e0c559fe8eaefa640d27abe59aba86332c066ac28f2c48b44a62ca70b6",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_5_internal_same_case_predictions.csv": "e5e4d87dff39e61b12652ff77e91ac014c5549c9af1f5878029bfdaa9469e7c4",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_internal_same_case_predictions.csv": "ecf9daf0156994b3cb448ada9a83cb0ae837f7f86bb6b5b8673d6452750592a7",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_internal_same_case_predictions.csv": "62a9aeb0488afaf5bd5ad7d5c90c0f10df20de21a094cbd0c405e46c67ba8651",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_internal_same_case_predictions.csv": "1070ad55b82a052b83ec5503aa144b078b87ad969f2101388c5822ff4cd38572",
+    "docs/kevin_paper_20261011/analysis/old_hash_group_unexposed_sensitivity.csv": "da1288c26944a10d7fdbda0ffc87886d77e48cb5ca2d7186a603e2492239bcba",
+    "docs/kevin_paper_20261011/analysis/old_hash_group_unexposed_sensitivity_audit.json": "44db9789f8f5479fef700abfdeb45e1a1cb2cef487ccde2f5a2907b6c731576c",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/original100_case_aligned_old_candidates_readers.csv": "219d2e5f9102e47a70b9ac4a2141b7aad9871a2b9dbed7a4673e12d38e717b8c",
+    "docs/kevin_paper_20261011/analysis/summarize_frozen_evaluation.py": "74b2e8659238d234034c0a442e9609506045f7b971ab73bb4e7fd4182f80335e",
+    "docs/kevin_paper_20261011/analysis/ensemble_supplement.py": "1155f0ed01f61d2ef04d0a488606070fc0b2728b32fd1625951964d98422f888",
+    "docs/kevin_paper_20261011/analysis/plot_evaluation_figures.py": "48a78ed1d14198813833fc937cde35e509737e894bec4893ca920871406ae81e",
+    "docs/kevin_paper_20261011/analysis/plot_training_curves.py": "6c9e95cf4ccd343edafe992743369dcc7b73c6132fffb54e5bdca9ff19618ef4",
+    "data/external/clinical_t1_preprocessed_v1/clinical_slices.csv": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_external__openneuro_ds007561_subject_predictions.csv": "745b64b16d04f706832312b054357eda262ab03bc2bb8514fbfac41f898599f2",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_test__besga_zenodo_3935636_subject_predictions.csv": "2627c66a2ea1c3dea49365d1d3508f9b2df847e8817d022709a811852117a3f2",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_external__openneuro_ds007561_subject_predictions.csv": "b82101211987b8b1b04a1e8e1c6c9f6eac8185ca88b589b10b9904531d4bd16f",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_test__besga_zenodo_3935636_subject_predictions.csv": "9382eb709b59326eb95677190e22e80d110d60a18fdfc32fe44e44603306a001",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_external__openneuro_ds007561_subject_predictions.csv": "ddc02a0c0f1bd0608e2dce45864c0a3aff6392e90fbeff1da8419ed5291e8fe7",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_test__besga_zenodo_3935636_subject_predictions.csv": "ffa26293b21cc22a77defd6eb598d535d8bb2a9ddeef5362c62fdcf76b3cd1b0",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_uncertainty_analysis_all6/uncertainty_analysis.json": "56881a4143143dcf4a8bc285ed03ec5a61ea2dcf26882a7eff220d16226189e7",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_supplement.json": "60d908b00945bb5319c74e69cd1f09d8996a4a0252cd3127f5c1a7048bdb3fdd",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement_freeze.json": "957a02ea89cd85325ffdc185fd8567e75dde5091481452f5ace1c181b96a701a",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_stage_only_original100_predictions.csv": "a0ec3e7e565f74f3d4a229cd0a4917715b72bfc72c84d548614e6b6b0587e705",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_multitask_original100_predictions.csv": "5e27ec69204c5164094a985da5d0d22af8774b8ad2687c030d1a91c716111090",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_stage_only_internal_same_case_predictions.csv": "bf156342647288813b9f8894d5cc413644edea2c157553493a722895b1ec5673",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_multitask_internal_same_case_predictions.csv": "3d4af11321f501c0e9c43a5d6565e5ca45232b79ee3b5ae5759d9222bc2b89ce",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_stage_only_old_hash_group_unexposed_sensitivity_predictions.csv": "c28338413bda61630a130b8a20ffa54ce8029f568cbe1fe5c34f1dc7cb62dd35",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_multitask_old_hash_group_unexposed_sensitivity_predictions.csv": "f4c5a6ab15cc3e59eafc0ceae7d26e37e935a85e63a4b0e45602c08e43424798",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_multitask_AD_CN_external__openneuro_ds007561_subject_predictions.csv": "b835137288621bc782c5fd12d248476060a5fdf12c46dfb99c5a9298e5f1ee30",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/ensemble_supplement/ensemble_multitask_AD_CN_test__besga_zenodo_3935636_subject_predictions.csv": "e48089a92bd71c5941e9450720a9615959e5297ddfe55df25e80615f0b372697",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261011/config.json": "1b58ef2dd52399f870ebe56ad78bf834633f51559e74b6ea50145d325f90d0db",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261011/history.json": "a7fbc496f1499dec90aa44c63139aa93b5ff8163afab1c7d79f9509f5584447c",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261011/best.pt": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261011/config.json": "c116739f4100cdb2eefcd3b30c07804bb0bd4aaebca91098d4c79c8b29dfd9cd",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261011/history.json": "d5218898c3836eda877f00db29b282c113e499ac7837809ce53417d87097214f",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261011/best.pt": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261012/config.json": "c1ae1c92cc2376aee1b065a3c3d72648155c7947f152357321591f5d8bec0a32",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261012/history.json": "cde2bf8293810ccdd1841ee3b77fbc9a320e83437f0558d75ba8b966167e959b",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261012/best.pt": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261012/config.json": "870c7b504c2dbd5641e782547e36eb12fc64d5d541ef18594eaa7f908e743e16",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261012/history.json": "930c0e52f834884a14c8b071b9bd2205977668d8b8be846d9f3795fddb105d50",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261012/best.pt": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261013/config.json": "eb14f8d52b4b1c170599bda6d83481325017b1bf5e0bb27dc2b94533d5f2cec5",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261013/history.json": "928442f2e32203e5f472a81c298a22f0e1387d49e9b69b28b210cb99756236ed",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261013/best.pt": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261013/config.json": "cf65ea5795ef5605b404811d6f6a7bcea49df62439ae23fdb02b9256b6883f2d",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261013/history.json": "07339957333fe8516655721a1d369c8708c8611658adf2b0e019ad13662a206e",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261013/best.pt": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/replay_metadata.json": "db8d21239b0e33d4c9a48b2e34cd92c74ea27b97343d3a3483281c9db93ac24f",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_1_train_resubstitution_predictions.csv": "143fab914533aca23c8ba719662a9e2588d2a3fa8309f2a279f246950619ddaa",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_3_train_resubstitution_predictions.csv": "83ac5d967f44580d700dd09943dfb225d28d0f206539fd69a3be612e531f6e0b",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_5_train_resubstitution_predictions.csv": "6a077dde981997b653b58fc19963533bd576031c2324bcc6c1915db00e310435",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_2_train_resubstitution_predictions.csv": "59eb9a014a99ec16b6447cecb341d461582aeb4a034bf5e0bd988b6c457ca4dd",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_4_train_resubstitution_predictions.csv": "2cc9967b96afe5e173c12ea1e2a584e02d517a90dd112eb0ba68810768966a8a",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_6_train_resubstitution_predictions.csv": "a298963f7ea428d1138a2cecb4d268ce4de0edf78202157ba5b22288ccf854d4",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_1_full_new_test_predictions.csv": "58201cfa219ddfc5614e33c980d48497feca13f329aeefcd7f01c39c20cd2084",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_3_full_new_test_predictions.csv": "f39b4c83160e592c0ab836cdf716bbeeb30848ad0b650afb17e70494cb011283",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_5_full_new_test_predictions.csv": "08a04cf842793961ac39a183194ab4a3e38aa3c2bbd1b62779afbbe3a4a279dd",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_2_full_new_test_predictions.csv": "a3b336e0e2d00cdd62fa59793da659bb4dc2accc7cc4ab6fd6eddae25097a443",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_4_full_new_test_predictions.csv": "63b2c923b6b3bebfda262832c3088e377ec6f640e7c53c32d57f45cedbf9c4de",
+    "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/candidate_6_full_new_test_predictions.csv": "2c2e93e63ef3f71dc92095bd50a583c44a4df00b709d06a13ff6032321bfafed"
+  },
+  "model_inference": false,
+  "new_fitting_or_selection": false,
+  "frozen_sources_modified": false,
+  "figures": [
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_confusion_all_nine.png",
+      "sha256": "8042d559cffe55a0bd68724d4a5fee7581e6475dc5e385c7d4dec92616ab64e7"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_confusion_all_nine.pdf",
+      "sha256": "5b88d67984c55d2dae746446465390e3808de34b0b06fdcfd97b4515ae51ecb5"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_reliability_all_nine.png",
+      "sha256": "beeefcf5b95cff7cf1a4ea60b0f8c8f6b7a750239d49109434c4c23e00588931"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_reliability_all_nine.pdf",
+      "sha256": "fb4f864b7326e8493c2d01c67c93082fa24214a1c09fe093fdef02c1103f8553"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_confidence_all_nine.png",
+      "sha256": "321804e1776556d90be69f8c984ddb149a58252f00263ec68a354832bfd404ce"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_confidence_all_nine.pdf",
+      "sha256": "c854d067e9619a6cda1f34951d89f0d2fd5b11385a3494c043172296d0849ed3"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_roc_all_nine.png",
+      "sha256": "464d310c09476237aab46ab7e50cecb2dee67fee3739fbd38a2fc55ae2e2bbe5"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_roc_all_nine.pdf",
+      "sha256": "dbbfdf2cc98a4ef5178038dd9ac672502dcff883864a6d21dcaa794513b6006b"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_pr_all_nine.png",
+      "sha256": "27ef48698ea54bba7e81b8432012185ced3d87ff24b39f5a52f31a80fe2bd4a8"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_pr_all_nine.pdf",
+      "sha256": "ec6a9bb3f181fdbdee3f3f36901a4f8d3ca676e51ff5921b47c13750763d58ef"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_errors_all_nine.png",
+      "sha256": "6021c3b551867780aa838b687f33593625f8c65a65969b958d3f29102c6776a5"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_errors_all_nine.pdf",
+      "sha256": "00944b673376b7949762434d4a4d4519ba506ef7055eec055c10ce67129090a9"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_confusion_all_nine.png",
+      "sha256": "a0bbdb4e1cd8ec88ecb7ce5dbe02b0cbd2dcde805ed02a14d4c60056fca1561b"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_confusion_all_nine.pdf",
+      "sha256": "43eae582d3a9a04b5535d3853081e6039ef22cf02a5b28d1f72f2375904d9ab8"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_reliability_all_nine.png",
+      "sha256": "7f6786ff35cb218814bdc3dd1edf5ba083b3f60b6aec6b657cb0aed50d1b7a9c"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_reliability_all_nine.pdf",
+      "sha256": "ce8701c5ca31371c27c5f6a9513c299057606623cbc0ecbd85593ba86811a686"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_confidence_all_nine.png",
+      "sha256": "cf6e985715707929abc330cb8aef8ec4c77e845a0fd2fefae5867228e281967a"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_confidence_all_nine.pdf",
+      "sha256": "c90b673ee0cdef2658d790615c5a00fa273f4f292d3b1372c6a280ca951bf930"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_roc_all_nine.png",
+      "sha256": "866023742384fd464fce9e90e1ab654015ba8dfc4162a981e5dc683e49149d90"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_roc_all_nine.pdf",
+      "sha256": "347c567d4b07dd50a768d58ea71e556808968816227efae7c1041ed7d4047f4a"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_pr_all_nine.png",
+      "sha256": "4a439c483c04062dcb076575c3f8d675193c52f82982101ae84239d2443f7291"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_pr_all_nine.pdf",
+      "sha256": "52e64a05efe15db76fd1d182aea6607be939d5253a1133b2684986fa82bffdd5"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_errors_all_nine.png",
+      "sha256": "38c5e8f040ab78ca2094172279516cff3ce4e347bdb610f9e6fcef7dbade876c"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_errors_all_nine.pdf",
+      "sha256": "7d700d292b4d9b140f276aeaadf6b070c421f1cee7b90c784a6167482c37c1d5"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_confusion_all_nine.png",
+      "sha256": "3556ba1adcd3069ec4c70813bd5d0c8140c06059f56dfcd59eae1c5bb158be16"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_confusion_all_nine.pdf",
+      "sha256": "9acf2b4cc704ae6b60f3ebc428269063c0c6f40c7e6b1253e4e94a29c11c943f"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_reliability_all_nine.png",
+      "sha256": "3ab5e88b89017a9f9d6a654c74d4b3bd2389509670c726bb1989e0e7aa290787"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_reliability_all_nine.pdf",
+      "sha256": "6703dbcdbc3e65fa10284abe930a30dd1dbc21f76c9a73a569d8b2e561f5568c"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_confidence_all_nine.png",
+      "sha256": "3d8c3634290fbcb34592bf98fb25bf99f9fae8103f9373a06aeaac015747e1ed"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_confidence_all_nine.pdf",
+      "sha256": "b6515718e3c375410e1dc5cfe0bf4165aada11fbcb3207610167645dad254128"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_roc_all_nine.png",
+      "sha256": "4125a1b5840b0847551cd7d6ce228919dd00200fa7bb08d898a334162f42c82b"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_roc_all_nine.pdf",
+      "sha256": "e784db0e5bdb96e64920dc772b845303ecf53348205b810e0caef6d37913c124"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_pr_all_nine.png",
+      "sha256": "2b8dbcbcca184ff79b859f80e8d0d1f964068e702c90dd86aff7d07815e86aad"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_pr_all_nine.pdf",
+      "sha256": "272aa1cd5b8ef515ed74780dfc645cbc6f889f2b77cbca289ef76fbfcecae629"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_errors_all_nine.png",
+      "sha256": "a6d2206c1581fc577e3ec0983a499a55aa09dd177feffee0003187775d99aed2"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_errors_all_nine.pdf",
+      "sha256": "7bef35c7f6df672d09975b708bc852a1c29522097d860fbcd4a7a6a0989d8a4b"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_models_and_fixed_readers.png",
+      "sha256": "25887ac3287cabcbffedc02fd262aad6b022313912a0e1b3c5da92f5edfd8680"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_models_and_fixed_readers.pdf",
+      "sha256": "753d357eb9da61eb32d937f8c62c8cc829722fd25ed59ed03fa4d9f304136deb"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_per_class_models_readers.png",
+      "sha256": "ef1b215e1a675e3567f2703a51b93d59f866467ad4310137672bedc9671055b8"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_per_class_models_readers.pdf",
+      "sha256": "9dc3bb6e2efbdd3c5836e19ac1d7ffcfd0adefe1e5581479999638ed9ff09f9b"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_seed_spread.png",
+      "sha256": "56e5508d079d8cdb7a005cbe6771090ca23038399ad6833a89650388d4ec5243"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_seed_spread.pdf",
+      "sha256": "6ec9d4fd98141740969a373f7810b8477546004f1af70ea978e1443229f4d8fb"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/paired_accuracy_differences.png",
+      "sha256": "675a2dbe8b2ba3fcab4c4e9b235a0ffc5ca9fdb6c56698ff0c80f717fc0b81f9"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/paired_accuracy_differences.pdf",
+      "sha256": "4017107c81852b83715fc6d6f47d93438c84495da3a30c4b938c220186f5e783"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_exact_intervals.png",
+      "sha256": "1b4a46cf18c52c2a9a1c8ddea7a923be9d28cc2b7be6b067b47d93500ecab2e5"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_exact_intervals.pdf",
+      "sha256": "de5133491d65290cf31aeb170f30eb5f356c5a4942c08d52d18c067c1cf50d26"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_confusion_all_multitask.png",
+      "sha256": "091bad81e32d264cec8799cc6eded0752b00c82ea92c195b5ae4a6a9a538bdf6"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_confusion_all_multitask.pdf",
+      "sha256": "a4c054a2b46360dcf6853f9eb5913fb1ba5efcdaeeea8df43ec20d439beadff3"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_accuracy_all_six_runs.png",
+      "sha256": "4074a26b451989632d91ba9fbca1a04115872dff5b29feb3261cb8d9b0aa80f5"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_accuracy_all_six_runs.pdf",
+      "sha256": "4d6fc4d94dfd393a5193a13351c1140bcb266d37824508cdf88e985327d4fd81"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_loss_all_six_runs.png",
+      "sha256": "ac21c8a72f39a204db9d2a683672a9d6413e89529de2208f49917da05b7ca110"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_loss_all_six_runs.pdf",
+      "sha256": "079d692fd3c97feb11091e517c3bea1bc705c66744575f99551ec9238e25ba9d"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_accuracy_all_three_seeds.png",
+      "sha256": "0c46ea90ea723a43a977a1daea369d71c20cbd1d2a2397494540ba9b4de0dfa4"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_accuracy_all_three_seeds.pdf",
+      "sha256": "f088807380bb43a9011c404b69ab79f037b20298bb3df59f2a3295aa576ad246"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_loss_all_three_multitask_seeds.png",
+      "sha256": "fbb6b57cde4bf084c57761abc6eb07c4f26a4f6637f125284f82dbe73580955e"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_loss_all_three_multitask_seeds.pdf",
+      "sha256": "d1e23f785b9ed402fee9a431087811453e55d059661bd228e5399189c8d5bbfa"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_validation_confusion_all_six.png",
+      "sha256": "8e364611e239d27e1daf90fde6dbaedc2a46665f376ac6bd4d7719e739472a77"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/stage_validation_confusion_all_six.pdf",
+      "sha256": "3dbd32512983fa63fba42bda17a46f81f958b7b0fc85ece82527c6fc33842249"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/train_resubstitution_confusion_all_six.png",
+      "sha256": "ebd9691b5b7dcf76146954b8090b7f2ae5d7d45c2455e4ec328f2e8c666e5342"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/train_resubstitution_confusion_all_six.pdf",
+      "sha256": "122bfe036df653987c214eb7a49431ca09d04d586425dc52695b31df2efaf112"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/full_new_test_confusion_all_six.png",
+      "sha256": "5ce0e357dde2133d0df85d387b185386778fd4fffe5528c8bc131523e3a3b8e1"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/full_new_test_confusion_all_six.pdf",
+      "sha256": "01a8ecc95d35239d4869ff1166342ae201b51d79a9af1a96dbbe51d3350ac99c"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_fixed_reader_confusion.png",
+      "sha256": "c47aa0616c695f81b9d8fd87edd0fa915283d8b084fd506c5485b4160f85f454"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/original100_fixed_reader_confusion.pdf",
+      "sha256": "ed9b59fce662f2dc04b3b29c90d6f0d2dca418d26a9e3b5c97c10b5102397dbe"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/dementia_study_workflow.png",
+      "sha256": "33abf928bd10e693c808fb09f79f4be512a52b957b86797d7925b8be15b3efa1"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/dementia_study_workflow.pdf",
+      "sha256": "513bafefec37411e1ddb6140fb0768b6d67f985707d12476a7302d004e3ddc19"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/dementia_two_condition_architecture.png",
+      "sha256": "5ba45e6a33a5bf602a6dce1dad6e4db701d509da7612a87e552a18228dec6d43"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/paper_figures/generated/dementia_two_condition_architecture.pdf",
+      "sha256": "8aa43c6a5bd001757d233ebb4a238f9d23a6a12f890c6ecb60d7766a719c64c1"
+    }
+  ],
+  "numeric_checks": {
+    "cohort_model_point_summaries_match_frozen_analysis": 27,
+    "clinical_model_cohort_points_and_exact_intervals": 8,
+    "fixed_ensemble_probability_files_equal_member_means": 6,
+    "saved_validation_matrices_validated": 6,
+    "posthoc_clean_replay_matrices_validated": 12
+  },
+  "limitations": [
+    "302 images have old development hash-group mates. Hash groups are not patient identities.",
+    "Excludes observed old development hash-group mates; patient independence remains unknown.",
+    "Old-model exposure: 66 training, 9 validation, 25 test images. No independent clinical claim.",
+    "Clinical AD/CN is exploratory, with only one external AD subject.",
+    "Seed spread is SD, not a confidence interval; ensembles remain supplementary.",
+    "Training resubstitution and full-new-test replay are post-hoc supplementary displays, not the primary held-out analysis."
+  ]
+}

@@ -1,0 +1,1061 @@
+{
+  "status": "completed_posthoc_clean_split_replay",
+  "created_utc": "2026-10-11T23:29:13.714566+00:00",
+  "script_sha256": "7cea8635a466dece5789684e7f83006ad7bf4f42ccdbb49557696a000592a1ca",
+  "stress_helper_sha256": "7955b7ad5c0d564bc25745e84f157c8544901d25ff2adb86f31bcc8e1b3d9f9a",
+  "class_order": [
+    "MildDemented",
+    "ModerateDemented",
+    "NonDemented",
+    "VeryMildDemented"
+  ],
+  "device": "mps",
+  "torch": "2.12.1",
+  "batch_size": 32,
+  "workers": 4,
+  "stage_manifest_sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+  "split_counts": {
+    "train_resubstitution": 19023,
+    "full_new_test": 5450
+  },
+  "model_order": [
+    "candidate_1",
+    "candidate_3",
+    "candidate_5",
+    "candidate_2",
+    "candidate_4",
+    "candidate_6"
+  ],
+  "checkpoints": {
+    "candidate_1": {
+      "checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+      "mode": "stage_only",
+      "seed": 20261011,
+      "selected_epoch": 23,
+      "splits": {
+        "train_resubstitution": {
+          "metrics": {
+            "n": 19023,
+            "loss": 0.03378438772524795,
+            "accuracy": 0.9998422961677969,
+            "balanced_accuracy": 0.9998344347657961,
+            "macro_f1": 0.9998386854252461,
+            "confusion_matrix": [
+              [
+                4631,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                5227,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4727,
+                1
+              ],
+              [
+                0,
+                1,
+                1,
+                4435
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 19023,
+                "loss": 0.03378438772524795,
+                "accuracy": 0.9998422961677969,
+                "balanced_accuracy": 0.9998344347657961,
+                "macro_f1": 0.9998386854252461,
+                "confusion_matrix": [
+                  [
+                    4631,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    5227,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    4727,
+                    1
+                  ],
+                  [
+                    0,
+                    1,
+                    1,
+                    4435
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_1_train_resubstitution_predictions.csv",
+          "predictions_sha256": "143fab914533aca23c8ba719662a9e2588d2a3fa8309f2a279f246950619ddaa",
+          "n": 19023
+        },
+        "full_new_test": {
+          "metrics": {
+            "n": 5450,
+            "loss": 0.03853126251964528,
+            "accuracy": 0.9977981651376147,
+            "balanced_accuracy": 0.9976775700928162,
+            "macro_f1": 0.9976913897759937,
+            "confusion_matrix": [
+              [
+                1341,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1538,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                1318,
+                5
+              ],
+              [
+                1,
+                1,
+                3,
+                1241
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 5450,
+                "loss": 0.03853126251964528,
+                "accuracy": 0.9977981651376147,
+                "balanced_accuracy": 0.9976775700928162,
+                "macro_f1": 0.9976913897759937,
+                "confusion_matrix": [
+                  [
+                    1341,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    1538,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    1318,
+                    5
+                  ],
+                  [
+                    1,
+                    1,
+                    3,
+                    1241
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_1_full_new_test_predictions.csv",
+          "predictions_sha256": "58201cfa219ddfc5614e33c980d48497feca13f329aeefcd7f01c39c20cd2084",
+          "n": 5450
+        }
+      }
+    },
+    "candidate_3": {
+      "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "mode": "stage_only",
+      "seed": 20261012,
+      "selected_epoch": 37,
+      "splits": {
+        "train_resubstitution": {
+          "metrics": {
+            "n": 19023,
+            "loss": 0.033829654703851374,
+            "accuracy": 1.0,
+            "balanced_accuracy": 1.0,
+            "macro_f1": 1.0,
+            "confusion_matrix": [
+              [
+                4631,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                5227,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4728,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                4437
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 19023,
+                "loss": 0.033829654703851374,
+                "accuracy": 1.0,
+                "balanced_accuracy": 1.0,
+                "macro_f1": 1.0,
+                "confusion_matrix": [
+                  [
+                    4631,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    5227,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    4728,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    4437
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_3_train_resubstitution_predictions.csv",
+          "predictions_sha256": "83ac5d967f44580d700dd09943dfb225d28d0f206539fd69a3be612e531f6e0b",
+          "n": 19023
+        },
+        "full_new_test": {
+          "metrics": {
+            "n": 5450,
+            "loss": 0.03755188061785207,
+            "accuracy": 0.9987155963302752,
+            "balanced_accuracy": 0.9986596723926224,
+            "macro_f1": 0.9986525929814092,
+            "confusion_matrix": [
+              [
+                1340,
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                1538,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                1321,
+                2
+              ],
+              [
+                0,
+                0,
+                2,
+                1244
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 5450,
+                "loss": 0.03755188061785207,
+                "accuracy": 0.9987155963302752,
+                "balanced_accuracy": 0.9986596723926224,
+                "macro_f1": 0.9986525929814092,
+                "confusion_matrix": [
+                  [
+                    1340,
+                    0,
+                    1,
+                    1
+                  ],
+                  [
+                    0,
+                    1538,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    1321,
+                    2
+                  ],
+                  [
+                    0,
+                    0,
+                    2,
+                    1244
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_3_full_new_test_predictions.csv",
+          "predictions_sha256": "f39b4c83160e592c0ab836cdf716bbeeb30848ad0b650afb17e70494cb011283",
+          "n": 5450
+        }
+      }
+    },
+    "candidate_5": {
+      "checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+      "mode": "stage_only",
+      "seed": 20261013,
+      "selected_epoch": 39,
+      "splits": {
+        "train_resubstitution": {
+          "metrics": {
+            "n": 19023,
+            "loss": 0.03554289658659258,
+            "accuracy": 0.9997371602796614,
+            "balanced_accuracy": 0.9997206384719454,
+            "macro_f1": 0.9997259086319044,
+            "confusion_matrix": [
+              [
+                4630,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                5227,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4728,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                4433
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 19023,
+                "loss": 0.03554289658659258,
+                "accuracy": 0.9997371602796614,
+                "balanced_accuracy": 0.9997206384719454,
+                "macro_f1": 0.9997259086319044,
+                "confusion_matrix": [
+                  [
+                    4630,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    5227,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    4728,
+                    0
+                  ],
+                  [
+                    4,
+                    0,
+                    0,
+                    4433
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_5_train_resubstitution_predictions.csv",
+          "predictions_sha256": "6a077dde981997b653b58fc19963533bd576031c2324bcc6c1915db00e310435",
+          "n": 19023
+        },
+        "full_new_test": {
+          "metrics": {
+            "n": 5450,
+            "loss": 0.03888106325823992,
+            "accuracy": 0.9988990825688073,
+            "balanced_accuracy": 0.9988366738425796,
+            "macro_f1": 0.9988438223960909,
+            "confusion_matrix": [
+              [
+                1340,
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                1538,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1323,
+                1
+              ],
+              [
+                3,
+                0,
+                0,
+                1243
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 5450,
+                "loss": 0.03888106325823992,
+                "accuracy": 0.9988990825688073,
+                "balanced_accuracy": 0.9988366738425796,
+                "macro_f1": 0.9988438223960909,
+                "confusion_matrix": [
+                  [
+                    1340,
+                    0,
+                    1,
+                    1
+                  ],
+                  [
+                    0,
+                    1538,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1323,
+                    1
+                  ],
+                  [
+                    3,
+                    0,
+                    0,
+                    1243
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_5_full_new_test_predictions.csv",
+          "predictions_sha256": "08a04cf842793961ac39a183194ab4a3e38aa3c2bbd1b62779afbbe3a4a279dd",
+          "n": 5450
+        }
+      }
+    },
+    "candidate_2": {
+      "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "mode": "multitask",
+      "seed": 20261011,
+      "selected_epoch": 28,
+      "splits": {
+        "train_resubstitution": {
+          "metrics": {
+            "n": 19023,
+            "loss": 0.04783913214516867,
+            "accuracy": 0.9984229616779687,
+            "balanced_accuracy": 0.9983432401177732,
+            "macro_f1": 0.9983610921508148,
+            "confusion_matrix": [
+              [
+                4630,
+                0,
+                0,
+                1
+              ],
+              [
+                0,
+                5227,
+                0,
+                0
+              ],
+              [
+                7,
+                0,
+                4719,
+                2
+              ],
+              [
+                15,
+                0,
+                5,
+                4417
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 19023,
+                "loss": 0.04783913214516867,
+                "accuracy": 0.9984229616779687,
+                "balanced_accuracy": 0.9983432401177732,
+                "macro_f1": 0.9983610921508148,
+                "confusion_matrix": [
+                  [
+                    4630,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    0,
+                    5227,
+                    0,
+                    0
+                  ],
+                  [
+                    7,
+                    0,
+                    4719,
+                    2
+                  ],
+                  [
+                    15,
+                    0,
+                    5,
+                    4417
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_2_train_resubstitution_predictions.csv",
+          "predictions_sha256": "59eb9a014a99ec16b6447cecb341d461582aeb4a034bf5e0bd988b6c457ca4dd",
+          "n": 19023
+        },
+        "full_new_test": {
+          "metrics": {
+            "n": 5450,
+            "loss": 0.06085661779751588,
+            "accuracy": 0.9932110091743119,
+            "balanced_accuracy": 0.9927062673061349,
+            "macro_f1": 0.9928844631988775,
+            "confusion_matrix": [
+              [
+                1342,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1538,
+                0,
+                0
+              ],
+              [
+                8,
+                0,
+                1313,
+                3
+              ],
+              [
+                19,
+                1,
+                6,
+                1220
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 5450,
+                "loss": 0.06085661779751588,
+                "accuracy": 0.9932110091743119,
+                "balanced_accuracy": 0.9927062673061349,
+                "macro_f1": 0.9928844631988775,
+                "confusion_matrix": [
+                  [
+                    1342,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1538,
+                    0,
+                    0
+                  ],
+                  [
+                    8,
+                    0,
+                    1313,
+                    3
+                  ],
+                  [
+                    19,
+                    1,
+                    6,
+                    1220
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_2_full_new_test_predictions.csv",
+          "predictions_sha256": "a3b336e0e2d00cdd62fa59793da659bb4dc2accc7cc4ab6fd6eddae25097a443",
+          "n": 5450
+        }
+      }
+    },
+    "candidate_4": {
+      "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "mode": "multitask",
+      "seed": 20261012,
+      "selected_epoch": 59,
+      "splits": {
+        "train_resubstitution": {
+          "metrics": {
+            "n": 19023,
+            "loss": 0.04085532665067554,
+            "accuracy": 0.9997897282237291,
+            "balanced_accuracy": 0.999778090388965,
+            "macro_f1": 0.9997809904127641,
+            "confusion_matrix": [
+              [
+                4631,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                5227,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4727,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                4434
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 19023,
+                "loss": 0.04085532665067554,
+                "accuracy": 0.9997897282237291,
+                "balanced_accuracy": 0.999778090388965,
+                "macro_f1": 0.9997809904127641,
+                "confusion_matrix": [
+                  [
+                    4631,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    5227,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    4727,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    2,
+                    4434
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_4_train_resubstitution_predictions.csv",
+          "predictions_sha256": "2cc9967b96afe5e173c12ea1e2a584e02d517a90dd112eb0ba68810768966a8a",
+          "n": 19023
+        },
+        "full_new_test": {
+          "metrics": {
+            "n": 5450,
+            "loss": 0.04948869472115509,
+            "accuracy": 0.9972477064220183,
+            "balanced_accuracy": 0.9971203925067769,
+            "macro_f1": 0.9970882303126266,
+            "confusion_matrix": [
+              [
+                1342,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1538,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                1313,
+                10
+              ],
+              [
+                2,
+                0,
+                2,
+                1242
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 5450,
+                "loss": 0.04948869472115509,
+                "accuracy": 0.9972477064220183,
+                "balanced_accuracy": 0.9971203925067769,
+                "macro_f1": 0.9970882303126266,
+                "confusion_matrix": [
+                  [
+                    1342,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1538,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    1313,
+                    10
+                  ],
+                  [
+                    2,
+                    0,
+                    2,
+                    1242
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_4_full_new_test_predictions.csv",
+          "predictions_sha256": "63b2c923b6b3bebfda262832c3088e377ec6f640e7c53c32d57f45cedbf9c4de",
+          "n": 5450
+        }
+      }
+    },
+    "candidate_6": {
+      "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "mode": "multitask",
+      "seed": 20261013,
+      "selected_epoch": 29,
+      "splits": {
+        "train_resubstitution": {
+          "metrics": {
+            "n": 19023,
+            "loss": 0.04531387177765526,
+            "accuracy": 0.9995268885033907,
+            "balanced_accuracy": 0.9995138532619823,
+            "macro_f1": 0.9995097827109133,
+            "confusion_matrix": [
+              [
+                4628,
+                0,
+                2,
+                1
+              ],
+              [
+                0,
+                5227,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4724,
+                4
+              ],
+              [
+                1,
+                0,
+                1,
+                4435
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 19023,
+                "loss": 0.04531387177765526,
+                "accuracy": 0.9995268885033907,
+                "balanced_accuracy": 0.9995138532619823,
+                "macro_f1": 0.9995097827109133,
+                "confusion_matrix": [
+                  [
+                    4628,
+                    0,
+                    2,
+                    1
+                  ],
+                  [
+                    0,
+                    5227,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    4724,
+                    4
+                  ],
+                  [
+                    1,
+                    0,
+                    1,
+                    4435
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_6_train_resubstitution_predictions.csv",
+          "predictions_sha256": "a298963f7ea428d1138a2cecb4d268ce4de0edf78202157ba5b22288ccf854d4",
+          "n": 19023
+        },
+        "full_new_test": {
+          "metrics": {
+            "n": 5450,
+            "loss": 0.05446629494842381,
+            "accuracy": 0.9959633027522936,
+            "balanced_accuracy": 0.9957682445970907,
+            "macro_f1": 0.9957553054484506,
+            "confusion_matrix": [
+              [
+                1340,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1538,
+                0,
+                0
+              ],
+              [
+                3,
+                0,
+                1311,
+                10
+              ],
+              [
+                4,
+                0,
+                3,
+                1239
+              ]
+            ],
+            "unit": "legacy_image",
+            "per_source": {
+              "legacy_augmented_4stage": {
+                "n": 5450,
+                "loss": 0.05446629494842381,
+                "accuracy": 0.9959633027522936,
+                "balanced_accuracy": 0.9957682445970907,
+                "macro_f1": 0.9957553054484506,
+                "confusion_matrix": [
+                  [
+                    1340,
+                    0,
+                    2,
+                    0
+                  ],
+                  [
+                    0,
+                    1538,
+                    0,
+                    0
+                  ],
+                  [
+                    3,
+                    0,
+                    1311,
+                    10
+                  ],
+                  [
+                    4,
+                    0,
+                    3,
+                    1239
+                  ]
+                ]
+              }
+            }
+          },
+          "predictions_file": "candidate_6_full_new_test_predictions.csv",
+          "predictions_sha256": "2c2e93e63ef3f71dc92095bd50a583c44a4df00b709d06a13ff6032321bfafed",
+          "n": 5450
+        }
+      }
+    }
+  },
+  "frozen_candidate_identities": {
+    "candidate_1": {
+      "checkpoint_path": "results/stage_only_seed20261011/best.pt",
+      "checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+      "mode": "stage_only",
+      "seed": 20261011,
+      "epoch": 23,
+      "stage_validation_nll": 0.03747158972872587
+    },
+    "candidate_3": {
+      "checkpoint_path": "results/stage_only_seed20261012/best.pt",
+      "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "mode": "stage_only",
+      "seed": 20261012,
+      "epoch": 37,
+      "stage_validation_nll": 0.03477062228208098
+    },
+    "candidate_5": {
+      "checkpoint_path": "results/stage_only_seed20261013/best.pt",
+      "checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+      "mode": "stage_only",
+      "seed": 20261013,
+      "epoch": 39,
+      "stage_validation_nll": 0.03694202273338021
+    },
+    "candidate_2": {
+      "checkpoint_path": "results/multitask_seed20261011/best.pt",
+      "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "mode": "multitask",
+      "seed": 20261011,
+      "epoch": 28,
+      "stage_validation_nll": 0.051600637482635964
+    },
+    "candidate_4": {
+      "checkpoint_path": "results/multitask_seed20261012/best.pt",
+      "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "mode": "multitask",
+      "seed": 20261012,
+      "epoch": 59,
+      "stage_validation_nll": 0.04531075374947832
+    },
+    "candidate_6": {
+      "checkpoint_path": "results/multitask_seed20261013/best.pt",
+      "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "mode": "multitask",
+      "seed": 20261013,
+      "epoch": 29,
+      "stage_validation_nll": 0.05403342983790774
+    }
+  },
+  "protected_inputs_sha256": {
+    "docs/kevin_paper_20261011/training/train_candidate.py": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+    "docs/kevin_paper_20261011/training/evaluate_candidates.py": "7ecebb4db2843ab90152ee31d859e03e725d9c2d476637fada1d3b557bf8231d",
+    "models/alzheimers_classifier.pt": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+    "training_logs/experiments/kevin_20261011/prepared/stage_manifest.csv": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+    "training_logs/experiments/kevin_20261011/prepared/same_case_test_intersection.csv": "7cf400fe66e8edc9bf86b784976ab1682e1ee8e933ee0d90b15cfd785b36ac05",
+    "data/evaluation/ground_truth/radiologist_test_key.csv": "067b3b6bd3f7d1224e50befe7dcb11c43dff878aeb1aac6c6f3f9dd6eabdb9af",
+    "data/external/clinical_t1_preprocessed_v1/clinical_slices.csv": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/validation_selection_before_evaluation.json": "5ba9de51fe339ab6e470de496571430ab6f463a814efc858c228db954241c0c7",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/evaluation.json": "2ad94f62c20b3505f3585abb6165e75aa4a532e916f41d482f7f7f288f2a56d0",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/evaluation_figures/evaluation_figure_provenance.json": "03be03d3acab1a66a356f6f1fa39abc674736f94e74eb2881f748e12ca003db2",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261011/best.pt": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261011/best.pt": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261012/best.pt": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261012/best.pt": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261013/best.pt": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261013/best.pt": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/old_baseline_internal_same_case_predictions.csv": "f9044f6274a4abc0cf1a0b7d2acb5b35b382cfee6d1ade18524621c52282cb7b",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/old_baseline_original100_predictions.csv": "f23a5373b85a7e6610450429062096dc89e2ea476fa57b6890d2d6984739de4e",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_1_internal_same_case_predictions.csv": "11894e3a11cc666b8a19e4acd577e485e863a41d0257d8019c37882377310667",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_1_original100_predictions.csv": "0969a84e99bf4d1bdc937d269a15d8b5db79fd0a1c013c62404275b179f543f2",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_3_internal_same_case_predictions.csv": "6c0da9e0c559fe8eaefa640d27abe59aba86332c066ac28f2c48b44a62ca70b6",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_3_original100_predictions.csv": "0606d6ef4e48b1aea5c8ca30e49a26578db67e1f963aed9ac5b05e1ae857dbba",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_5_internal_same_case_predictions.csv": "e5e4d87dff39e61b12652ff77e91ac014c5549c9af1f5878029bfdaa9469e7c4",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_5_original100_predictions.csv": "634cbc5f79bf48a1463ac0d379e48807be6cd1bbb204310752828900560a5080",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_internal_same_case_predictions.csv": "ecf9daf0156994b3cb448ada9a83cb0ae837f7f86bb6b5b8673d6452750592a7",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_original100_predictions.csv": "5d5968367644f82bda763a9e8759351ae283fc565222127852c34ed2d8e5b6f8",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_internal_same_case_predictions.csv": "62a9aeb0488afaf5bd5ad7d5c90c0f10df20de21a094cbd0c405e46c67ba8651",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_original100_predictions.csv": "741514166bccc279d5429e3c89ca26b125838117ff445fb0b01ce54d94d0e124",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_internal_same_case_predictions.csv": "1070ad55b82a052b83ec5503aa144b078b87ad969f2101388c5822ff4cd38572",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_original100_predictions.csv": "21173e84fb78980f84b00aae1fd9126cef2b72bc8629b560b414ec5b31f74af8"
+  },
+  "original_validation_preference": "candidate_3",
+  "checkpoint_reselection": false,
+  "primary1058_unchanged": true,
+  "training": false,
+  "random_augmentation": false,
+  "interpretations": {
+    "train_resubstitution": "Final selected checkpoint scored on its training images in evaluation mode without augmentation. Resubstitution; not a generalization estimate or the online epoch training metric.",
+    "full_new_test": "All5450 images in the frozen new test split. Contains the primary1058; post-hoc supplementary evaluation, not a replacement primary or an independent additional cohort. Legacy patient IDs unavailable."
+  },
+  "finished_utc": "2026-10-11T23:37:22.904316+00:00",
+  "elapsed_seconds": 484.76001287507825,
+  "protected_input_rechecks_passed": true
+}

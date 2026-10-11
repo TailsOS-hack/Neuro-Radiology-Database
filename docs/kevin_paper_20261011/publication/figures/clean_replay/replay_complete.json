@@ -1,0 +1,6 @@
+{
+  "status": "completed_posthoc_clean_split_replay",
+  "output_manifest_sha256": "5b44287d765a2cf39ee722876f558b5e13276cb5ae2e3430377ca0cc708b2c58",
+  "local_readback_passed": true,
+  "cloud_resources_used": false
+}

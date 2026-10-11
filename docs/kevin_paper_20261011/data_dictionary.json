@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "study": "Kevin paper new cohort staging",
+  "unit": "one MRI volume or source DICOM series per row; not individual exported 2D slices",
+  "template_has_data_rows": false,
+  "readiness_boundary": "Structural staging only; no clinical approval or training-readiness claim. Empty/pending templates return NOT_READY (exit 2).",
+  "endpoint_vocabulary": "No endpoint vocabulary has been chosen. Pass --endpoint-label for every approved class after study endpoint review.",
+  "defaults_are_guidance_only": "The header-only template does not populate defaults. Pending statuses intentionally fail validation.",
+  "columns": {
+    "cohort_id": {
+      "description": "Stable source cohort identifier across releases. All releases share external-versus-development assignment.",
+      "required": true,
+      "default": ""
+    },
+    "cohort_release": {
+      "description": "Exact version/release/accession; never silently mix releases.",
+      "required": true,
+      "default": ""
+    },
+    "cohort_role": {
+      "description": "Whole source cohort role, fixed before outcomes are inspected.",
+      "required": true,
+      "default": "pending",
+      "allowed": [
+        "development",
+        "external"
+      ]
+    },
+    "patient_id": {
+      "description": "Pseudonymous participant ID, stable across visits and releases within a cohort. Do not use names or infer identities from filenames.",
+      "required": true,
+      "default": ""
+    },
+    "global_patient_id": {
+      "description": "Optional pseudonymous linkage ID for a known shared participant across cohorts. Blank means linkage unavailable, not independence.",
+      "required": false,
+      "default": ""
+    },
+    "visit_id": {
+      "description": "Source visit/timepoint identifier; all visits of a participant remain in one split.",
+      "required": true,
+      "default": ""
+    },
+    "scan_id": {
+      "description": "Unique source MRI volume or series accession within a cohort release; one scan per row.",
+      "required": true,
+      "default": ""
+    },
+    "input_kind": {
+      "description": "One volumetric file or one directory containing a single source DICOM series. Never one row per exported slice.",
+      "required": true,
+      "default": "pending",
+      "allowed": [
+        "volume_file",
+        "dicom_series_directory"
+      ]
+    },
+    "modality": {
+      "description": "Source modality; this manifest is for MRI.",
+      "required": true,
+      "default": "MR",
+      "required_value": "MR"
+    },
+    "sequence": {
+      "description": "Source sequence description (e.g. T1, T2, FLAIR); retain source facts. Unknown is allowed and requires later compatibility review.",
+      "required": true,
+      "default": "unknown"
+    },
+    "relative_file_path": {
+      "description": "Local file or DICOM-series directory relative to --data-root (default manifest directory). Absolute paths, parent traversal, URLs, and paths escaping root are rejected.",
+      "required": true,
+      "default": ""
+    },
+    "source_label": {
+      "description": "Unmodified clinical/source label. Never equate MCI with a public-image stage label without approved endpoint design.",
+      "required": true,
+      "default": ""
+    },
+    "endpoint_label": {
+      "description": "Approved endpoint label, blank until mapping is reviewed. Must be included in explicitly supplied --endpoint-label vocabulary.",
+      "required": true,
+      "default": ""
+    },
+    "label_mapping_status": {
+      "description": "Declared review status of source-to-endpoint mapping. Pending rows fail staging.",
+      "required": true,
+      "default": "pending",
+      "required_value": "verified"
+    },
+    "label_mapping_evidence": {
+      "description": "Protocol/reference documenting the approved label mapping; not generated from accuracy outcomes.",
+      "required": true,
+      "default": ""
+    },
+    "reference_standard": {
+      "description": "Source clinical diagnosis/adjudication instrument and timing basis; records why the label is meaningful.",
+      "required": true,
+      "default": ""
+    },
+    "split": {
+      "description": "Fixed participant-level assignment. external_test is exclusive to external cohorts.",
+      "required": true,
+      "default": "pending",
+      "allowed": [
+        "train",
+        "validation",
+        "test",
+        "external_test"
+      ]
+    },
+    "access_status": {
+      "description": "Declared permission for this research use. The checker cannot itself verify a DUA or rights.",
+      "required": true,
+      "default": "pending",
+      "required_value": "verified"
+    },
+    "access_evidence": {
+      "description": "Local authorization/license/DUA reference sufficient for investigator review. Do not paste secrets or credentials.",
+      "required": true,
+      "default": ""
+    },
+    "deidentification_status": {
+      "description": "Declared review of raw identifiers and image privacy, including burned-in identifiers as applicable.",
+      "required": true,
+      "default": "pending",
+      "required_value": "verified_deidentified"
+    },
+    "deidentification_evidence": {
+      "description": "Local de-identification/QC record reference. This tool does not inspect raw tags or images.",
+      "required": true,
+      "default": ""
+    },
+    "provenance_url": {
+      "description": "Authoritative dataset/release/descriptor URL or DOI. No network request is made.",
+      "required": true,
+      "default": ""
+    },
+    "license_or_dua": {
+      "description": "Specific dataset license or approved agreement/version.",
+      "required": true,
+      "default": ""
+    },
+    "age_years": {
+      "description": "Age at this scan, as provided by source; blank if unavailable. Numeric 0 through 120. Never estimate from MRI.",
+      "required": false,
+      "default": ""
+    },
+    "sex": {
+      "description": "Source-recorded sex, retaining documented source coding; blank if unavailable. Do not infer.",
+      "required": false,
+      "default": ""
+    },
+    "site": {
+      "description": "Acquisition site code if available; use allowed pseudonymous identifiers.",
+      "required": false,
+      "default": ""
+    },
+    "scanner_manufacturer": {
+      "description": "Source scanner manufacturer; blank if unavailable.",
+      "required": false,
+      "default": ""
+    },
+    "scanner_model": {
+      "description": "Source scanner model; blank if unavailable.",
+      "required": false,
+      "default": ""
+    },
+    "field_strength_t": {
+      "description": "Scanner field strength in tesla, if documented; numeric 0.01 through 20.",
+      "required": false,
+      "default": ""
+    },
+    "acquisition_date": {
+      "description": "Source-authorized or shifted scan date/timepoint; blank if unavailable. Keep provider privacy requirements.",
+      "required": false,
+      "default": ""
+    },
+    "clinical_assessment_date": {
+      "description": "Authorized/shifted clinical assessment date or relative timepoint; blank if unavailable.",
+      "required": false,
+      "default": ""
+    },
+    "notes": {
+      "description": "Selection/exclusion/metadata notes. Never include direct identifiers or guessed clinical labels.",
+      "required": false,
+      "default": ""
+    }
+  },
+  "optional_metadata_columns": [
+    "age_years",
+    "sex",
+    "site",
+    "scanner_manufacturer",
+    "scanner_model",
+    "field_strength_t",
+    "acquisition_date",
+    "clinical_assessment_date"
+  ],
+  "grouping_rules": [
+    "Group all visits and scans by (cohort_id, patient_id), across releases.",
+    "Use optional global_patient_id to link known shared participants across cohorts; missing links do not prove independence.",
+    "A source cohort_id cannot participate in both development and external_test, including across releases.",
+    "No identical resolved local path, duplicate scan_id within a release, or nested DICOM-series manifest paths. Content duplicates are not checked."
+  ],
+  "cli_examples": [
+    "python3 docs/kevin_paper_20261011/validate_cohort_manifest.py",
+    "python3 docs/kevin_paper_20261011/validate_cohort_manifest.py /path/to/manifest.csv --data-root /path/to/private/cohorts --endpoint-label APPROVED_CLASS_1 --endpoint-label APPROVED_CLASS_2"
+  ],
+  "exit_codes": {
+    "0": "STAGING_CHECKS_PASSED; training_ready remains false",
+    "2": "NOT_READY; inspect errors"
+  },
+  "privacy": "Keep raw files and populated patient manifests local in an approved environment. This tool does not upload or write reports. Review stdout before sharing."
+}

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "experiment": "kevin_20261011",
+  "specified_date": "2026-10-11",
+  "role": "Supplementary analysis prespecified before held-out inference; primary protocol and all seven primary model results remain unchanged",
+  "modes": ["stage_only", "multitask"],
+  "seeds": [20261011, 20261012, 20261013],
+  "members_per_condition": 3,
+  "weight_rule": "uniform arithmetic mean of exported probability vectors; each member has weight 1/3",
+  "probability_processing": "No fitting, recalibration, clipping, renormalization, threshold tuning or member selection",
+  "stage_class_order": ["MildDemented", "ModerateDemented", "NonDemented", "VeryMildDemented"],
+  "clinical_class_order": ["CN", "AD"],
+  "tie_rule": "argmax takes the first class in the published class order",
+  "stage_cohorts": ["internal_same_case", "old_hash_group_unexposed_sensitivity", "original100"],
+  "clinical_rule": "Only the three multitask AD/CN heads; average already slice-aggregated subject probabilities within each source/split; MCI remains prediction-only",
+  "paired_stage_contrasts": ["ensemble_stage_only minus old_baseline", "ensemble_multitask minus old_baseline", "ensemble_multitask minus ensemble_stage_only"],
+  "stage_uncertainty": "Reuse primary paired bootstrap helper: 2000 context-seeded replicates, base seed 1729, two-sided 95% percentile intervals; prepared hash-group units for primary/sensitivity and image units for reused original100",
+  "clinical_uncertainty": "Reuse exact Clopper-Pearson intervals for subject accuracy, AD sensitivity and CN specificity; no old-baseline AD/CN comparison",
+  "member_spread": "Report every member's accuracy, balanced accuracy and macro F1; arithmetic mean, sample SD, minimum and maximum across the three prespecified seeds",
+  "disagreement": "Any-member hard-prediction disagreement and each of the three pairwise disagreement rates on the same aligned cases; descriptive only",
+  "brier": "Mean over cases of the SUM over classes of (probability minus one-hot reference)^2; range 0 to 2, not divided by class count",
+  "ece": "Top-label ECE with ten fixed equal-width bins [0,.1),...,[.9,1]; sum of bin fraction times absolute bin accuracy minus mean maximum probability; empty bins contribute zero",
+  "calibration_interpretation": "Brier and ECE are descriptive, uncalibrated probability summaries with no added confidence intervals; not clinical calibration evidence or selection criteria",
+  "decision_rule": "Report both condition ensembles and all applicable cohorts regardless of results; no winner, promotion, deployment or additional training is selected from held-out outcomes",
+  "compute": "CPU analysis of existing evaluator CSVs only; zero new GPU inference or training",
+  "limitations": [
+    "Ensembling can retain correlated errors and does not fix missing patient provenance, source confounding or inadequate clinical data.",
+    "Original100 remains historically reused, and the primary exact-row comparison has known old development hash-group exposure; the secondary subset is not patient-independent.",
+    "Conditional bootstrap intervals do not account for training randomness or multiple comparisons; three-seed spread is not a confidence interval.",
+    "The clinical external pilot contains only one AD subject. Ensemble averaging does not increase the independent sample size.",
+    "Research inference with an ensemble requires three member forwards; no production inference wrapper is built or deployed by this analysis."
+  ],
+  "references": [
+    "https://arxiv.org/abs/1612.01474",
+    "https://pubs.rsna.org/doi/10.1148/ryai.240300"
+  ],
+  "readiness_note": "real_world_readiness.txt"
+}

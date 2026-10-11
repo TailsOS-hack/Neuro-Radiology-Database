@@ -1,0 +1,169 @@
+cohort,n,target_class,checkpoint,display_name,metric,value
+original100,100,MildDemented,old_baseline,Old baseline,ROC_AUC,1.0
+original100,100,MildDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,1.0
+original100,100,MildDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+original100,100,MildDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+original100,100,MildDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,1.0
+original100,100,MildDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,1.0
+original100,100,MildDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+original100,100,ModerateDemented,old_baseline,Old baseline,ROC_AUC,1.0
+original100,100,ModerateDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,1.0
+original100,100,ModerateDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+original100,100,ModerateDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+original100,100,ModerateDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,1.0
+original100,100,ModerateDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,1.0
+original100,100,ModerateDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+original100,100,NonDemented,old_baseline,Old baseline,ROC_AUC,1.0
+original100,100,NonDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,0.9994926433282597
+original100,100,NonDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+original100,100,NonDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+original100,100,NonDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,1.0
+original100,100,NonDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,0.9989852866565195
+original100,100,NonDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+original100,100,VeryMildDemented,old_baseline,Old baseline,ROC_AUC,1.0
+original100,100,VeryMildDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,0.9989852866565194
+original100,100,VeryMildDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+original100,100,VeryMildDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+original100,100,VeryMildDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,1.0
+original100,100,VeryMildDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,0.9989852866565194
+original100,100,VeryMildDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+original100,100,MildDemented,old_baseline,Old baseline,average_precision,0.9999999999999999
+original100,100,MildDemented,candidate_1,Stage only | seed 20261011,average_precision,0.9999999999999999
+original100,100,MildDemented,candidate_3,Stage only | seed 20261012,average_precision,0.9999999999999999
+original100,100,MildDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999999999999999
+original100,100,MildDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999999999999999
+original100,100,MildDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9999999999999999
+original100,100,MildDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9999999999999999
+original100,100,ModerateDemented,old_baseline,Old baseline,average_precision,0.9999999999999999
+original100,100,ModerateDemented,candidate_1,Stage only | seed 20261011,average_precision,0.9999999999999999
+original100,100,ModerateDemented,candidate_3,Stage only | seed 20261012,average_precision,0.9999999999999999
+original100,100,ModerateDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999999999999999
+original100,100,ModerateDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999999999999999
+original100,100,ModerateDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9999999999999999
+original100,100,ModerateDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9999999999999999
+original100,100,NonDemented,old_baseline,Old baseline,average_precision,0.9999999999999998
+original100,100,NonDemented,candidate_1,Stage only | seed 20261011,average_precision,0.9986772486772484
+original100,100,NonDemented,candidate_3,Stage only | seed 20261012,average_precision,0.9999999999999998
+original100,100,NonDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999999999999998
+original100,100,NonDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999999999999998
+original100,100,NonDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9974457215836525
+original100,100,NonDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9999999999999998
+original100,100,VeryMildDemented,old_baseline,Old baseline,average_precision,0.9999999999999998
+original100,100,VeryMildDemented,candidate_1,Stage only | seed 20261011,average_precision,0.9973055065647656
+original100,100,VeryMildDemented,candidate_3,Stage only | seed 20261012,average_precision,0.9999999999999998
+original100,100,VeryMildDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999999999999998
+original100,100,VeryMildDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999999999999998
+original100,100,VeryMildDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9973055065647656
+original100,100,VeryMildDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9999999999999998
+internal_same_case,1058,MildDemented,old_baseline,Old baseline,ROC_AUC,1.0
+internal_same_case,1058,MildDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,1.0
+internal_same_case,1058,MildDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+internal_same_case,1058,MildDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,0.9999953775821981
+internal_same_case,1058,MildDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,0.9999907551643963
+internal_same_case,1058,MildDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,0.9999815103287927
+internal_same_case,1058,MildDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+internal_same_case,1058,ModerateDemented,old_baseline,Old baseline,ROC_AUC,1.0
+internal_same_case,1058,ModerateDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,1.0
+internal_same_case,1058,ModerateDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+internal_same_case,1058,ModerateDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+internal_same_case,1058,ModerateDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,1.0
+internal_same_case,1058,ModerateDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,1.0
+internal_same_case,1058,ModerateDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+internal_same_case,1058,NonDemented,old_baseline,Old baseline,ROC_AUC,0.9999632430161731
+internal_same_case,1058,NonDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,0.9999894980046209
+internal_same_case,1058,NonDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+internal_same_case,1058,NonDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+internal_same_case,1058,NonDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,0.9999947490023104
+internal_same_case,1058,NonDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,1.0
+internal_same_case,1058,NonDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,0.9999737450115522
+internal_same_case,1058,VeryMildDemented,old_baseline,Old baseline,ROC_AUC,0.999940919295758
+internal_same_case,1058,VeryMildDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,0.9999852298239396
+internal_same_case,1058,VeryMildDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,0.9999950766079799
+internal_same_case,1058,VeryMildDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+internal_same_case,1058,VeryMildDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,0.9999655362558588
+internal_same_case,1058,VeryMildDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,0.9999556894718186
+internal_same_case,1058,VeryMildDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,0.9999507660797984
+internal_same_case,1058,MildDemented,old_baseline,Old baseline,average_precision,1.0
+internal_same_case,1058,MildDemented,candidate_1,Stage only | seed 20261011,average_precision,1.0
+internal_same_case,1058,MildDemented,candidate_3,Stage only | seed 20261012,average_precision,1.0
+internal_same_case,1058,MildDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999870139989092
+internal_same_case,1058,MildDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999741210874319
+internal_same_case,1058,MildDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9999481490852502
+internal_same_case,1058,MildDemented,candidate_6,Multitask | seed 20261013,average_precision,1.0
+internal_same_case,1058,ModerateDemented,old_baseline,Old baseline,average_precision,1.0
+internal_same_case,1058,ModerateDemented,candidate_1,Stage only | seed 20261011,average_precision,1.0
+internal_same_case,1058,ModerateDemented,candidate_3,Stage only | seed 20261012,average_precision,1.0
+internal_same_case,1058,ModerateDemented,candidate_5,Stage only | seed 20261013,average_precision,1.0
+internal_same_case,1058,ModerateDemented,candidate_2,Multitask | seed 20261011,average_precision,1.0
+internal_same_case,1058,ModerateDemented,candidate_4,Multitask | seed 20261012,average_precision,1.0
+internal_same_case,1058,ModerateDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9999999999999999
+internal_same_case,1058,NonDemented,old_baseline,Old baseline,average_precision,0.9998715831957439
+internal_same_case,1058,NonDemented,candidate_1,Stage only | seed 20261011,average_precision,0.9999622746503654
+internal_same_case,1058,NonDemented,candidate_3,Stage only | seed 20261012,average_precision,1.0
+internal_same_case,1058,NonDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999999999999999
+internal_same_case,1058,NonDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999811782420478
+internal_same_case,1058,NonDemented,candidate_4,Multitask | seed 20261012,average_precision,1.0
+internal_same_case,1058,NonDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9999063758907013
+internal_same_case,1058,VeryMildDemented,old_baseline,Old baseline,average_precision,0.9998075623654669
+internal_same_case,1058,VeryMildDemented,candidate_1,Stage only | seed 20261011,average_precision,0.999953314659197
+internal_same_case,1058,VeryMildDemented,candidate_3,Stage only | seed 20261012,average_precision,0.9999843152017065
+internal_same_case,1058,VeryMildDemented,candidate_5,Stage only | seed 20261013,average_precision,1.0
+internal_same_case,1058,VeryMildDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9998899480640768
+internal_same_case,1058,VeryMildDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9998605494943329
+internal_same_case,1058,VeryMildDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9998428946670402
+old_hash_group_unexposed_sensitivity,756,MildDemented,old_baseline,Old baseline,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,0.9999909782304701
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,0.9999639129218806
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,old_baseline,Old baseline,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,NonDemented,old_baseline,Old baseline,ROC_AUC,0.999951774691358
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,0.9999807098765432
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,0.9999903549382716
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,0.9999807098765432
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,old_baseline,Old baseline,ROC_AUC,0.9999157177105183
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_1,Stage only | seed 20261011,ROC_AUC,0.999971905903506
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_3,Stage only | seed 20261012,ROC_AUC,0.9999906353011686
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_5,Stage only | seed 20261013,ROC_AUC,1.0
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_2,Multitask | seed 20261011,ROC_AUC,0.9999906353011686
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_4,Multitask | seed 20261012,ROC_AUC,0.9999157177105183
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_6,Multitask | seed 20261013,ROC_AUC,0.9999531765058436
+old_hash_group_unexposed_sensitivity,756,MildDemented,old_baseline,Old baseline,average_precision,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_1,Stage only | seed 20261011,average_precision,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_3,Stage only | seed 20261012,average_precision,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999748743718594
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_2,Multitask | seed 20261011,average_precision,1.0
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9998997474936875
+old_hash_group_unexposed_sensitivity,756,MildDemented,candidate_6,Multitask | seed 20261013,average_precision,1.0
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,old_baseline,Old baseline,average_precision,1.0000000000000002
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_1,Stage only | seed 20261011,average_precision,1.0000000000000002
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_3,Stage only | seed 20261012,average_precision,1.0000000000000002
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_5,Stage only | seed 20261013,average_precision,1.0000000000000002
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_2,Multitask | seed 20261011,average_precision,1.0000000000000002
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_4,Multitask | seed 20261012,average_precision,1.0000000000000002
+old_hash_group_unexposed_sensitivity,756,ModerateDemented,candidate_6,Multitask | seed 20261013,average_precision,1.0000000000000002
+old_hash_group_unexposed_sensitivity,756,NonDemented,old_baseline,Old baseline,average_precision,0.9998498498498497
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_1,Stage only | seed 20261011,average_precision,0.9999384421253665
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_3,Stage only | seed 20261012,average_precision,0.9999999999999999
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_5,Stage only | seed 20261013,average_precision,0.9999999999999999
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999693063228974
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9999999999999999
+old_hash_group_unexposed_sensitivity,756,NonDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9999389499389498
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,old_baseline,Old baseline,average_precision,0.9997411801693753
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_1,Stage only | seed 20261011,average_precision,0.9999164531580708
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_3,Stage only | seed 20261012,average_precision,0.9999718563548352
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_5,Stage only | seed 20261013,average_precision,1.0
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_2,Multitask | seed 20261011,average_precision,0.9999718563548352
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_4,Multitask | seed 20261012,average_precision,0.9997508024248498
+old_hash_group_unexposed_sensitivity,756,VeryMildDemented,candidate_6,Multitask | seed 20261013,average_precision,0.9998586733915185

@@ -1,0 +1,295 @@
+{
+  "status": "passed",
+  "source_figures": 40,
+  "pages": 40,
+  "bookmarks": 40,
+  "duplicate_sources": 0,
+  "source_page_bounds_and_text_preserved": true,
+  "atlas_sha256": "d94572ae9b51e1e0faaa8669e7277ed88324c978a0b285527a864f1630ac3236",
+  "index_sha256": "7593ecd8e34eb250f3e154ff2318471f331986ec048cbb9aa506bc5efe9f8fc2",
+  "script_sha256": "723347c64f428fcd72dc952fae0b024bc9da409b86b1f515bb416317f03b7f56",
+  "sources": [
+    {
+      "page": 1,
+      "title": "Dementia study workflow and separate image and clinical endpoints",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/dementia_study_workflow.pdf",
+      "source_sha256": "513bafefec37411e1ddb6140fb0768b6d67f985707d12476a7302d004e3ddc19"
+    },
+    {
+      "page": 2,
+      "title": "MobileNetV3 architecture: stage-only and multitask conditions",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/dementia_two_condition_architecture.pdf",
+      "source_sha256": "8aa43c6a5bd001757d233ebb4a238f9d23a6a12f890c6ecb60d7766a719c64c1"
+    },
+    {
+      "page": 3,
+      "title": "Four-stage training and validation loss: all six runs",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/stage_loss_all_six_runs.pdf",
+      "source_sha256": "079d692fd3c97feb11091e517c3bea1bc705c66744575f99551ec9238e25ba9d"
+    },
+    {
+      "page": 4,
+      "title": "Four-stage training and validation accuracy: all six runs",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/stage_accuracy_all_six_runs.pdf",
+      "source_sha256": "4d6fc4d94dfd393a5193a13351c1140bcb266d37824508cdf88e985327d4fd81"
+    },
+    {
+      "page": 5,
+      "title": "Clinical AD/CN training and validation loss: all three multitask seeds",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_loss_all_three_multitask_seeds.pdf",
+      "source_sha256": "d1e23f785b9ed402fee9a431087811453e55d059661bd228e5399189c8d5bbfa"
+    },
+    {
+      "page": 6,
+      "title": "Clinical AD/CN training and validation accuracy: all three multitask seeds",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_accuracy_all_three_seeds.pdf",
+      "source_sha256": "f088807380bb43a9011c404b69ab79f037b20298bb3df59f2a3295aa576ad246"
+    },
+    {
+      "page": 7,
+      "title": "Post-hoc training resubstitution confusion matrices: all six checkpoints",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/train_resubstitution_confusion_all_six.pdf",
+      "source_sha256": "122bfe036df653987c214eb7a49431ca09d04d586425dc52695b31df2efaf112"
+    },
+    {
+      "page": 8,
+      "title": "Stored validation confusion matrices: all six selected checkpoints",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/stage_validation_confusion_all_six.pdf",
+      "source_sha256": "3dbd32512983fa63fba42bda17a46f81f958b7b0fc85ece82527c6fc33842249"
+    },
+    {
+      "page": 9,
+      "title": "Post-hoc full new test confusion matrices: all six checkpoints",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/full_new_test_confusion_all_six.pdf",
+      "source_sha256": "01a8ecc95d35239d4869ff1166342ae201b51d79a9af1a96dbbe51d3350ac99c"
+    },
+    {
+      "page": 10,
+      "title": "Primary 1,058 images: exact-row held out | confidence distributions for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_confidence_all_nine.pdf",
+      "source_sha256": "c854d067e9619a6cda1f34951d89f0d2fd5b11385a3494c043172296d0849ed3"
+    },
+    {
+      "page": 11,
+      "title": "Primary 1,058 images: exact-row held out | confusion matrices for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_confusion_all_nine.pdf",
+      "source_sha256": "5b88d67984c55d2dae746446465390e3808de34b0b06fdcfd97b4515ae51ecb5"
+    },
+    {
+      "page": 12,
+      "title": "Primary 1,058 images: exact-row held out | complete observed-error audit for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_errors_all_nine.pdf",
+      "source_sha256": "00944b673376b7949762434d4a4d4519ba506ef7055eec055c10ce67129090a9"
+    },
+    {
+      "page": 13,
+      "title": "Primary 1,058 images: exact-row held out | precision-recall curves for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_pr_all_nine.pdf",
+      "source_sha256": "ec6a9bb3f181fdbdee3f3f36901a4f8d3ca676e51ff5921b47c13750763d58ef"
+    },
+    {
+      "page": 14,
+      "title": "Primary 1,058 images: exact-row held out | reliability diagrams for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_reliability_all_nine.pdf",
+      "source_sha256": "fb4f864b7326e8493c2d01c67c93082fa24214a1c09fe093fdef02c1103f8553"
+    },
+    {
+      "page": 15,
+      "title": "Primary 1,058 images: exact-row held out | one-versus-rest ROC curves for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/internal_same_case_roc_all_nine.pdf",
+      "source_sha256": "dbbfdf2cc98a4ef5178038dd9ac672502dcff883864a6d21dcaa794513b6006b"
+    },
+    {
+      "page": 16,
+      "title": "Secondary sensitivity: 756 images | confidence distributions for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_confidence_all_nine.pdf",
+      "source_sha256": "c90b673ee0cdef2658d790615c5a00fa273f4f292d3b1372c6a280ca951bf930"
+    },
+    {
+      "page": 17,
+      "title": "Secondary sensitivity: 756 images | confusion matrices for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_confusion_all_nine.pdf",
+      "source_sha256": "43eae582d3a9a04b5535d3853081e6039ef22cf02a5b28d1f72f2375904d9ab8"
+    },
+    {
+      "page": 18,
+      "title": "Secondary sensitivity: 756 images | complete observed-error audit for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_errors_all_nine.pdf",
+      "source_sha256": "7d700d292b4d9b140f276aeaadf6b070c421f1cee7b90c784a6167482c37c1d5"
+    },
+    {
+      "page": 19,
+      "title": "Secondary sensitivity: 756 images | precision-recall curves for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_pr_all_nine.pdf",
+      "source_sha256": "52e64a05efe15db76fd1d182aea6607be939d5253a1133b2684986fa82bffdd5"
+    },
+    {
+      "page": 20,
+      "title": "Secondary sensitivity: 756 images | reliability diagrams for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_reliability_all_nine.pdf",
+      "source_sha256": "ce8701c5ca31371c27c5f6a9513c299057606623cbc0ecbd85593ba86811a686"
+    },
+    {
+      "page": 21,
+      "title": "Secondary sensitivity: 756 images | one-versus-rest ROC curves for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/old_hash_group_unexposed_sensitivity_roc_all_nine.pdf",
+      "source_sha256": "347c567d4b07dd50a768d58ea71e556808968816227efae7c1041ed7d4047f4a"
+    },
+    {
+      "page": 22,
+      "title": "Original 100: historically reused image benchmark | confidence distributions for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_confidence_all_nine.pdf",
+      "source_sha256": "b6515718e3c375410e1dc5cfe0bf4165aada11fbcb3207610167645dad254128"
+    },
+    {
+      "page": 23,
+      "title": "Original 100: historically reused image benchmark | confusion matrices for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_confusion_all_nine.pdf",
+      "source_sha256": "9acf2b4cc704ae6b60f3ebc428269063c0c6f40c7e6b1253e4e94a29c11c943f"
+    },
+    {
+      "page": 24,
+      "title": "Original 100: historically reused image benchmark | complete observed-error audit for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_errors_all_nine.pdf",
+      "source_sha256": "7bef35c7f6df672d09975b708bc852a1c29522097d860fbcd4a7a6a0989d8a4b"
+    },
+    {
+      "page": 25,
+      "title": "Reused original100: confusion matrices for the three fixed readers",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_fixed_reader_confusion.pdf",
+      "source_sha256": "ed9b59fce662f2dc04b3b29c90d6f0d2dca418d26a9e3b5c97c10b5102397dbe"
+    },
+    {
+      "page": 26,
+      "title": "Reused original100: models, individual readers and descriptive reader range",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_models_and_fixed_readers.pdf",
+      "source_sha256": "753d357eb9da61eb32d937f8c62c8cc829722fd25ed59ed03fa4d9f304136deb"
+    },
+    {
+      "page": 27,
+      "title": "Reused original100: per-class recall for all models and fixed readers",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_per_class_models_readers.pdf",
+      "source_sha256": "9dc3bb6e2efbdd3c5836e19ac1d7ffcfd0adefe1e5581479999638ed9ff09f9b"
+    },
+    {
+      "page": 28,
+      "title": "Original 100: historically reused image benchmark | precision-recall curves for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_pr_all_nine.pdf",
+      "source_sha256": "272aa1cd5b8ef515ed74780dfc645cbc6f889f2b77cbca289ef76fbfcecae629"
+    },
+    {
+      "page": 29,
+      "title": "Original 100: historically reused image benchmark | reliability diagrams for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_reliability_all_nine.pdf",
+      "source_sha256": "6703dbcdbc3e65fa10284abe930a30dd1dbc21f76c9a73a569d8b2e561f5568c"
+    },
+    {
+      "page": 30,
+      "title": "Original 100: historically reused image benchmark | one-versus-rest ROC curves for all nine models",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/original100_roc_all_nine.pdf",
+      "source_sha256": "e784db0e5bdb96e64920dc772b845303ecf53348205b810e0caef6d37913c124"
+    },
+    {
+      "page": 31,
+      "title": "Clinical subject confusion matrices: all multitask seeds and supplementary ensemble",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_confusion_all_multitask.pdf",
+      "source_sha256": "a4c054a2b46360dcf6853f9eb5913fb1ba5efcdaeeea8df43ec20d439beadff3"
+    },
+    {
+      "page": 32,
+      "title": "Clinical accuracy, AD sensitivity and CN specificity with exact 95% intervals",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/clinical_exact_intervals.pdf",
+      "source_sha256": "de5133491d65290cf31aeb170f30eb5f356c5a4942c08d52d18c067c1cf50d26"
+    },
+    {
+      "page": 33,
+      "title": "Paired accuracy differences from the old baseline with conditional 95% intervals",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/paired_accuracy_differences.pdf",
+      "source_sha256": "4017107c81852b83715fc6d6f47d93438c84495da3a30c4b938c220186f5e783"
+    },
+    {
+      "page": 34,
+      "title": "Three-seed variability for both conditions across all image benchmarks",
+      "category": "Completed quantitative figures; post-hoc analyses labeled on page",
+      "source_path": "docs/kevin_paper_20261011/paper_figures/generated/stage_seed_spread.pdf",
+      "source_sha256": "6ec9d4fd98141740969a373f7810b8477546004f1af70ea978e1443229f4d8fb"
+    },
+    {
+      "page": 35,
+      "title": "internal same case accuracy stress curves",
+      "category": "Post-hoc image perturbation stress analysis",
+      "source_path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/internal_same_case_accuracy_stress_curves.pdf",
+      "source_sha256": "19c673eccfccb3e7ed34331e71bb6d31d110593be20c4f404d2d52f154ed05f9"
+    },
+    {
+      "page": 36,
+      "title": "internal same case label flip fraction stress curves",
+      "category": "Post-hoc image perturbation stress analysis",
+      "source_path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/internal_same_case_label_flip_fraction_stress_curves.pdf",
+      "source_sha256": "bc0f96e7bff2761a944e08e77d74dd06e5df477d1fbe8932e4ffeb9b00dc1270"
+    },
+    {
+      "page": 37,
+      "title": "original100 accuracy stress curves",
+      "category": "Post-hoc image perturbation stress analysis",
+      "source_path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/original100_accuracy_stress_curves.pdf",
+      "source_sha256": "4757bc5ab589d4b252945f7e00b52e3ac5d44c332af183623daa1d2f19e9a88c"
+    },
+    {
+      "page": 38,
+      "title": "original100 label flip fraction stress curves",
+      "category": "Post-hoc image perturbation stress analysis",
+      "source_path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/original100_label_flip_fraction_stress_curves.pdf",
+      "source_sha256": "7891465365ff1b70d6513b094c9622dccb3b155fc46c407d7ae3f050cfefed4a"
+    },
+    {
+      "page": 39,
+      "title": "figure9 attribution controls",
+      "category": "Exploratory attribution controls",
+      "source_path": "docs/kevin_paper_20261011/posthoc_explainability/results/figure9_attribution_controls.pdf",
+      "source_sha256": "33d34fad2e2859ea11dc7ab7582d611b16a3bb1a5731ddf2f16512fa9bdfc0df"
+    },
+    {
+      "page": 40,
+      "title": "figure10 parameter randomization",
+      "category": "Exploratory attribution controls",
+      "source_path": "docs/kevin_paper_20261011/posthoc_explainability/results/figure10_parameter_randomization.pdf",
+      "source_sha256": "7176d29eba9e092ab8463b268deacdc2181d9fb2782208a8a83b1444d3dfb48d"
+    }
+  ],
+  "quantitative_review": "figure_qa.json",
+  "additional_source_review": "Parent confirmed all four stress figures and both attribution-control figures individually reviewed before atlas assembly."
+}

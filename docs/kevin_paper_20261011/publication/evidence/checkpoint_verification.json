@@ -1,0 +1,68 @@
+{
+  "checked_at_utc": "2026-10-11T23:30:16.144937+00:00",
+  "baseline_unchanged_sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+  "total_bytes": 305100062,
+  "metadata_inspection": "Checkpoint configs contain generic experiment paths, hyperparameters, optimizer and RNG state, aggregate validation metrics and training history. No raw MRI pixels, subject-level clinical tables, private correspondence, credentials, or SSH identities are included.",
+  "checkpoints": [
+    {
+      "file": "models/kevin_20261011/stage_only_seed20261011.pt",
+      "sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+      "identity_matches": true,
+      "selection_metadata_matches": true,
+      "stage_validation_records": "aggregate metrics only; no image rows",
+      "clinical_validation_records": "aggregate metrics only; no subject identifiers",
+      "state_tensors": 312,
+      "auxiliary_head": true
+    },
+    {
+      "file": "models/kevin_20261011/multitask_seed20261011.pt",
+      "sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "identity_matches": true,
+      "selection_metadata_matches": true,
+      "stage_validation_records": "aggregate metrics only; no image rows",
+      "clinical_validation_records": "aggregate metrics only; no subject identifiers",
+      "state_tensors": 312,
+      "auxiliary_head": true
+    },
+    {
+      "file": "models/kevin_20261011/stage_only_seed20261012.pt",
+      "sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "identity_matches": true,
+      "selection_metadata_matches": true,
+      "stage_validation_records": "aggregate metrics only; no image rows",
+      "clinical_validation_records": "aggregate metrics only; no subject identifiers",
+      "state_tensors": 312,
+      "auxiliary_head": true
+    },
+    {
+      "file": "models/kevin_20261011/multitask_seed20261012.pt",
+      "sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "identity_matches": true,
+      "selection_metadata_matches": true,
+      "stage_validation_records": "aggregate metrics only; no image rows",
+      "clinical_validation_records": "aggregate metrics only; no subject identifiers",
+      "state_tensors": 312,
+      "auxiliary_head": true
+    },
+    {
+      "file": "models/kevin_20261011/stage_only_seed20261013.pt",
+      "sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+      "identity_matches": true,
+      "selection_metadata_matches": true,
+      "stage_validation_records": "aggregate metrics only; no image rows",
+      "clinical_validation_records": "aggregate metrics only; no subject identifiers",
+      "state_tensors": 312,
+      "auxiliary_head": true
+    },
+    {
+      "file": "models/kevin_20261011/multitask_seed20261013.pt",
+      "sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "identity_matches": true,
+      "selection_metadata_matches": true,
+      "stage_validation_records": "aggregate metrics only; no image rows",
+      "clinical_validation_records": "aggregate metrics only; no subject identifiers",
+      "state_tensors": 312,
+      "auxiliary_head": true
+    }
+  ]
+}

@@ -1,0 +1,2454 @@
+{
+  "specified_utc": "2026-10-11T20:38:07.987242+00:00",
+  "status": "prespecified_before_heldout_model_evaluation",
+  "scope": "Secondary conservative sensitivity analysis only; full 1058-row primary intersection unchanged. Uses existing frozen predictions, no additional model inference.",
+  "criterion": "Retain each original same-case intersection row only if its entire prepared exact-pixel/dHash connected group has zero rows assigned train or val in the old strict manifest.",
+  "derivation": "Join all prepared stage rows to the full old strict manifest by exact path and confirm baseline_strict_split equality; identify exposed groups before subsetting the unchanged full intersection.",
+  "sources": {
+    "stage_manifest": {
+      "path": "training_logs/experiments/kevin_20261011/prepared/stage_manifest.csv",
+      "sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9"
+    },
+    "same_case_test_intersection": {
+      "path": "training_logs/experiments/kevin_20261011/prepared/same_case_test_intersection.csv",
+      "sha256": "7cf400fe66e8edc9bf86b784976ab1682e1ee8e933ee0d90b15cfd785b36ac05"
+    },
+    "old_strict_manifest": {
+      "path": "training_logs/splits/strict_manifest.csv",
+      "sha256": "5b910d6e822192de06f4f2610c0041671da9326591b32505374226f7326383fc"
+    },
+    "split_audit": {
+      "path": "training_logs/experiments/kevin_20261011/prepared/split_audit.json",
+      "sha256": "7b497f425532309ff8c6dac33383bf0c3fff387db9f056f24988413e2ea57fe4"
+    }
+  },
+  "subset": {
+    "path": "docs/kevin_paper_20261011/analysis/old_hash_group_unexposed_sensitivity.csv",
+    "sha256": "da1288c26944a10d7fdbda0ffc87886d77e48cb5ca2d7186a603e2492239bcba",
+    "rows": 756,
+    "unique_hash_groups": 733,
+    "class_counts": {
+      "MildDemented": 199,
+      "ModerateDemented": 189,
+      "NonDemented": 180,
+      "VeryMildDemented": 188
+    },
+    "columns": [
+      "path",
+      "split",
+      "domain",
+      "subtype",
+      "binary_label",
+      "eight_class",
+      "source_split",
+      "pixel_sha256",
+      "dhash",
+      "prior_split",
+      "group_id",
+      "label",
+      "cohort",
+      "baseline_strict_split"
+    ]
+  },
+  "primary": {
+    "rows": 1058,
+    "unique_hash_groups": 966,
+    "class_counts": {
+      "MildDemented": 277,
+      "ModerateDemented": 299,
+      "NonDemented": 230,
+      "VeryMildDemented": 252
+    }
+  },
+  "excluded": {
+    "rows": 302,
+    "unique_hash_groups": 233,
+    "class_counts": {
+      "MildDemented": 78,
+      "ModerateDemented": 110,
+      "NonDemented": 50,
+      "VeryMildDemented": 64
+    },
+    "groups": [
+      {
+        "group_id": "007919a377fae6d5928e307233d4bb180e4b5ff5d63b11e8c54fb9101e943817",
+        "intersection_rows": 3,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "00a06d2b2e6c6b351fcffcd22dee8ac0de9664f3896c1d39f53a902f10395410",
+        "intersection_rows": 5,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 21,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "00a0fdf40b9d93eccaf9da3dee481b873a84c01fdd8d0c7b46f175998294c0f1",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "01351973484b5ec0e5ec354468a91b1f8bc64dcb19d4e937caf28328a751517e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "01db9e50622b7bcdffb349586c5a7e87ff58ae15f765a932820a47164757b2f1",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "02919a8d22b35a30b1995b834fdb68a6cea1afb3237f4853d544c7a3218fc46b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "02b7fd4f7db244c40df96bb40837a18248aa9973395069fc310bd4915c49b7eb",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "039a2978e054f0a0fb909661619a69f5af9d74b0d666eedc6c9f985805e9244d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "03deedea0db9ff485dd1544f9542a9956ac3aa7cb206982f0e38ed4db5e4bca1",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "03fbaf51526551fc7297f736f1fa8d3a4937e6609aaa9261be614f7e0bb32b0c",
+        "intersection_rows": 3,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 5,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "0434613be73c17c80fd81cb7db3f440953b7c2a75830de25e3df3ecb6d89b203",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "04896122b374436c4f8d8d836e07073a2096d8db44e042722a3b0206670c6b21",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "04d75f54b379f2cd1f038e6584ce5d940bc9d48790ffef7e846d06ef2f396036",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "060201e3d8112cd47401460b0e21138443736e10ea11bd7dbdceddb22461f9d0",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 7,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "061a4e08a3eb088a0e8547d863c7c815cf40f98075db728df9e7939cd4c6b80e",
+        "intersection_rows": 6,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 18,
+        "old_strict_validation_rows_in_prepared_group": 4
+      },
+      {
+        "group_id": "068bd66d3e07c9c10d4c10965d0ba0bad035b72d1c5431fc34451e6a672c8fbf",
+        "intersection_rows": 7,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 16,
+        "old_strict_validation_rows_in_prepared_group": 3
+      },
+      {
+        "group_id": "073236f6503e43a7a15b6e6d115498046c93449695103aaaed05c3e66bc552a1",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "073314e4b48e6230558f7a7898366cf31f4bf35c164b0475ee853462103540cc",
+        "intersection_rows": 5,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 23,
+        "old_strict_validation_rows_in_prepared_group": 3
+      },
+      {
+        "group_id": "07c292d9bbefa9c971613ef714ddbba3e06d333548d235a1af1c3ff651e6e971",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "07c8b4fc35e114b9ff3ca613460e9a86cd32f97f797003e2b6b6964a0b9360e1",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "08c2a36206b350075c88c69f6e8511de916334abcafd4e6112160c0a53d5f99f",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 8,
+        "old_strict_validation_rows_in_prepared_group": 2
+      },
+      {
+        "group_id": "08dc7bd2759025eeb715ea1a7776a68263d780cebd0d943ef5a86c82a234ebc9",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "08fa82faf8422a4031b3950354c64f24812be594e710ee0fde06be4286407178",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 5,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "090858c7b78c23f44a812522cdbe3dc7154aa2f446aad8183d2cdfab2c498d5c",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "092c423a74abdf7d6e4a47217765764739fb5bafed65ddb364c5baff2c173a6e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0a8bb38681c8b134b463518f105c38e3a6691d64601e3a2143de74bd2f9547a4",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0b130c9984744a1dc26dee0dbbfff35e9ee8f0f87987a777496e7892bcf2f2b3",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0baa26e1bd078cf3f8229dba62b607b55b8c72893f34e19ab79dd80d9078badd",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0c082cf69d2153c4c4e0f4f53ffd6d064622b2962de9abf57f596d1ccc6bc8c6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0ced9a4adaf76699f6ca772ff3b49c5a5bcf3a4cf5aefad0e2625bd40cc63c5f",
+        "intersection_rows": 6,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 22,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "0d2af9e72f92e754ea892796af2a1f9e3b379a4a8821fed81fcf074f06ff130b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "0de833a201815bb8c001b6c9ca9941b3b72c8c3eebacc36723be473e70315940",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0df346749642380952d6ef5d129675ea5fa9efbfbe41a97d8f260c7e4f555426",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0e153b7e15dadf04a3b71e812dbdb0af1e22d572a619320a9302341f7b7ae7bd",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 9,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0e477de8bc2decd369bbe0350492b12cbdaf36a72bbc783849289df6dc1333aa",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0e7863a52559abc56714040510285e6894d0ca38540b216bf1656db4abb0de49",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0f847145c794b78e9c0b25d7a53acef4c0676b1e1725910c8ab8690264617d9d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "0fe80923117b906e04d7f46cacbacfacccf07940f079ebda20cf2b38b6c9a253",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "10825a55e9c0fae01ff65553612624eeda64fd46a8f90874581ee10523de14ac",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "108ce0a8c8fb7b66ff110f1dcdd647b6926c5f29cb7088891d5d95750cc450c7",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 14,
+        "old_strict_validation_rows_in_prepared_group": 2
+      },
+      {
+        "group_id": "11419f144e1949569191cd09dc2faf453a5539aa404b72ca5d380f2c6e56c1d4",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1247658db40242895b0b9646a12812f75bd90dd53a87c06f2981aa0f4b1c3866",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "129470b538f549a6389eb8ad0749409c6038579a5b6b3402331fac4e57e7cd7e",
+        "intersection_rows": 3,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 22,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "12abfb47f4b1b308bf26a142690bb81d24cbd83ae6361124e1f9187ff0a1de2b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1303c3e38fae0a03d584a15028308fd06e809246cb7f426813eb25cdedfb1b52",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "13596f3392278f8679d2275e28377166e810fe87901980c3d1d3d13070e4b43d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "138307037e32259832367799aa693475daf6b18a2c3199f61585c8a3336d8dd7",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1386ea5bba4e2f4eb6d2a83f34d7571b78dbd059b32acd572a67291e961d8490",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "13cf1380159585ef0d158bf9bef29358d84412a478fd6618a782340d9bef6e88",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1428be17e13b50e7e694686947c57cbcb5ab60ad81118481a7f08ca44d2bc71d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 2
+      },
+      {
+        "group_id": "14c4e353e31b204f5628d3af912264c189b94dff347a88950850568b460e779a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "15d2ad190a72c992e26e855af98217d7c8edd008f6aa0be109b5c6534dc8f6f5",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 7,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "1643b2e3d061917416319201fcd4c82c3fbf35fb7e2fd8ec814b0251e5869a7d",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 6,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "164c2b96d5d7e7b3e40b0397e84a2c66c793373a06d674567c41020d2e4aa48b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1657017114ad16fe95dc3fbd647fd832701e42c94c2067c29b9b7bd00cb13d23",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "16e4587bc6217236a2581bfabd00ddedbb4fbf0c0a614c75d8d3d0b59d928639",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "17a946e0fb68f0770c7521a080e3bb962104fc28dbc3118bab95bdb5b19c4b23",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "17d72d1ebe653e1deafc2ad814aaeef5665c960b54de5b9a04fcd2d704049f0e",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 8,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "181da68f9eca5ff575b6be717166e0a913cfd05f9e2016c65f54e1f894857ca6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "18b11e2f17d7aaa1ed09c1f25e2535ae27c3ed6cecbee8cb09dab1a3d7c86293",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "18b1ca4ea88c7870be0920b2920d25ea4250ef09914bd80c011ca5b142f26f62",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "19226ab7f43f7cb578db3e5d65080fe26a915e7f300f3c57c4344afcb2d14fa0",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "195694b8eef52e4414f8a2bd289317d4c234d1edf8abf6ad04c703fa6743584c",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 5,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "195848c60177ffe681c2d36197cb99c81fe2c99864ad52a7fa5e28d6566bee08",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "19b39c9e46b1bc685ffd0785d702b8c3900e7c60aa03a7893f0bae741ad95994",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "19d5cc4a0a752db5db16a9ae857e69332554703d63e6eef2e8c26cbf5f4fd568",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "19df7eec58d18575831b37bd1df54a62018867b05f613d947a1a76358d430f5e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1a27a83623be90d526cdc9f6745330c1be0873dbd317f536b65c12c0928765a2",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 6,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1a8892acd825e10c84cd67e56a77e1e4123a34443124e065c174c619e91122ee",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1ae93d8c8ae7acb570e2be5095c2e175ac04a921064f0a797b423b9b638f89ff",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1c02e3513c7bf1fa49b44c658decec93198b927ca2ececb8a7d64f03318eb0ce",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1c96a349579ec4617ff3df8c37d00433c1e63f4ab3c909d85eed44fa94572b39",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "1d4a81a8d08758856e094c3cae307f16e12310377dac12050a5daf4488fffe31",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 17,
+        "old_strict_validation_rows_in_prepared_group": 4
+      },
+      {
+        "group_id": "1d9d60a87e4f4e1be5817ed7eed2f3dc685ba5d1c768e979512db617f63944b2",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1d9e70affff99d444ca314ea62b71d583566512ed93b038111041fdaf00c60c0",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1dd60608a39bced3468cf7312501eeafae6c26c1f0af52f1bb535324a7b95a78",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1e78c84a98e74056cfbc278130e6413ee01ef72939860d0a798f532b7a6eef59",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "1fd165cc328c62196e6df82cdf6d46e0bca400f837030302ac72147bf13bc8d0",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "201ecd225dceaf21e2739723b9996972be5489563e128e1482eb1413dd19a8b3",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 9,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "2030c000ec80d7a2ed082e43539d8cf867aa7aff4f27d690a8c6fff24d8b99f8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "20454a57d9da5f5b8d1b7106199df78de4d20d69ad0247030fa3a78a17884391",
+        "intersection_rows": 3,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "21b8f120748fec4a1a9df1c2683879129ab0fa953306c845a1ecd4d05e842a7d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "222c8a6ef2a6fadb28d9c2e8816a74014109cac0a1096d14c8a589e6fc7f972a",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "2279e8fa4c5224caa7a5b961331c062f047383b3bf17fc489a27ca8ee66c9202",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 2
+      },
+      {
+        "group_id": "22fdac908499884fbdcac6f1b5a4898086a8ab52bcd256fa2654c5347bccaeb4",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "237b1adf048955ee033ecccc64fd8cf4f1375ffad53f7badca9b167f480b1bd4",
+        "intersection_rows": 5,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 6,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "24a841c9437420b255e87870a080a669ac51d321efa8667691577793886feaad",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "253e676138406b6400ec9b5a895c323dd031fe569b11df58dce77e9fad4b5644",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "2664ef614989971dde64cbb2373bcbc06aded71f627d3490ce61e6545b576d15",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "26e3d3d6b078917906855a88215f64acb7239140b43b4bbd138a8059d466d9ac",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "2757602c776518fd1f811f30d1d0182bc356c72b5d89e64ecdee3c96d524923e",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "27b132b5e2825a52fd0321bf59171e15dd7f2876ee805cce541f4f9e0e5163a0",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "27c923bc886671467cf0c84e41d022123913b5069641d76c75db0453e383f261",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "27cd2fa55c911c9f72d2fd376d9fb496e8adfb707acd56c1aac5998520068c07",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 6,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "280156d0b49961f155827aed2f5c6dd72c28b494e5cd1e3df3f2557810a22426",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 5,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "28b831980aac0e5049cbe8d5444461c8eb215e72a72b2d2460063a729e6f506a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "28b873d1da1f0df3a79e93ce2c9fba2c80d52d903b6a6d7a5dc0dd0967fddbb8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "28c0dc0156a8bab5039043f7e05fbec1e99bbd641bb7493b95e167af336fe7b0",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "28ca41dda50c5cd97887960c94acb46b994b885ee06702932acd2cfa815d2ac4",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "28eb2b5207d2c6ddedafe2f8820c30c92f2d14fd42cca6db8f83c99077a0ad15",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "28f1cc12585eab9a46b601c9c0121e9941babed2b6371b42df351579844c834e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "29066f341faa139a3d6d3766f45be8e893ffb18a31a93ee3a0435c6ffcf6ba2c",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "298270688df273f9b38d00e19279ac1a9846119d716fdcd43529e20cd91f9ed1",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "2d6b0bb56e789831958479d68772601e10bbfdbfd13d86d594cd792a26a27a57",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "2e239f890039f50a9a9a39fd4ee8575bd2616c1b1f19789c43783c4e87f7e4ef",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "2e64387d8b0fe4e18aaf363bf6f1488dc194ab959d142f740bf82fb61c88193a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "2f9bff6e0e662fd621e8ee34585eafdbc6bcc80a5affe0141f26b5dd44671b98",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "2fea00b16d087fc15f58e84ddeb201c47aa52765014545feaa5d9d1c98cfbd61",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "30a8b4191ebecd17088200621f443439ba319c59d2c0f24dfb1ace5356436a65",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "30fd90b9f3408fc7758ba71cd40480040000eda2e5336436d4eb870addf8ee77",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "312a4bc3c14fb47ca30f192d4e71927a23a730ff8b0afdc82455009475bc0249",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "315d58662ae5a1e6cef4c3634adea331ad19d7939895eb34a0af13c2f58ffc32",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "319a5a22b72ea5eeb51d5922d89ffe991c2370c634a2f5af5619f90e33ebc13d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3201f1e3ab2e920163010e0e659f44c75734df76c5fb4b1ec122e3dc534ed1bd",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "328175f44bda407c6959aa8b0dba81547615c4796bdef91bced6497359d3b188",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3352efb60fe73962062712210be2d27d78cb234d3bd41fd8f3d690ff6eb393da",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "33d9b29f8c6fd4456b68e64f966e767fff2d430905fa541ba8312815468876e8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "34083f8787e6fa6cf99bf4655c748cb6c0ca4bdd3c5bb5442e8680f375d64f3b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "34a8e415a35858f8b104577df5e81b7739ea99513bbab990425bea7fb1f2f3c7",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "36627cf1bef7377f1cd013ee811ef6a794ab64b4546e0dbecd2d3d8d6bcfd3b3",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "36be60b32293222175a69472dda5d6234d33d26e16f8b8f16e65d42c95faa02f",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "387bda26dff6f1233644efcd8f85667be3b03b17b3b8d30914996f2436e722b5",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "388d6b70115b276a67c0c9a008aa0272770a42b0b2b7caf4f1634d31e0bd2612",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 6,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "38ce2af8f079834c38858362264e37ff38e32b85bc4886f6afd2a1203d2c7ba2",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "395a10a8c100c1a8dc7179257cc25a521d9d95bf4092bc85cc595483b4529add",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3980f86b5b6925a74426dc4c037f9a60d3a5ded91fb95ed6bf57c8e26b8cadd8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "3acf575243476ce7fc0682995df7348a29a1012f750d4190757e59e6e6fe536c",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3b1f4856bbcc2e55b77377bae3944f335ae1391d124167f8c7f8fccf3199e41b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3b6613f7a606b9b2669f16a9078203401fb8ea8514e4537aed3afdccfd98497c",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3b8d32217b0934ceabf48b6bbee89a90430a418877998d231d03011dedc65827",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3be5d868a466a0a5b0596ef90e45a2c5cbb4686e17c5f5d588e5f66ffe6d5b27",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3ce2d9202e3129a20fc6a88895a54ed0550faaf0410bdb7eef489e52a2fbf02e",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 3
+      },
+      {
+        "group_id": "3d4201c59652da08b67040914e5872c2f616651d99f577a486aaa9cdd39675a6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3d7dfe17e9fe586b06e5668ce37c8be14e42274b032d9d59be9207bf2a0fa100",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3de7d9002e3021d777fdb135f1086d05bde0cca7ecb6ff0730088699a715fb7e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "3e379f035e54814840b09c911ab68ddeed1a193676b7cc5e955db2ae61472fba",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3e91491f57744a9921063d62e82e1646c3179882b7b480f5a24d43fbfcddec6b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "3f7175d07e6ba9ebc19d016beca397d7a054191281718e8697ea2519ae872509",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "40139a7e17ab0416f3e339ec7e534c165070ed5e16c10708e004d55c9d8c8aac",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "407499c6bc9a5f43c6ecf31fb4b599615d3b12ea9287bd0e0876eb1862c3ce0f",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 5,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "4299f1188495030286bfaa87f7e7c7838b6a16ebe8b43afb70f145bf97877242",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4347accd6609541932dc41541506dd71bfe05865b784eb0e4aa5e83dd779e400",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 5,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "43536de83a3d3b1cf30afdd65588c047c63be888189f88740c9f991308a14a61",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "44f85167ce639746dcda2940b9b7928430e6d71feb3896f2fe7b7f000c37ba94",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "461a938e50ed7d3cff7eb3cc84c969a104562f99eec3251ac47dd54333288482",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4766c0625d4ff1672bfab72b1830acccec2ddf3fb640facffebf49a255c88f2f",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "479358dfbfa1545730fb6d376552ae3e3cd6e1263e5e29e3ef7f94ddfa896ff4",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "47c8f3c8f35503af993e02a4eb8b0a6bc160b5619a4d5636a1f035c902c83ca8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4ae0e72fd76c1f28c6fa26391d817dbbe9471445336e526aaa831e3dc75d5f47",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "4be9b39e699eb2cbc498301b4454a95875c765e4406440c327ebab24a04ecc02",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4e78168b51abd91ac59079219b985abb8ab933fb09a478fff09daad357f03e28",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4e83fcb21cabc5bca16d40e6ea4e5985dc329626f56c2f9eae1d72dff5a709a8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4f15d701ffd0786ade6894cee0a456e8bc2301f2951695a81ecd3ec0e9a4f391",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4f556c44e44196d1d02b6485373357b01a42b2934276ab4b95673970684f4a96",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "4fd1dd297e54f5e9e4f5b74e805597bf03e8edc67794df7bc75a543c53e36bd6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5067eb695555ea372ccc802be117eb5e94c171d093adc4513ca75143a83d8a31",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "51017c7f8852a4d49a070a7d47978c849b21a7bd75a0696a7c9ef22385a012d8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "510a27e91c6dc8fe2323e517b1188b548dcea616c4ea78d426e02984aacbfa50",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "51b8a0cd601a5900c952af0520a11504cd26a73602a4e1afdd7470f78b84e62a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "5234465d466f8295d43cddb3139a8ad4e75b765046ccbf667e83cbb1a82e9fb8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5311c68be573fc808a12e82e336af7d96d2ecb236f9deb9c3ffed47a558ed21f",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5348610985cb95cb62641af1bb475431583515e1ccdd4d05de46c92d60c329d6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "542ecdad8f3d9b81210993435cb90169424e67f40da17114acd3a68625a8dc0e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 3,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "553ed9a7b4b4cebb77a4b7917319eb6acb85505d4cbbf5261d0e0492598d3703",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "55913a7314cbe6452901003d90e361342c803110ebbdf8727dfdd19d33c4ec6c",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "56ba9391dc5813c9f440278c856ac2569207a9a706bf62115d66976d4e6a2353",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 2
+      },
+      {
+        "group_id": "592d2c3f9578f09e12b24b7904a5772cee6a5e9fe35b84de83830b9ed7396645",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 4,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "5c54cf03950fe44f5f04f4b966f8b0fad4c03785b0b22ef6dd6c56cfa8dfa210",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5c591b5604da590abb993d5db804385ab40b572a603036bebeb7069ad8f912e7",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5d8376399fc435a6956144dab63af1f618f328297c05ed978124602a0424992f",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5dd175843f761718e43aca7be1b33709f2bfb5c23bdea284a359a91389c63578",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5ddc5116c3e7d4c2f9aff9b48efe084a20d47b86ca544af9de30a0d846b3bc89",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "5ea37d5595bc824c726909b624113bb09e01449d24d1f1cd23da5c8cafcb4c5c",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 7,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "6008c1b0b94ffc1bf3db1ecea72944253ba13187c38b384f1a2231fba57bc6ad",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "61713f87ced492db9c49081bb8ad01d3cca17ecee20c815326b8b0488566d056",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "624cb381deb8de912e0b198182a0bac25336fdc41a09b7197a63ed4909dae7e4",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "65f7e5b524312b464ceecbd28c2282bc5c594b2940bdae85f9a664d4361a938e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "666c2d61468375b9ce5c627a869ce976760f3d9b6ea3d38d9999770f05e4ceb5",
+        "intersection_rows": 3,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6675f9f95adc27b6a091d445918e721a01b8ce8348d562d36548d7b8c38b5ece",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "667d678d2034fa5e3402e3fd2aedba5b276e791c49a0b2523ef358a5bd04791a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "67fcc736816c92198e0d6ff0a55ba571089627d092c016abd2ca33a2dab79552",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6973de9f71f1f62bbe294704f2c34134dcbcd2df426653b066a88fc3bdb2ce2e",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6c60eb9fe635d1cce4a5fb0dd1235d32d1778028c3fa8f6d4bfdd064ca13394f",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6dde7f4b1a85b9f5d805da300a2d5976cdcae16750be9874f3ec30d22d07c7e6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6e033184f94bf9aabe440f85c824f8a0fbb1c794ff91a0052999325f6eb3847e",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6e54663707fcc436c08fa7e0ad792926d87fe074c928a608d472eb23230e559b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6eeed620eadf2f6f5e74c0b0b73a2636aad9896d77a55410cef0eb64227260d3",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6f06ece6012b6ce9365dab3ddf83aa00d35de30517193563385945315b20916a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "6f6618d7c5dcb0bdb81d03b3503f22579d4fc5d794777cd19524b0964fb68bb6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "71797e3ab60eb18dabada0b5c5e574de313fe3b5b360e61b9f455b63f9f2e978",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "71f72407dfa8399f1225e3ed244c17380f6beee02746dfbbb9e2681f7790811a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "72e5d63a5c8ce1974b0c8db0e30651df10b1791470582b1c16baac37f2ef473c",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "7451cfc83fcd3c9e8cafd91bee84a90a92b80a21e6f7789caac5ac346d181a1a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "755f89321743119746ffe486537a49e89af222b74a16db863799c542f30378eb",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "75b7c79631fe86fda6bf30f4622ca8faf0f99eb36cee967a33caf8a86f69d405",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "7957341b766e1d531272efffc519328ea5932b7c8182ffc036b2196713e33d0d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "7e7f47f4ffbd58bbc4da4a6791cea63c9e4964eee27ffd39bebe670dfd8c755a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "7e8ee27ac6c1360fc3e602cf9d3ec0cac0d5aaea7725afddd63de70047578862",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "7f8601908e1bc004c6f10f8cac24aa20f5c26b1e19589b9ab846e1e74670b067",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "812f0ccda5b00921e424905ae84215c2014920472d832ca0fb5f01b73cb04f10",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "82212b9db6b7a4d85be9c63094bcf8a5d6f3124cbde5341675c313e7dfcc6081",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "84ca67c5f4ad34fdd31c3dbc7601620c10d933d1e716fc8ce098fb6269abc64d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "86557a412556be09c959cb798c56f395668bad13874c68c354f44b1149836263",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "86e08a237e50e8f6226db66e218044a7e1740e62151ec3d93c32d1cdec1706bc",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "887c4415fa18374ea756d106a90bf9dfbebc266388970d66d3f3f67b42bb0cd7",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "8bc7818a057802848bfbb998dcfb795b86956aaae4a45f65033077ae1ab35acd",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "8c03e4384ed6325afc95d2593d88800e311706c1e637addd7419a1eaff489dea",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "8d863e10860ca1c3e60fb55da55a5fb2c9c19c7daf7b852270a1d2b03fb12a91",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "8f699e8017c0c65edf9890d4669d83007f0e4e6153bfc7c5fc3da2e822c71d58",
+        "intersection_rows": 2,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "8f85010f7dc940dd74acca13835702e836660dd96c7474939bde1ed051ee0274",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "8f99b85f3b164f17796e211cfaebbffe1de3334df100f35e471178d1a76be907",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "910775d666995987db4cb8032d746c4d3b3aeb34dfba9421052fecb1f16df8f4",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "951e25f89a7740f9ec5a6df66f40a1dd8b7f105cca10838986f6be44b31f4e27",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "96341d374fa21c7ea9185d5b982aafc342bf269c164d6f43351b328ddbe1bc57",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "9641122cb43cd8df5b15d10c2de6d2fdd231969e4b314fd6d6daeec68f81dea6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "96d6ab8bfe379d212f5209d7f5821281b35a69add42d366847a1f49a1a78262a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "9e3fb348214979a1d01042722252875c61e45a4efd41e790acb81108f18d9231",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "a221842aaa551081a9cf8ad3bba278fda6325556d9f75c9346de06baec87dbe6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "a374761e4699f75e6e7b475d57adf9cbb9bc5ee9d23365b8358d983c348a9d11",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "afb2ed6b8e02c4f5b96744222213bc2ee3206e504425d359d06b5a914af95a1d",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 2,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "b5df81405cb3320c4c0fa18f8f77c59f8040effbbdfac6a81ddd793863716a1a",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "b6aef63a86add4a8d707ff06b045fe8387a937105d96cc1c9a2e4ebbb6fbcf1b",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "ba8d3c80a68d9fbb5eee15db7fc533652ddb0900fc869eedb0fb3f35cd11a991",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "c5a7beef357535a451795e7c900fd390c411b0f0c6b2c823594585a59c3b9628",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "c930ddcbf6f03a9518ca002f45cf72d689efa26fb4d415108525b9f8cc2cca12",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "c94180240855ad843b142c5324e1ab38859d8b4e2a2e52e63e91deefc6ea4e1f",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "ce562b15d388530c061f8a0c18baa9189b25840477a5341cc93c49ec4a50d079",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "d2ccc61b35f24120e5761f4d9f94a5d26313b672182951ce7ca9954d3725e6b3",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "d37d7c672e630219f28f137d870a3ad90416d3cbf3f711d905a6d91f3a4c3e04",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "d5fa519ab6aa157c063b2bbe05accf1d229a3308f58140843a37ed7c00088517",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "dee8f57aedd4869470728b19d63b91f6496a3cca88a54ed19159320183224bc6",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      },
+      {
+        "group_id": "e8e3ee127e4aeaa015368c605ec086ce3c4c9fd130165ddf126a5b9b0033e433",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "val"
+        ],
+        "old_strict_train_rows_in_prepared_group": 0,
+        "old_strict_validation_rows_in_prepared_group": 1
+      },
+      {
+        "group_id": "f25b4f60602ff53304e06fc1e7d18dd721334108c5e53f7537beb44d6c83c0b8",
+        "intersection_rows": 1,
+        "old_strict_splits_in_prepared_group": [
+          "test",
+          "train"
+        ],
+        "old_strict_train_rows_in_prepared_group": 1,
+        "old_strict_validation_rows_in_prepared_group": 0
+      }
+    ]
+  },
+  "interpretation": [
+    "Old-hash-group-unexposed refers only to the supported prepared image-similarity group and old strict manifest; it is not proof the old checkpoint never encountered related pixels, augmentation families, or the same patients.",
+    "Exact-pixel/dHash groups are conservative similarity groups; dHash can collide across distinct people. Removing exposed groups may change class composition and difficulty, so this secondary estimate is conditional on a selected subset.",
+    "All original primary and original100 results remain reported; this subset cannot select a model, erase an unfavorable primary result, or support clinical superiority.",
+    "Bootstrap whole retained hash groups jointly for paired differences. No patient-independent uncertainty claim follows."
+  ],
+  "no_image_pixels_or_model_predictions_read_for_derivation": true,
+  "no_frozen_training_or_evaluation_code_modified": true
+}

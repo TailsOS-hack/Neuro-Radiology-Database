@@ -1,0 +1,48 @@
+{
+  "interpretation": "Recorded runtime differences are relevant to probability replay. They do not establish the cause of discrepancies. No hostnames, serials or account/connection details are included.",
+  "records": {
+    "original_training": {
+      "versions_and_execution": {
+        "device": "cuda",
+        "workers": 4,
+        "batch_size": 32,
+        "torch": "2.8.0+cu128",
+        "device_actual": "cuda"
+      },
+      "source": "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261012/config.json",
+      "source_sha256": "c1ae1c92cc2376aee1b065a3c3d72648155c7947f152357321591f5d8bec0a32"
+    },
+    "posthoc_attribution": {
+      "versions_and_execution": {
+        "torch": "2.12.1",
+        "device": "cpu",
+        "threads": 4
+      },
+      "source": "docs/kevin_paper_20261011/posthoc_explainability/results/summary.json",
+      "source_sha256": "a8f445371bc80cdbd5c1283959e9642047cf3a888c89bd385ba245667574855a"
+    },
+    "posthoc_stress": {
+      "versions_and_execution": {
+        "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 21.0.0 (clang-2100.0.123.102)]",
+        "torch": "2.12.1",
+        "torchvision": "0.27.1",
+        "numpy": "2.5.0",
+        "pillow": "12.3.0",
+        "device": "mps",
+        "batch_size": 32
+      },
+      "source": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/environment.json",
+      "source_sha256": "69787a88de0324f4e6e457a95b5b88fd05bb4f459ed2d4efd9b091f0ce689189"
+    },
+    "posthoc_clean_replay": {
+      "versions_and_execution": {
+        "device": "mps",
+        "torch": "2.12.1",
+        "batch_size": 32,
+        "workers": 4
+      },
+      "source": "docs/kevin_paper_20261011/posthoc_robustness/clean_split_replay_20261011/replay_metadata.json",
+      "source_sha256": "db8d21239b0e33d4c9a48b2e34cd92c74ea27b97343d3a3483281c9db93ac24f"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "all_legacy_and_original100_source_bytes_match_original_GPU_bundle",
+  "created_utc": "2026-10-11T23:28:44.233125+00:00",
+  "script_sha256": "c631e7bd97db8b83aa688f95e7f8c65a41079cadfabcd5164d0fd813f8332d9e",
+  "archive_sha256": "b0a7324e58653e138ba520b4188fb529161ef8cd4c96f118987203623e2aad39",
+  "bundle_manifest_sha256": "a8835a864d0a48461e28f9819d333d7d1fff69af2a0a77f7ffeeb35e1686c9a9",
+  "counts": {
+    "retained_legacy_image": 27178,
+    "original100_image": 100
+  },
+  "checked_files": 27278,
+  "failures": [],
+  "interpretation": "The local source image bytes match the independently pinned bundle previously transferred to the GPU. This check does not establish the cause of cross-environment probability drift or patient independence."
+}

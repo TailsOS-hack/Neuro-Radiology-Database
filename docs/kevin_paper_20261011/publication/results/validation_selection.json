@@ -1,0 +1,117 @@
+{
+  "frozen_before_heldout_evaluation": true,
+  "created_utc": "2026-10-11T23:10:27.325271+00:00",
+  "checked_empty_evaluation_output": "results/frozen_evaluation_all6",
+  "criterion": "Before any held-out evaluation, prefer mode with lowest mean stage validation NLL across the three seeds; lowest validation NLL seed within that mode is an exploratory representative, never a test-selected winner",
+  "candidates": {
+    "candidate_1": {
+      "checkpoint_path": "results/stage_only_seed20261011/best.pt",
+      "checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+      "mode": "stage_only",
+      "seed": 20261011,
+      "epoch": 23,
+      "stage_validation_nll": 0.03747158972872587
+    },
+    "candidate_2": {
+      "checkpoint_path": "results/multitask_seed20261011/best.pt",
+      "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "mode": "multitask",
+      "seed": 20261011,
+      "epoch": 28,
+      "stage_validation_nll": 0.051600637482635964
+    },
+    "candidate_3": {
+      "checkpoint_path": "results/stage_only_seed20261012/best.pt",
+      "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "mode": "stage_only",
+      "seed": 20261012,
+      "epoch": 37,
+      "stage_validation_nll": 0.03477062228208098
+    },
+    "candidate_4": {
+      "checkpoint_path": "results/multitask_seed20261012/best.pt",
+      "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "mode": "multitask",
+      "seed": 20261012,
+      "epoch": 59,
+      "stage_validation_nll": 0.04531075374947832
+    },
+    "candidate_5": {
+      "checkpoint_path": "results/stage_only_seed20261013/best.pt",
+      "checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+      "mode": "stage_only",
+      "seed": 20261013,
+      "epoch": 39,
+      "stage_validation_nll": 0.03694202273338021
+    },
+    "candidate_6": {
+      "checkpoint_path": "results/multitask_seed20261013/best.pt",
+      "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "mode": "multitask",
+      "seed": 20261013,
+      "epoch": 29,
+      "stage_validation_nll": 0.05403342983790774
+    }
+  },
+  "mode_mean_stage_validation_nll": {
+    "stage_only": 0.03639474491472902,
+    "multitask": 0.050314940356674005
+  },
+  "preferred_mode": "stage_only",
+  "exploratory_representative_candidate": "candidate_3",
+  "tie_breaking": "mode name lexicographic; seed ascending within mode",
+  "interpretation": "Validation-only exploratory preference. Primary reporting includes both conditions and all six seeds/checkpoints. No test result influences this record.",
+  "stage_manifest_sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+  "clinical_manifest_sha256": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+  "old_hash_unexposed_sensitivity": {
+    "manifest_path": "docs/kevin_paper_20261011/analysis/old_hash_group_unexposed_sensitivity.csv",
+    "manifest_sha256": "da1288c26944a10d7fdbda0ffc87886d77e48cb5ca2d7186a603e2492239bcba",
+    "audit_path": "docs/kevin_paper_20261011/analysis/old_hash_group_unexposed_sensitivity_audit.json",
+    "audit_sha256": "44db9789f8f5479fef700abfdeb45e1a1cb2cef487ccde2f5a2907b6c731576c"
+  },
+  "analysis_protocol": {
+    "version": 2,
+    "specified_date": "2026-10-11",
+    "bootstrap_resamples": 2000,
+    "base_seed": 1729,
+    "confidence_level": 0.95,
+    "bootstrap": "paired, unstratified, percentile; sample clusters uniformly with replacement",
+    "cluster_estimand": "image-weighted metric; all images of each sampled hash group travel together",
+    "internal_same_case_unit": "prepared exact-pixel/dHash connected group; NOT patient identity",
+    "internal_same_case_interpretation": "Exact-row-held-out comparison only; prepared similarity groups can contain old strict-train/validation rows",
+    "old_hash_group_unexposed_sensitivity": "Prespecified secondary subset of unchanged primary: exclude every primary row whose prepared hash group contains any old strict train/val row; derive only from existing primary predictions; retain and report the full primary",
+    "original100_unit": "image; no supported patient/augmentation-family clusters",
+    "clinical_unit": "one source subject after the evaluator averages slice probabilities",
+    "clinical_interval": "two-sided Clopper-Pearson for accuracy, AD sensitivity and CN specificity",
+    "paired_difference": "candidate minus reference, using the same resampled cases/groups",
+    "macro_f1": "fixed class vocabulary, zero division contributes zero",
+    "balanced_accuracy": "mean class recall; undefined when a target class is absent",
+    "bootstrap_missing_class": "omit undefined replicate only for that metric; suppress CI if <95% valid",
+    "decision_threshold": "argmax in published class order; binary tie predicts CN",
+    "multiplicity": "no adjusted significance testing; all candidates/readers reported, none selected here",
+    "reader_missingness": "strict complete labels by default; explicit opt-in reports paired complete cases",
+    "planned_modes": [
+      "stage_only",
+      "multitask"
+    ],
+    "planned_seeds": [
+      20261011,
+      20261012,
+      20261013
+    ],
+    "primary_conditions": "Report all three seeds per mode: arithmetic mean, sample SD and range of each metric; all six checkpoints remain visible",
+    "validation_preference": "Before any held-out evaluation, prefer mode with lowest mean stage validation NLL across the three seeds; lowest validation NLL seed within that mode is an exploratory representative, never a test-selected winner",
+    "original100_old_exposure": {
+      "train_images": 66,
+      "validation_images": 9,
+      "test_images": 25
+    },
+    "sources": [
+      "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+      "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html",
+      "https://docs.scipy.org/doc/scipy-1.16.1/reference/generated/scipy.stats._result_classes.BinomTestResult.proportion_ci.html"
+    ]
+  },
+  "analysis_script_sha256": "74b2e8659238d234034c0a442e9609506045f7b971ab73bb4e7fd4182f80335e",
+  "selection_script_sha256": "c68ecc085264449b06bc6065eb6e3ef54ad3797e9b5eddd41fe9f8909f1a330d"
+}

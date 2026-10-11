@@ -1,0 +1,244 @@
+{
+  "verified_on": "2026-10-11",
+  "purpose": "Ten-source access, clinical-fit and overlap crosswalk for the dementia experiment.",
+  "coverage": {
+    "recommended_source_count": 10,
+    "registry_matches": 10,
+    "new_registry_entries_required": 0,
+    "registry_entries_total": 35,
+    "registry_entries_are_not_independent_additive_cohorts": true
+  },
+  "evidence_method": "Dataset-specific routes, scientific fit and clinical fields are carried forward from the official/primary sources already verified for dataset_registry.json. OASIS access and no-combination language were independently refreshed from indexed official provider pages on 2026-10-11; direct provider page opening intermittently returned server/network errors. No new account access, permission, dataset download or exact release eligibility count was established by this crosswalk.",
+  "consequential_reconciliations": [
+    {
+      "topic": "OASIS pooling",
+      "finding": "Provider advice warns against pooling OASIS-1, -2 and -3 or presenting one as independent external evaluation of another: people can recur under different anonymized IDs. OASIS-4 is described by the provider as a unique cohort; independence from every other repository still needs verification.",
+      "source": "https://sites.wustl.edu/oasisbrains/home/oasis-resources-and-faq/"
+    },
+    {
+      "topic": "OASIS access wording",
+      "finding": "The current official access page distinguishes open OASIS-1/2 from restricted OASIS-3/4 while still requesting research statements and acceptance of terms. NITRC registration is explicitly required for OASIS-3/4. The OASIS-1/2 entries in dataset_registry.json and primary_source_notes.json were corrected to avoid asserting an unverified NITRC-account requirement.",
+      "sources": [
+        "https://sites.wustl.edu/oasisbrains/home/access/",
+        "https://sites.wustl.edu/oasisbrains/request-access/"
+      ]
+    },
+    {
+      "topic": "Four-class severity feasibility",
+      "finding": "A source having CDR or AD diagnoses does not establish adequate coverage of the legacy four image classes. Moderate-dementia/CDR-2 cases are sparse or absent in common OASIS subsets; exact eligible unique-participant class counts must be audited from the approved release before selecting a four-class clinical endpoint. This crosswalk does not assert a precise CDR-2 patient count. CDR 0.5, MCI and the legacy VeryMildDemented image label are not interchangeable.",
+      "sources": [
+        "https://doi.org/10.1162/jocn.2007.19.9.1498",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2895005/",
+        "https://adni.loni.usc.edu/data-samples/adni-data/study-cohort-information/"
+      ]
+    },
+    {
+      "topic": "Current acquisition status",
+      "finding": "The 98 newly acquired original MRI volumes are 78 Besga and 20 OpenNeuro ds007561 volumes. None of these ten recommended official raw releases was newly acquired for this workflow. Legacy image provenance remains uncertain and cannot establish either approved source access or independence from these named cohorts."
+    },
+    {
+      "topic": "Claims and model readiness",
+      "finding": "These ten names expand access priorities, not evidence of a larger completed clinical training set. Current preprocessing is 74 participants/666 slices, with 32 Besga development-training participants; access requests, release-specific endpoint audits and future GPU runs remain pending. No candidate superiority or completed 100-epoch experiment is claimed."
+    }
+  ],
+  "records": [
+    {
+      "recommended_dataset_name": "ADNI",
+      "registry_id": "ADNI",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "LONI IDA application, institutional affiliation, proposed use, DUA and publication requirements. Official page says review generally within two weeks; annual account update required.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Strong development cohort. Reserve a separate provider cohort for external evaluation; multicenter internal cross-validation alone is not external validation.",
+      "clinical_metadata": "Age/demographics, clinical assessments, CDR, MMSE, cognitive diagnosis, genetics and biomarkers. Diagnostic groups are CU/CN, MCI, and dementia/AD; early/late MCI distinctions vary by phase. Both MCI and dementia/AD can have CDR 0.5, so never map CDR 0.5 directly to a universal diagnosis.",
+      "overlap_or_grouping_constraints": "Participants roll between ADNI phases under the same RID/PTID. Group all visits, repeated sequences and derived slices by person. Phase alone cannot define an independent patient test set.",
+      "next_required": "Approved investigator/IDA access and applicable use terms; obtain dated raw T1 and clinical exports, join RID/PTID and visits, resolve diagnosis/CDR endpoint and age/site composition, group all phases/visits by participant.",
+      "sources": [
+        "https://adni.loni.usc.edu/data-samples/adni-data/",
+        "https://adni.loni.usc.edu/data-samples/adni-data/neuroimaging/mri/",
+        "https://adni.loni.usc.edu/data-samples/adni-data/study-cohort-information/",
+        "https://adni.loni.usc.edu/help-faqs/ask-the-experts/",
+        "https://adni.loni.usc.edu/help-faqs/faqs/"
+      ]
+    },
+    {
+      "recommended_dataset_name": "OASIS-1",
+      "registry_id": "OASIS-1",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "Official access form labels OASIS-1/2 open datasets and routes requests through reviewed research statements and data-use terms. A NITRC account is explicitly required for OASIS-3/4; a corresponding requirement for OASIS-1/2 was not established. Follow the dataset-specific provider instructions; old mirrors do not establish project permission.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Small legacy benchmark. Avoid if OASIS-3 is chosen for training or held-out evaluation; compare age-matched older groups rather than young-versus-demented shortcut learning.",
+      "clinical_metadata": "Age, sex, dementia status; use supplied clinical dictionary for CDR/MMSE fields and missingness. Young controls can confound disease classification through age.",
+      "overlap_or_grouping_constraints": "OASIS explicitly advises against combining OASIS-1, -2 and -3: anonymized people may appear across them with different IDs.",
+      "next_required": "Use current reviewed OASIS request and terms. Select this as an alternative to OASIS-2/3, not an additive cohort. Audit original patient IDs, repeated acquisitions, age-matched controls and exact CDR class counts before accepting a four-class endpoint.",
+      "sources": [
+        "https://sites.wustl.edu/oasisbrains/",
+        "https://sites.wustl.edu/oasisbrains/datasets/",
+        "https://sites.wustl.edu/oasisbrains/home/oasis-resources-and-faq/",
+        "https://doi.org/10.1162/jocn.2007.19.9.1498",
+        "https://sites.wustl.edu/oasisbrains/home/access/",
+        "https://sites.wustl.edu/oasisbrains/request-access/"
+      ]
+    },
+    {
+      "recommended_dataset_name": "OASIS-2",
+      "registry_id": "OASIS-2",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "Official access form labels OASIS-1/2 open datasets and routes requests through reviewed research statements and data-use terms. A NITRC account is explicitly required for OASIS-3/4; a corresponding requirement for OASIS-1/2 was not established. Follow the dataset-specific provider instructions; old mirrors do not establish project permission.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Useful for within-person longitudinal robustness after grouping by subject; inadequate as an independent external cohort if other overlapping OASIS releases are used.",
+      "clinical_metadata": "Age, sex, education, SES, MMSE, CDR, visit/timing, eTIV, normalized whole-brain volume and atlas scaling factor. The original paper describes 51 baseline CDR-0.5 cases as very mild AD, whereas ADNI MCI criteria also use CDR 0.5. Preserve source diagnosis.",
+      "overlap_or_grouping_constraints": "Original paper explicitly says many subjects also occur in OASIS-1 under new random IDs. Current OASIS FAQ extends no-combination advice to OASIS-1/2/3.",
+      "next_required": "Use current reviewed OASIS request and terms. Select this as an alternative to OASIS-1/3. Group longitudinal sessions and repeated acquisitions by participant; freeze scan/clinical timing and audit CDR coverage and converters.",
+      "sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2895005/",
+        "https://sites.wustl.edu/oasisbrains/home/oasis-resources-and-faq/",
+        "https://sites.wustl.edu/oasisbrains/",
+        "https://sites.wustl.edu/oasisbrains/home/access/",
+        "https://sites.wustl.edu/oasisbrains/request-access/"
+      ]
+    },
+    {
+      "recommended_dataset_name": "OASIS-3",
+      "registry_id": "OASIS-3",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "Current provider uses NITRC-IR, reviewed application/DUA. Official scripts support selected session/type downloads. Old central.xnat.org instructions in older PDFs are not the current route.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Strong rich-metadata candidate, but use person-grouped splits and preserve original diagnostic variables. A broad cognitive-decline category is not a single AD stage.",
+      "clinical_metadata": "UDS clinical/cognitive assessments, demographics and imaging JSON/CSV. Clinical diagnosis is in OASIS3_data_files. Dates are normalized to days from study entry; predefine a clinical-to-MRI matching window.",
+      "overlap_or_grouping_constraints": "Do not pool OASIS-1/2/3; subjects can overlap under distinct IDs. OASIS is also a released subset of the broader Knight imaging resource, so KARI is not automatically independent.",
+      "next_required": "Obtain approved OASIS access and NITRC account; retrieve clinical tables and dated raw T1 manifest, define clinical-MRI matching window, count eligible participants by endpoint, and exclude OASIS-1/2 from development/evaluation combinations.",
+      "sources": [
+        "https://sites.wustl.edu/oasisbrains/home/oasis-3/",
+        "https://sites.wustl.edu/oasisbrains/home/oasis-resources-and-faq/",
+        "https://sites.wustl.edu/oasisbrains/",
+        "https://sites.wustl.edu/oasisbrains/files/2024/04/OASIS-3_Imaging_Data_Dictionary_v2.3-a93c947a586e7367.pdf",
+        "https://github.com/NrgXnat/oasis-scripts",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC12637817/",
+        "https://sites.wustl.edu/oasisbrains/home/access/",
+        "https://sites.wustl.edu/oasisbrains/request-access/"
+      ]
+    },
+    {
+      "recommended_dataset_name": "OASIS-4",
+      "registry_id": "OASIS-4",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "NITRC-IR account, reviewed OASIS request and DUA. Download nonimaging data from OASIS4_data_files, scans via UI or official scripts.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Prefer reserving as a clinical cohort test rather than adding every source to training. May support AD-versus-other-dementia analysis if label/sample counts permit; do not recode all clinical referrals as AD. CSF assays have provider-specific compatibility warnings.",
+      "clinical_metadata": "Demographics, clinical diagnoses, psychometrics, CSF and FreeSurfer outputs. Contains patients evaluated for memory disorders and dementia of differing causes; preserve etiology separately from severity.",
+      "overlap_or_grouping_constraints": "Provider states OASIS-4 is a unique cohort and can be combined with other OASIS datasets. This does not by itself verify independence from every other external repository.",
+      "next_required": "Obtain approved OASIS access and NITRC account; inspect clinical etiology and severity independently, audit eligible T1/label pairs, and decide in advance whether to reserve the entire cohort for external testing.",
+      "sources": [
+        "https://sites.wustl.edu/oasisbrains/home/oasis-4/",
+        "https://sites.wustl.edu/oasisbrains/home/oasis-resources-and-faq/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7182765/",
+        "https://sites.wustl.edu/oasisbrains/",
+        "https://sites.wustl.edu/oasisbrains/home/access/",
+        "https://sites.wustl.edu/oasisbrains/request-access/"
+      ]
+    },
+    {
+      "recommended_dataset_name": "NACC",
+      "registry_id": "NACC_MIXED_PROTOCOL",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "Data Front Door Quick Access File request plus DUA; images delivered through controlled S3 download. Clinical summary data may arrive quickly, but don't promise image delivery timing.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Potentially valuable clinical external evaluation or training expansion. Greater scanner variation and etiologic breadth demand source/age/site stratification and careful quality checks.",
+      "clinical_metadata": "Link by NACCID to longitudinal UDS demographics, CDR, neuropsychology, cognitive diagnosis and etiologic diagnosis. Match scan date with the relevant clinical visit, not the most recent arbitrary diagnosis.",
+      "overlap_or_grouping_constraints": "NACC explicitly says it lacks overlap lists for ADNI, DIAN and NIFD/FTLDNI. Therefore NACC is not proven independent merely because its repository name differs; document unresolved overlap and use available crosswalks/provider advice.",
+      "next_required": "Complete Data Front Door request/DUA and request MRI plus matched UDS clinical data. Confirm actual delivery scope and MRI/visit dates; obtain overlap advice or crosswalks for ADNI/NIFD and other sources. NACC SCAN is a related acquisition stream, not an automatically independent extra cohort.",
+      "sources": [
+        "https://www.naccdata.org/data-request-process/",
+        "https://www.naccdata.org/data-front-door",
+        "https://www.naccdata.org/data-file-faq",
+        "https://www.naccdata.org/mri-preview-system",
+        "https://www.naccdata.org/the-nacc-researchers-guide"
+      ]
+    },
+    {
+      "recommended_dataset_name": "AIBL",
+      "registry_id": "AIBL",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "AIBL subset via LONI IDA approval/terms and research/collaborator description. Broader access via AIBL expression of interest reviewed by management committee.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Valuable held-out external geography; compare source clinical diagnoses rather than forcing four severity classes. Can join development only if a different untouched test cohort is reserved.",
+      "clinical_metadata": "Demographic, medical-history, CDR/MMSE/neuropsychology, APOE/lab, diagnosis and MRI-acquisition CSVs. Provider warns that DICOM age/sex/birthdate can be unreliable: use nonimaging tables.",
+      "overlap_or_grouping_constraints": "Australian AIBL is a distinct study hosted on ADNI-compatible infrastructure, not a new MRI modality or a guarantee of cross-source independence. Audit aliases and source provenance.",
+      "next_required": "Obtain the relevant IDA or AIBL/CSIRO approval; audit actual MRI subset and longitudinal clinical linkage. Use age/sex from clinical tables rather than unverified DICOM fields; reserve a cohort-level role before analysis.",
+      "sources": [
+        "https://aibl.org.au/collaboration/",
+        "https://data.aibl.org.au/adni/index.html",
+        "https://data.aibl.org.au/adni/imaging.html",
+        "https://data.aibl.org.au/adni/nonimaging.php"
+      ]
+    },
+    {
+      "recommended_dataset_name": "MIRIAD",
+      "registry_id": "MIRIAD",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "UCL MIRIAD XNAT registration and data-use terms; project Download Images plus CSV exports from ClinicalAssessment and MR Sessions. Redistribution needs prior agreement; citation/acknowledgment and accepted-paper copy required.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Prefer external AD-versus-control evaluation and short-interval consistency analysis; small person count yields wide confidence intervals. Augmented/slice counts cannot remedy that uncertainty.",
+      "clinical_metadata": "Age at scan, sex, AD/control group, visit MMSE; screening CDR/global and sum-of-boxes for AD participants. No MCI cohort and no validated four-class stage coverage.",
+      "overlap_or_grouping_constraints": "All repeated acquisitions for each participant stay together. A single-scanner cohort is valuable for test\u2013retest consistency but not evidence of multicenter generalization on its own.",
+      "next_required": "Register with UCL XNAT and accept use/redistribution terms; download original scans with MR-session and clinical exports; group all serial acquisitions by the 69 participants and use an AD-versus-control or repeatability endpoint.",
+      "sources": [
+        "https://www.ucl.ac.uk/brain-sciences/ion/research/research-centres/dementia-research-centre/research-clinical-trials/minimal-interval-resonance-imaging-alzheimers-disease-miriad",
+        "https://discovery.ucl.ac.uk/id/eprint/1382603/",
+        "https://doi.org/10.1016/j.neuroimage.2012.12.044",
+        "https://miriad.drc.ion.ucl.ac.uk/"
+      ]
+    },
+    {
+      "recommended_dataset_name": "NIFD / FTLDNI",
+      "registry_id": "FTLDNI_NIFD",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "NIFD currently listed by LONI among studies one can apply to. Legacy cohort website inaccessible during lookup.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "FTD differential diagnosis only; reconcile overlap with UCSF/other FTD cohorts.",
+      "clinical_metadata": "Clinical/neuropsychological, caregiver, blood/CSF assessments",
+      "overlap_or_grouping_constraints": "Reconcile participant overlap with related FTD repositories and group all visits/acquisitions from one participant together.",
+      "next_required": "Apply to the NIFD project in LONI, verify actual accessible raw MRI and clinical fields, and reconcile participant overlap with ALLFTD/UCSF/NACC. Use an FTD differential-diagnosis endpoint only if prospectively justified.",
+      "sources": [
+        "https://ida.loni.usc.edu/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6351779/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7455324/"
+      ]
+    },
+    {
+      "recommended_dataset_name": "ALLFTD",
+      "registry_id": "ALLFTD",
+      "already_in_registry": true,
+      "discovery_status": "identified; access and analysis inclusion pending",
+      "current_access_route": "Research goals, analysis plan, qualified investigator and DUA; review generally 4\u20136 weeks. Minimal or full clinical data can accompany MRI.",
+      "access_established_for_this_project": false,
+      "included_in_newly_acquired_98_volume_sources": false,
+      "scientific_fit": "Differential diagnosis / FTD auxiliary cohort, not AD severity labels.",
+      "clinical_metadata": "Demographics, neuropsychology, function, diagnosis, disease severity, CDR+NACC FTLD; NfL subset",
+      "overlap_or_grouping_constraints": "ARTFL and LEFFTDS are predecessors, not separate additive independent datasets; NACC-associated overlap possible.",
+      "next_required": "Submit qualified-investigator request, aims/analysis plan and DUA; request MRI-linked clinical data; treat ARTFL/LEFFTDS as predecessors rather than additive cohorts. Reconcile FTD participant overlap and retain etiology-specific labels.",
+      "sources": [
+        "https://www.allftd.org/data",
+        "https://www.allftd.org/policies"
+      ]
+    }
+  ]
+}

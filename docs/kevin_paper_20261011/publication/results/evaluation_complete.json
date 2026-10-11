@@ -1,0 +1,14 @@
+{
+  "completed_at": "2026-10-11T23:10:39.287833+00:00",
+  "checkpoints": 7,
+  "candidate_order": [
+    "stage_only_seed20261011",
+    "multitask_seed20261011",
+    "stage_only_seed20261012",
+    "multitask_seed20261012",
+    "stage_only_seed20261013",
+    "multitask_seed20261013"
+  ],
+  "evaluation_sha256": "2ad94f62c20b3505f3585abb6165e75aa4a532e916f41d482f7f7f288f2a56d0",
+  "validation_selection_sha256": "5ba9de51fe339ab6e470de496571430ab6f463a814efc858c228db954241c0c7"
+}

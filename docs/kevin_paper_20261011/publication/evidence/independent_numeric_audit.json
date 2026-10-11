@@ -1,0 +1,188 @@
+{
+  "independent_numeric_checks": 38,
+  "all_passed": true,
+  "method": "Independent CSV confusion-matrix and arithmetic checks; ensemble mean probabilities, class metrics, paired discordance counts, seed means/SDs, descriptive Brier/ECE, and clinical exact intervals recomputed with beta quantiles. No model inference or bootstrap interval rerun.",
+  "reader_complete_correct_counts": {
+    "Reader_Kalapos": 37,
+    "Reader_Kanekar": 44,
+    "Reader_Thamburaj": 38
+  },
+  "clinical_counts": {
+    "external__openneuro_ds007561/candidate_2": {
+      "accuracy_exact": [
+        14,
+        15
+      ],
+      "AD_sensitivity_exact": [
+        0,
+        1
+      ],
+      "CN_specificity_exact": [
+        14,
+        14
+      ]
+    },
+    "external__openneuro_ds007561/candidate_4": {
+      "accuracy_exact": [
+        7,
+        15
+      ],
+      "AD_sensitivity_exact": [
+        1,
+        1
+      ],
+      "CN_specificity_exact": [
+        6,
+        14
+      ]
+    },
+    "external__openneuro_ds007561/candidate_6": {
+      "accuracy_exact": [
+        13,
+        15
+      ],
+      "AD_sensitivity_exact": [
+        0,
+        1
+      ],
+      "CN_specificity_exact": [
+        13,
+        14
+      ]
+    },
+    "external__openneuro_ds007561/ensemble_multitask_AD_CN": {
+      "accuracy_exact": [
+        12,
+        15
+      ],
+      "AD_sensitivity_exact": [
+        0,
+        1
+      ],
+      "CN_specificity_exact": [
+        12,
+        14
+      ]
+    },
+    "test__besga_zenodo_3935636/candidate_2": {
+      "accuracy_exact": [
+        5,
+        11
+      ],
+      "AD_sensitivity_exact": [
+        1,
+        7
+      ],
+      "CN_specificity_exact": [
+        4,
+        4
+      ]
+    },
+    "test__besga_zenodo_3935636/candidate_4": {
+      "accuracy_exact": [
+        7,
+        11
+      ],
+      "AD_sensitivity_exact": [
+        4,
+        7
+      ],
+      "CN_specificity_exact": [
+        3,
+        4
+      ]
+    },
+    "test__besga_zenodo_3935636/candidate_6": {
+      "accuracy_exact": [
+        4,
+        11
+      ],
+      "AD_sensitivity_exact": [
+        1,
+        7
+      ],
+      "CN_specificity_exact": [
+        3,
+        4
+      ]
+    },
+    "test__besga_zenodo_3935636/ensemble_multitask_AD_CN": {
+      "accuracy_exact": [
+        5,
+        11
+      ],
+      "AD_sensitivity_exact": [
+        1,
+        7
+      ],
+      "CN_specificity_exact": [
+        4,
+        4
+      ]
+    }
+  },
+  "checks": [
+    "internal_same_case/candidate_1/point_metrics",
+    "internal_same_case/candidate_2/point_metrics",
+    "internal_same_case/candidate_3/point_metrics",
+    "internal_same_case/candidate_4/point_metrics",
+    "internal_same_case/candidate_5/point_metrics",
+    "internal_same_case/candidate_6/point_metrics",
+    "internal_same_case/old_baseline/point_metrics",
+    "original100/candidate_1/point_metrics",
+    "original100/candidate_2/point_metrics",
+    "original100/candidate_3/point_metrics",
+    "original100/candidate_4/point_metrics",
+    "original100/candidate_5/point_metrics",
+    "original100/candidate_6/point_metrics",
+    "original100/old_baseline/point_metrics",
+    "old_hash_group_unexposed_sensitivity/candidate_1/point_metrics",
+    "old_hash_group_unexposed_sensitivity/candidate_2/point_metrics",
+    "old_hash_group_unexposed_sensitivity/candidate_3/point_metrics",
+    "old_hash_group_unexposed_sensitivity/candidate_4/point_metrics",
+    "old_hash_group_unexposed_sensitivity/candidate_5/point_metrics",
+    "old_hash_group_unexposed_sensitivity/candidate_6/point_metrics",
+    "old_hash_group_unexposed_sensitivity/old_baseline/point_metrics",
+    "internal_same_case/ensemble_stage_only/mean_probabilities_and_point_metrics",
+    "internal_same_case/ensemble_multitask/mean_probabilities_and_point_metrics",
+    "old_hash_group_unexposed_sensitivity/ensemble_stage_only/mean_probabilities_and_point_metrics",
+    "old_hash_group_unexposed_sensitivity/ensemble_multitask/mean_probabilities_and_point_metrics",
+    "original100/ensemble_stage_only/mean_probabilities_and_point_metrics",
+    "original100/ensemble_multitask/mean_probabilities_and_point_metrics",
+    "Reader_Kalapos/100_complete_metrics",
+    "Reader_Kanekar/100_complete_metrics",
+    "Reader_Thamburaj/100_complete_metrics",
+    "external__openneuro_ds007561/candidate_2/denominators_point_metrics_exact_intervals",
+    "external__openneuro_ds007561/candidate_4/denominators_point_metrics_exact_intervals",
+    "external__openneuro_ds007561/candidate_6/denominators_point_metrics_exact_intervals",
+    "external__openneuro_ds007561/ensemble_multitask_AD_CN/denominators_point_metrics_exact_intervals",
+    "test__besga_zenodo_3935636/candidate_2/denominators_point_metrics_exact_intervals",
+    "test__besga_zenodo_3935636/candidate_4/denominators_point_metrics_exact_intervals",
+    "test__besga_zenodo_3935636/candidate_6/denominators_point_metrics_exact_intervals",
+    "test__besga_zenodo_3935636/ensemble_multitask_AD_CN/denominators_point_metrics_exact_intervals"
+  ],
+  "displayed_primary_report_numeric_rows_checked": 21,
+  "original100_case_rows_in_report": 100,
+  "overview_reviewed": true,
+  "report_files": {
+    "docs/kevin_paper_20261011/Kevin_Experiment_Results.md": "818b459c3aa61e75fb70678c125d4ac3d30247ada93f6e14947145b738de780e",
+    "docs/kevin_paper_20261011/Kevin_Results_Overview.md": "479ccdf4218db0ac4a8e239dfb444e57c31e6a9a8eec866529317cc625f4a05b",
+    "docs/kevin_paper_20261011/analysis/manuscript_methods_addendum.md": "1ce3f68cf18149e6e0485273ac574973afdd0e65c874f632ae9ed16d6f4b2445"
+  },
+  "interpretation_audit": {
+    "unresolved_numeric_or_scientific_corrections": [],
+    "historical_suite_status_explained_in_overview": true,
+    "all_six_runs_and_both_conditions_reported": true,
+    "reader_denominators_100_each_and_no_missing": true,
+    "original100_reuse_and_no_clinical_reader_superiority_claim": true,
+    "primary_old_similarity_exposure_and_secondary_limits_disclosed": true,
+    "ensemble_one_image_gain_and_interval_including_zero_disclosed": true,
+    "clinical_failures_and_one_external_AD_disclosed": true,
+    "MCI_excluded_from_binary_denominators": true,
+    "recommended10_not_claimed_acquired_or_trained": true,
+    "overall_stronger_or_clinically_ready_claim_rejected": true,
+    "cleanup_claim_matches_local_verified_evidence": true,
+    "production_checkpoint_sha_unchanged": true
+  },
+  "scope_limits": "No model inference; no live cloud API called; local deletion evidence and parent-verified retrieval relied upon. Bootstrap intervals checked against frozen outputs, not independently rerun."
+}

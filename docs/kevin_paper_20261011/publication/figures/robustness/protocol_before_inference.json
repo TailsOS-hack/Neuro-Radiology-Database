@@ -1,0 +1,206 @@
+{
+  "label": "POST-HOC DESCRIPTIVE FIXED-CHECKPOINT AUDIT",
+  "created_utc": "2026-10-11T23:26:04.890863+00:00",
+  "script_sha256": "7955b7ad5c0d564bc25745e84f157c8544901d25ff2adb86f31bcc8e1b3d9f9a",
+  "scenarios": [
+    {
+      "name": "clean",
+      "family": "clean",
+      "value": 0
+    },
+    {
+      "name": "brightness_0.90",
+      "family": "brightness",
+      "value": 0.9
+    },
+    {
+      "name": "brightness_1.10",
+      "family": "brightness",
+      "value": 1.1
+    },
+    {
+      "name": "contrast_0.90",
+      "family": "contrast",
+      "value": 0.9
+    },
+    {
+      "name": "contrast_1.10",
+      "family": "contrast",
+      "value": 1.1
+    },
+    {
+      "name": "noise_sd0.01",
+      "family": "noise",
+      "value": 0.01
+    },
+    {
+      "name": "noise_sd0.02",
+      "family": "noise",
+      "value": 0.02
+    },
+    {
+      "name": "blur_sigma0.5",
+      "family": "blur",
+      "value": 0.5
+    },
+    {
+      "name": "blur_sigma1.0",
+      "family": "blur",
+      "value": 1.0
+    },
+    {
+      "name": "downsample_192",
+      "family": "downsample",
+      "value": 192
+    },
+    {
+      "name": "downsample_160",
+      "family": "downsample",
+      "value": 160
+    },
+    {
+      "name": "jpeg_quality90",
+      "family": "jpeg",
+      "value": 90
+    },
+    {
+      "name": "jpeg_quality70",
+      "family": "jpeg",
+      "value": 70
+    }
+  ],
+  "fixed_seed": 20261011,
+  "models": {
+    "old_baseline": {
+      "sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+      "mode": "old_baseline",
+      "seed": null
+    },
+    "candidate_1": {
+      "checkpoint_path": "results/stage_only_seed20261011/best.pt",
+      "checkpoint_sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+      "mode": "stage_only",
+      "seed": 20261011,
+      "epoch": 23,
+      "stage_validation_nll": 0.03747158972872587
+    },
+    "candidate_2": {
+      "checkpoint_path": "results/multitask_seed20261011/best.pt",
+      "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "mode": "multitask",
+      "seed": 20261011,
+      "epoch": 28,
+      "stage_validation_nll": 0.051600637482635964
+    },
+    "candidate_3": {
+      "checkpoint_path": "results/stage_only_seed20261012/best.pt",
+      "checkpoint_sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "mode": "stage_only",
+      "seed": 20261012,
+      "epoch": 37,
+      "stage_validation_nll": 0.03477062228208098
+    },
+    "candidate_4": {
+      "checkpoint_path": "results/multitask_seed20261012/best.pt",
+      "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "mode": "multitask",
+      "seed": 20261012,
+      "epoch": 59,
+      "stage_validation_nll": 0.04531075374947832
+    },
+    "candidate_5": {
+      "checkpoint_path": "results/stage_only_seed20261013/best.pt",
+      "checkpoint_sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+      "mode": "stage_only",
+      "seed": 20261013,
+      "epoch": 39,
+      "stage_validation_nll": 0.03694202273338021
+    },
+    "candidate_6": {
+      "checkpoint_path": "results/multitask_seed20261013/best.pt",
+      "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "mode": "multitask",
+      "seed": 20261013,
+      "epoch": 29,
+      "stage_validation_nll": 0.05403342983790774
+    }
+  },
+  "model_order": [
+    "old_baseline",
+    "candidate_1",
+    "candidate_3",
+    "candidate_5",
+    "candidate_2",
+    "candidate_4",
+    "candidate_6"
+  ],
+  "class_order": [
+    "MildDemented",
+    "ModerateDemented",
+    "NonDemented",
+    "VeryMildDemented"
+  ],
+  "cohort_sizes": {
+    "internal_same_case": 1058,
+    "original100": 100
+  },
+  "clean_comparison_tolerance": {
+    "absolute": 1e-05,
+    "relative": 0.0001,
+    "criterion": "abs(new-old) <= atol + rtol*abs(old), elementwise; mismatches reported, never overwritten"
+  },
+  "input_checksums": {
+    "docs/kevin_paper_20261011/training/train_candidate.py": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+    "docs/kevin_paper_20261011/training/evaluate_candidates.py": "7ecebb4db2843ab90152ee31d859e03e725d9c2d476637fada1d3b557bf8231d",
+    "models/alzheimers_classifier.pt": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+    "training_logs/experiments/kevin_20261011/prepared/stage_manifest.csv": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+    "training_logs/experiments/kevin_20261011/prepared/same_case_test_intersection.csv": "7cf400fe66e8edc9bf86b784976ab1682e1ee8e933ee0d90b15cfd785b36ac05",
+    "data/evaluation/ground_truth/radiologist_test_key.csv": "067b3b6bd3f7d1224e50befe7dcb11c43dff878aeb1aac6c6f3f9dd6eabdb9af",
+    "data/external/clinical_t1_preprocessed_v1/clinical_slices.csv": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/validation_selection_before_evaluation.json": "5ba9de51fe339ab6e470de496571430ab6f463a814efc858c228db954241c0c7",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/evaluation.json": "2ad94f62c20b3505f3585abb6165e75aa4a532e916f41d482f7f7f288f2a56d0",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/evaluation_figures/evaluation_figure_provenance.json": "03be03d3acab1a66a356f6f1fa39abc674736f94e74eb2881f748e12ca003db2",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261011/best.pt": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261011/best.pt": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261012/best.pt": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261012/best.pt": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/stage_only_seed20261013/best.pt": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/multitask_seed20261013/best.pt": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/old_baseline_internal_same_case_predictions.csv": "f9044f6274a4abc0cf1a0b7d2acb5b35b382cfee6d1ade18524621c52282cb7b",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/old_baseline_original100_predictions.csv": "f23a5373b85a7e6610450429062096dc89e2ea476fa57b6890d2d6984739de4e",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_1_internal_same_case_predictions.csv": "11894e3a11cc666b8a19e4acd577e485e863a41d0257d8019c37882377310667",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_1_original100_predictions.csv": "0969a84e99bf4d1bdc937d269a15d8b5db79fd0a1c013c62404275b179f543f2",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_3_internal_same_case_predictions.csv": "6c0da9e0c559fe8eaefa640d27abe59aba86332c066ac28f2c48b44a62ca70b6",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_3_original100_predictions.csv": "0606d6ef4e48b1aea5c8ca30e49a26578db67e1f963aed9ac5b05e1ae857dbba",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_5_internal_same_case_predictions.csv": "e5e4d87dff39e61b12652ff77e91ac014c5549c9af1f5878029bfdaa9469e7c4",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_5_original100_predictions.csv": "634cbc5f79bf48a1463ac0d379e48807be6cd1bbb204310752828900560a5080",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_internal_same_case_predictions.csv": "ecf9daf0156994b3cb448ada9a83cb0ae837f7f86bb6b5b8673d6452750592a7",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_2_original100_predictions.csv": "5d5968367644f82bda763a9e8759351ae283fc565222127852c34ed2d8e5b6f8",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_internal_same_case_predictions.csv": "62a9aeb0488afaf5bd5ad7d5c90c0f10df20de21a094cbd0c405e46c67ba8651",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_4_original100_predictions.csv": "741514166bccc279d5429e3c89ca26b125838117ff445fb0b01ce54d94d0e124",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_internal_same_case_predictions.csv": "1070ad55b82a052b83ec5503aa144b078b87ad969f2101388c5822ff4cd38572",
+    "training_logs/experiments/kevin_20261011/runpod_blackwell_20261011/frozen_evaluation_all6/candidate_6_original100_predictions.csv": "21173e84fb78980f84b00aae1fd9126cef2b72bc8629b560b414ec5b31f74af8"
+  },
+  "training": false,
+  "threshold_tuning": false,
+  "checkpoint_reselection": false,
+  "primary_experiment_changed": false,
+  "validation_preference_unchanged": "candidate_3",
+  "transform_order": "PIL decode RGB -> exact frozen torchvision Resize(224,224, antialias=True) -> fixed stress -> exact frozen ToTensor and ImageNet normalization",
+  "noise": "NumPy PCG64 per-case SHA256-derived seed; shared spatial noise across RGB channels; same normalized field across noise levels; clip [0,1] and round to uint8",
+  "blur": "Pillow GaussianBlur radius in pixels; an approximate Gaussian implementation",
+  "downsample": "Pillow bilinear resize down then bilinear return to224",
+  "jpeg": "Pillow JPEG encode/decode, subsampling=0, optimize=False",
+  "limitations": [
+    "Original100 is historically reused and has old training exposure.",
+    "Primary exact-row test membership does not establish patient independence.",
+    "Stress parameters were chosen after the primary experiment; this supplement is descriptive and post-hoc.",
+    "No MRI acquisition physics, patient variation, diagnosis shift, modality shift, prospective setting, or new clinical cohort is simulated.",
+    "No acceptance threshold or model superiority is inferred from this audit."
+  ],
+  "implementation_references": [
+    "https://docs.pytorch.org/vision/stable/generated/torchvision.transforms.ColorJitter.html",
+    "https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur",
+    "https://rsna.github.io/claim/checklist.html"
+  ]
+}

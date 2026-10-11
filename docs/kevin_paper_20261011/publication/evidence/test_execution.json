@@ -1,0 +1,38 @@
+{
+  "recorded_at_utc": "2026-10-11T23:27:40.443006+00:00",
+  "scope": "Software regression/guard tests; synthetic tests do not measure clinical performance.",
+  "checks": [
+    {
+      "exit_code": 0,
+      "tests_run": 51,
+      "result": "OK",
+      "log_sha256": "42f424cc4747bd999a513595e12f405a13a3264ff44683fba81d5a547b2a3986"
+    },
+    {
+      "exit_code": 0,
+      "tests_run": 11,
+      "result": "OK",
+      "log_sha256": "37f56f815b1a3d14ca5758cefc69b5bdcd3bf95bf8373e07f30ce125ac8fcc01",
+      "overlap_note": "These 11 Grad-CAM tests are included in the 51-test repository suite; not 62 distinct tests."
+    },
+    {
+      "script": "docs/kevin_paper_20261011/analysis/test_synthetic_analysis.py",
+      "sha256": "884459d1e05e40fc6fa7d72949ad90afb87d083eb9eeeef3572760e40f7a27c0",
+      "exit_code": 0,
+      "output": "test_bootstrap_is_paired_deterministic_and_clustered (__main__.SyntheticAnalysisTests.test_bootstrap_is_paired_deterministic_and_clustered) ... ok\ntest_exact_extreme_intervals_are_not_certain (__main__.SyntheticAnalysisTests.test_exact_extreme_intervals_are_not_certain) ... ok\ntest_freeze_selection_uses_only_validation_and_rejects_late_freeze (__main__.SyntheticAnalysisTests.test_freeze_selection_uses_only_validation_and_rejects_late_freeze) ... ok\ntest_full_six_candidate_schema_and_guards (__main__.SyntheticAnalysisTests.test_full_six_candidate_schema_and_guards) ... ok\ntest_identity_label_probability_guards (__main__.SyntheticAnalysisTests.test_identity_label_probability_guards) ... ok\ntest_metrics_hand_calculated_and_missing_class (__main__.SyntheticAnalysisTests.test_metrics_hand_calculated_and_missing_class) ... ok\ntest_prespecified_sensitivity_uses_exact_aligned_subset_and_preserves_primary (__main__.SyntheticAnalysisTests.test_prespecified_sensitivity_uses_exact_aligned_subset_and_preserves_primary) ... ok\ntest_reader_missingness_requires_explicit_paired_complete_cases (__main__.SyntheticAnalysisTests.test_reader_missingness_requires_explicit_paired_complete_cases) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 3.815s\n\nOK\n"
+    },
+    {
+      "script": "docs/kevin_paper_20261011/analysis/test_synthetic_results_report.py",
+      "sha256": "869abaffdf055a79eb8937cc9297cff015baa58ac6a66457624bc6304adb129a",
+      "exit_code": 0,
+      "output": "test_changed_aligned_results_are_refused (__main__.SyntheticReportTests.test_changed_aligned_results_are_refused) ... ok\ntest_changed_checkpoint_is_refused (__main__.SyntheticReportTests.test_changed_checkpoint_is_refused) ... ok\ntest_cleanup_is_explicit_and_never_inferred (__main__.SyntheticReportTests.test_cleanup_is_explicit_and_never_inferred) ... ok\ntest_complete_report_includes_all_conditions_and_exact_counts (__main__.SyntheticReportTests.test_complete_report_includes_all_conditions_and_exact_counts) ... ok\ntest_incomplete_suite_is_refused (__main__.SyntheticReportTests.test_incomplete_suite_is_refused) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.991s\n\nOK\n"
+    },
+    {
+      "script": "docs/kevin_paper_20261011/analysis/test_ensemble_supplement.py",
+      "sha256": "9b34bc42a3132383f857757328905ce79c3b9c49358de8a6a3c877a7db4bf7df",
+      "exit_code": 0,
+      "output": "test_calibration_and_argmax_tie_definitions (__main__.EnsembleSupplementTests.test_calibration_and_argmax_tie_definitions) ... ok\ntest_freeze_before_any_checkpoint_and_late_launch_guards (__main__.EnsembleSupplementTests.test_freeze_before_any_checkpoint_and_late_launch_guards) ... ok\ntest_frozen_protocol_manifest_and_primary_report_guards (__main__.EnsembleSupplementTests.test_frozen_protocol_manifest_and_primary_report_guards) ... ok\ntest_full_supplement_and_reproducibility_spec_preserve_primary (__main__.EnsembleSupplementTests.test_full_supplement_and_reproducibility_spec_preserve_primary) ... ok\ntest_missing_cases_and_checkpoint_mismatch_fail (__main__.EnsembleSupplementTests.test_missing_cases_and_checkpoint_mismatch_fail) ... ok\ntest_spec_rejects_wrong_transform_or_member_count (__main__.EnsembleSupplementTests.test_spec_rejects_wrong_transform_or_member_count) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 6.671s\n\nOK\n"
+    }
+  ],
+  "all_passed": true
+}

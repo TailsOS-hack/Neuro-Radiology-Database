@@ -1,0 +1,95 @@
+{
+  "acquisition_date": "2026-10-11",
+  "acquisition_mode": "Selective extraction of original T1 entries from downloaded archive prefix plus the provider central-directory tail; processed duplicates not acquired.",
+  "age_years": {
+    "maximum": 89.0,
+    "mean": 74.92307692307692,
+    "median": 75.5,
+    "minimum": 55.0,
+    "n": 78
+  },
+  "age_years_by_source_group": {
+    "crl": {
+      "maximum": 89.0,
+      "mean": 73.63157894736842,
+      "median": 74.0,
+      "minimum": 56.0,
+      "n": 19
+    },
+    "ea": {
+      "maximum": 88.0,
+      "mean": 79.08571428571429,
+      "median": 81.0,
+      "minimum": 68.0,
+      "n": 35
+    },
+    "tb": {
+      "maximum": 86.0,
+      "mean": 69.875,
+      "median": 70.0,
+      "minimum": 55.0,
+      "n": 24
+    }
+  },
+  "article": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7658647/",
+  "clinical_archive_provider_md5_verified": true,
+  "clinical_rows": 78,
+  "clinical_unique_study_identifiers": 78,
+  "excluded_clinical_csv": "clinical_data_corrected.csv",
+  "full_archive_expected_bytes": 5280797009,
+  "full_t1_archive_md5_note": "Full source ZIP was not acquired/hashed by this process. The sparse assembly is not a complete source archive.",
+  "full_t1_archive_md5_verified": false,
+  "imaging_clinical_joins": 78,
+  "limitations": [
+    "Counts are source study participants and scan files, not an external validation result.",
+    "Source ea/crl/tb groups are retained. Bipolar disorder is not assumed to be a dementia or cognitively normal class.",
+    "No endpoint mapping, development/external role, or train/validation/test split has been approved.",
+    "NIfTI headers/voxel arrays decoded successfully; anatomical quality, orientation, defacing/de-identification, and clinical suitability remain pending.",
+    "No image identity hashing across other cohorts, patient linkage, duplicate-content exclusion, or independent-cohort claim was completed.",
+    "Biomarker CSVs were preserved but their patient linkage/clinical meaning was not audited.",
+    "No training, inference, model/metric replacement, or raw patient-level publication occurred."
+  ],
+  "prefix_bytes_used": 709350600,
+  "selected_clinical_csvs": 13,
+  "selected_mri_compressed_file_bytes": 709344779,
+  "selected_mri_entries": 78,
+  "source_diagnosis_counts": {
+    "crl": 19,
+    "ea": 35,
+    "tb": 24
+  },
+  "source_diagnosis_meanings": {
+    "crl": "cognitively normal control",
+    "ea": "Alzheimer disease",
+    "tb": "bipolar disorder"
+  },
+  "source_doi": "10.5281/zenodo.3935636",
+  "source_gender_code_counts": {
+    "1": 43,
+    "2": 35
+  },
+  "source_gender_codes": "retained without inferred coding/sex mapping",
+  "source_license": "CC BY 4.0",
+  "status": "SELECTIVE_ORIGINALS_ACQUIRED_AND_TECHNICALLY_DECODED; STUDY_NOT_READY",
+  "tail_bytes_used": 65536,
+  "technical_checks": {
+    "datatype_code_counts": {
+      "4": 78
+    },
+    "gzip_crc_verified": 78,
+    "headers_with_nonempty_description": 0,
+    "nifti_voxel_arrays_decoded": 78,
+    "provider_per_entry_sha256_available": false,
+    "scaled_nonfinite_voxels": 0,
+    "sha256_local_readback_verified": 91,
+    "shape_counts": {
+      "192x256x160": 1,
+      "192x256x176": 77
+    },
+    "stored_nonfinite_voxels": 0,
+    "zip_entry_crc32_verified": 91
+  },
+  "training_ready": false,
+  "unmatched_clinical_rows": 0,
+  "unmatched_imaging_rows": 0
+}

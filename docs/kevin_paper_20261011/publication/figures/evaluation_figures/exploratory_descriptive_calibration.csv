@@ -1,0 +1,22 @@
+cohort,n,checkpoint,display_name,multiclass_brier_sum_0_to_2,top_label_ECE_10_equal_width_bins
+original100,100,old_baseline,Old baseline,0.0024962976386978665,0.039784303903579676
+original100,100,candidate_1,Stage only | seed 20261011,0.0172470833839223,0.044118481874465904
+original100,100,candidate_3,Stage only | seed 20261012,0.0035045695663462606,0.036800355911254884
+original100,100,candidate_5,Stage only | seed 20261013,0.006124411308239391,0.04351862311363224
+original100,100,candidate_2,Multitask | seed 20261011,0.006304867422869234,0.05192950010299684
+original100,100,candidate_4,Multitask | seed 20261012,0.020599695386918776,0.032192105650901734
+original100,100,candidate_6,Multitask | seed 20261013,0.012046129488306412,0.05425630509853366
+internal_same_case,1058,old_baseline,Old baseline,0.004632784241488439,0.03722943909226839
+internal_same_case,1058,candidate_1,Stage only | seed 20261011,0.004337198730156296,0.03442084451253561
+internal_same_case,1058,candidate_3,Stage only | seed 20261012,0.0031423019566584323,0.0348801575108151
+internal_same_case,1058,candidate_5,Stage only | seed 20261013,0.0032287647716094385,0.03662363094733654
+internal_same_case,1058,candidate_2,Multitask | seed 20261011,0.010574361488670461,0.04505120262869812
+internal_same_case,1058,candidate_4,Multitask | seed 20261012,0.005758806103102646,0.04094038376961399
+internal_same_case,1058,candidate_6,Multitask | seed 20261013,0.0074286824739030945,0.04457212587385411
+old_hash_group_unexposed_sensitivity,756,old_baseline,Old baseline,0.005512029368940043,0.03759770970495924
+old_hash_group_unexposed_sensitivity,756,candidate_1,Stage only | seed 20261011,0.005464019612171906,0.03537409622517842
+old_hash_group_unexposed_sensitivity,756,candidate_3,Stage only | seed 20261012,0.003800836268929915,0.03561155868585782
+old_hash_group_unexposed_sensitivity,756,candidate_5,Stage only | seed 20261013,0.003497078531833294,0.0366822016775293
+old_hash_group_unexposed_sensitivity,756,candidate_2,Multitask | seed 20261011,0.012505397948820737,0.04477666586479809
+old_hash_group_unexposed_sensitivity,756,candidate_4,Multitask | seed 20261012,0.007213349517272378,0.04221854544190508
+old_hash_group_unexposed_sensitivity,756,candidate_6,Multitask | seed 20261013,0.007378973446425925,0.047153369538367795

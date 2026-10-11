@@ -1,0 +1,30 @@
+{
+  "role": "Public aggregate completion record; operational identifiers omitted",
+  "archive_sha256": "3b73c98a8c9c2445cb327edf2999d1519eb257ccf123ca3f070d1043f636d2f1",
+  "archive_bytes": 653723249,
+  "verified_payload_files": 415,
+  "destination_readback_verified": true,
+  "retrieval_verified_before_deletion": true,
+  "all_task_created_paid_resources_absent": true,
+  "historical_training_orchestrator_state": "training_complete_awaiting_frozen_evaluation",
+  "historical_state_is_not_current_evaluation_status": true,
+  "evaluation_completion": {
+    "completed_at": "2026-10-11T23:10:39.287833+00:00",
+    "checkpoints": 7,
+    "candidate_order": [
+      "stage_only_seed20261011",
+      "multitask_seed20261011",
+      "stage_only_seed20261012",
+      "multitask_seed20261012",
+      "stage_only_seed20261013",
+      "multitask_seed20261013"
+    ],
+    "evaluation_sha256": "2ad94f62c20b3505f3585abb6165e75aa4a532e916f41d482f7f7f288f2a56d0",
+    "validation_selection_sha256": "5ba9de51fe339ab6e470de496571430ab6f463a814efc858c228db954241c0c7"
+  },
+  "source_record_sha256": {
+    "retrieval": "1381d276b2706b13828f8b7cf99f60782624aea18777d4505eee1a915dbb33da",
+    "cleanup": "5df97c4a5c05ee9db25275e9f3f38a2181df208d35c94f46d07a3cb60c4da561",
+    "historical_training_status": "40400a103ddce71e8b3322e1313723caf4f5838d43debc2acacf8d035c7519e3"
+  }
+}

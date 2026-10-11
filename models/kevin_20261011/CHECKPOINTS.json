@@ -1,0 +1,73 @@
+{
+  "role": "Six validation-selected research checkpoints; production baseline unchanged; not clinically ready.",
+  "validation_preferred_condition": "stage_only",
+  "exploratory_representative": "candidate_3",
+  "class_order": [
+    "MildDemented",
+    "ModerateDemented",
+    "NonDemented",
+    "VeryMildDemented"
+  ],
+  "checkpoints": [
+    {
+      "candidate": "candidate_1",
+      "condition": "stage_only",
+      "seed": 20261011,
+      "selected_epoch": 23,
+      "validation_nll": 0.03747158972872587,
+      "file": "stage_only_seed20261011.pt",
+      "sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771",
+      "bytes": 50835668
+    },
+    {
+      "candidate": "candidate_2",
+      "condition": "multitask",
+      "seed": 20261011,
+      "selected_epoch": 28,
+      "validation_nll": 0.051600637482635964,
+      "file": "multitask_seed20261011.pt",
+      "sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "bytes": 50860918
+    },
+    {
+      "candidate": "candidate_3",
+      "condition": "stage_only",
+      "seed": 20261012,
+      "selected_epoch": 37,
+      "validation_nll": 0.03477062228208098,
+      "file": "stage_only_seed20261012.pt",
+      "sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e",
+      "bytes": 50837460
+    },
+    {
+      "candidate": "candidate_4",
+      "condition": "multitask",
+      "seed": 20261012,
+      "selected_epoch": 59,
+      "validation_nll": 0.04531075374947832,
+      "file": "multitask_seed20261012.pt",
+      "sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "bytes": 50867126
+    },
+    {
+      "candidate": "candidate_5",
+      "condition": "stage_only",
+      "seed": 20261013,
+      "selected_epoch": 39,
+      "validation_nll": 0.03694202273338021,
+      "file": "stage_only_seed20261013.pt",
+      "sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b",
+      "bytes": 50837780
+    },
+    {
+      "candidate": "candidate_6",
+      "condition": "multitask",
+      "seed": 20261013,
+      "selected_epoch": 29,
+      "validation_nll": 0.05403342983790774,
+      "file": "multitask_seed20261013.pt",
+      "sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "bytes": 50861110
+    }
+  ]
+}

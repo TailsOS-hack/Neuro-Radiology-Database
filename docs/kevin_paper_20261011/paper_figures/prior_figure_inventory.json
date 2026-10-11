@@ -1,0 +1,43 @@
+{
+  "source_archive": "paper_package/Dementia_Only_2026-10-09.zip",
+  "source_archive_sha256": "18ddbb41e03e834d0e6374a949c72af2e66985d2012e3d83a209e4ec3656d6ee",
+  "archive_integrity": "passed full ZIP CRC verification",
+  "png_figures": 137,
+  "categories": {
+    "original100_attribution": 100,
+    "training_loss": 4,
+    "model_reader_accuracy_mean_range": 4,
+    "evaluation_confusion": 5,
+    "per_class_model_reader_recall": 1,
+    "class_balanced_attribution_examples": 8,
+    "prior_review_attribution_examples": 7,
+    "training_accuracy": 2,
+    "training_resubstitution_confusion": 1,
+    "validation_confusion": 1,
+    "calibration_reliability": 1,
+    "confidence_distribution": 1,
+    "precision_recall": 1,
+    "roc": 1
+  },
+  "quantitative_figures": 22,
+  "attribution_figures": 115,
+  "scope_note": "Dementia-only archive inventory; source recording asks to repeat all figures. No unrelated router, tumor or VLM measurements are imported.",
+  "additional_current_categories": [
+    "seed spread across three fixed seeds",
+    "error audit for all nine stage models",
+    "clinical subject confusion and exact binomial intervals",
+    "dementia workflow and two-condition architecture",
+    "paired accuracy differences using frozen conditional bootstrap intervals"
+  ],
+  "quantitative_recreation": {
+    "status": "complete",
+    "current_png_figures": 34,
+    "current_pdf_figures": 34,
+    "index": "generated/FIGURE_INDEX.csv",
+    "qa": "figure_qa.json",
+    "all_prior_quantitative_families_covered": true,
+    "training_replay": "Post-hoc clean final-checkpoint resubstitution; not epoch-augmentation draws or generalization evidence.",
+    "full_test_replay": "Additional post-hoc5450-image confusion display; unchanged primary1058 and sensitivity756 retained."
+  },
+  "attribution_recreation": "Parent-owned completed 115 case panels plus two attribution-control summary figures; see ../posthoc_explainability/results."
+}

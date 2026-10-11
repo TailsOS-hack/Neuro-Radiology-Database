@@ -1,0 +1,43 @@
+{
+  "status": "posthoc_stress_outputs_verified",
+  "created_utc": "2026-10-11T23:29:46.827507+00:00",
+  "output_manifest_sha256": "ef8f0714038b6df9a1b356f0b7708638fa234941681830306de62f109af3be07",
+  "manifest_entries_readback_verified": 107,
+  "prediction_csv_files": 91,
+  "prediction_rows_checked": 105378,
+  "scenario_metric_records": 182,
+  "all_confusion_matrices_and_accuracy_recomputed_from_csv": true,
+  "figures": [
+    {
+      "path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/internal_same_case_accuracy_stress_curves.png",
+      "sha256": "2f631e940240a7a57f641b749c138e67f9cd7baaf9737d0f1705b7c4c3b86bc0",
+      "visual_inspection": "pass: full title/legend/labels/caption visible; all seven models retained; no clipping or overlap observed"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/internal_same_case_label_flip_fraction_stress_curves.png",
+      "sha256": "1059e7670a29c743ab4ce8fd3a8616660ffcbe3b5566ce8725525bb0dc3fc090",
+      "visual_inspection": "pass: full title/legend/labels/caption visible; all seven models retained; no clipping or overlap observed"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/original100_accuracy_stress_curves.png",
+      "sha256": "efd282e3e6f58306372c1c51a04f6362b60bccd8cabcfc6c37fc252f828f7b20",
+      "visual_inspection": "pass: full title/legend/labels/caption visible; all seven models retained; no clipping or overlap observed"
+    },
+    {
+      "path": "docs/kevin_paper_20261011/posthoc_robustness/results_20261011/original100_label_flip_fraction_stress_curves.png",
+      "sha256": "01c2e70ba2dd0d6d8b439f4c7d9bb1daa400e40cc47459f3dfa29376d88fbd3c",
+      "visual_inspection": "pass: full title/legend/labels/caption visible; all seven models retained; no clipping or overlap observed"
+    }
+  ],
+  "scenario_input_grid_review": "All13 fixed transformations viewed on first original100 key row; no crop/order/render failure observed. This is image-processing QA, not clinical endorsement of transformed labels.",
+  "curve_display_limits": "Axes retain0..1; small changes may overlap. Exact scenario metrics and FINDINGS.md retain all quantitative changes.",
+  "synthetic_transform_limits": [
+    "Single fixed noise field per case evaluated at two amplitudes; variability across noise realizations is not estimated.",
+    "No joint/composed corruption or patient/scanner/site shift was tested.",
+    "No clinical inference or tuning occurred."
+  ],
+  "input_bundle_verification": "docs/kevin_paper_20261011/posthoc_robustness/transfer_input_verification.json",
+  "input_bundle_verification_sha256": "f23d07a44da7c9590577a0b40e6a53d64655b4bd8c6468bef94d217de4fc5ea2",
+  "protected_experiment_unchanged": true,
+  "pdf_check": "Matching PDF files were checksum/signature verified; PNGs visually reviewed, PDFs not independently rasterized."
+}

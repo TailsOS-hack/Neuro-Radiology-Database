@@ -1,0 +1,37 @@
+Historical pre-completion readiness protocol snapshot. Completed results are in Overview.md and Full_Results.md. Public derivative; private/runtime details omitted.
+
+Kevin dementia model: real-world readiness assessment
+
+The current work is a research experiment. Neither a stronger model overall nor clinical readiness is established by this review. More GPU power and more epochs may improve optimization; they cannot repair missing patient provenance, weak clinical labels or an inadequate external test. This assessment reviews the frozen protocol and data evidence, not model outcomes or the completion status of the six runs.
+
+What is already protected
+
+The frozen implementation separates the four legacy image classes from clinical AD/control, keeps MCI out of binary scoring, groups the supplied clinical subjects and their slices, and keeps OpenNeuro outside fitting and checkpoint selection. Legacy image-similarity grouping and original100-connected exclusions reduce observed overlap in the new experiment. Six prespecified condition/seed runs, validation-only selection, raw curves, all-candidate reporting, case-aligned readers and conditional uncertainty analysis support reproducibility. These are research safeguards, not proof of clinical robustness; synthetic tests verify software behavior only.
+
+What must still be measured or developed
+
+Complete and report the frozen experiment without selecting a winner on its held-out results. Preserve class-specific regressions and all seeds. Add approved original MRI cohorts with reliable person/visit linkage and matched clinical reference labels. Reserve relevant sites/sources/scanners before development, reconcile shared participants, and prespecify subgroup and failure analyses using adequately represented age, verified sex/gender, acquisition and other supported factors. Do not invent missing metadata or treat a sparse subgroup as evidence of equal performance.
+
+Current probabilities use softmax and argmax. There is no validated calibration or abstention component. For a future model version, choose and fit calibration and uncertainty/rejection rules only on suitable development/validation data, freeze them, and evaluate reliability, proper scoring measures, selective risk versus coverage and subgroup behavior on newly reserved untouched cohorts. Do not tune thresholds on this experiment's test results or claim softmax recognizes unfamiliar disease or modality.
+
+A clinical input contract and rejection gate are also needed. The current clinical experiment is a heuristic T1 MRI adaptation to a 2D model; it does not validate T2/FLAIR, CT, arbitrary screenshots or poor-quality scans. Verify acquisition/provenance and quality, reject unsupported or corrupt inputs, and record failures instead of forcing a class. Qualified radiologists should review the anatomy/preprocessing and difficult cases. Repeat-scan and plausible acquisition/quality stress tests can diagnose sensitivity, but synthetic perturbations cannot replace independent clinical cohorts.
+
+The actual blockers
+
+Legacy patient and augmentation-family identifiers are absent. The original100 benchmark is historically reused. Of the 1,058 primary comparison images, 302 have an old training/validation similarity-group mate; the 756-image conservative secondary subset still cannot establish patient independence. Clinical development uses 32 Besga training and 11 validation source subjects, with 11 internal-test subjects. The OpenNeuro binary pilot has 15 subjects but only 1 AD case, plus 5 MCI cases for predictions only. Both sources were inspected during preprocessing preparation; age/source confounding and cross-repository identity remain unresolved. These limits prevent a robust external clinical-generalization claim, whatever the eventual accuracy.
+
+Before moving toward clinical use, clinical collaborators must define intended use, population, inputs, reference standard and acceptable error costs, and adjudicate appropriate source clinical labels and ambiguous cases. They must prespecify clinically justified acceptance and uncertainty criteria before evaluation, rather than borrowing a convenient threshold after results. Independent, clinically representative person-grouped source-heldout evidence and validated quality/uncertainty handling are required. After retrospective requirements are met, a qualified clinical team should oversee a prospective silent evaluation in the intended workflow, with no patient-care decisions driven by model outputs, and with failure capture, adjudication, drift monitoring and human review. This note makes no regulatory approval or authorization determination.
+
+The ten recommended official sources are acquisition priorities, not ten completed training cohorts; their approved raw releases remain pending in the current acquisition record. More slices or overlapping releases do not increase the independent patient count. The matching machine-readable file records each implemented protection, unfinished check, blocker, milestone and exact evidence-file hash.
+
+Evidence
+
+real_world_readiness.json
+methods_protocol_snapshot.md
+../clinical_preprocessing_summary.json
+../current_local_audit.json
+../abid_dataset_crosswalk.json
+old_hash_group_unexposed_sensitivity_audit.json
+
+Reporting reference: CLAIM 2024 update, items 30 (robustness), 33 (external testing), 37 (subgroups), 38 (uncertainty/calibration), primary source verified during this task:
+https://pubs.rsna.org/doi/10.1148/ryai.240300
