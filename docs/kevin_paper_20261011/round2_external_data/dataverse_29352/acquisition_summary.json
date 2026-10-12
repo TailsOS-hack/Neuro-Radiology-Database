@@ -1,0 +1,44 @@
+{
+  "status": "downloaded_and_verified_header_inventory",
+  "checked_utc": "2026-10-12T01:03:55.882904+00:00",
+  "dataset_doi": "10.7910/DVN/29352",
+  "dataset_version": "2.0",
+  "license": "CC0-1.0",
+  "archive_file_doi": "doi:10.7910/DVN/29352/YRDYHM",
+  "provider_file_id": 2544368,
+  "provider_archive_bytes": 1495117504,
+  "provider_md5": "e4df070acb9a15451e391b9acd00bf04",
+  "md5": "e4df070acb9a15451e391b9acd00bf04",
+  "sha256": "55a88acce2aa77b75b8c587e9ed76fe48b181ab28d13130a7ad9daf2b4cc4481",
+  "access_route": "Ordinary Safari public dataset download; official API metadata saved through Safari. No account, challenge solving, access bypass, or contact.",
+  "metadata_sha256": "daaff1a8e5a72de90df6e4a36a73b16e4daead55f472142c3d01082cad053834",
+  "member_count": 93,
+  "nifti_count": 59,
+  "structural_count": 29,
+  "structural_group_counts": {
+    "AD": 9,
+    "NCS": 10,
+    "MCI": 10
+  },
+  "functional_count": 30,
+  "independent_file_md5_matches": 59,
+  "individual_structural_records": 29,
+  "header_payload_lengths_verified": true,
+  "structural_shapes": [
+    "[224, 256, 176]"
+  ],
+  "unique_structural_sha256": 29,
+  "t1_weighting_basis": "Provider related publication and Clark et al. specify MDEFT anatomical T1; filenames and NIfTI dimensions support structural scans, not independent sequence verification.",
+  "subject_mapping_basis": "Original archive group/subject hierarchy, independently matched against diagnosis-tagged file MD5 where listed; subject numbers repeat across groups and must be prefixed.",
+  "role": "Untouched candidate for a separately frozen clinical external analysis; not training, validation selection, or a four-stage label source.",
+  "eligibility_limits": [
+    "Small source-specific cohort; candidate AD-versus-healthy-control denominator must use available T1 counts, with MCI separate.",
+    "Patient independence against unresolved legacy source cannot be proved from pseudonymous IDs alone.",
+    "Age, sex, severity, reference-standard adjudication, image quality, defacing and residual header privacy still require clinical/data review.",
+    "No clinical-readiness claim; acquisition is not external model validation."
+  ],
+  "model_inference_performed": false,
+  "preprocessing_performed": false,
+  "extraction_performed": false,
+  "source_script_sha256": "9e92320ec43da78919d7875ccc9e0bb6ebdf48d5cb5181e02fcf58ae9fae0b79"
+}

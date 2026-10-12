@@ -1,0 +1,26 @@
+{
+  "status": "passed_independent_static_and_manifest_review",
+  "recorded_at_utc": "2026-10-12T00:27:31.919869+00:00",
+  "trainer_sha256": "94153e6af976fb8d31b9d3d2ae7f2ce6d011e3ef59a94909b4fdec3d4b867dcc",
+  "protocol_sha256": "26b5c0a178a02f1cb82fad148aadc540a07cbfa93784950c49c7f941bb600ba2",
+  "train_val_rows": 21728,
+  "stress_rows": 256,
+  "stress_distinct_groups": 256,
+  "original_manifest_columns_preserved": true,
+  "train_val_group_intersection_empty": true,
+  "stress_selection_independently_recomputed": true,
+  "all_mask_payload_sha256_verified": true,
+  "all_starting_checkpoint_sha256_verified": true,
+  "all_protocol_source_sha256_verified": true,
+  "static_code_findings": [
+    "No outstanding launch correctness blocker found.",
+    "Initial model paths now align with transfer bundle.",
+    "Epoch0 same-runtime fallback, objective, guards, selection tie/min_delta, fulltrain weighting and allseed convergence rules agree with frozen protocol.",
+    "Maxepochs withoutplateau requires validation-only convergence review before test addon/evaluation."
+  ],
+  "limitations": [
+    "Independent source review and actual manifest/file verification; no new training or model inference performed by reviewer.",
+    "Nine unit tests and two MPS smokes reviewed from implementation_checks; they establish software behavior only.",
+    "All later benchmarks retrospective; heuristic support and synthetic stresses do not establish clinical readiness."
+  ]
+}

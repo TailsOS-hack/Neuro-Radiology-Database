@@ -1,0 +1,94 @@
+{
+  "status": "frozen_exploratory_preprocessing_gross_visual_qc_complete",
+  "checked_utc": "2026-10-12T01:05:29.815239+00:00",
+  "dataset_doi": "10.7910/DVN/29352",
+  "license": "CC0-1.0",
+  "source_archive_sha256": "55a88acce2aa77b75b8c587e9ed76fe48b181ab28d13130a7ad9daf2b4cc4481",
+  "manifest": "data/external/clinical_harvard29352_v1/clinical_slices.csv",
+  "manifest_sha256": "504d2b04d223637fcd92ee9072341b43a2f7ed4e44e7d0043b28c70137d8585d",
+  "subjects_in_provider_release": 30,
+  "subjects_with_structural_t1": 29,
+  "subjects_processed": 29,
+  "processed_diagnosis_counts": {
+    "CN": 10,
+    "AD": 9,
+    "MCI": 10
+  },
+  "slices_written": 261,
+  "unavailable_t1_subjects": 1,
+  "unavailable_t1_diagnosis_counts": {
+    "AD": 1
+  },
+  "preprocessing_failures": 0,
+  "all_subjects_retained_in_private_table": true,
+  "all_processed_subjects_external": true,
+  "mci_binary_labels_blank": true,
+  "binary_scoring_subjects": 19,
+  "preprocessing_version": "exploratory_t1_axial_v1",
+  "preprocessing_helper_sha256": "bc3e1c7012cc54e9453af38d554073b3666cbc115fbb2a2072ed10a822f49475",
+  "unchanged_slice_fractions": [
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85
+  ],
+  "protected_historical_files_sha256": {
+    "docs/kevin_paper_20261011/preprocess_clinical_t1.py": "bc3e1c7012cc54e9453af38d554073b3666cbc115fbb2a2072ed10a822f49475",
+    "data/external/clinical_t1_preprocessed_v1/clinical_slices.csv": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+    "data/external/clinical_t1_preprocessed_v1/subjects.csv": "7ef68ae7b2ff9f8428306b9801a79f7b84d32f1fade2b270d45b7b8dbb9d6bb7",
+    "data/external/clinical_t1_preprocessed_v1/preprocessing_qc_private.json": "6011c8730a08bd651ccc3de4412db058739b034f47460eff71c295205b75de45",
+    "docs/kevin_paper_20261011/clinical_preprocessing_summary.json": "06ff44cc979c0940daa460499dd81cbf2b66fd582438c4fb0d88991e2cd30ba9"
+  },
+  "protected_historical_files_unchanged": true,
+  "exact_cross_cohort_duplicate_matches": 0,
+  "exact_within_cohort_cross_subject_duplicates": {
+    "raw_bytes": 0,
+    "decoded_voxels": 0,
+    "prepared_pixels": 0
+  },
+  "prior_raw_subjects_checked": 98,
+  "prior_processed_slices_checked": 666,
+  "gross_visual_qc": {
+    "status": "gross_all_subject_rendering_review_complete",
+    "reviewed_utc": "2026-10-12T01:06:26.276425+00:00",
+    "reviewer": "Codex visual inspection; not radiologist review",
+    "subjects_reviewed": 29,
+    "slices_reviewed": 261,
+    "pages_reviewed": 5,
+    "labels": "Opaque subject IDs and fixed slice fractions; no diagnosis or model outcome displayed",
+    "findings": [
+      "Every available subject has a recognizable inferior-to-superior axial anatomical sequence; no blank or corrupted rendered image was observed.",
+      "Head pitch, cranial shape, relative anatomical levels, image sharpness and intensity vary. Fractions do not provide atlas-aligned anatomy.",
+      "Anterior extracranial cutouts and peripheral tissue appearance vary across subjects; source preprocessing and image appearance remain possible confounders.",
+      "No gross brain truncation attributable to the square display crop was apparent at montage scale.",
+      "All29available subjects are retained. The30thparticipant has no provider T1 and remains explicitly listed as unavailable."
+    ],
+    "excluded_subjects": 0,
+    "model_outcomes_inspected": false,
+    "scope": "Gross rendering/anatomical plausibility only, not diagnostic review, validated segmentation/localization, defacing certification, or clinical image-quality adjudication.",
+    "qa_sha256": {
+      "all_subjects_nine_slices_01.png": "c389b32a1df1039f0572ce96e63d23464a61825fe7ebb03f572110f75fc28862",
+      "all_subjects_nine_slices_02.png": "d120c819708e94530244d3ade75c5091a91701c256c45b17f027838ba61daf24",
+      "all_subjects_nine_slices_03.png": "9c00ef9328c750852a3a0d54b561611bf5753d5b9c04ffac16e291f59d5f97ac",
+      "all_subjects_nine_slices_04.png": "4e9bb12d5795370cd0d25deca978006b9d3e620208f25f5758aec4baa9c38eb3",
+      "all_subjects_nine_slices_05.png": "f84abc5d0662fe88f86a3af93b17f85d9950f0c3caf01e61e00cf55accebaed2"
+    }
+  },
+  "qa_pages": 5,
+  "clinical_protocol_frozen": false,
+  "model_inference_performed": false,
+  "limitations": [
+    "Gross rendering QC does not establish clinical or anatomical validity.",
+    "The original fixed heuristic has no atlas registration, validated skull stripping, bias-field correction, or scanner harmonization.",
+    "Exact duplicate checks do not establish patient independence against unidentified legacy source data.",
+    "A small single-site probable-AD/healthy-control cohort cannot establish real-world clinical readiness.",
+    "Missing T1 is retained and reported; no replacement or imputation is performed."
+  ],
+  "wrapper_sha256": "d23ea3ec1c5c75319bd0d81cb46f3dea6548cbf7d8fb631ed0e8e08919c005ff",
+  "visual_qc_sha256": "995dbf5c5c627bb9bdd0bde63108ee02fd129d944611fccc5fc6efa1358cbc99"
+}

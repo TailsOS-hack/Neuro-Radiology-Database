@@ -1,0 +1,25 @@
+{
+  "status": "synthetic_tests_and_independent_review_passed",
+  "created_utc": "2026-10-12T01:32:38.193951+00:00",
+  "helper_sha256": "59567b3fbb60a7201caea3d8d19c6b56f812b9047253877fe4892d577f405886",
+  "tests_sha256": "1d2fa40ceabc9ed726d34ec061e152101fdeb72916cd81f8dc4bf22adb2c8e94",
+  "frozen_attribution_source_sha256": "5d44bcc8b22f337619fe7f20e307271f41a7669901540294e04f53dd9328c074",
+  "synthetic_tests_passed": 7,
+  "tests": [
+    "byte-identical original payload copy and unmodified source",
+    "complete unique case membership and state flags",
+    "native-mass and randomization metric corruption rejection",
+    "probability replay discrepancy retains blocked completion",
+    "failed native map counted without fabricated array",
+    "wrong trace, changed protocol and unexpected payload rejection",
+    "symlink, source mutation and existing destination refusal"
+  ],
+  "real_failure_trace_pin_verified": true,
+  "real_model_inference_performed": false,
+  "real_model_constructed": false,
+  "production_recovery_performed": false,
+  "independent_review": "paper_claim_audit: no execution blocker; synthetic traceback portability issue resolved",
+  "preservation": "No frozen source or tolerance changed. Original attribution directory remains untouched; recovery writes a new sibling.",
+  "evidence_limit": "Original in-memory model assertions are evidenced by the exact traceback and pinned control flow, not re-executed by this artifact-only helper.",
+  "actual_postprocessing": "Root will run helper after transfer and inspect its explicit recovery receipt and numerical marker."
+}

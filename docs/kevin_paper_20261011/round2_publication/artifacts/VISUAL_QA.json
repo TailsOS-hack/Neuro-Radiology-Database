@@ -1,0 +1,15 @@
+{
+  "stage": {
+    "status": "passed_numeric_and_visual_review",
+    "real_data": true,
+    "source_receipt_sha256": "948898bb5b6dad40254c706ef4035cfa5687fa9e8198d49532709fe4fb9419f0",
+    "reviewed_export_visuals": 182,
+    "attribution_probability_replay_status": "blocked_cloud_probability_replay_review"
+  },
+  "clinical": {
+    "status": "passed_numeric_and_visual_review",
+    "real_data": true,
+    "source_receipt_sha256": "186b51ffd1094bbbfce68f71065eeadf5c434c2d7cbd8d964fbfc8ca6e27e188",
+    "reviewed_export_visuals": 44
+  }
+}

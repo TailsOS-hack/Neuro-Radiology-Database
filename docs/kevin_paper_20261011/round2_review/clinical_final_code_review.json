@@ -1,0 +1,22 @@
+{
+  "checked_utc": "2026-10-12T01:18:32.058063+00:00",
+  "scope": "Independent read-only static review of final clinical evaluator/statistics; no clinical predictions or training",
+  "reviewed_sha256": {
+    "docs/kevin_paper_20261011/round2_clinical/clinical_compare.py": "6e5d2e1ef2c3233d691163cc50c168b2b2ac7c6241ba1b78df7e40ad414fc3ed",
+    "docs/kevin_paper_20261011/round2_clinical/clinical_statistics.py": "425a10c5d4aa1a6e3e0e4f89559b14c89fc17abf754896384218253d60f8668c",
+    "docs/kevin_paper_20261011/round2_clinical/evaluation_protocol.json": "d4a522d020e7342baaf44a3d594c00bfa073eb67398a5640320afe06d34e9cd8"
+  },
+  "launch_blockers_found": [],
+  "checks": [
+    "Newpatientprobabilities softmax(mean9logits); oldprobabilitymean preserved",
+    "Sixindividualmodels plus bothfixed3-modelprobabilityensembles; noexternalreselection",
+    "Harvardbinary19(9AD10CN);MCIexcluded frombinary scoring",
+    "Allsource/pixel/selectedcheckpoint pins andsingle-launch guard",
+    "Fixedthreshold0.5 andoldargmaxequivalence guard",
+    "Exactbinomial intervals; pairedpatientbootstrap stratifiedbydiagnosis; exactMcNemar",
+    "No fitted calibration/threshold and explicit smallsource/patient limitations"
+  ],
+  "reporting_note": "Training/validation NLL is clipped at1e-15; evaluation metrics clip at1e-12. Preserve stored values and do not silently equate saturated-probability losses.",
+  "model_inference_performed": false,
+  "files_modified": false
+}

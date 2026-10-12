@@ -1,0 +1,80 @@
+{
+  "status": "six_fixed_research_exports_verified",
+  "created_utc": "2026-10-12T01:45:13.934786+00:00",
+  "checkpoint_manifest_sha256": "5147cf780be3a3b3fb83ffa4d7a59cbd7af044bbd7c0a61e2d17f346b454b2ca",
+  "export_source_sha256": "fc8bb1a6f4ebf7144a777d0075cc4b91767915301b9277c95b4a8d132a011aae",
+  "independent_destination_readback": true,
+  "all_retained_tensor_states_bitwise_equal": true,
+  "all_six_synthetic_cpu_logits_and_probabilities_bitwise_equal": true,
+  "real_image_inference_performed": false,
+  "production_baseline_unchanged": true,
+  "torch_version": "2.12.1",
+  "retrieved_payload_counts": {
+    "stage": 960,
+    "clinical": 298
+  },
+  "total_checkpoint_bytes": 87396222,
+  "checkpoints": [
+    {
+      "kind": "stage",
+      "seed": 20261011,
+      "selected_epoch": 6,
+      "file": "stage_seed20261011.pt",
+      "source_checkpoint_sha256": "4c194aa46c4eafbde5269908ab5522a7e27571f6a46c4c2fb425e2807ce3cc20",
+      "export_sha256": "13a58e4a41fed168c88bf34598b97b04510525d6016b41f7143874b755529bbd",
+      "export_bytes": 17043019,
+      "retained_tensors": 314
+    },
+    {
+      "kind": "stage",
+      "seed": 20261012,
+      "selected_epoch": 18,
+      "file": "stage_seed20261012.pt",
+      "source_checkpoint_sha256": "1db175a5e631e04a396d97f47c1bd03c59e0602ca601891ecafa6066a0ea546f",
+      "export_sha256": "35c9d024a8d539f967a6bc7cd37ff5e7fc3e561b7b9500304a1977bccd6b1484",
+      "export_bytes": 17043019,
+      "retained_tensors": 314
+    },
+    {
+      "kind": "stage",
+      "seed": 20261013,
+      "selected_epoch": 20,
+      "file": "stage_seed20261013.pt",
+      "source_checkpoint_sha256": "3bd6d22d437625f768584033a741a584b489fe591d4d537b7dface02e9a87368",
+      "export_sha256": "e3a06ac53bb3506f3e5d3485a0373b4a407cadc6e0f0d6c08fc6deee96995393",
+      "export_bytes": 17043019,
+      "retained_tensors": 314
+    },
+    {
+      "kind": "clinical",
+      "seed": 20261021,
+      "selected_epoch": 65,
+      "file": "clinical_seed20261021.pt",
+      "source_checkpoint_sha256": "cb984775c99bc7108863c77329f984df4de863faa6755b4def28271a32da247a",
+      "export_sha256": "cb984775c99bc7108863c77329f984df4de863faa6755b4def28271a32da247a",
+      "export_bytes": 12089055,
+      "retained_tensors": 310
+    },
+    {
+      "kind": "clinical",
+      "seed": 20261022,
+      "selected_epoch": 38,
+      "file": "clinical_seed20261022.pt",
+      "source_checkpoint_sha256": "2c0dea86db73075729e51deb3cf189d244042e862253f6362e733a918ca403ce",
+      "export_sha256": "2c0dea86db73075729e51deb3cf189d244042e862253f6362e733a918ca403ce",
+      "export_bytes": 12089055,
+      "retained_tensors": 310
+    },
+    {
+      "kind": "clinical",
+      "seed": 20261023,
+      "selected_epoch": 63,
+      "file": "clinical_seed20261023.pt",
+      "source_checkpoint_sha256": "def69f2c01d57f9cc543141ace02229ef24206a1a4bb578f42554e4ce86165fa",
+      "export_sha256": "def69f2c01d57f9cc543141ace02229ef24206a1a4bb578f42554e4ce86165fa",
+      "export_bytes": 12089055,
+      "retained_tensors": 310
+    }
+  ],
+  "interpretation": "Serialization and strict-load fidelity only. This export is research-only and does not establish medical validity; retained unused stage auxiliary weights have no clinical interpretation. Quantitative checkpoint integrity and the separately reported stage attribution status are distinct."
+}

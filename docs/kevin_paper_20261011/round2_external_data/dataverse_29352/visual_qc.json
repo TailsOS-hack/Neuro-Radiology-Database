@@ -1,0 +1,26 @@
+{
+  "status": "gross_all_subject_rendering_review_complete",
+  "reviewed_utc": "2026-10-12T01:06:26.276425+00:00",
+  "reviewer": "Codex visual inspection; not radiologist review",
+  "subjects_reviewed": 29,
+  "slices_reviewed": 261,
+  "pages_reviewed": 5,
+  "labels": "Opaque subject IDs and fixed slice fractions; no diagnosis or model outcome displayed",
+  "findings": [
+    "Every available subject has a recognizable inferior-to-superior axial anatomical sequence; no blank or corrupted rendered image was observed.",
+    "Head pitch, cranial shape, relative anatomical levels, image sharpness and intensity vary. Fractions do not provide atlas-aligned anatomy.",
+    "Anterior extracranial cutouts and peripheral tissue appearance vary across subjects; source preprocessing and image appearance remain possible confounders.",
+    "No gross brain truncation attributable to the square display crop was apparent at montage scale.",
+    "All29available subjects are retained. The30thparticipant has no provider T1 and remains explicitly listed as unavailable."
+  ],
+  "excluded_subjects": 0,
+  "model_outcomes_inspected": false,
+  "scope": "Gross rendering/anatomical plausibility only, not diagnostic review, validated segmentation/localization, defacing certification, or clinical image-quality adjudication.",
+  "qa_sha256": {
+    "all_subjects_nine_slices_01.png": "c389b32a1df1039f0572ce96e63d23464a61825fe7ebb03f572110f75fc28862",
+    "all_subjects_nine_slices_02.png": "d120c819708e94530244d3ade75c5091a91701c256c45b17f027838ba61daf24",
+    "all_subjects_nine_slices_03.png": "9c00ef9328c750852a3a0d54b561611bf5753d5b9c04ffac16e291f59d5f97ac",
+    "all_subjects_nine_slices_04.png": "4e9bb12d5795370cd0d25deca978006b9d3e620208f25f5758aec4baa9c38eb3",
+    "all_subjects_nine_slices_05.png": "f84abc5d0662fe88f86a3af93b17f85d9950f0c3caf01e61e00cf55accebaed2"
+  }
+}

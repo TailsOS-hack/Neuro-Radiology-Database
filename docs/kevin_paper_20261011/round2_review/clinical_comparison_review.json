@@ -1,0 +1,68 @@
+{
+  "status": "passed_independent_synthetic_comparator_and_report_review",
+  "checked_utc": "2026-10-12T01:17:46.050622+00:00",
+  "source_sha256": {
+    "docs/kevin_paper_20261011/round2_clinical/clinical_compare.py": "6e5d2e1ef2c3233d691163cc50c168b2b2ac7c6241ba1b78df7e40ad414fc3ed",
+    "docs/kevin_paper_20261011/round2_clinical/clinical_statistics.py": "425a10c5d4aa1a6e3e0e4f89559b14c89fc17abf754896384218253d60f8668c",
+    "docs/kevin_paper_20261011/round2_clinical/clinical_bag.py": "96c4d3a53b717d4e0bfcee25221c8c31ac6b8c84e9ea03652adfa9c45cd88156",
+    "docs/kevin_paper_20261011/round2_clinical/evaluation_protocol.json": "d4a522d020e7342baaf44a3d594c00bfa073eb67398a5640320afe06d34e9cd8",
+    "docs/kevin_paper_20261011/round2_clinical/clinical_report.py": "8146f61ee61736cb783f1c078b01d7a1c57b7c900ee3356dd3167e9c58e55e46"
+  },
+  "test_runs": [
+    {
+      "test_file": "docs/kevin_paper_20261011/round2_review/test_clinical_compare_independent.py",
+      "test_sha256": "f46a3737cb5de6fada2c405e8bcdf3e67796d5674ed958c2a33a536c4d9b2ff9",
+      "exit_code": 0,
+      "output": "test_actual_pixel_transform_identity_and_fixed_noise (__main__.IndependentClinicalCompare.test_actual_pixel_transform_identity_and_fixed_noise) ... ok\ntest_freeze_and_load_reject_code_selection_and_checkpoint_changes (__main__.IndependentClinicalCompare.test_freeze_and_load_reject_code_selection_and_checkpoint_changes) ... ok\ntest_full_synthetic_grid_pooling_alignment_mci_and_repeat_guard (__main__.IndependentClinicalCompare.test_full_synthetic_grid_pooling_alignment_mci_and_repeat_guard) ... ok\ntest_historical_old_exact_half_tie_is_fail_closed (__main__.IndependentClinicalCompare.test_historical_old_exact_half_tie_is_fail_closed) ... ok\ntest_manifest_pin_rejects_prefreeze_label_or_source_map_changes (__main__.IndependentClinicalCompare.test_manifest_pin_rejects_prefreeze_label_or_source_map_changes) ... ok\ntest_manifest_source_and_image_readbacks_reject_mutation (__main__.IndependentClinicalCompare.test_manifest_source_and_image_readbacks_reject_mutation) ... ok\ntest_nonfinite_predictions_are_fail_closed (__main__.IndependentClinicalCompare.test_nonfinite_predictions_are_fail_closed) ... ok\ntest_safe_paths_reject_absolute_parent_and_symlink (__main__.IndependentClinicalCompare.test_safe_paths_reject_absolute_parent_and_symlink) ... ok\ntest_state_mutating_model_is_fail_closed (__main__.IndependentClinicalCompare.test_state_mutating_model_is_fail_closed) ... ok\ntest_transform_disagreement_rejected_before_launch (__main__.IndependentClinicalCompare.test_transform_disagreement_rejected_before_launch) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.555s\n\nOK\n"
+    },
+    {
+      "test_file": "docs/kevin_paper_20261011/round2_review/test_clinical_report_independent.py",
+      "test_sha256": "191e17e23f645aabfe7dabb3266e8725af13445a2c3a34f130a842d1bb41b037",
+      "exit_code": 0,
+      "output": "test_complete_receipt_and_shuffled_patient_alignment (__main__.IndependentClinicalReport.test_complete_receipt_and_shuffled_patient_alignment) ... ok\ntest_paired_analysis_is_patient_aligned_and_order_invariant (__main__.IndependentClinicalReport.test_paired_analysis_is_patient_aligned_and_order_invariant) ... ok\ntest_payload_byte_tamper_rejected (__main__.IndependentClinicalReport.test_payload_byte_tamper_rejected) ... ok\ntest_unfrozen_or_heldout_selected_receipt_rejected (__main__.IndependentClinicalReport.test_unfrozen_or_heldout_selected_receipt_rejected) ... ok\ntest_unhashed_prediction_or_metric_payload_rejected (__main__.IndependentClinicalReport.test_unhashed_prediction_or_metric_payload_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 3.020s\n\nOK\n"
+    }
+  ],
+  "independent_test_count": 15,
+  "scope": "Synthetic images/models/probabilities only. Actual prepared patient metadata and source/QC hashes were reviewed, with no clinical model inference or cloud operation.",
+  "evaluation_manifest_sha256": "7275db1cefdc29790981cf4821110cf9a8dc6fda32c0bf273f708ecc8bb3ba74",
+  "patients": 60,
+  "slices": 540,
+  "binary_by_cohort": {
+    "harvard_fresh_external": 19,
+    "besga_reused_test": 11,
+    "openneuro_reused_external": 15
+  },
+  "mci_prediction_only": 15,
+  "source_and_qc_pins": {
+    "data/external/clinical_t1_preprocessed_v1/clinical_slices.csv": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+    "data/external/clinical_harvard29352_v1/clinical_slices.csv": "504d2b04d223637fcd92ee9072341b43a2f7ed4e44e7d0043b28c70137d8585d",
+    "docs/kevin_paper_20261011/round2_external_data/dataverse_29352/visual_qc.json": "995dbf5c5c627bb9bdd0bde63108ee02fd129d944611fccc5fc6efa1358cbc99",
+    "docs/kevin_paper_20261011/round2_external_data/dataverse_29352/output_verification.json": "f2149f4f56ab6c3505f8140a96fab923b52677275156024ab6cde56b2f4b6f8a",
+    "docs/kevin_paper_20261011/round2_external_data/dataverse_29352/preprocessing_summary.json": "f698db0bdb9fd04d2bdab4b3757c3efebae71544d0ccee4a83823425f16cd138",
+    "docs/kevin_paper_20261011/round2_external_data/dataverse_29352/acquisition_summary.json": "cc89948d40fd9b3a5623e9ff5845829503a1b61d43722ee195fcf9af4796fce6"
+  },
+  "resolved_findings": [
+    "Prepared patient manifest now has an independent expected SHA before freeze, rejecting label/cohort/source-map changes.",
+    "Old probability aggregation now reproduces historical NumPy float64 pooling exactly on synthetic logits; the new mean-logit pooling is unchanged.",
+    "Historical old argmax agreement and exact half-probability ties are guarded.",
+    "Report requires all four evaluation payloads in the checksum inventory and verifies frozen status and no held-out selection."
+  ],
+  "verified": [
+    "3360 unique patient/model/scenario records and 168 binary metric cells",
+    "Old and new pooling plus fixed three-member ensembles",
+    "MCI excluded from binary scoring",
+    "Historical and new clean transforms exactly match on synthetic PNGs",
+    "Deterministic shared-channel synthetic noise",
+    "Invalid probabilities, model-state changes and repeat inference rejected",
+    "Frozen selection, checkpoint, code and source/image mutations rejected",
+    "Shuffled prediction order preserves keyed patient alignment and paired comparisons"
+  ],
+  "statistical_review": "docs/kevin_paper_20261011/round2_review/clinical_statistics_review.json",
+  "scope_note": "docs/kevin_paper_20261011/round2_review/clinical_scope_review.md",
+  "outstanding_correctness_blockers": [],
+  "limitations": [
+    "These tests establish implementation behavior, not clinical performance or readiness.",
+    "Training and fresh external evaluation results were not read by this review.",
+    "Report layout QA is owned by the reporting agent; future real-result figures still require visual review."
+  ]
+}

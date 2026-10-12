@@ -1,0 +1,24 @@
+{
+  "status": "passed_synthetic_exporter_guard_tests",
+  "tests_passed": 16,
+  "tests_failed": 0,
+  "fixture_scope": "Synthetic wrappers, temporary result archives and fresh random MobileNet models only; no real patient input or trained research checkpoint loaded",
+  "initial_test_issue": "macOS temporary test root used /var symlink; resolved fixture root to its canonical path without weakening production symlink guards",
+  "checks": [
+    "Only permitted three stage fields removed; all retained tensors and metadata exact",
+    "Original clinical best bytes preserved; optimizer/unknown/private fields rejected",
+    "Signed-zero raw-byte inequality and nonfinite states detected",
+    "Actual results_archive receipt schema, independent archive SHA and complete destination readback",
+    "Existing identical outputs preserved; different outputs refused",
+    "Existing stage loader and clinical builder produce bitwise-equal logits/probabilities from source versus export on fixed synthetic CPU tensors",
+    "Clinical synthetic inference uses two complete nine-slice bags; stage auxiliary head not evaluated"
+  ],
+  "real_weight_export_performed": false,
+  "real_image_inference_performed": false,
+  "git_or_cloud_action_performed": false,
+  "source_sha256": {
+    "export_research_weights.py": "fc8bb1a6f4ebf7144a777d0075cc4b91767915301b9277c95b4a8d132a011aae",
+    "test_export_research_weights.py": "9b62e3ed9b6388262b510b9650c6fae5d26745fe65e0b62dc114078ed6b2006d",
+    "RESEARCH_WEIGHTS_USAGE.md": "06b79685e4deb76dfa6fde6e9f1ebcf9040f5db6460f9b32755b092d201cb210"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "version": "clinical_patient_bag_v1",
+  "status": "prepared_before_fitting_and_fresh_external_predictions",
+  "endpoint": "Source clinical AD versus CN; neither severity staging nor diagnosis of MCI",
+  "architecture": "mobilenet_v3_large_features_imagenet_v1_dropout02_linear960x2",
+  "trainer_sha256": "96c4d3a53b717d4e0bfcee25221c8c31ac6b8c84e9ea03652adfa9c45cd88156",
+  "source_manifest": "data/external/clinical_t1_preprocessed_v1/clinical_slices.csv",
+  "source_manifest_sha256": "9dc70cad44f40f06dd028fe5e90790d656cf142ce4fb1d6f2f828646719951c1",
+  "preprocessor": "docs/kevin_paper_20261011/preprocess_clinical_t1.py",
+  "preprocessor_sha256": "bc3e1c7012cc54e9453af38d554073b3666cbc115fbb2a2072ed10a822f49475",
+  "patients_manifest_sha256": "ecac589248aa48dfc117a94b2650d78ea4df945b507d51cf3da0a6b6713289e1",
+  "initialization": {
+    "path": "models/kevin_20261011/imagenet_mobilenet_v3_large_8738ca79.pth",
+    "sha256": "8738ca797c879b547d18bbd15da5736ff2557b2036a9af72225393ca61759a04",
+    "source": "Official torchvision MobileNetV3-Large ImageNet1K V1 only"
+  },
+  "seeds": [
+    20261021,
+    20261022,
+    20261023
+  ],
+  "train_patients": 32,
+  "val_patients": 11,
+  "counts": {
+    "train/0": 11,
+    "train/1": 21,
+    "val/0": 4,
+    "val/1": 7
+  },
+  "bag_size": 9,
+  "bag_aggregation": "softmax(mean of nine slice logits)",
+  "train_loss": "unweighted patient cross entropy on mean slice logits",
+  "class_weights": [
+    1.0,
+    1.0
+  ],
+  "label_smoothing": 0.0,
+  "selection_metric": "unweighted_patient_nll",
+  "selection": {
+    "epoch0_eligible": true,
+    "min_delta": 0.0001,
+    "tie": "earliest eligible epoch retained",
+    "rule": "Save checkpoint only if full clean Besga validation patient NLL improves by more than min_delta"
+  },
+  "max_epochs": 100,
+  "min_epochs": 20,
+  "patience": 15,
+  "warmup_head_only_epochs": 5,
+  "batch_size_patients": 4,
+  "all_train_patients_once_per_epoch": true,
+  "optimizer": {
+    "name": "AdamW",
+    "head_lr": 0.0001,
+    "backbone_lr": 1e-05,
+    "weight_decay": 0.001,
+    "gradient_clip_norm": 5.0
+  },
+  "learning_rate": "Cosine decay over fixed100epochs to5percent of initial rates",
+  "trainable_features": "Only feature blocks14,15,16 after5head-only epochs; all other feature parameters frozen",
+  "batchnorm": "All running statistics and affine parameters frozen throughout",
+  "dropout": 0.2,
+  "augmentation": {
+    "seed": "SHA256(seed|epoch|group_key), independent of worker order",
+    "rotation_degrees": [
+      -5,
+      5
+    ],
+    "rotation_expand": true,
+    "resize_after_expansion": [
+      224,
+      224
+    ],
+    "brightness": [
+      0.92,
+      1.08
+    ],
+    "contrast": [
+      0.9,
+      1.1
+    ],
+    "gaussian_noise_probability": 0.5,
+    "gaussian_noise_sigma": [
+      0,
+      0.01
+    ],
+    "gaussian_blur_probability": 0.25,
+    "gaussian_blur_radius": [
+      0,
+      0.5
+    ],
+    "shared_within_patient": [
+      "rotation",
+      "brightness",
+      "contrast",
+      "noise_sigma",
+      "blur_radius"
+    ],
+    "independent_grayscale_noise_per_slice": true,
+    "flips": false,
+    "crops": false,
+    "translations": false,
+    "cutout": false
+  },
+  "eval_transform": "Existing frozen224x224RGB pixels /255 then ImageNet mean/std; no geometry or augmentation",
+  "evaluation": {
+    "binary_threshold": 0.5,
+    "calibration_fitting": false,
+    "threshold_tuning": false,
+    "primary_model": "Fixed equal-probability ensemble of all3 independently validation-selected seeds",
+    "report_all_seeds": true,
+    "representative": "lowest validation NLL, then ascending seed; attribution only",
+    "fresh_primary_source": "Harvard Dataverse10.7910/DVN/29352: verified9AD+10CN=19T1subjects",
+    "mci": "10Harvard MCI remain outsidebinary metrics; report separately without relabeling",
+    "reused_sources": "Besga test11 and OpenNeuro prior external are descriptive reused cohorts",
+    "old_comparators": "All3fixedmultitaskclinicalheads with historical mean-probability pooling, plus equal-probability ensemble; whole-pipelinecomparison"
+  },
+  "no_selection_sources": [
+    "All legacy-stage data and outcomes",
+    "Besga test",
+    "OpenNeuro",
+    "Harvard Dataverse",
+    "AlzaSet"
+  ],
+  "convergence": {
+    "safety_wall_hours": 12,
+    "wall_limit_is_not_scientific_convergence": true,
+    "max_epochs_without_patience_requires_validation_only_review": true
+  },
+  "spending_authority": "User machine cap10USD/hour; no total cap; resource control belongs to root",
+  "limitations": [
+    "Exploratory small single-source development:32train11validation patients",
+    "Only19freshAD/CNT1patients, with broad uncertainty and case-control spectrum bias",
+    "No validated brain segmentation, atlas registration, prospective workflow or calibrated clinical-risk claim",
+    "Besga/OpenNeuro outcomes previously inspected; fresh external cohort must remain unused until model/selection freeze",
+    "Different scanner/site/population and preprocessing may impair transportability; no superiority promise"
+  ]
+}

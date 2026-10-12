@@ -1,0 +1,38 @@
+{
+  "status": "passed_synthetic_packaging_guards_and_verified_real_export",
+  "recorded_utc": "2026-10-12T01:51:01.105979+00:00",
+  "synthetic_tests": 16,
+  "real_results_exported": true,
+  "real_models_executed": false,
+  "inference_performed": false,
+  "cloud_or_git_mutations": false,
+  "source_sha256": {
+    "export_artifacts.py": "bf4e339a28167c8c4515f9d5216629b0ac1805132c4faa78cc936b11ade53d4a",
+    "test_export_artifacts.py": "1198f8800ca42b04a979fc9beba0990d76ac1dbf0ebed96663530e8e35f26bb5",
+    "ARTIFACT_EXPORT_USAGE.md": "3bb3118c64181ba29c725db28a4d25d405c94c608302823f9f748e802e8e6417"
+  },
+  "verification_scope": "Sixteen synthetic packaging tests plus real numerical, visual-receipt, source-preservation, privacy-schema, link and destination-readback guards. Packaging success is not clinical readiness.",
+  "test_command": "PYTHONPYCACHEPREFIX=/tmp/kevin_export_pycache python3 -m unittest discover -s docs/kevin_paper_20261011/round2_publication -p test_export_artifacts.py -v",
+  "actual_export": {
+    "directory": "artifacts",
+    "manifest_sha256": "e18b505b17a1b5ac16d3c57e39892f39e8c0840882caac16b6ef5b7019470980",
+    "payloads": 684,
+    "visuals": 226,
+    "source_files_unchanged": true,
+    "private_clinical_rows_exported": false,
+    "attribution_replay_status": "blocked_cloud_probability_replay_review"
+  },
+  "narrative_verification": {
+    "local_links_checked": 42,
+    "stage_correct_counts_checked": 20,
+    "clinical_new_correct_counts_checked": 12,
+    "fresh_harvard_all_ad_confirmed": true,
+    "reused_openneuro_ensemble_all_cn_confirmed": true,
+    "source_sha256": {
+      "README.md": "b7a73b452776be4b2f1fe945c3319818b09f3268097b8d6fd34af9bf34a59046",
+      "RESULTS.md": "f2254bca68909c24d1c8833d7677ea54e1b882c6e82f9d8b9653ac363608ed47",
+      "Methods.md": "d4dbfe44d1bfbe831be1b651687cd8d135928f148574ed2254e8a17cb6fbaabd",
+      "DATA_AND_LIMITATIONS.md": "3b585a3bd8cff1a95a256d18eacb66ecce256f103c9a327c12b91727a8ac5847"
+    }
+  }
+}

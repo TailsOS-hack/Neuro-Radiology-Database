@@ -1,0 +1,10 @@
+{
+  "status": "complete_diagnostic_appendix_with_blocked_replay",
+  "payloads": 317,
+  "manifest_sha256": "af725fa35f6e9f0abf3fa79167fa29a45f5fe74e80f08cbefcb872941edd1115",
+  "source_marker_sha256": "834d493e8cd1b91cb3b15773ea2ee802db7b641af6459ee40730ea8e38b14dda",
+  "panel_count": 115,
+  "summary_pairs": 2,
+  "visual_review_required": true,
+  "no_inference": true
+}

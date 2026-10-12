@@ -1,0 +1,13 @@
+{
+  "status": "portable_public_source_synthetic_tests_passed",
+  "tests_passed": 10,
+  "tests_failed": 0,
+  "scope": "Invented integrity/archive fixtures; mocked scientific validator; no model inference, real payload read, or cloud action",
+  "original_sources_unchanged": true,
+  "created_utc": "2026-10-12T01:41:25.095401+00:00",
+  "source_sha256": {
+    "migrate_completed_clinical.py": "bc4ca9c6993592ab40870471b54eae443fc5230510a3a5d5e5f2f525f8e95154",
+    "test_migrate_completed_clinical.py": "566c80e60fd2486c5d74313115a56b7183936a8c05cd931cb2f5cb60fd3bd14a"
+  },
+  "test_output": "test_changed_frozen_source_refused_before_install (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_changed_original_optimizer_file_blocks_before_packaging (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_destination_verifier_mismatch_preserves_diagnostics_without_success_receipt (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_existing_destination_not_overwritten (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_link_and_traversal_members_refused (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_missing_original_last_checkpoint_refused (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_original_suite_gate_failure_blocks_copy (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_payload_tamper_detected_against_manifest (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_roundtrip_only_three_last_files_omitted_all_scientific_bytes_preserved (test_migrate_completed_clinical.MigrationTests) ... ok\ntest_wrong_independent_archive_checksum_refused (test_migrate_completed_clinical.MigrationTests) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.073s\n\nOK\n"
+}

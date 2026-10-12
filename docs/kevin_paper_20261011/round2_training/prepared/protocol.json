@@ -1,0 +1,152 @@
+{
+  "schema_version": 2,
+  "experiment": "round2_legacy_stage_robustness",
+  "defaults": {
+    "max_epochs": 100,
+    "min_epochs": 20,
+    "patience": 15,
+    "min_delta": 0.0001,
+    "learning_rate": 3e-05,
+    "weight_decay": 0.001,
+    "label_smoothing": 0.05,
+    "gradient_clip": 5.0,
+    "batch_size": 64,
+    "image_size": 224,
+    "clean_accuracy_drop": 0.002,
+    "clean_balanced_accuracy_drop": 0.002,
+    "clean_nll_multiplier": 1.2,
+    "clean_nll_slack": 0.002,
+    "stress_per_class": 64,
+    "stress_seed": 2026101202,
+    "suite_safety_seconds": 43200,
+    "support_threshold_uint8": 8,
+    "support_dilation_pixels": 5,
+    "border_width": 8,
+    "corner_width": 16
+  },
+  "seeds": [
+    20261011,
+    20261012,
+    20261013
+  ],
+  "initializations": {
+    "20261011": {
+      "path": "models/kevin_20261011/stage_only_seed20261011.pt",
+      "sha256": "a3a811c02a43d5f0ba4b126955a50b2a9d5e98e1a3f333aaba7b201e6dc2d771"
+    },
+    "20261012": {
+      "path": "models/kevin_20261011/stage_only_seed20261012.pt",
+      "sha256": "642c39da1adecd7925cb4057718772af2603ef6077df676c4c4abd1907c3356e"
+    },
+    "20261013": {
+      "path": "models/kevin_20261011/stage_only_seed20261013.pt",
+      "sha256": "b0cfa50d30cc6880a52ea0e3aaf7249de3b52ba91163bb1e6472a3d59d12d06b"
+    }
+  },
+  "class_order": [
+    "MildDemented",
+    "ModerateDemented",
+    "NonDemented",
+    "VeryMildDemented"
+  ],
+  "scenarios": [
+    {
+      "name": "clean",
+      "family": "clean",
+      "amount": 0.0
+    },
+    {
+      "name": "background_flat",
+      "family": "background",
+      "amount": 0.1
+    },
+    {
+      "name": "background_edge_pattern",
+      "family": "background",
+      "amount": 0.12
+    },
+    {
+      "name": "intensity_090",
+      "family": "intensity",
+      "amount": 0.9
+    },
+    {
+      "name": "intensity_110",
+      "family": "intensity",
+      "amount": 1.1
+    },
+    {
+      "name": "noise_001",
+      "family": "noise",
+      "amount": 0.01
+    },
+    {
+      "name": "noise_002",
+      "family": "noise",
+      "amount": 0.02
+    },
+    {
+      "name": "blur_050",
+      "family": "blur",
+      "amount": 0.5
+    },
+    {
+      "name": "blur_100",
+      "family": "blur",
+      "amount": 1.0
+    }
+  ],
+  "selection": "Equal clean NLL / equally-weighted four stress-family mean NLL; full clean validation, fixed 64/hash-distinct images per class for stress. Eligible epoch0 fallback. Min score improvement 1e-4; exact ties retain earlier epoch.",
+  "clean_guards": "Accuracy and balanced accuracy no more 0.002 below same-device epoch0; clean NLL <=1.2*epoch0+0.002.",
+  "minimum_epoch_behavior": "No early stop before20; afterward stop after15 consecutive epochs without eligible score improvement. Checkpoint selection considers every completed epoch, including epoch0.",
+  "training": "All19023 train images once/epoch; inverse hash-group-size and class-group loss weighting; full-network AdamW; smoothing0.05; gradient clip5; cosine LR3e-5 to1.5e-6 over100epochs.",
+  "augmentation": "Full224FOV; deterministic per seed/epoch/path flip0.5; background0.5: global or edge equally likely, constant or8x8bilinear texture equally likely, amplitudeU[0,.12]. Blur0.25 radiusU[0,1]. IntensityU[.9,1.1]. SharedRGBnoise0.5 SDU[0,.02]. Background edits only outside protected support; intensity/noise/blur may affect foreground.",
+  "mask": "PIL L>8; fill holes;5 iterations3x3 dilation. Near-empty support<1% protects all. Not anatomical segmentation. Bright corner text remains protected. Edge region border8+corner16, always intersect safe background.",
+  "source_hashes": {
+    "docs/kevin_paper_20261011/round2_training/round2.py": "94153e6af976fb8d31b9d3d2ae7f2ce6d011e3ef59a94909b4fdec3d4b867dcc",
+    "docs/kevin_paper_20261011/round2_training/test_round2.py": "6bee61589a163bac0d6a4372134ba884ebc8cba9018f01429d65e95a1b79c333",
+    "docs/kevin_paper_20261011/round2_training/README.md": "d7e5b0478c81e874c136af5877326035d29750b6f25e8891f5048eb987922be7",
+    "docs/kevin_paper_20261011/training/train_candidate.py": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2"
+  },
+  "preparation": {
+    "status": "prepared",
+    "stage_manifest_sha256": "66a0cd9409d61edd32ee137154f769c749664f255ddebe461cf7683c1f4ba7b9",
+    "train_val_manifest_sha256": "c6d8e6382568a74316aae5357f01cbc905ce173e94e1f8e25ddd7856c1649d01",
+    "stress_manifest_sha256": "426106e2fdb8f5d9a824614e201e4be056c1b7aac14acf7d982f8924677879b5",
+    "mask_coverage_sha256": "34721b936fa461fbaec22fa0ac798db768ed3627dfa309a82f97f5f77b6adea4",
+    "counts": {
+      "train": 19023,
+      "val": 2705
+    },
+    "stress_counts": {
+      "0": 64,
+      "1": 64,
+      "2": 64,
+      "3": 64
+    },
+    "mask_coverage": {
+      "train": {
+        "protected_fraction": 0.7010835322315924,
+        "safe_background_fraction": 0.29891646776840763,
+        "safe_edge_fraction": 0.10561805989151693
+      },
+      "val": {
+        "protected_fraction": 0.7005158993761552,
+        "safe_background_fraction": 0.29948410062384473,
+        "safe_edge_fraction": 0.1062970948545777
+      },
+      "background_edit_empty_images": 5136,
+      "background_edit_below_one_percent_images": 5468,
+      "edge_edit_empty_images": 5136
+    }
+  },
+  "clinical_data_used": false,
+  "held_out_images_used_for_selection": false,
+  "prior_test_results_known": true,
+  "assessment_label": "Retrospective reused-benchmark development, not fresh independent test validation.",
+  "attribution_used_for_selection": false,
+  "rep_seed_selection": "No test-based or CAM-based seed selection. Report all3; optional representative is smallest eligible selected validation score, tie seed order.",
+  "budget_authority": "User superseded $10 total cap; machine <=$10/hour; epochs stop by validation plateau or100max.12h suite timeout is operational failsafe only. Root monitors billing/retrieval/cleanup.",
+  "resume_policy": "No automatic restart or resume; preserve diagnostics and completed checkpoints on failure. Any restart requires explicit reviewed continuation, not new hyperparameter search.",
+  "interpretation": "Research-only 2D legacy-stage experiment. Does not establish real-world clinical readiness, patient independence, MRI domain robustness or improvement."
+}

@@ -1,0 +1,110 @@
+{
+  "status": "no_additional_eligible_unrestricted_AD_CN_T1_cohort_verified",
+  "checked_utc": "2026-10-12T01:42:06.063677+00:00",
+  "scope": "Targeted primary-provider and original data-descriptor metadata review; not an exhaustive systematic review.",
+  "requirements": [
+    "Original or provider-authorized clinical structural whole-brain T1 MRI",
+    "Patient-level AD/control diagnoses and stable subject identities",
+    "No institutional login, form, data-use application or approval needed",
+    "Additional source beyond already used Besga, OpenNeuro clinical release and Harvard Dataverse29352",
+    "No unmapped Kaggle/JPEG reuploads"
+  ],
+  "actions": {
+    "large_files_downloaded": false,
+    "images_downloaded": false,
+    "model_inference": false,
+    "training": false,
+    "frozen_test_or_protocol_changed": false,
+    "access_requests_submitted": false
+  },
+  "prior_review_reused": [
+    "MIRIAD: registration/data-use route remains unresolved for unrestricted access",
+    "BrainLat: provider permission and institutional access information required in prior check",
+    "NeuGRID cohorts: registration and dataset agreements",
+    "BioFIND: MCI/control rather than diagnosed AD/control",
+    "AlzaSet: acquired but quarantined without verified subject mapping; not used for fitting or prediction",
+    "OASIS: previously documented institutional access gate; no mirror used to evade provider requirements"
+  ],
+  "new_candidates": [
+    {
+      "id": "ANMerge_syn22252881",
+      "provider": "Sage Bionetworks Synapse / original AddNeuroMed investigators",
+      "sources": [
+        "https://www.synapse.org/Synapse:syn22252881",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7902946/"
+      ],
+      "imaging": "Descriptor states raw longitudinal 1.5T T1 MRI plus FreeSurfer measures are provided.",
+      "identity": "Descriptor documents unified participant identifiers and mapping back to raw modalities, with AD/MCI/control diagnoses. Total 1702 is the multimodal cohort, not a verified available MRI denominator.",
+      "license_and_access": "Original descriptor requires Synapse registration, signed data-use certificate, research proposal and ethical-review confirmation. Anonymous current file permission could not be verified; public project title alone does not authorize download.",
+      "decision": "Not eligible under no-login/no-forms requirement; strongest additional scientific lead only if the access constraint is later changed.",
+      "no_access_bypass": true
+    },
+    {
+      "id": "OpenNeuro_ds006148_QNLD",
+      "sources": [
+        "https://www.nature.com/articles/s41597-026-07081-x",
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006148/master/dataset_description.json",
+        "https://openneuro.org/datasets/ds006148/versions/1.0.5"
+      ],
+      "provider": "Weill Cornell Medicine / OpenNeuro",
+      "license": "CC0 in provider dataset_description.json; article permission is distinct from dataset access.",
+      "identity": "BIDS subject/session identities and structural MPRAGE T1 MRI documented.",
+      "endpoint": "Normal cognition required; older participants screened to exclude MCI and dementia. Amyloid-positive cognitively unimpaired participants are not diagnosed AD cases.",
+      "access": "Imaging/cognitive BIDS data are public; individual demographics require institution-signed DUA.",
+      "decision": "Not a diagnosed AD/control cohort. Possible later separately prespecified normal-aging or preclinical biomarker research only; no acquisition or use now."
+    },
+    {
+      "id": "OpenNeuro_ds004796_PEARL_Neuro",
+      "sources": [
+        "https://openneuro.org/datasets/ds004796/versions/1.0.9",
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004796/master/dataset_description.json"
+      ],
+      "provider": "Original PEARL-Neuro investigators / OpenNeuro",
+      "license": "CC0 in provider metadata",
+      "identity": "Public BIDS participant metadata; neuroimaging subgroup 79.",
+      "endpoint": "Provider describes healthy middle-aged participants at genetic risk, not diagnosed AD/control groups.",
+      "decision": "Wrong clinical endpoint. Do not turn genetic risk into AD labels; T1 payload completeness not pursued after endpoint exclusion."
+    },
+    {
+      "id": "OpenNeuro_ds004873",
+      "sources": [
+        "https://raw.githubusercontent.com/OpenNeuroDatasets/ds004873/master/README"
+      ],
+      "provider": "OpenNeuro original dataset README",
+      "identity": "Subject membership described in provider README; no subject rows copied here.",
+      "endpoint": "Main study 40 healthy participants, plus separately listed discarded participants.",
+      "decision": "Healthy-only; not AD/control. License and full imaging inventory not pursued after endpoint exclusion."
+    },
+    {
+      "id": "Zenodo14266867_Gonzo",
+      "sources": [
+        "https://zenodo.org/records/14266867"
+      ],
+      "provider": "Simula / University of Oslo / Oslo University Hospital investigators",
+      "identity": "One healthy-appearing volunteer repeatedly scanned before/after intrathecal tracer.",
+      "imaging": "T1-weighted and other MRI plus derived tracer/concentration data.",
+      "decision": "Single-volunteer tracer experiment, not a clinical AD/control cohort. Repeated acquisitions cannot be counted as independent patients; license not pursued after endpoint exclusion."
+    },
+    {
+      "id": "Zenodo19709849_paired_lowfield",
+      "sources": [
+        "https://zenodo.org/records/19709849"
+      ],
+      "provider": "Leiden University Medical Center investigators",
+      "imaging": "Public record describes 86 low-field scans and 11 paired high-field scans, with T1 among modalities; these are scan counts, not a verified independent patient denominator.",
+      "endpoint": "Healthy-subject MRI, as named by provider.",
+      "decision": "Wrong clinical endpoint. Could be a future dedicated acquisition-shift study with a new protocol, not additional AD cases or evidence of AD discrimination. Current record points to a newer version; not acquired."
+    }
+  ],
+  "unresolved_search_leads": [
+    {
+      "id": "Zenodo3533631",
+      "status": "Provider record/API could not be resolved by available tools; not treated as usable evidence or an eligible cohort."
+    },
+    {
+      "id": "Zenodo20426271",
+      "status": "Search index described derived two-dimensional dementia images and restricted files; provider page unavailable on direct read, so no positive provenance/access claim or acquisition made."
+    }
+  ],
+  "boundary": "Do not add healthy-only sources as the control class against AD from another site: diagnosis and source would be confounded. Do not adapt the current selected models or thresholds using held-out outcomes. Any future training-source expansion and hyperparameter comparison needs a new frozen patient/source partition with validation-only selection and an untouched final source."
+}

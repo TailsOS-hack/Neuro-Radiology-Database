@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "purpose": "Research-only fixed selected inference checkpoints; not clinical deployment",
+  "stage_class_order": [
+    "MildDemented",
+    "ModerateDemented",
+    "NonDemented",
+    "VeryMildDemented"
+  ],
+  "clinical_class_order": [
+    "CN",
+    "AD"
+  ],
+  "clinical_threshold": 0.5,
+  "stage_auxiliary_head": "Retained bit-for-bit for source compatibility; not used or clinically evaluated",
+  "stage_removed_fields": [
+    "history",
+    "optimizer_state",
+    "scheduler_state"
+  ],
+  "clinical_original_best_bytes_preserved": true,
+  "frozen_selection_sha256": {
+    "stage": "5013de5062d941a1f6dfbe7f8e9267c20e4854d523af305cbc587d324d938ae0",
+    "clinical": "655adde5bbe5f89e1710e544e2d08f6f9d11ae462746016349ed97d0ed50aa72"
+  },
+  "retrieval": {
+    "stage": {
+      "receipt_sha256": "97243d9c1f4d94c6ac2368e2c78f49cc854e8385bf9e70f9c4e7b36d894fed3b",
+      "independent_checksum_file_sha256": "b47b20b93d661c0f0f36b4b5d1b174b8fc27c49ea430c40a68c8f42cc9694f2f",
+      "archive_sha256": "ef95694bba2295901babcd2c6bacb948786384b79cc57988f1363e17898058fe",
+      "verified_payload_files": 960,
+      "destination_readback_verified": true
+    },
+    "clinical": {
+      "receipt_sha256": "ba34773ec5adefb20c8c406e3ff797cf681000eca391e9fcd3ccd3a7c17fd6d1",
+      "independent_checksum_file_sha256": "f7f22774a952438b7c193c350fa757552f1de3f3eeb00245436a761c5630167a",
+      "archive_sha256": "c04159c9910cd82206e274f670887870621ca128d71413c57d84bde77b59c05c",
+      "verified_payload_files": 298,
+      "destination_readback_verified": true
+    }
+  },
+  "export_source_sha256": "fc8bb1a6f4ebf7144a777d0075cc4b91767915301b9277c95b4a8d132a011aae",
+  "torch_version": "2.12.1",
+  "cpu_threads": 1,
+  "checkpoints": [
+    {
+      "kind": "stage",
+      "seed": 20261011,
+      "selected_epoch": 6,
+      "file": "stage_seed20261011.pt",
+      "source_checkpoint_sha256": "4c194aa46c4eafbde5269908ab5522a7e27571f6a46c4c2fb425e2807ce3cc20",
+      "export_sha256": "13a58e4a41fed168c88bf34598b97b04510525d6016b41f7143874b755529bbd",
+      "export_bytes": 17043019,
+      "training_protocol_sha256": "26b5c0a178a02f1cb82fad148aadc540a07cbfa93784950c49c7f941bb600ba2",
+      "removed_top_level_fields": [
+        "history",
+        "optimizer_state",
+        "scheduler_state"
+      ],
+      "retained_tensors": 314,
+      "all_retained_tensors_bitwise_equal": true,
+      "retained_metadata_exactly_equal": true,
+      "contains_clinical_individual_records": false,
+      "synthetic_cpu_equivalence": {
+        "device": "cpu",
+        "generator_seed": 2026101209,
+        "input_shape": [
+          3,
+          3,
+          224,
+          224
+        ],
+        "input_sha256": "b94cb7197ccf4ec9795f619621b53cfdcf943c256e103a202bc5527e44eaa79a",
+        "input": "synthetic standard-normal tensors; no MRI",
+        "logits_bitwise_equal": true,
+        "probabilities_bitwise_equal": true,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_probability_difference": 0.0,
+        "model_state_unchanged_by_eval": true,
+        "clinical_pooling": null,
+        "stage_auxiliary_head_evaluated": false
+      }
+    },
+    {
+      "kind": "stage",
+      "seed": 20261012,
+      "selected_epoch": 18,
+      "file": "stage_seed20261012.pt",
+      "source_checkpoint_sha256": "1db175a5e631e04a396d97f47c1bd03c59e0602ca601891ecafa6066a0ea546f",
+      "export_sha256": "35c9d024a8d539f967a6bc7cd37ff5e7fc3e561b7b9500304a1977bccd6b1484",
+      "export_bytes": 17043019,
+      "training_protocol_sha256": "26b5c0a178a02f1cb82fad148aadc540a07cbfa93784950c49c7f941bb600ba2",
+      "removed_top_level_fields": [
+        "history",
+        "optimizer_state",
+        "scheduler_state"
+      ],
+      "retained_tensors": 314,
+      "all_retained_tensors_bitwise_equal": true,
+      "retained_metadata_exactly_equal": true,
+      "contains_clinical_individual_records": false,
+      "synthetic_cpu_equivalence": {
+        "device": "cpu",
+        "generator_seed": 2026101209,
+        "input_shape": [
+          3,
+          3,
+          224,
+          224
+        ],
+        "input_sha256": "b94cb7197ccf4ec9795f619621b53cfdcf943c256e103a202bc5527e44eaa79a",
+        "input": "synthetic standard-normal tensors; no MRI",
+        "logits_bitwise_equal": true,
+        "probabilities_bitwise_equal": true,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_probability_difference": 0.0,
+        "model_state_unchanged_by_eval": true,
+        "clinical_pooling": null,
+        "stage_auxiliary_head_evaluated": false
+      }
+    },
+    {
+      "kind": "stage",
+      "seed": 20261013,
+      "selected_epoch": 20,
+      "file": "stage_seed20261013.pt",
+      "source_checkpoint_sha256": "3bd6d22d437625f768584033a741a584b489fe591d4d537b7dface02e9a87368",
+      "export_sha256": "e3a06ac53bb3506f3e5d3485a0373b4a407cadc6e0f0d6c08fc6deee96995393",
+      "export_bytes": 17043019,
+      "training_protocol_sha256": "26b5c0a178a02f1cb82fad148aadc540a07cbfa93784950c49c7f941bb600ba2",
+      "removed_top_level_fields": [
+        "history",
+        "optimizer_state",
+        "scheduler_state"
+      ],
+      "retained_tensors": 314,
+      "all_retained_tensors_bitwise_equal": true,
+      "retained_metadata_exactly_equal": true,
+      "contains_clinical_individual_records": false,
+      "synthetic_cpu_equivalence": {
+        "device": "cpu",
+        "generator_seed": 2026101209,
+        "input_shape": [
+          3,
+          3,
+          224,
+          224
+        ],
+        "input_sha256": "b94cb7197ccf4ec9795f619621b53cfdcf943c256e103a202bc5527e44eaa79a",
+        "input": "synthetic standard-normal tensors; no MRI",
+        "logits_bitwise_equal": true,
+        "probabilities_bitwise_equal": true,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_probability_difference": 0.0,
+        "model_state_unchanged_by_eval": true,
+        "clinical_pooling": null,
+        "stage_auxiliary_head_evaluated": false
+      }
+    },
+    {
+      "kind": "clinical",
+      "seed": 20261021,
+      "selected_epoch": 65,
+      "file": "clinical_seed20261021.pt",
+      "source_checkpoint_sha256": "cb984775c99bc7108863c77329f984df4de863faa6755b4def28271a32da247a",
+      "export_sha256": "cb984775c99bc7108863c77329f984df4de863faa6755b4def28271a32da247a",
+      "export_bytes": 12089055,
+      "training_protocol_sha256": "58061826e2c1b351845bf3a0a6022552a4f1e60ce637c6d267524f62b8bfe2cf",
+      "removed_top_level_fields": [],
+      "retained_tensors": 310,
+      "all_retained_tensors_bitwise_equal": true,
+      "retained_metadata_exactly_equal": true,
+      "contains_clinical_individual_records": false,
+      "synthetic_cpu_equivalence": {
+        "device": "cpu",
+        "generator_seed": 2026101209,
+        "input_shape": [
+          18,
+          3,
+          224,
+          224
+        ],
+        "input_sha256": "ad88831486fa56f23eeec928ea299b245edbc662ef275227063b627f66c5a2ab",
+        "input": "synthetic standard-normal tensors; no MRI",
+        "logits_bitwise_equal": true,
+        "probabilities_bitwise_equal": true,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_probability_difference": 0.0,
+        "model_state_unchanged_by_eval": true,
+        "clinical_pooling": "softmax(mean nine logits)",
+        "stage_auxiliary_head_evaluated": false
+      }
+    },
+    {
+      "kind": "clinical",
+      "seed": 20261022,
+      "selected_epoch": 38,
+      "file": "clinical_seed20261022.pt",
+      "source_checkpoint_sha256": "2c0dea86db73075729e51deb3cf189d244042e862253f6362e733a918ca403ce",
+      "export_sha256": "2c0dea86db73075729e51deb3cf189d244042e862253f6362e733a918ca403ce",
+      "export_bytes": 12089055,
+      "training_protocol_sha256": "58061826e2c1b351845bf3a0a6022552a4f1e60ce637c6d267524f62b8bfe2cf",
+      "removed_top_level_fields": [],
+      "retained_tensors": 310,
+      "all_retained_tensors_bitwise_equal": true,
+      "retained_metadata_exactly_equal": true,
+      "contains_clinical_individual_records": false,
+      "synthetic_cpu_equivalence": {
+        "device": "cpu",
+        "generator_seed": 2026101209,
+        "input_shape": [
+          18,
+          3,
+          224,
+          224
+        ],
+        "input_sha256": "ad88831486fa56f23eeec928ea299b245edbc662ef275227063b627f66c5a2ab",
+        "input": "synthetic standard-normal tensors; no MRI",
+        "logits_bitwise_equal": true,
+        "probabilities_bitwise_equal": true,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_probability_difference": 0.0,
+        "model_state_unchanged_by_eval": true,
+        "clinical_pooling": "softmax(mean nine logits)",
+        "stage_auxiliary_head_evaluated": false
+      }
+    },
+    {
+      "kind": "clinical",
+      "seed": 20261023,
+      "selected_epoch": 63,
+      "file": "clinical_seed20261023.pt",
+      "source_checkpoint_sha256": "def69f2c01d57f9cc543141ace02229ef24206a1a4bb578f42554e4ce86165fa",
+      "export_sha256": "def69f2c01d57f9cc543141ace02229ef24206a1a4bb578f42554e4ce86165fa",
+      "export_bytes": 12089055,
+      "training_protocol_sha256": "58061826e2c1b351845bf3a0a6022552a4f1e60ce637c6d267524f62b8bfe2cf",
+      "removed_top_level_fields": [],
+      "retained_tensors": 310,
+      "all_retained_tensors_bitwise_equal": true,
+      "retained_metadata_exactly_equal": true,
+      "contains_clinical_individual_records": false,
+      "synthetic_cpu_equivalence": {
+        "device": "cpu",
+        "generator_seed": 2026101209,
+        "input_shape": [
+          18,
+          3,
+          224,
+          224
+        ],
+        "input_sha256": "ad88831486fa56f23eeec928ea299b245edbc662ef275227063b627f66c5a2ab",
+        "input": "synthetic standard-normal tensors; no MRI",
+        "logits_bitwise_equal": true,
+        "probabilities_bitwise_equal": true,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_probability_difference": 0.0,
+        "model_state_unchanged_by_eval": true,
+        "clinical_pooling": "softmax(mean nine logits)",
+        "stage_auxiliary_head_evaluated": false
+      }
+    }
+  ],
+  "real_image_inference_performed": false,
+  "production_baseline_unchanged": true,
+  "limitations": [
+    "Synthetic equality proves export fidelity only, not medical validity.",
+    "All test/outcome and privacy limitations of the frozen studies apply.",
+    "Full optimizer/history training states remain in private verified archives."
+  ]
+}

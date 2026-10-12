@@ -1,0 +1,28 @@
+{
+  "experiment": "round2_posthoc_reused_benchmark_comparison",
+  "models": ["old_baseline", "round1_c3", "round2_seed20261011", "round2_seed20261012", "round2_seed20261013"],
+  "seeds": [20261011, 20261012, 20261013],
+  "selection": "All three round2 validation selections, clean guards, epoch0 fallback and min_delta history must verify before inference. Representative is the smallest selected eligible validation score, tie ascending seed. No test or attribution-based selection.",
+  "convergence_gate": "Any needs_validation_convergence_review flag requires an explicitly recorded validation-only resolution tied to the exact suite status and training protocol before freezing.",
+  "cohorts": {
+    "full_new_test": {"n": 5450, "interpretation": "Already-seen legacy image test split; post-hoc development benchmark; includes primary1058."},
+    "internal_same_case": {"n": 1058, "interpretation": "Already-seen exact-row held-out comparison; 302 rows have old development hash-group mates; not equally unseen at group level."},
+    "old_hash_group_unexposed_sensitivity": {"n": 756, "interpretation": "Prespecified historical subset removing observed old development hash-group mates; reused in round2; hash groups are not patients."},
+    "original100": {"n": 100, "interpretation": "Historically reused image reader benchmark; old exposure66train9validation25test; no independent clinical superiority claim."}
+  },
+  "stress": "All 13 unchanged posthoc_robustness/stress_test.py scenarios, on complete1058 and original100 for all five models. Same-device clean reference; no stress-outcome seed selection.",
+  "corner": "Same fixed160 validation images and13 black/mean corner/border/matched-center controls as round2_corner_audit. No new sample selection.",
+  "statistics": "All five models, paired contrasts of each new seed versus both old and round1c3. Reuse2000 deterministic conditional paired bootstrap draws grouped by prepared hash identity for image cohorts; original100 uses image-level units. No multiplicity adjustment or patient-level inference. Report all3 seed means/sampleSD and individual values.",
+  "probability_metrics": "Accuracy, balanced accuracy, macroF1, confusion, NLL, multiclass Brier sum, ten-equal-width-bin top-label ECE, one-vs-rest ROC/AveragePrecision. No fitted recalibration or threshold tuning.",
+  "readers": "Same fixed three reader labels on all100cases, complete alignment required; mean/range descriptive across those readers.",
+  "attribution": "All115 fixed case slots; old andc3 unchanged native7x7 arrays alongside new validation-selected representative native maps. Each map targets that model's own unmodified argmax, so differing target classes are labeled. No smoothing used in native measurements; upsampled overlays are display only. Verify before/after logits and unchanged state. Three-seed staged parameter randomization on the eight previously fixed historical examples.",
+  "clinical_head_evaluated": false,
+  "prior_benchmark_outcomes_known": true,
+  "limitations": [
+    "Round2 is retrospective robustness development after prior benchmark outcomes were known; its repeated scores are not a fresh independent test.",
+    "Legacy upstream subject identities and augmentation families are incomplete; hash grouping does not establish patient independence.",
+    "Synthetic2D perturbations and GradCAM do not establish MRI acquisition robustness, anatomical faithfulness or clinical readiness.",
+    "No corner-control result can establish absence of every shortcut. Background masks are conservative display heuristics, not brain segmentation.",
+    "The stage head is not the AD/CN clinical auxiliary endpoint; no clinical predictions are produced here."
+  ]
+}

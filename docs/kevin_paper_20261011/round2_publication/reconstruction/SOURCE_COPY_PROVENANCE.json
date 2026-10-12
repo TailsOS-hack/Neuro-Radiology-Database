@@ -1,0 +1,28 @@
+{
+  "status": "byte_preserving_public_source_copies",
+  "source_scope": "Generic integrity helper, synthetic tests and their historical synthetic verification only",
+  "copies": [
+    {
+      "name": "migrate_completed_clinical.py",
+      "source": "docs/kevin_paper_20261011/round2_operations/migrate_completed_clinical.py",
+      "sha256": "bc4ca9c6993592ab40870471b54eae443fc5230510a3a5d5e5f2f525f8e95154",
+      "byte_identical": true
+    },
+    {
+      "name": "test_migrate_completed_clinical.py",
+      "source": "docs/kevin_paper_20261011/round2_operations/test_migrate_completed_clinical.py",
+      "sha256": "566c80e60fd2486c5d74313115a56b7183936a8c05cd931cb2f5cb60fd3bd14a",
+      "byte_identical": true
+    },
+    {
+      "name": "clinical_migration_synthetic_verification.json",
+      "source": "docs/kevin_paper_20261011/round2_operations/clinical_migration_synthetic_verification.json",
+      "sha256": "b78c7fc89d6a60561a04c61c8e25f5c769919a887d6baff96b133296a8855f53",
+      "byte_identical": true
+    }
+  ],
+  "clinical_individual_data_included": false,
+  "real_migration_receipts_included": false,
+  "archive_payload_or_resource_state_included": false,
+  "frozen_scientific_source_modified": false
+}

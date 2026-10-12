@@ -1,0 +1,360 @@
+{
+  "status": "passed_independent_public_artifact_semantic_readback_audit",
+  "created_utc": "2026-10-12T01:52:11.951485+00:00",
+  "export_manifest_sha256": "e18b505b17a1b5ac16d3c57e39892f39e8c0840882caac16b6ef5b7019470980",
+  "payloads_verified": 684,
+  "identity_payloads_byte_equal_to_verified_source": 680,
+  "guarded_sources_rehashed": 853,
+  "documented_derivatives_verified": 2,
+  "clinical_aggregate_analysis_equals_recursive_patient_ids_removal": true,
+  "private_clinical_identifier_scan": {
+    "source_roster_used": true,
+    "actual_identifiers_found": 0,
+    "private_identifier_keys_found": 0,
+    "text_files_and_pdf_text_scanned": 99,
+    "pdfs_scanned": 56,
+    "scope": "Public artifact payloads; fixed legacy image-case outputs are intentionally retained."
+  },
+  "clinical_aggregate_cells": 168,
+  "stage_models": 5,
+  "clinical_models_including_two_fixed_ensembles": 8,
+  "diagnostic_warning_visuals": 119,
+  "attribution_replay_status": "blocked_cloud_probability_replay_review",
+  "visual_qa_hashes_verified": 226,
+  "portable_local_links_verified": 192,
+  "gateway_RESULTS_draft_deferred_to_publication_author": false,
+  "combined_atlas_sha256": "2005b23e5c9e82d2e0513d7ac21fb9ea39b1362e885bb2de509ba691c27c3159",
+  "combined_atlas_pages": 49,
+  "independent_page_pixel_readbacks": [
+    {
+      "page": 1,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 2,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 2,
+      "pixels_equal": true
+    },
+    {
+      "page": 3,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 3,
+      "pixels_equal": true
+    },
+    {
+      "page": 4,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 4,
+      "pixels_equal": true
+    },
+    {
+      "page": 5,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 5,
+      "pixels_equal": true
+    },
+    {
+      "page": 6,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 6,
+      "pixels_equal": true
+    },
+    {
+      "page": 7,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 7,
+      "pixels_equal": true
+    },
+    {
+      "page": 8,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 8,
+      "pixels_equal": true
+    },
+    {
+      "page": 9,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 9,
+      "pixels_equal": true
+    },
+    {
+      "page": 10,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 10,
+      "pixels_equal": true
+    },
+    {
+      "page": 11,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 11,
+      "pixels_equal": true
+    },
+    {
+      "page": 12,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 12,
+      "pixels_equal": true
+    },
+    {
+      "page": 13,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 13,
+      "pixels_equal": true
+    },
+    {
+      "page": 14,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 14,
+      "pixels_equal": true
+    },
+    {
+      "page": 15,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 15,
+      "pixels_equal": true
+    },
+    {
+      "page": 16,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 16,
+      "pixels_equal": true
+    },
+    {
+      "page": 17,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 17,
+      "pixels_equal": true
+    },
+    {
+      "page": 18,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 18,
+      "pixels_equal": true
+    },
+    {
+      "page": 19,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 19,
+      "pixels_equal": true
+    },
+    {
+      "page": 20,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 20,
+      "pixels_equal": true
+    },
+    {
+      "page": 21,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 21,
+      "pixels_equal": true
+    },
+    {
+      "page": 22,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 22,
+      "pixels_equal": true
+    },
+    {
+      "page": 23,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 23,
+      "pixels_equal": true
+    },
+    {
+      "page": 24,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 24,
+      "pixels_equal": true
+    },
+    {
+      "page": 25,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 25,
+      "pixels_equal": true
+    },
+    {
+      "page": 26,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 26,
+      "pixels_equal": true
+    },
+    {
+      "page": 27,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 27,
+      "pixels_equal": true
+    },
+    {
+      "page": 28,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 28,
+      "pixels_equal": true
+    },
+    {
+      "page": 29,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 29,
+      "pixels_equal": true
+    },
+    {
+      "page": 30,
+      "source_sha256": "3730674d38f534eb1e6e6e1d25228ab3fa4f9a4a32ac392222579193453cc57d",
+      "source_page": 30,
+      "pixels_equal": true
+    },
+    {
+      "page": 31,
+      "source_sha256": "5e2043d995ed8d4f0d4a96a9cad4e6c77562b4c5797c6549d1b30635fd35bb4c",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 32,
+      "source_sha256": "40aff908e8f6693f52af0049f428cb2054272d35c0d8b2d82da16dcdac1ddadb",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 33,
+      "source_sha256": "1f630135a6960d97d8df354665d76d6d12f55f8093df29500bb01eebbcc854d2",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 34,
+      "source_sha256": "d495d7c0cc4f47ce84b1d62cc15f0a9ac8aab8fb5c17b2a47d1634027802b6be",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 35,
+      "source_sha256": "5a2c7c3847a3e78a22ad1ae5ef6169fca44830c02f112a6f2c6dcb47d884cf49",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 36,
+      "source_sha256": "16f430234cdd7240b90afcf338c85ab9d33cec6823713d3963f38a36de7fdf23",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 37,
+      "source_sha256": "0ba4a71be5ef0de81af106f9f255eabf74dbdc640cba55d7006d26f58ab293ec",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 38,
+      "source_sha256": "005e40c5dd052a2d1a12d15df710e4d9a777b12351d2ef2d7e5392dbf7b0f937",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 39,
+      "source_sha256": "57e6182d9b9fb087c174e34952b1f904641bd9a487ca26605afdd7e442ea61ef",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 40,
+      "source_sha256": "b6b2f4a44c23dfef66de61dc0f4d809f03325c4758f62815998ded701102f05e",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 41,
+      "source_sha256": "fd9f97eda5c23b07ca3edce74547190643abb2d097f5b3a947c0b3e5fa2faf75",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 42,
+      "source_sha256": "f02b84a3b4da83b02536d4e7e121653e516ee04b07359103c4312675d4195ff7",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 43,
+      "source_sha256": "c2bfa9291b6552adfc2a9139346fe0f55eadbd297623ac837d2d0fb5b28add4b",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 44,
+      "source_sha256": "fac3292f70e45f02dd7603c57d89aed096e353e9e9c39ad2847a0722b9d1096c",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 45,
+      "source_sha256": "2d75b6daed293ef968218789e230aa7d163dd79c70e4cfe74073f8bb74b20a37",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 46,
+      "source_sha256": "804d682926fa2589580afb92d921f2c5ac669e5324f65a72a2bb7d131ea7c515",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 47,
+      "source_sha256": "0b1feb3c93ec15906cda1fe9d8962c7fcb1c0900805a25995cd4726794073cdc",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 48,
+      "source_sha256": "ef3da4eac3b9f51925c78e6b6e91eba85c1ad07a0aacf31241566611f214b2bd",
+      "source_page": 1,
+      "pixels_equal": true
+    },
+    {
+      "page": 49,
+      "source_sha256": "8141665cf2340325d375e8944928c0a1bc83ffb5de7f6c318d46a793c46aaad0",
+      "source_page": 1,
+      "pixels_equal": true
+    }
+  ],
+  "numeric_claim_checks": {
+    "fresh_harvard_old_new_correct": [
+      10,
+      9
+    ],
+    "fresh_harvard_n": 19,
+    "new_harvard_specificity": 0,
+    "reused_openneuro_new_sensitivity": 0,
+    "original100_all_five_correct": 100,
+    "stage_denominators": [
+      5450,
+      1058,
+      756,
+      100
+    ],
+    "mci_not_scored": true
+  },
+  "limitations": [
+    "Attribution remains diagnostic; two probability replays exceed the unchanged 0.0001 tolerance.",
+    "Visual and export integrity checks do not establish clinical validity.",
+    "Fresh Harvard performance did not establish superiority; reused stage/clinical cohorts remain separately labeled."
+  ],
+  "files_modified_by_audit": "This separate receipt only; exported artifacts and source outputs unchanged.",
+  "stage_atlas_index_derivative_verified": "All 30 source hashes and non-path fields unchanged; rewritten paths resolve to exported PDFs.",
+  "results_claims_review": {
+    "source_sha256": "f2254bca68909c24d1c8833d7677ea54e1b882c6e82f9d8b9653ac363608ed47",
+    "status": "reviewed_against_verified_aggregate_reports",
+    "exact_intervals_and_seed_counts_match": true,
+    "paired_10k_intervals_match": true,
+    "fresh_harvard_all_ad_and_openneuro_sole_ad_failure_preserved": true,
+    "reused_benchmarks_and_hash_not_patient_limits_preserved": true,
+    "blocked_attribution_warning_preserved": true,
+    "local_links_resolve": true,
+    "numeric_claim_findings": [],
+    "operational_gpu_cleanup_claims": "Root-owned operational receipts; not independently queried by this artifact audit."
+  }
+}

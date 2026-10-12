@@ -1,0 +1,41 @@
+# Round 2: validation-selected legacy-stage robustness development
+
+This experiment continues all three **stage-only** Round 1 seeds from their existing validation-selected MobileNetV3-Large checkpoints. It is a new exploratory development round. Earlier primary1058, sensitivity756, original100, full5450 and clinical results were already inspected; any subsequent evaluation on those images is a retrospectively reused benchmark. No new independent clinical validation or real-world readiness follows. No clinical auxiliary endpoint is trained in this round, and the original results remain unchanged.
+
+The separate validation corner audit found no dominant corner dependence for candidate 3: all 160 sampled validation images remained correctly classified after the tested corner and border erasures, while corner-only inputs were at chance. Accordingly, the new background interventions are **modest regularization**, not a correction of a demonstrated corner shortcut. They do not select models by their attribution-map appearance.
+
+## Fixed training and selection rules
+
+The seeds are 20261011, 20261012, 20261013; their starting checkpoint identities and all code/data hashes are frozen in `prepared/protocol.json`. Every epoch sees each of 19,023 training images once, with the prior inverse hash-group-size and class-group objective weights. The full network is fine-tuned with AdamW, LR 3e-5, weight decay 0.001, smoothing 0.05 and gradient clipping 5. Cosine LR reaches1.5e-6 at 100 epochs. The scientific limit is 100 epochs, minimum 20 before early stopping, and patience 15 consecutive epochs without an eligible score improvement of at least 0.0001. Each seed has identical rules. Extra epochs after validation plateau are not assumed to improve generalization.
+
+Full clean validation uses all 2,705 images. A fixed stress subset selects 64 distinct hash groups per class (256 images) by SHA256 ordering; this is image/hash-group sampling, not proven patient independence. Eight conditions form four equally weighted families: safe-background flat 0.10 and edge pattern≤0.12; intensity×0.90 and×1.10; shared-RGB Gaussian noise SD0.01 and0.02 on the unit scale; Gaussian blur radius0.5 and1pixel. Every validation noise/texture draw is fixed per image and family, independent of training seed and epoch. Fixed-mask foreground and raw perturbations remain available for audit. These conditions represent a small diagnostic image grid, **not MRI-domain shift**.
+
+The checkpoint score is 50% full clean validation NLL plus 50% the mean of four stress-family NLLs. Eligibility also requires clean accuracy and balanced accuracy within 0.002 of the same-device starting checkpoint, and clean NLL≤ 1.2 × starting NLL+ 0.002. These are experimental selection guards, not clinical acceptance thresholds. The starting checkpoint is evaluated under the exact same runtime and fixed bank and remains an eligible epoch 0 fallback. A lower stress score that fails a clean guard is rejected. Exact ties retain the earlier checkpoint. All seeds and all rejection reasons are reported. No test or CAM result selects a checkpoint, transform, or seed.
+
+## Image transformations and their limits
+
+All images retain the entire field of view, resized to224 × 224 exactly as in the frozen evaluator. No central crop or unprotected corner/border cutout is used. The support heuristic protects PIL grayscale values>8/255, filled internal holes, and five pixels of dilation. If its support is below 1%, background augmentation is skipped by protecting the whole image. This is **not validated brain segmentation**: bright corner text/padding can be protected, and dark anatomy cannot be guaranteed by an intensity heuristic.
+
+Every background change is intersected with the complement of that support and verifies protected RGB pixels are bit-identical. The edge region is an 8 pixel outer border plus 16 pixel corners, always gated by the same safe-background mask. Coverage, empty regions and nearly empty editable regions are reported. Training independently draws a horizontal flip with probability 0.5; background replacement with probability 0.5 (global/edge and constant/low-frequency texture chosen equally, amplitude0–0.12); blur with probability 0.25 (radius 0–1); intensity factor0.9–1.1; and noise with probability 0.5 (SD0–0.02). Mild intensity/noise/blur deliberately affect the foreground as well; only **background edits** assert bit-identical protected pixels. Their combination is experimental augmentation, not a model of all clinical acquisition shifts.
+
+## Run and preservation
+
+Use the environment containing torch, torchvision, numpy, Pillow, scipy, scikit-learn and matplotlib. From the repository root:
+
+```sh
+python docs/kevin_paper_20261011/round2_training/test_round2.py
+python docs/kevin_paper_20261011/round2_training/round2.py prepare --data-root . --prepared docs/kevin_paper_20261011/round2_training/prepared
+python docs/kevin_paper_20261011/round2_training/round2.py suite --data-root . --prepared docs/kevin_paper_20261011/round2_training/prepared --output /workspace/kevin_round2_results --device cuda --workers 8
+```
+
+Preparation reads only frozen TRAIN/VAL image rows and verifies decoded-pixel identities; the resulting development manifest and masks are hashed. Runtime verifies every image and mask byte checksum before training. The transfer bundle requires those 21,728 images, the three starting checkpoints, this folder's code and prepared outputs, plus the unchanged `training/train_candidate.py` helper. Held-out image files and clinical data are not required for training. The frozen full stage manifest is an audit reference; no test images are opened.
+
+Run `train ... --seed 20261011 --smoke --device mps --workers 0` into a separate disposable output to check one tiny TRAIN/VAL epoch. Smoke checkpoints are marked and cannot be research candidates. Research batch size 64 is protocol-fixed, not an adjustable sweep; workers/device are runtime settings. A hardware throughput benchmark, if needed, must be a clearly marked smoke output and does not select hyperparameters.
+
+The user superseded the original $10 total cap and authorized enough time at **machine rate ≤ $10/hour**. Training stops by the validation rule. A 12 hour suite deadline is only an operational failsafe; reaching it yields incomplete status, not scientific completion. The root controller owns billing checks, verified retrieval, and deletion of this task's resources. This trainer cannot delete or provision cloud resources. It does not automatically restart failed runs.
+
+Per-seed outputs are `stage_only_seed<seed>/{best.pt,last.pt,selection.json,run_status.json,history.json,history.csv,epoch_NNN_validation.json,raw_curves.png,raw_curves.pdf}`. The checkpoint keeps the exact architecture/class vocabulary and adds `round=2`, `selection`, `best_selection_score`, `stage_validation`, `stress_validation` and initial/protocol identities. Do not use the old frozen evaluator's pure-clean-NLL selection check on this different criterion.
+
+Top-level `suite_status.json` records all completed or failed seeds. `validation_selection_before_any_round2_test.json` freezes selected checkpoint identities before any subsequent reused-test inference. A complete suite means all three runs ended by plateau or max epochs. Failure or safety stop preserves previous complete epoch checkpoints and diagnostics; partially optimized unfinished epochs are discarded. Epoch0 fallback means no eligible improvement was selected. A run ending at the 100 epoch ceiling without the specified plateau is flagged `needs_validation_convergence_review=true`; the root controller must review validation-only convergence before any Round 2 test inference. No superiority is promised.
+
+Raw online train NLL, the distinct weighted smoothed optimization objective, clean validation NLL, stress-family NLL, selection score and accuracies are saved without curve smoothing. With uniform-mixture label smoothing 0.05, a four-class one-hot target assigns 0.9625 to the true class, corresponding to raw NLL ≈ 0.03822 if matched exactly. This is a mathematical reference, not a hard lower bound, proof of optimal training, or evidence of generalization.

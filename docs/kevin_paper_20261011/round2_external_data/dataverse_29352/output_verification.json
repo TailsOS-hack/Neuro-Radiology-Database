@@ -1,0 +1,26 @@
+{
+  "status": "passed_independent_output_readback",
+  "checked_utc": "2026-10-12T01:06:17.638692+00:00",
+  "subjects_retained": 30,
+  "subjects_with_verified_t1": 29,
+  "missing_t1_retained": 1,
+  "all_261_pngs_decoded_and_pixel_hash_checked": true,
+  "exact_manifest_file_membership": true,
+  "source_diagnosis_and_hash_join_verified": true,
+  "all_external": true,
+  "mci_binary_blank": true,
+  "historical_inputs_unchanged": true,
+  "model_inference_performed": false,
+  "manifest_sha256": "504d2b04d223637fcd92ee9072341b43a2f7ed4e44e7d0043b28c70137d8585d",
+  "private_subject_table_sha256": "2b71fa4a7c5934860ebab7bd5e1a9a98ee28af507be8da1920eb371eebe0e99d",
+  "private_preprocessing_qc_sha256": "12c7b78bd27290910d13f80a4294587183d0c8b8f29e053c1bc14e1c05c9ee69",
+  "private_overlap_audit_sha256": "e7ab53c921a8897eb513bb77ad533514422cd52fce7cf3ce02c12b7257c4c35d",
+  "qa_sha256": {
+    "all_subjects_nine_slices_01.png": "c389b32a1df1039f0572ce96e63d23464a61825fe7ebb03f572110f75fc28862",
+    "all_subjects_nine_slices_02.png": "d120c819708e94530244d3ade75c5091a91701c256c45b17f027838ba61daf24",
+    "all_subjects_nine_slices_03.png": "9c00ef9328c750852a3a0d54b561611bf5753d5b9c04ffac16e291f59d5f97ac",
+    "all_subjects_nine_slices_04.png": "4e9bb12d5795370cd0d25deca978006b9d3e620208f25f5758aec4baa9c38eb3",
+    "all_subjects_nine_slices_05.png": "f84abc5d0662fe88f86a3af93b17f85d9950f0c3caf01e61e00cf55accebaed2"
+  },
+  "script_sha256": "b78c407c885da070c8ae14b273924c8f9503724f8c2cf4cb8dc899413b083c5b"
+}

@@ -1,0 +1,3205 @@
+{
+  "status": "complete_verified_predictions_only",
+  "freeze_sha256": "655adde5bbe5f89e1710e544e2d08f6f9d11ae462746016349ed97d0ed50aa72",
+  "manifest_sha256": "7275db1cefdc29790981cf4821110cf9a8dc6fda32c0bf273f708ecc8bb3ba74",
+  "all_models": [
+    "round1_c2",
+    "round1_c4",
+    "round1_c6",
+    "clinical_seed20261021",
+    "clinical_seed20261022",
+    "clinical_seed20261023",
+    "round1_clinical_ensemble",
+    "new_clinical_ensemble"
+  ],
+  "cohorts": {
+    "harvard_fresh_external": {
+      "models": {
+        "round1_c2": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 13,
+          "confusion_cn_ad": [
+            [
+              4,
+              6
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.6842105263157895,
+          "accuracy_exact95": [
+            0.43449843115384906,
+            0.8742393641270166
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.4,
+          "specificity_exact95": [
+            0.12155225811982719,
+            0.7376219233930549
+          ],
+          "precision_ad": 0.6,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 0.7,
+          "macro_f1": 0.6607142857142857,
+          "roc_auc": 0.8444444444444444,
+          "average_precision": 0.8368045534712203,
+          "nll": 0.629455330921742,
+          "binary_brier": 0.21493540559506788,
+          "ad_probability_ece_5_bins": 0.20506894102657747,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 3,
+              "mean_p_ad": 0.33721933831219325,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 3,
+              "mean_p_ad": 0.5053536558040866,
+              "observed_ad_fraction": 0.3333333333333333
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 7,
+              "mean_p_ad": 0.6941133348478211,
+              "observed_ad_fraction": 0.42857142857142855
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 6,
+              "mean_p_ad": 0.918299592203564,
+              "observed_ad_fraction": 0.8333333333333334
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_c4": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 9,
+          "confusion_cn_ad": [
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.47368421052631576,
+          "accuracy_exact95": [
+            0.24447468946619608,
+            0.7113567520830011
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.0,
+          "specificity_exact95": [
+            0.0,
+            0.3084971078187608
+          ],
+          "precision_ad": 0.47368421052631576,
+          "negative_predictive_value": null,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.32142857142857145,
+          "roc_auc": 0.8333333333333333,
+          "average_precision": 0.8636141636141637,
+          "nll": 1.0298525145705308,
+          "binary_brier": 0.3687110473668271,
+          "ad_probability_ece_5_bins": 0.39574824779005774,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 4,
+              "mean_p_ad": 0.7572938079635303,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 15,
+              "mean_p_ad": 0.899336098410465,
+              "observed_ad_fraction": 0.6
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_c6": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 13,
+          "confusion_cn_ad": [
+            [
+              4,
+              6
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.6842105263157895,
+          "accuracy_exact95": [
+            0.43449843115384906,
+            0.8742393641270166
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.4,
+          "specificity_exact95": [
+            0.12155225811982719,
+            0.7376219233930549
+          ],
+          "precision_ad": 0.6,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 0.7,
+          "macro_f1": 0.6607142857142857,
+          "roc_auc": 0.7555555555555555,
+          "average_precision": 0.7286935286935288,
+          "nll": 0.7433432753433621,
+          "binary_brier": 0.2559449932091604,
+          "ad_probability_ece_5_bins": 0.25951846876339607,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 5,
+              "mean_p_ad": 0.46181440485848324,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 6,
+              "mean_p_ad": 0.7300564884035676,
+              "observed_ad_fraction": 0.6666666666666666
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 8,
+              "mean_p_ad": 0.905179993973838,
+              "observed_ad_fraction": 0.625
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261021": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 9,
+          "confusion_cn_ad": [
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.47368421052631576,
+          "accuracy_exact95": [
+            0.24447468946619608,
+            0.7113567520830011
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.0,
+          "specificity_exact95": [
+            0.0,
+            0.3084971078187608
+          ],
+          "precision_ad": 0.47368421052631576,
+          "negative_predictive_value": null,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.32142857142857145,
+          "roc_auc": 0.8111111111111111,
+          "average_precision": 0.8254079254079256,
+          "nll": 1.0990078381430626,
+          "binary_brier": 0.3819986725535689,
+          "ad_probability_ece_5_bins": 0.4135688825657493,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 4,
+              "mean_p_ad": 0.7624744027853012,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 15,
+              "mean_p_ad": 0.9205274105072021,
+              "observed_ad_fraction": 0.6
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261022": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 9,
+          "confusion_cn_ad": [
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.47368421052631576,
+          "accuracy_exact95": [
+            0.24447468946619608,
+            0.7113567520830011
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.0,
+          "specificity_exact95": [
+            0.0,
+            0.3084971078187608
+          ],
+          "precision_ad": 0.47368421052631576,
+          "negative_predictive_value": null,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.32142857142857145,
+          "roc_auc": 0.8555555555555556,
+          "average_precision": 0.8558793058793059,
+          "nll": 1.0071563192391257,
+          "binary_brier": 0.3691425320316788,
+          "ad_probability_ece_5_bins": 0.38404283398076106,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 2,
+              "mean_p_ad": 0.7455141842365265,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 17,
+              "mean_p_ad": 0.8709285574800828,
+              "observed_ad_fraction": 0.5294117647058824
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261023": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 9,
+          "confusion_cn_ad": [
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.47368421052631576,
+          "accuracy_exact95": [
+            0.24447468946619608,
+            0.7113567520830011
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.0,
+          "specificity_exact95": [
+            0.0,
+            0.3084971078187608
+          ],
+          "precision_ad": 0.47368421052631576,
+          "negative_predictive_value": null,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.32142857142857145,
+          "roc_auc": 0.8111111111111111,
+          "average_precision": 0.8446386946386948,
+          "nll": 0.9389325360359293,
+          "binary_brier": 0.34464612890596863,
+          "ad_probability_ece_5_bins": 0.3724663006631952,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 5,
+              "mean_p_ad": 0.7204530715942383,
+              "observed_ad_fraction": 0.2
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 14,
+              "mean_p_ad": 0.8910424539021083,
+              "observed_ad_fraction": 0.5714285714285714
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_clinical_ensemble": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 10,
+          "confusion_cn_ad": [
+            [
+              1,
+              9
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.5263157894736842,
+          "accuracy_exact95": [
+            0.2886432479169988,
+            0.7555253105338039
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.1,
+          "specificity_exact95": [
+            0.0025285785444617848,
+            0.4450161170281954
+          ],
+          "precision_ad": 0.5,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 0.55,
+          "macro_f1": 0.4242424242424242,
+          "roc_auc": 0.8222222222222222,
+          "average_precision": 0.8022927689594357,
+          "nll": 0.7588515887355531,
+          "binary_brier": 0.2691706470898183,
+          "ad_probability_ece_5_bins": 0.28677855252667706,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 4,
+              "mean_p_ad": 0.5263923059252125,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 8,
+              "mean_p_ad": 0.734162457080351,
+              "observed_ad_fraction": 0.5
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 7,
+              "mean_p_ad": 0.9242748025233152,
+              "observed_ad_fraction": 0.7142857142857143
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "new_clinical_ensemble": {
+          "n_patients": 19,
+          "n_ad": 9,
+          "n_cn": 10,
+          "correct": 9,
+          "confusion_cn_ad": [
+            [
+              0,
+              10
+            ],
+            [
+              0,
+              9
+            ]
+          ],
+          "accuracy": 0.47368421052631576,
+          "accuracy_exact95": [
+            0.24447468946619608,
+            0.7113567520830011
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.6637328831200572,
+            1.0
+          ],
+          "specificity_cn": 0.0,
+          "specificity_exact95": [
+            0.0,
+            0.3084971078187608
+          ],
+          "precision_ad": 0.47368421052631576,
+          "negative_predictive_value": null,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.32142857142857145,
+          "roc_auc": 0.8444444444444444,
+          "average_precision": 0.8584045584045585,
+          "nll": 0.9992708478786978,
+          "binary_brier": 0.3641469121934047,
+          "ad_probability_ece_5_bins": 0.39002601096504613,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 3,
+              "mean_p_ad": 0.7452594836552938,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 16,
+              "mean_p_ad": 0.8859197348356247,
+              "observed_ad_fraction": 0.5625
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        }
+      },
+      "paired_comparisons": {
+        "new_clinical_ensemble_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 0,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 1.0,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": -0.05263157894736842,
+              "conditional95": [
+                -0.15789473684210525,
+                0.0
+              ]
+            },
+            "balanced_accuracy": {
+              "point": -0.050000000000000044,
+              "conditional95": [
+                -0.15,
+                0.0
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.0,
+              "conditional95": [
+                0.0,
+                0.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.1,
+              "conditional95": [
+                -0.3,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": 0.24041925914314466,
+              "conditional95": [
+                0.08233112358393735,
+                0.37701679856902176
+              ]
+            },
+            "binary_brier": {
+              "point": 0.09497626510358642,
+              "conditional95": [
+                0.03974397229859234,
+                0.145948672723666
+              ]
+            },
+            "roc_auc": {
+              "point": 0.022222222222222254,
+              "conditional95": [
+                -0.12222222222222223,
+                0.15555555555555556
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261021_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 0,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 1.0,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": -0.05263157894736842,
+              "conditional95": [
+                -0.15789473684210525,
+                0.0
+              ]
+            },
+            "balanced_accuracy": {
+              "point": -0.050000000000000044,
+              "conditional95": [
+                -0.15,
+                0.0
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.0,
+              "conditional95": [
+                0.0,
+                0.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.1,
+              "conditional95": [
+                -0.3,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": 0.34015624940750944,
+              "conditional95": [
+                0.18523249965832447,
+                0.47405421249928753
+              ]
+            },
+            "binary_brier": {
+              "point": 0.11282802546375059,
+              "conditional95": [
+                0.057401269391118774,
+                0.1603244016933748
+              ]
+            },
+            "roc_auc": {
+              "point": -0.011111111111111072,
+              "conditional95": [
+                -0.13333333333333341,
+                0.09999999999999998
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261022_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 0,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 1.0,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": -0.05263157894736842,
+              "conditional95": [
+                -0.15789473684210525,
+                0.0
+              ]
+            },
+            "balanced_accuracy": {
+              "point": -0.050000000000000044,
+              "conditional95": [
+                -0.15,
+                0.0
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.0,
+              "conditional95": [
+                0.0,
+                0.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.1,
+              "conditional95": [
+                -0.3,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": 0.2483047305035726,
+              "conditional95": [
+                0.05286811125186891,
+                0.4334432799583333
+              ]
+            },
+            "binary_brier": {
+              "point": 0.09997188494186049,
+              "conditional95": [
+                0.03508319662793497,
+                0.1652196502356821
+              ]
+            },
+            "roc_auc": {
+              "point": 0.03333333333333344,
+              "conditional95": [
+                -0.15555555555555556,
+                0.23333333333333334
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261023_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 0,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 1.0,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": -0.05263157894736842,
+              "conditional95": [
+                -0.15789473684210525,
+                0.0
+              ]
+            },
+            "balanced_accuracy": {
+              "point": -0.050000000000000044,
+              "conditional95": [
+                -0.15,
+                0.0
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.0,
+              "conditional95": [
+                0.0,
+                0.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.1,
+              "conditional95": [
+                -0.3,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": 0.18008094730037616,
+              "conditional95": [
+                0.0235122975340492,
+                0.3200962338022609
+              ]
+            },
+            "binary_brier": {
+              "point": 0.07547548181615032,
+              "conditional95": [
+                0.02238533229897553,
+                0.12443804754613523
+              ]
+            },
+            "roc_auc": {
+              "point": -0.011111111111111072,
+              "conditional95": [
+                -0.15555555555555556,
+                0.1333333333333333
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        }
+      },
+      "optimization_seed_spread": {
+        "new": {
+          "accuracy": {
+            "values": {
+              "clinical_seed20261021": 0.47368421052631576,
+              "clinical_seed20261022": 0.47368421052631576,
+              "clinical_seed20261023": 0.47368421052631576
+            },
+            "mean": 0.47368421052631576,
+            "sample_sd": 0.0
+          },
+          "balanced_accuracy": {
+            "values": {
+              "clinical_seed20261021": 0.5,
+              "clinical_seed20261022": 0.5,
+              "clinical_seed20261023": 0.5
+            },
+            "mean": 0.5,
+            "sample_sd": 0.0
+          },
+          "sensitivity_ad": {
+            "values": {
+              "clinical_seed20261021": 1.0,
+              "clinical_seed20261022": 1.0,
+              "clinical_seed20261023": 1.0
+            },
+            "mean": 1.0,
+            "sample_sd": 0.0
+          },
+          "specificity_cn": {
+            "values": {
+              "clinical_seed20261021": 0.0,
+              "clinical_seed20261022": 0.0,
+              "clinical_seed20261023": 0.0
+            },
+            "mean": 0.0,
+            "sample_sd": 0.0
+          },
+          "nll": {
+            "values": {
+              "clinical_seed20261021": 1.0990078381430626,
+              "clinical_seed20261022": 1.0071563192391257,
+              "clinical_seed20261023": 0.9389325360359293
+            },
+            "mean": 1.0150322311393725,
+            "sample_sd": 0.0803277540913963
+          },
+          "binary_brier": {
+            "values": {
+              "clinical_seed20261021": 0.3819986725535689,
+              "clinical_seed20261022": 0.3691425320316788,
+              "clinical_seed20261023": 0.34464612890596863
+            },
+            "mean": 0.36526244449707207,
+            "sample_sd": 0.01897615447591077
+          },
+          "roc_auc": {
+            "values": {
+              "clinical_seed20261021": 0.8111111111111111,
+              "clinical_seed20261022": 0.8555555555555556,
+              "clinical_seed20261023": 0.8111111111111111
+            },
+            "mean": 0.825925925925926,
+            "sample_sd": 0.025660011963983403
+          }
+        },
+        "old": {
+          "accuracy": {
+            "values": {
+              "round1_c2": 0.6842105263157895,
+              "round1_c4": 0.47368421052631576,
+              "round1_c6": 0.6842105263157895
+            },
+            "mean": 0.6140350877192983,
+            "sample_sd": 0.12154742509255283
+          },
+          "balanced_accuracy": {
+            "values": {
+              "round1_c2": 0.7,
+              "round1_c4": 0.5,
+              "round1_c6": 0.7
+            },
+            "mean": 0.6333333333333333,
+            "sample_sd": 0.11547005383792512
+          },
+          "sensitivity_ad": {
+            "values": {
+              "round1_c2": 1.0,
+              "round1_c4": 1.0,
+              "round1_c6": 1.0
+            },
+            "mean": 1.0,
+            "sample_sd": 0.0
+          },
+          "specificity_cn": {
+            "values": {
+              "round1_c2": 0.4,
+              "round1_c4": 0.0,
+              "round1_c6": 0.4
+            },
+            "mean": 0.26666666666666666,
+            "sample_sd": 0.23094010767585033
+          },
+          "nll": {
+            "values": {
+              "round1_c2": 0.629455330921742,
+              "round1_c4": 1.0298525145705308,
+              "round1_c6": 0.7433432753433621
+            },
+            "mean": 0.8008837069452116,
+            "sample_sd": 0.20630717903205847
+          },
+          "binary_brier": {
+            "values": {
+              "round1_c2": 0.21493540559506788,
+              "round1_c4": 0.3687110473668271,
+              "round1_c6": 0.2559449932091604
+            },
+            "mean": 0.2798638153903518,
+            "sample_sd": 0.07962926309768723
+          },
+          "roc_auc": {
+            "values": {
+              "round1_c2": 0.8444444444444444,
+              "round1_c4": 0.8333333333333333,
+              "round1_c6": 0.7555555555555555
+            },
+            "mean": 0.811111111111111,
+            "sample_sd": 0.04843221048378525
+          }
+        }
+      }
+    },
+    "besga_reused_test": {
+      "models": {
+        "round1_c2": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 5,
+          "confusion_cn_ad": [
+            [
+              4,
+              0
+            ],
+            [
+              6,
+              1
+            ]
+          ],
+          "accuracy": 0.45454545454545453,
+          "accuracy_exact95": [
+            0.16748809406370713,
+            0.7662064023406548
+          ],
+          "sensitivity_ad": 0.14285714285714285,
+          "sensitivity_exact95": [
+            0.0036102968619005833,
+            0.5787231970431952
+          ],
+          "specificity_cn": 1.0,
+          "specificity_exact95": [
+            0.3976353643835253,
+            1.0
+          ],
+          "precision_ad": 1.0,
+          "negative_predictive_value": 0.4,
+          "balanced_accuracy": 0.5714285714285714,
+          "macro_f1": 0.4107142857142857,
+          "roc_auc": 0.6785714285714285,
+          "average_precision": 0.8163265306122447,
+          "nll": 0.9637904076275808,
+          "binary_brier": 0.35531666938674816,
+          "ad_probability_ece_5_bins": 0.3806031449801392,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 5,
+              "mean_p_ad": 0.13810739297833707,
+              "observed_ad_fraction": 0.6
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 5,
+              "mean_p_ad": 0.27288743716975056,
+              "observed_ad_fraction": 0.6
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 1,
+              "mean_p_ad": 0.7583912544780307,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_c4": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 7,
+          "confusion_cn_ad": [
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "accuracy": 0.6363636363636364,
+          "accuracy_exact95": [
+            0.30790471501167715,
+            0.8907365561809019
+          ],
+          "sensitivity_ad": 0.5714285714285714,
+          "sensitivity_exact95": [
+            0.184051567640083,
+            0.9010117215574921
+          ],
+          "specificity_cn": 0.75,
+          "specificity_exact95": [
+            0.19412044968324338,
+            0.9936905367902902
+          ],
+          "precision_ad": 0.8,
+          "negative_predictive_value": 0.5,
+          "balanced_accuracy": 0.6607142857142857,
+          "macro_f1": 0.6333333333333333,
+          "roc_auc": 0.8214285714285714,
+          "average_precision": 0.8736394557823128,
+          "nll": 0.5811129514911042,
+          "binary_brier": 0.20007912701385136,
+          "ad_probability_ece_5_bins": 0.31591522272187056,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 3,
+              "mean_p_ad": 0.31342398899572865,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 6,
+              "mean_p_ad": 0.4979178778551243,
+              "observed_ad_fraction": 0.8333333333333334
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 1,
+              "mean_p_ad": 0.6146020922395918,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 1,
+              "mean_p_ad": 0.8630951576762729,
+              "observed_ad_fraction": 1.0
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_c6": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 4,
+          "confusion_cn_ad": [
+            [
+              3,
+              1
+            ],
+            [
+              6,
+              1
+            ]
+          ],
+          "accuracy": 0.36363636363636365,
+          "accuracy_exact95": [
+            0.10926344381909811,
+            0.6920952849883228
+          ],
+          "sensitivity_ad": 0.14285714285714285,
+          "sensitivity_exact95": [
+            0.0036102968619005833,
+            0.5787231970431952
+          ],
+          "specificity_cn": 0.75,
+          "specificity_exact95": [
+            0.19412044968324338,
+            0.9936905367902902
+          ],
+          "precision_ad": 0.5,
+          "negative_predictive_value": 0.3333333333333333,
+          "balanced_accuracy": 0.4464285714285714,
+          "macro_f1": 0.3418803418803419,
+          "roc_auc": 0.5357142857142857,
+          "average_precision": 0.704421768707483,
+          "nll": 0.8440357262810867,
+          "binary_brier": 0.3221813220755037,
+          "ad_probability_ece_5_bins": 0.41336095641658765,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 1,
+              "mean_p_ad": 0.19866925146844652,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 8,
+              "mean_p_ad": 0.2987527208816674,
+              "observed_ad_fraction": 0.75
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 1,
+              "mean_p_ad": 0.5568973355823092,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 1,
+              "mean_p_ad": 0.8185742994149526,
+              "observed_ad_fraction": 1.0
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261021": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 10,
+          "confusion_cn_ad": [
+            [
+              3,
+              1
+            ],
+            [
+              0,
+              7
+            ]
+          ],
+          "accuracy": 0.9090909090909091,
+          "accuracy_exact95": [
+            0.5872200830116173,
+            0.9977010277861857
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.5903836027749966,
+            1.0
+          ],
+          "specificity_cn": 0.75,
+          "specificity_exact95": [
+            0.19412044968324338,
+            0.9936905367902902
+          ],
+          "precision_ad": 0.875,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 0.875,
+          "macro_f1": 0.8952380952380952,
+          "roc_auc": 0.8571428571428571,
+          "average_precision": 0.9093537414965986,
+          "nll": 0.44664233934674474,
+          "binary_brier": 0.13981583590421817,
+          "ad_probability_ece_5_bins": 0.25521720133044506,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 2,
+              "mean_p_ad": 0.18018778413534164,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 1,
+              "mean_p_ad": 0.328287273645401,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 2,
+              "mean_p_ad": 0.5590848326683044,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 2,
+              "mean_p_ad": 0.6453215777873993,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 4,
+              "mean_p_ad": 0.8818847984075546,
+              "observed_ad_fraction": 0.75
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261022": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 10,
+          "confusion_cn_ad": [
+            [
+              3,
+              1
+            ],
+            [
+              0,
+              7
+            ]
+          ],
+          "accuracy": 0.9090909090909091,
+          "accuracy_exact95": [
+            0.5872200830116173,
+            0.9977010277861857
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.5903836027749966,
+            1.0
+          ],
+          "specificity_cn": 0.75,
+          "specificity_exact95": [
+            0.19412044968324338,
+            0.9936905367902902
+          ],
+          "precision_ad": 0.875,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 0.875,
+          "macro_f1": 0.8952380952380952,
+          "roc_auc": 0.8571428571428571,
+          "average_precision": 0.9093537414965986,
+          "nll": 0.4798216094285538,
+          "binary_brier": 0.15241498217161906,
+          "ad_probability_ece_5_bins": 0.2243117229505019,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 1,
+              "mean_p_ad": 0.3878088891506195,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 2,
+              "mean_p_ad": 0.4392121136188507,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 7,
+              "mean_p_ad": 0.6943412934030805,
+              "observed_ad_fraction": 0.8571428571428571
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 1,
+              "mean_p_ad": 0.9384151101112366,
+              "observed_ad_fraction": 1.0
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261023": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 9,
+          "confusion_cn_ad": [
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              6
+            ]
+          ],
+          "accuracy": 0.8181818181818182,
+          "accuracy_exact95": [
+            0.4822441476398273,
+            0.9771688017000403
+          ],
+          "sensitivity_ad": 0.8571428571428571,
+          "sensitivity_exact95": [
+            0.4212768029568048,
+            0.9963897031380994
+          ],
+          "specificity_cn": 0.75,
+          "specificity_exact95": [
+            0.19412044968324338,
+            0.9936905367902902
+          ],
+          "precision_ad": 0.8571428571428571,
+          "negative_predictive_value": 0.75,
+          "balanced_accuracy": 0.8035714285714286,
+          "macro_f1": 0.8035714285714286,
+          "roc_auc": 0.7857142857142857,
+          "average_precision": 0.8260204081632654,
+          "nll": 0.4924085218957362,
+          "binary_brier": 0.15314420719384214,
+          "ad_probability_ece_5_bins": 0.26058840345252643,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 1,
+              "mean_p_ad": 0.16585250198841095,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 2,
+              "mean_p_ad": 0.2547433376312256,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 2,
+              "mean_p_ad": 0.5259982347488403,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 2,
+              "mean_p_ad": 0.6542943716049194,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 4,
+              "mean_p_ad": 0.8879296183586121,
+              "observed_ad_fraction": 0.75
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_clinical_ensemble": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 5,
+          "confusion_cn_ad": [
+            [
+              4,
+              0
+            ],
+            [
+              6,
+              1
+            ]
+          ],
+          "accuracy": 0.45454545454545453,
+          "accuracy_exact95": [
+            0.16748809406370713,
+            0.7662064023406548
+          ],
+          "sensitivity_ad": 0.14285714285714285,
+          "sensitivity_exact95": [
+            0.0036102968619005833,
+            0.5787231970431952
+          ],
+          "specificity_cn": 1.0,
+          "specificity_exact95": [
+            0.3976353643835253,
+            1.0
+          ],
+          "precision_ad": 1.0,
+          "negative_predictive_value": 0.4,
+          "balanced_accuracy": 0.5714285714285714,
+          "macro_f1": 0.4107142857142857,
+          "roc_auc": 0.6785714285714286,
+          "average_precision": 0.7798185941043083,
+          "nll": 0.7506230568753772,
+          "binary_brier": 0.28065539174941906,
+          "ad_probability_ece_5_bins": 0.29972811029465113,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 1,
+              "mean_p_ad": 0.17900536374913323,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 7,
+              "mean_p_ad": 0.30994283862254296,
+              "observed_ad_fraction": 0.7142857142857143
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 2,
+              "mean_p_ad": 0.4495213548135426,
+              "observed_ad_fraction": 0.5
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 1,
+              "mean_p_ad": 0.8133535705230854,
+              "observed_ad_fraction": 1.0
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "new_clinical_ensemble": {
+          "n_patients": 11,
+          "n_ad": 7,
+          "n_cn": 4,
+          "correct": 10,
+          "confusion_cn_ad": [
+            [
+              3,
+              1
+            ],
+            [
+              0,
+              7
+            ]
+          ],
+          "accuracy": 0.9090909090909091,
+          "accuracy_exact95": [
+            0.5872200830116173,
+            0.9977010277861857
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.5903836027749966,
+            1.0
+          ],
+          "specificity_cn": 0.75,
+          "specificity_exact95": [
+            0.19412044968324338,
+            0.9936905367902902
+          ],
+          "precision_ad": 0.875,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 0.875,
+          "macro_f1": 0.8952380952380952,
+          "roc_auc": 0.8571428571428571,
+          "average_precision": 0.9093537414965986,
+          "nll": 0.4636499849769126,
+          "binary_brier": 0.144435998854457,
+          "ad_probability_ece_5_bins": 0.25857779383659363,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 3,
+              "mean_p_ad": 0.29224833846092224,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 2,
+              "mean_p_ad": 0.5717651546001434,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 2,
+              "mean_p_ad": 0.6569538116455078,
+              "observed_ad_fraction": 1.0
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 4,
+              "mean_p_ad": 0.8562621623277664,
+              "observed_ad_fraction": 0.75
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        }
+      },
+      "paired_comparisons": {
+        "new_clinical_ensemble_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 6,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 0.125,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": 0.45454545454545453,
+              "conditional95": [
+                0.18181818181818188,
+                0.6363636363636364
+              ]
+            },
+            "balanced_accuracy": {
+              "point": 0.3035714285714286,
+              "conditional95": [
+                0.0357142857142857,
+                0.5
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.8571428571428572,
+              "conditional95": [
+                0.5714285714285714,
+                1.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.25,
+              "conditional95": [
+                -0.75,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": -0.2869730718984646,
+              "conditional95": [
+                -0.46805289094149444,
+                -0.07798947238264506
+              ]
+            },
+            "binary_brier": {
+              "point": -0.13621939289496207,
+              "conditional95": [
+                -0.21864768649275268,
+                -0.04156544877001976
+              ]
+            },
+            "roc_auc": {
+              "point": 0.1785714285714285,
+              "conditional95": [
+                0.0,
+                0.46428571428571425
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261021_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 6,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 0.125,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": 0.45454545454545453,
+              "conditional95": [
+                0.18181818181818188,
+                0.6363636363636364
+              ]
+            },
+            "balanced_accuracy": {
+              "point": 0.3035714285714286,
+              "conditional95": [
+                0.0357142857142857,
+                0.5
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.8571428571428572,
+              "conditional95": [
+                0.5714285714285714,
+                1.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.25,
+              "conditional95": [
+                -0.75,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": -0.3039807175286325,
+              "conditional95": [
+                -0.5049564112488242,
+                -0.06649899073932525
+              ]
+            },
+            "binary_brier": {
+              "point": -0.1408395558452009,
+              "conditional95": [
+                -0.22991185465624356,
+                -0.035793493885084744
+              ]
+            },
+            "roc_auc": {
+              "point": 0.1785714285714285,
+              "conditional95": [
+                0.0,
+                0.46428571428571425
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261022_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 6,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 0.125,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": 0.45454545454545453,
+              "conditional95": [
+                0.18181818181818188,
+                0.6363636363636364
+              ]
+            },
+            "balanced_accuracy": {
+              "point": 0.3035714285714286,
+              "conditional95": [
+                0.0357142857142857,
+                0.5
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.8571428571428572,
+              "conditional95": [
+                0.5714285714285714,
+                1.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.25,
+              "conditional95": [
+                -0.75,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": -0.27080144744682344,
+              "conditional95": [
+                -0.3982653868426839,
+                -0.12841967216410244
+              ]
+            },
+            "binary_brier": {
+              "point": -0.1282404095778,
+              "conditional95": [
+                -0.19022647257913405,
+                -0.05690069993309904
+              ]
+            },
+            "roc_auc": {
+              "point": 0.1785714285714285,
+              "conditional95": [
+                0.0,
+                0.46428571428571425
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261023_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 5,
+          "old_only_correct": 1,
+          "mcnemar_exact_two_sided_p": 0.21875,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": 0.3636363636363637,
+              "conditional95": [
+                0.09090909090909088,
+                0.6363636363636364
+              ]
+            },
+            "balanced_accuracy": {
+              "point": 0.2321428571428572,
+              "conditional95": [
+                -0.05357142857142855,
+                0.5
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.7142857142857142,
+              "conditional95": [
+                0.42857142857142855,
+                1.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.25,
+              "conditional95": [
+                -0.75,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": -0.25821453497964103,
+              "conditional95": [
+                -0.5070334698508807,
+                0.04505155088499343
+              ]
+            },
+            "binary_brier": {
+              "point": -0.12751118455557692,
+              "conditional95": [
+                -0.23179235555499847,
+                -0.0065395025036268
+              ]
+            },
+            "roc_auc": {
+              "point": 0.1071428571428571,
+              "conditional95": [
+                0.0,
+                0.35714285714285715
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        }
+      },
+      "optimization_seed_spread": {
+        "new": {
+          "accuracy": {
+            "values": {
+              "clinical_seed20261021": 0.9090909090909091,
+              "clinical_seed20261022": 0.9090909090909091,
+              "clinical_seed20261023": 0.8181818181818182
+            },
+            "mean": 0.8787878787878788,
+            "sample_sd": 0.05248638810814775
+          },
+          "balanced_accuracy": {
+            "values": {
+              "clinical_seed20261021": 0.875,
+              "clinical_seed20261022": 0.875,
+              "clinical_seed20261023": 0.8035714285714286
+            },
+            "mean": 0.8511904761904763,
+            "sample_sd": 0.041239304942116105
+          },
+          "sensitivity_ad": {
+            "values": {
+              "clinical_seed20261021": 1.0,
+              "clinical_seed20261022": 1.0,
+              "clinical_seed20261023": 0.8571428571428571
+            },
+            "mean": 0.9523809523809524,
+            "sample_sd": 0.08247860988423228
+          },
+          "specificity_cn": {
+            "values": {
+              "clinical_seed20261021": 0.75,
+              "clinical_seed20261022": 0.75,
+              "clinical_seed20261023": 0.75
+            },
+            "mean": 0.75,
+            "sample_sd": 0.0
+          },
+          "nll": {
+            "values": {
+              "clinical_seed20261021": 0.44664233934674474,
+              "clinical_seed20261022": 0.4798216094285538,
+              "clinical_seed20261023": 0.4924085218957362
+            },
+            "mean": 0.4729574902236782,
+            "sample_sd": 0.023642609111960516
+          },
+          "binary_brier": {
+            "values": {
+              "clinical_seed20261021": 0.13981583590421817,
+              "clinical_seed20261022": 0.15241498217161906,
+              "clinical_seed20261023": 0.15314420719384214
+            },
+            "mean": 0.14845834175655978,
+            "sample_sd": 0.007493505377263594
+          },
+          "roc_auc": {
+            "values": {
+              "clinical_seed20261021": 0.8571428571428571,
+              "clinical_seed20261022": 0.8571428571428571,
+              "clinical_seed20261023": 0.7857142857142857
+            },
+            "mean": 0.8333333333333334,
+            "sample_sd": 0.041239304942116105
+          }
+        },
+        "old": {
+          "accuracy": {
+            "values": {
+              "round1_c2": 0.45454545454545453,
+              "round1_c4": 0.6363636363636364,
+              "round1_c6": 0.36363636363636365
+            },
+            "mean": 0.48484848484848486,
+            "sample_sd": 0.13886593015017695
+          },
+          "balanced_accuracy": {
+            "values": {
+              "round1_c2": 0.5714285714285714,
+              "round1_c4": 0.6607142857142857,
+              "round1_c6": 0.4464285714285714
+            },
+            "mean": 0.5595238095238095,
+            "sample_sd": 0.10763774595253052
+          },
+          "sensitivity_ad": {
+            "values": {
+              "round1_c2": 0.14285714285714285,
+              "round1_c4": 0.5714285714285714,
+              "round1_c6": 0.14285714285714285
+            },
+            "mean": 0.28571428571428564,
+            "sample_sd": 0.24743582965269673
+          },
+          "specificity_cn": {
+            "values": {
+              "round1_c2": 1.0,
+              "round1_c4": 0.75,
+              "round1_c6": 0.75
+            },
+            "mean": 0.8333333333333334,
+            "sample_sd": 0.14433756729740646
+          },
+          "nll": {
+            "values": {
+              "round1_c2": 0.9637904076275808,
+              "round1_c4": 0.5811129514911042,
+              "round1_c6": 0.8440357262810867
+            },
+            "mean": 0.7963130284665906,
+            "sample_sd": 0.19575137489629935
+          },
+          "binary_brier": {
+            "values": {
+              "round1_c2": 0.35531666938674816,
+              "round1_c4": 0.20007912701385136,
+              "round1_c6": 0.3221813220755037
+            },
+            "mean": 0.29252570615870105,
+            "sample_sd": 0.08175735628705176
+          },
+          "roc_auc": {
+            "values": {
+              "round1_c2": 0.6785714285714285,
+              "round1_c4": 0.8214285714285714,
+              "round1_c6": 0.5357142857142857
+            },
+            "mean": 0.6785714285714285,
+            "sample_sd": 0.14285714285714285
+          }
+        }
+      }
+    },
+    "openneuro_reused_external": {
+      "models": {
+        "round1_c2": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 14,
+          "confusion_cn_ad": [
+            [
+              14,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "accuracy": 0.9333333333333333,
+          "accuracy_exact95": [
+            0.6805154334216966,
+            0.9983135697586473
+          ],
+          "sensitivity_ad": 0.0,
+          "sensitivity_exact95": [
+            0.0,
+            0.975
+          ],
+          "specificity_cn": 1.0,
+          "specificity_exact95": [
+            0.7683642383498834,
+            1.0
+          ],
+          "precision_ad": null,
+          "negative_predictive_value": 0.9333333333333333,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.4827586206896552,
+          "roc_auc": 1.0,
+          "average_precision": 1.0,
+          "nll": 0.2975801012165266,
+          "binary_brier": 0.07430212821918297,
+          "ad_probability_ece_5_bins": 0.16081727252652245,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 5,
+              "mean_p_ad": 0.13576728536023033,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 10,
+              "mean_p_ad": 0.27334226610966855,
+              "observed_ad_fraction": 0.1
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_c4": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 7,
+          "confusion_cn_ad": [
+            [
+              6,
+              8
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "accuracy": 0.4666666666666667,
+          "accuracy_exact95": [
+            0.21266672951930787,
+            0.7341386527226034
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.025,
+            1.0
+          ],
+          "specificity_cn": 0.42857142857142855,
+          "specificity_exact95": [
+            0.1766110899821179,
+            0.7113905999616925
+          ],
+          "precision_ad": 0.1111111111111111,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 0.7142857142857143,
+          "macro_f1": 0.4,
+          "roc_auc": 0.9285714285714286,
+          "average_precision": 0.5,
+          "nll": 0.736807065870322,
+          "binary_brier": 0.2688706995769408,
+          "ad_probability_ece_5_bins": 0.45868087002524616,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 3,
+              "mean_p_ad": 0.34448900046171965,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 7,
+              "mean_p_ad": 0.4933468588287867,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 5,
+              "mean_p_ad": 0.6786636074384054,
+              "observed_ad_fraction": 0.2
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_c6": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 13,
+          "confusion_cn_ad": [
+            [
+              13,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "accuracy": 0.8666666666666667,
+          "accuracy_exact95": [
+            0.5953973033966279,
+            0.9834240865599164
+          ],
+          "sensitivity_ad": 0.0,
+          "sensitivity_exact95": [
+            0.0,
+            0.975
+          ],
+          "specificity_cn": 0.9285714285714286,
+          "specificity_exact95": [
+            0.6613155100681788,
+            0.9981932193408746
+          ],
+          "precision_ad": 0.0,
+          "negative_predictive_value": 0.9285714285714286,
+          "balanced_accuracy": 0.4642857142857143,
+          "macro_f1": 0.4642857142857143,
+          "roc_auc": 0.8571428571428572,
+          "average_precision": 0.3333333333333333,
+          "nll": 0.4357376399672189,
+          "binary_brier": 0.13039154104637934,
+          "ad_probability_ece_5_bins": 0.2636666316125128,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 1,
+              "mean_p_ad": 0.16236280649900436,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 11,
+              "mean_p_ad": 0.3035825043916702,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 3,
+              "mean_p_ad": 0.484409706460105,
+              "observed_ad_fraction": 0.3333333333333333
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261021": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 14,
+          "confusion_cn_ad": [
+            [
+              14,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "accuracy": 0.9333333333333333,
+          "accuracy_exact95": [
+            0.6805154334216966,
+            0.9983135697586473
+          ],
+          "sensitivity_ad": 0.0,
+          "sensitivity_exact95": [
+            0.0,
+            0.975
+          ],
+          "specificity_cn": 1.0,
+          "specificity_exact95": [
+            0.7683642383498834,
+            1.0
+          ],
+          "precision_ad": null,
+          "negative_predictive_value": 0.9333333333333333,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.4827586206896552,
+          "roc_auc": 0.9285714285714286,
+          "average_precision": 0.5,
+          "nll": 0.2526503771213512,
+          "binary_brier": 0.06445374518031761,
+          "ad_probability_ece_5_bins": 0.1319845090309779,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 10,
+              "mean_p_ad": 0.11940804123878479,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 2,
+              "mean_p_ad": 0.24666789919137955,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 3,
+              "mean_p_ad": 0.43078380823135376,
+              "observed_ad_fraction": 0.3333333333333333
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261022": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 10,
+          "confusion_cn_ad": [
+            [
+              10,
+              4
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "accuracy": 0.6666666666666666,
+          "accuracy_exact95": [
+            0.38380373254115413,
+            0.881758896633119
+          ],
+          "sensitivity_ad": 0.0,
+          "sensitivity_exact95": [
+            0.0,
+            0.975
+          ],
+          "specificity_cn": 0.7142857142857143,
+          "specificity_exact95": [
+            0.4189647428163391,
+            0.9161106816928725
+          ],
+          "precision_ad": 0.0,
+          "negative_predictive_value": 0.9090909090909091,
+          "balanced_accuracy": 0.35714285714285715,
+          "macro_f1": 0.4,
+          "roc_auc": 0.7142857142857143,
+          "average_precision": 0.2,
+          "nll": 0.559832696186229,
+          "binary_brier": 0.18653994117640488,
+          "ad_probability_ece_5_bins": 0.3539783000946045,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 1,
+              "mean_p_ad": 0.19150274991989136,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 6,
+              "mean_p_ad": 0.3580571760733922,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 8,
+              "mean_p_ad": 0.49622858688235283,
+              "observed_ad_fraction": 0.125
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "clinical_seed20261023": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 15,
+          "confusion_cn_ad": [
+            [
+              14,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "accuracy": 1.0,
+          "accuracy_exact95": [
+            0.7819806390894659,
+            1.0
+          ],
+          "sensitivity_ad": 1.0,
+          "sensitivity_exact95": [
+            0.025,
+            1.0
+          ],
+          "specificity_cn": 1.0,
+          "specificity_exact95": [
+            0.7683642383498834,
+            1.0
+          ],
+          "precision_ad": 1.0,
+          "negative_predictive_value": 1.0,
+          "balanced_accuracy": 1.0,
+          "macro_f1": 1.0,
+          "roc_auc": 1.0,
+          "average_precision": 1.0,
+          "nll": 0.23957566011611633,
+          "binary_brier": 0.059826651046089876,
+          "ad_probability_ece_5_bins": 0.13252658396959305,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 11,
+              "mean_p_ad": 0.11997792327945883,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 1,
+              "mean_p_ad": 0.22312161326408386,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 3,
+              "mean_p_ad": 0.48167333006858826,
+              "observed_ad_fraction": 0.3333333333333333
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "round1_clinical_ensemble": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 12,
+          "confusion_cn_ad": [
+            [
+              12,
+              2
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "accuracy": 0.8,
+          "accuracy_exact95": [
+            0.5191088661931469,
+            0.9566879948941633
+          ],
+          "sensitivity_ad": 0.0,
+          "sensitivity_exact95": [
+            0.0,
+            0.975
+          ],
+          "specificity_cn": 0.8571428571428571,
+          "specificity_exact95": [
+            0.5718708390903011,
+            0.9822054845168084
+          ],
+          "precision_ad": 0.0,
+          "negative_predictive_value": 0.9230769230769231,
+          "balanced_accuracy": 0.42857142857142855,
+          "macro_f1": 0.4444444444444444,
+          "roc_auc": 0.8571428571428572,
+          "average_precision": 0.3333333333333333,
+          "nll": 0.4604636809557127,
+          "binary_brier": 0.13949763327872336,
+          "ad_probability_ece_5_bins": 0.29438825805476043,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 11,
+              "mean_p_ad": 0.31774603407704566,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 4,
+              "mean_p_ad": 0.48015437399347627,
+              "observed_ad_fraction": 0.25
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        },
+        "new_clinical_ensemble": {
+          "n_patients": 15,
+          "n_ad": 1,
+          "n_cn": 14,
+          "correct": 14,
+          "confusion_cn_ad": [
+            [
+              14,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "accuracy": 0.9333333333333333,
+          "accuracy_exact95": [
+            0.6805154334216966,
+            0.9983135697586473
+          ],
+          "sensitivity_ad": 0.0,
+          "sensitivity_exact95": [
+            0.0,
+            0.975
+          ],
+          "specificity_cn": 1.0,
+          "specificity_exact95": [
+            0.7683642383498834,
+            1.0
+          ],
+          "precision_ad": null,
+          "negative_predictive_value": 0.9333333333333333,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.4827586206896552,
+          "roc_auc": 0.9285714285714286,
+          "average_precision": 0.5,
+          "nll": 0.3376954220964828,
+          "binary_brier": 0.09050349229497642,
+          "ad_probability_ece_5_bins": 0.20616313765446348,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "n": 5,
+              "mean_p_ad": 0.16249574571847916,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "n": 7,
+              "mean_p_ad": 0.2624902916806085,
+              "observed_ad_fraction": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6000000000000001,
+              "n": 3,
+              "mean_p_ad": 0.48084543148676556,
+              "observed_ad_fraction": 0.3333333333333333
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.8,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "n": 0,
+              "mean_p_ad": null,
+              "observed_ad_fraction": null
+            }
+          ],
+          "threshold": 0.5,
+          "calibration_fitted": false,
+          "unit": "patient",
+          "mean_probability_total_variation": 0.0,
+          "label_flip_fraction": 0.0
+        }
+      },
+      "paired_comparisons": {
+        "new_clinical_ensemble_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 2,
+          "old_only_correct": 0,
+          "mcnemar_exact_two_sided_p": 0.5,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": 0.1333333333333333,
+              "conditional95": [
+                0.0,
+                0.33333333333333337
+              ]
+            },
+            "balanced_accuracy": {
+              "point": 0.07142857142857145,
+              "conditional95": [
+                0.0,
+                0.17857142857142855
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.0,
+              "conditional95": [
+                0.0,
+                0.0
+              ]
+            },
+            "specificity_cn": {
+              "point": 0.1428571428571429,
+              "conditional95": [
+                0.0,
+                0.3571428571428571
+              ]
+            },
+            "nll": {
+              "point": -0.12276825885922993,
+              "conditional95": [
+                -0.17077712632550301,
+                -0.07560212519269435
+              ]
+            },
+            "binary_brier": {
+              "point": -0.04899414098374694,
+              "conditional95": [
+                -0.06926126469540383,
+                -0.029808223314703886
+              ]
+            },
+            "roc_auc": {
+              "point": 0.0714285714285714,
+              "conditional95": [
+                0.0,
+                0.2142857142857143
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261021_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 2,
+          "old_only_correct": 0,
+          "mcnemar_exact_two_sided_p": 0.5,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": 0.1333333333333333,
+              "conditional95": [
+                0.0,
+                0.33333333333333337
+              ]
+            },
+            "balanced_accuracy": {
+              "point": 0.07142857142857145,
+              "conditional95": [
+                0.0,
+                0.17857142857142855
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.0,
+              "conditional95": [
+                0.0,
+                0.0
+              ]
+            },
+            "specificity_cn": {
+              "point": 0.1428571428571429,
+              "conditional95": [
+                0.0,
+                0.3571428571428571
+              ]
+            },
+            "nll": {
+              "point": -0.20781330383436153,
+              "conditional95": [
+                -0.2547365531648749,
+                -0.16097650902860838
+              ]
+            },
+            "binary_brier": {
+              "point": -0.07504388809840574,
+              "conditional95": [
+                -0.09391374745851784,
+                -0.05699033554995769
+              ]
+            },
+            "roc_auc": {
+              "point": 0.0714285714285714,
+              "conditional95": [
+                0.0,
+                0.2142857142857143
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261022_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 0,
+          "old_only_correct": 2,
+          "mcnemar_exact_two_sided_p": 0.5,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": -0.13333333333333341,
+              "conditional95": [
+                -0.33333333333333337,
+                0.0
+              ]
+            },
+            "balanced_accuracy": {
+              "point": -0.0714285714285714,
+              "conditional95": [
+                -0.17857142857142858,
+                0.0
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 0.0,
+              "conditional95": [
+                0.0,
+                0.0
+              ]
+            },
+            "specificity_cn": {
+              "point": -0.1428571428571428,
+              "conditional95": [
+                -0.35714285714285715,
+                0.0
+              ]
+            },
+            "nll": {
+              "point": 0.09936901523051628,
+              "conditional95": [
+                0.03687816423985139,
+                0.16960647729803416
+              ]
+            },
+            "binary_brier": {
+              "point": 0.04704230789768152,
+              "conditional95": [
+                0.01783437626050201,
+                0.0800780197191949
+              ]
+            },
+            "roc_auc": {
+              "point": -0.1428571428571429,
+              "conditional95": [
+                -0.35714285714285715,
+                0.0
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        },
+        "clinical_seed20261023_minus_round1_clinical_ensemble": {
+          "unit": "patient",
+          "new_only_correct": 3,
+          "old_only_correct": 0,
+          "mcnemar_exact_two_sided_p": 0.25,
+          "bootstrap_draws": 10000,
+          "bootstrap_scheme": "Paired patient resampling stratified by observed diagnosis counts",
+          "differences": {
+            "accuracy": {
+              "point": 0.19999999999999996,
+              "conditional95": [
+                0.06666666666666665,
+                0.4
+              ]
+            },
+            "balanced_accuracy": {
+              "point": 0.5714285714285714,
+              "conditional95": [
+                0.5,
+                0.6785714285714286
+              ]
+            },
+            "sensitivity_ad": {
+              "point": 1.0,
+              "conditional95": [
+                1.0,
+                1.0
+              ]
+            },
+            "specificity_cn": {
+              "point": 0.1428571428571429,
+              "conditional95": [
+                0.0,
+                0.3571428571428571
+              ]
+            },
+            "nll": {
+              "point": -0.22088802083959638,
+              "conditional95": [
+                -0.2693083169074219,
+                -0.16922195145555002
+              ]
+            },
+            "binary_brier": {
+              "point": -0.07967098223263348,
+              "conditional95": [
+                -0.09895276157333566,
+                -0.060249778235296605
+              ]
+            },
+            "roc_auc": {
+              "point": 0.1428571428571428,
+              "conditional95": [
+                0.0,
+                0.3571428571428571
+              ]
+            }
+          },
+          "multiplicity_adjusted": false,
+          "interpretation": "Small fixed-cohort exploratory comparison; no population-wide or clinical-superiority claim."
+        }
+      },
+      "optimization_seed_spread": {
+        "new": {
+          "accuracy": {
+            "values": {
+              "clinical_seed20261021": 0.9333333333333333,
+              "clinical_seed20261022": 0.6666666666666666,
+              "clinical_seed20261023": 1.0
+            },
+            "mean": 0.8666666666666667,
+            "sample_sd": 0.1763834207376394
+          },
+          "balanced_accuracy": {
+            "values": {
+              "clinical_seed20261021": 0.5,
+              "clinical_seed20261022": 0.35714285714285715,
+              "clinical_seed20261023": 1.0
+            },
+            "mean": 0.6190476190476191,
+            "sample_sd": 0.3375582590180434
+          },
+          "sensitivity_ad": {
+            "values": {
+              "clinical_seed20261021": 0.0,
+              "clinical_seed20261022": 0.0,
+              "clinical_seed20261023": 1.0
+            },
+            "mean": 0.3333333333333333,
+            "sample_sd": 0.5773502691896258
+          },
+          "specificity_cn": {
+            "values": {
+              "clinical_seed20261021": 1.0,
+              "clinical_seed20261022": 0.7142857142857143,
+              "clinical_seed20261023": 1.0
+            },
+            "mean": 0.9047619047619048,
+            "sample_sd": 0.1649572197684645
+          },
+          "nll": {
+            "values": {
+              "clinical_seed20261021": 0.2526503771213512,
+              "clinical_seed20261022": 0.559832696186229,
+              "clinical_seed20261023": 0.23957566011611633
+            },
+            "mean": 0.35068624447456553,
+            "sample_sd": 0.18124407784497715
+          },
+          "binary_brier": {
+            "values": {
+              "clinical_seed20261021": 0.06445374518031761,
+              "clinical_seed20261022": 0.18653994117640488,
+              "clinical_seed20261023": 0.059826651046089876
+            },
+            "mean": 0.10360677913427079,
+            "sample_sd": 0.0718594776265588
+          },
+          "roc_auc": {
+            "values": {
+              "clinical_seed20261021": 0.9285714285714286,
+              "clinical_seed20261022": 0.7142857142857143,
+              "clinical_seed20261023": 1.0
+            },
+            "mean": 0.8809523809523809,
+            "sample_sd": 0.14869042853329517
+          }
+        },
+        "old": {
+          "accuracy": {
+            "values": {
+              "round1_c2": 0.9333333333333333,
+              "round1_c4": 0.4666666666666667,
+              "round1_c6": 0.8666666666666667
+            },
+            "mean": 0.7555555555555555,
+            "sample_sd": 0.2523959264800122
+          },
+          "balanced_accuracy": {
+            "values": {
+              "round1_c2": 0.5,
+              "round1_c4": 0.7142857142857143,
+              "round1_c6": 0.4642857142857143
+            },
+            "mean": 0.5595238095238096,
+            "sample_sd": 0.13521210347143509
+          },
+          "sensitivity_ad": {
+            "values": {
+              "round1_c2": 0.0,
+              "round1_c4": 1.0,
+              "round1_c6": 0.0
+            },
+            "mean": 0.3333333333333333,
+            "sample_sd": 0.5773502691896258
+          },
+          "specificity_cn": {
+            "values": {
+              "round1_c2": 1.0,
+              "round1_c4": 0.42857142857142855,
+              "round1_c6": 0.9285714285714286
+            },
+            "mean": 0.7857142857142857,
+            "sample_sd": 0.3113499245386196
+          },
+          "nll": {
+            "values": {
+              "round1_c2": 0.2975801012165266,
+              "round1_c4": 0.736807065870322,
+              "round1_c6": 0.4357376399672189
+            },
+            "mean": 0.4900416023513558,
+            "sample_sd": 0.22459245728142768
+          },
+          "binary_brier": {
+            "values": {
+              "round1_c2": 0.07430212821918297,
+              "round1_c4": 0.2688706995769408,
+              "round1_c6": 0.13039154104637934
+            },
+            "mean": 0.1578547896141677,
+            "sample_sd": 0.10014941216238778
+          },
+          "roc_auc": {
+            "values": {
+              "round1_c2": 1.0,
+              "round1_c4": 0.9285714285714286,
+              "round1_c6": 0.8571428571428572
+            },
+            "mean": 0.9285714285714285,
+            "sample_sd": 0.0714285714285714
+          }
+        }
+      }
+    }
+  },
+  "recomputed_all168_metrics": true,
+  "recomputed_all_uniform_ensemble_probabilities": true,
+  "primary_contrast": "new_clinical_ensemble minus round1_clinical_ensemble",
+  "fresh_external_binary_n": 19,
+  "mci_patients": 15,
+  "mci_scored": false,
+  "protocol": {
+    "status": "prespecified_before_any_new_clinical_fitting_or_inference",
+    "endpoint": "Provider AD diagnosis versus provider control label from structural T1; research pilot only",
+    "class_order": [
+      "CN",
+      "AD"
+    ],
+    "positive_class": "AD",
+    "new_seeds": [
+      20261021,
+      20261022,
+      20261023
+    ],
+    "primary_new_model": "Equal arithmetic mean of the three validation-selected patient probability vectors",
+    "primary_comparator": "Equal arithmetic mean of the unchanged c2/c4/c6 clinical-head patient probability vectors",
+    "individual_models": "Report every new seed and c2/c4/c6, without choosing from external scores",
+    "new_slice_aggregation": "softmax(mean of all nine two-class slice logits)",
+    "old_slice_aggregation": "mean of the nine original clinical-head softmax probability vectors",
+    "decision_rule": "AD if P_AD >= 0.5. Verify no exact0.5 old-comparator tie to retain its historical argmax decision.",
+    "calibration": "No fitted calibration or threshold search; report raw patient NLL, binary Brier and fixed5-bin AD-probability reliability descriptively",
+    "cohorts": {
+      "harvard_fresh_external": {
+        "binary_patients": 19,
+        "AD": 9,
+        "CN": 10,
+        "MCI_prediction_only": 10,
+        "role": "Fresh source-heldout binary endpoint; no fitting or model selection; one of the published10AD has no released T1"
+      },
+      "besga_reused_test": {
+        "binary_patients": 11,
+        "AD": 7,
+        "CN": 4,
+        "MCI_prediction_only": 0,
+        "role": "Retrospectively reused internal patient test; original frozen partition preserved"
+      },
+      "openneuro_reused_external": {
+        "binary_patients": 15,
+        "AD": 1,
+        "CN": 14,
+        "MCI_prediction_only": 5,
+        "role": "Retrospectively reused external patients; one AD cannot establish stable sensitivity"
+      }
+    },
+    "synthetic_stress": [
+      "clean",
+      "intensity_0.9",
+      "intensity_1.1",
+      "gaussian_noise_0.01",
+      "gaussian_noise_0.02",
+      "blur_0.5",
+      "blur_1.0"
+    ],
+    "stress_policy": "Apply each fixed perturbation to every slice for all6 individual models, then compute both fixed ensembles; deterministic per patient/slice/scenario noise shared across models. Report every scenario per cohort; do not select checkpoints using outcomes. These are2D pixel diagnostics, not physical MRI acquisition simulations.",
+    "uncertainty": "Two-sided95% exact binomial intervals for accuracy, AD sensitivity and CN specificity. Primary paired ensemble contrast and each newseed versus oldensemble use10,000 diagnosis-stratified paired patient bootstrap draws with fixed identity-derived seeds; conditional95% percentile intervals and exact paired McNemar discordance. Report unadjusted exploratory comparisons without multiplicity or clinical-superiority claims.",
+    "unit": "One patient; nine slices and three seeds never count as additional patients",
+    "preprocessing": "Existing unchanged exploratory_t1_axial_v1;1.5mm RAS, per-volume intensity scaling, fixed45-85% cranial-span fractions, aspect-preserving224PNG. No external-fitted normalization, cropping, harmonization or parameter adjustment.",
+    "quality_gate": "Provider-derived source/diagnosis mapping, complete9-slice bags, allpatient gross anatomical review with diagnosis and predictions hidden, exact raw/canonical/pixel overlap audit, documented unavailableT1 and no silent exclusion before model inference",
+    "limitations": [
+      "Convenience case-control cohorts and small source-heldout sample do not establish population risk calibration or real-world clinical readiness.",
+      "Source scanner and demographic confounding remain; no prospective study or clinician-adjudicated deployment validation.",
+      "Mean-logit and mean-probability systems differ in complete training and pooling pipelines; this is not an isolated architecture ablation.",
+      "MCI probabilities are descriptive, not binary accuracy, early-AD detection or progression prediction.",
+      "The original100 legacy stage images and neuroradiologist results are a different endpoint; this binary model is not scored against those four labels.",
+      "AlzaSet remains excluded while provider patient mapping and archive counts are unresolved."
+    ]
+  },
+  "no_inference_performed": true,
+  "real_figures_need_visual_review": true
+}

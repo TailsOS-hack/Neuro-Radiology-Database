@@ -1,0 +1,28 @@
+{
+  "case_count": 115,
+  "valid_maps": 115,
+  "all_logits_modes_gradients_unchanged": true,
+  "original_checkpoint_state_restored": true,
+  "randomization_records": 72,
+  "cloud_probability_tolerance": 0.0001,
+  "cloud_probability_or_argmax_failures": [
+    {
+      "case_id": "image_005",
+      "max_probability_difference": 0.00011771917343139648,
+      "argmax_agreement": true
+    },
+    {
+      "case_id": "image_010",
+      "max_probability_difference": 0.00037366151809692383,
+      "argmax_agreement": true
+    }
+  ],
+  "historical_sources": {
+    "case_inventory_sha256": "71e94e550471989ff4316bb5742e185379add3ef7e1237bcfdb901d538b378a5",
+    "baseline_payload_manifest_sha256": "abf11186722dd43ab4fbea7b97eb7752007436c5dacd8bfc27dd0bfe80f2b7e7"
+  },
+  "clinical_anatomical_validation": false,
+  "visual_review_required": true,
+  "recovery_receipt": "recovery_receipt.json",
+  "state_assertion_basis": "Original runtime assertion evidence; artifact checks independently recomputed without inference."
+}

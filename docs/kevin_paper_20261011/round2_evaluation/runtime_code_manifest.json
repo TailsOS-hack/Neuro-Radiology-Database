@@ -1,0 +1,42 @@
+{
+  "status": "final_ready_for_code_only_transfer",
+  "contains_images": false,
+  "files": {
+    "docs/kevin_paper_20261011/analysis/analysis_protocol.json": "938709c2cab684e35df3b36df09b6131b540b77f08a2ebc53201c5256160d5a4",
+    "docs/kevin_paper_20261011/analysis/plot_evaluation_figures.py": "48a78ed1d14198813833fc937cde35e509737e894bec4893ca920871406ae81e",
+    "docs/kevin_paper_20261011/analysis/summarize_frozen_evaluation.py": "74b2e8659238d234034c0a442e9609506045f7b971ab73bb4e7fd4182f80335e",
+    "docs/kevin_paper_20261011/posthoc_robustness/stress_test.py": "7955b7ad5c0d564bc25745e84f157c8544901d25ff2adb86f31bcc8e1b3d9f9a",
+    "docs/kevin_paper_20261011/round2_corner_audit/corner_audit.py": "0262f2cd0b4c62eaabd56814d2574e81e95b0c444bfdcb8f15e29cedf6c6b976",
+    "docs/kevin_paper_20261011/round2_evaluation/README.md": "05f21e543f067ac614ffbdd4034c199bb8d8aba3ba46fd75beb2d71639bbabf5",
+    "docs/kevin_paper_20261011/round2_evaluation/assemble_atlas.py": "480e5e2762668e248d5ac4ab4f697f93e97d88ec9e99c9ca62dec228af1968e5",
+    "docs/kevin_paper_20261011/round2_evaluation/protocol.json": "de8801f98789fbd9bde41ed7c5a4c32b8dc5234df95284a5bdcef98de049ff2e",
+    "docs/kevin_paper_20261011/round2_evaluation/report_round2.py": "98077e9127bfdbc57cd262f42b004af1450680b21aedcd75a148dee7df0c58f2",
+    "docs/kevin_paper_20261011/round2_evaluation/round2_attribution.py": "5d44bcc8b22f337619fe7f20e307271f41a7669901540294e04f53dd9328c074",
+    "docs/kevin_paper_20261011/round2_evaluation/round2_pipeline.py": "86b9616259e4583ae0b757998684a6ae7da23a1c195667dd0c485681a3bcf3d8",
+    "docs/kevin_paper_20261011/round2_evaluation/test_round2_pipeline.py": "f6223fcb321d20c96f8d6f2657011577abe2ab4063cb610da4d1b0911fd2baff",
+    "docs/kevin_paper_20261011/round2_evaluation/verify_synthetic_pipeline.py": "292c8112fa0b2278265045712a47a5a61a3994b2bef22dccabe28067efdfb4a1",
+    "docs/kevin_paper_20261011/round2_training/README.md": "d7e5b0478c81e874c136af5877326035d29750b6f25e8891f5048eb987922be7",
+    "docs/kevin_paper_20261011/round2_training/round2.py": "94153e6af976fb8d31b9d3d2ae7f2ce6d011e3ef59a94909b4fdec3d4b867dcc",
+    "docs/kevin_paper_20261011/round2_training/test_round2.py": "6bee61589a163bac0d6a4372134ba884ebc8cba9018f01429d65e95a1b79c333",
+    "docs/kevin_paper_20261011/training/evaluate_candidates.py": "7ecebb4db2843ab90152ee31d859e03e725d9c2d476637fada1d3b557bf8231d",
+    "docs/kevin_paper_20261011/training/train_candidate.py": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+    "src/explainability_validation.py": "314437bcfc580e80b8d48297027f147b1bd2a9b64c85bf273587491c6490168a",
+    "src/grad_cam.py": "b96976bccd9e2dd642c02ca1c1b19a7d1b06fc46574a79c68ae07b31d6d4b0ec"
+  },
+  "freeze_runtime_pins": {
+    "docs/kevin_paper_20261011/round2_evaluation/round2_pipeline.py": "86b9616259e4583ae0b757998684a6ae7da23a1c195667dd0c485681a3bcf3d8",
+    "docs/kevin_paper_20261011/round2_evaluation/report_round2.py": "98077e9127bfdbc57cd262f42b004af1450680b21aedcd75a148dee7df0c58f2",
+    "docs/kevin_paper_20261011/round2_evaluation/round2_attribution.py": "5d44bcc8b22f337619fe7f20e307271f41a7669901540294e04f53dd9328c074",
+    "docs/kevin_paper_20261011/round2_evaluation/protocol.json": "de8801f98789fbd9bde41ed7c5a4c32b8dc5234df95284a5bdcef98de049ff2e",
+    "docs/kevin_paper_20261011/training/train_candidate.py": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+    "docs/kevin_paper_20261011/training/evaluate_candidates.py": "7ecebb4db2843ab90152ee31d859e03e725d9c2d476637fada1d3b557bf8231d",
+    "docs/kevin_paper_20261011/posthoc_robustness/stress_test.py": "7955b7ad5c0d564bc25745e84f157c8544901d25ff2adb86f31bcc8e1b3d9f9a",
+    "docs/kevin_paper_20261011/round2_corner_audit/corner_audit.py": "0262f2cd0b4c62eaabd56814d2574e81e95b0c444bfdcb8f15e29cedf6c6b976",
+    "docs/kevin_paper_20261011/round2_training/round2.py": "94153e6af976fb8d31b9d3d2ae7f2ce6d011e3ef59a94909b4fdec3d4b867dcc",
+    "src/grad_cam.py": "b96976bccd9e2dd642c02ca1c1b19a7d1b06fc46574a79c68ae07b31d6d4b0ec",
+    "src/explainability_validation.py": "314437bcfc580e80b8d48297027f147b1bd2a9b64c85bf273587491c6490168a",
+    "docs/kevin_paper_20261011/analysis/summarize_frozen_evaluation.py": "74b2e8659238d234034c0a442e9609506045f7b971ab73bb4e7fd4182f80335e",
+    "docs/kevin_paper_20261011/analysis/analysis_protocol.json": "938709c2cab684e35df3b36df09b6131b540b77f08a2ebc53201c5256160d5a4",
+    "docs/kevin_paper_20261011/analysis/plot_evaluation_figures.py": "48a78ed1d14198813833fc937cde35e509737e894bec4893ca920871406ae81e"
+  }
+}

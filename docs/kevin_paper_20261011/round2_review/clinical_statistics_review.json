@@ -1,0 +1,15 @@
+{
+  "status": "passed_independent_synthetic_statistics_review",
+  "checked_utc": "2026-10-12T01:07:28.170822+00:00",
+  "source_sha256": "425a10c5d4aa1a6e3e0e4f89559b14c89fc17abf754896384218253d60f8668c",
+  "checks": [
+    "20 binomial intervals independently match scipy exact proportion intervals, including all-success/all-failure cases",
+    "Missing denominator has no invented confidence interval",
+    "19-patient synthetic confusion, denominators, NLL, Brier and AUC independently checked",
+    "Identical paired models yield exact zero differences and discordance p=1",
+    "Pairing, deterministic bootstrap, exact McNemar and lower-is-better difference signs independently checked",
+    "MCI/invalid probabilities rejected by binary metric entry point"
+  ],
+  "scope": "Synthetic fixtures only; no model or clinical outcome inference",
+  "pending": "Review clinical_compare.py once available; verify freeze binds manifest and QC evidence, no old mean-probability exact0.5 ties, patient alignment, all seeds and fixed ensembles."
+}

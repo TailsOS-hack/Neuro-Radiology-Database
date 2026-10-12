@@ -1,0 +1,33 @@
+{
+  "status": "prespecified_before_any_new_clinical_fitting_or_inference",
+  "endpoint": "Provider AD diagnosis versus provider control label from structural T1; research pilot only",
+  "class_order": ["CN", "AD"],
+  "positive_class": "AD",
+  "new_seeds": [20261021, 20261022, 20261023],
+  "primary_new_model": "Equal arithmetic mean of the three validation-selected patient probability vectors",
+  "primary_comparator": "Equal arithmetic mean of the unchanged c2/c4/c6 clinical-head patient probability vectors",
+  "individual_models": "Report every new seed and c2/c4/c6, without choosing from external scores",
+  "new_slice_aggregation": "softmax(mean of all nine two-class slice logits)",
+  "old_slice_aggregation": "mean of the nine original clinical-head softmax probability vectors",
+  "decision_rule": "AD if P_AD >= 0.5. Verify no exact0.5 old-comparator tie to retain its historical argmax decision.",
+  "calibration": "No fitted calibration or threshold search; report raw patient NLL, binary Brier and fixed5-bin AD-probability reliability descriptively",
+  "cohorts": {
+    "harvard_fresh_external": {"binary_patients": 19, "AD": 9, "CN": 10, "MCI_prediction_only": 10, "role": "Fresh source-heldout binary endpoint; no fitting or model selection; one of the published10AD has no released T1"},
+    "besga_reused_test": {"binary_patients": 11, "AD": 7, "CN": 4, "MCI_prediction_only": 0, "role": "Retrospectively reused internal patient test; original frozen partition preserved"},
+    "openneuro_reused_external": {"binary_patients": 15, "AD": 1, "CN": 14, "MCI_prediction_only": 5, "role": "Retrospectively reused external patients; one AD cannot establish stable sensitivity"}
+  },
+  "synthetic_stress": ["clean", "intensity_0.9", "intensity_1.1", "gaussian_noise_0.01", "gaussian_noise_0.02", "blur_0.5", "blur_1.0"],
+  "stress_policy": "Apply each fixed perturbation to every slice for all6 individual models, then compute both fixed ensembles; deterministic per patient/slice/scenario noise shared across models. Report every scenario per cohort; do not select checkpoints using outcomes. These are2D pixel diagnostics, not physical MRI acquisition simulations.",
+  "uncertainty": "Two-sided95% exact binomial intervals for accuracy, AD sensitivity and CN specificity. Primary paired ensemble contrast and each newseed versus oldensemble use10,000 diagnosis-stratified paired patient bootstrap draws with fixed identity-derived seeds; conditional95% percentile intervals and exact paired McNemar discordance. Report unadjusted exploratory comparisons without multiplicity or clinical-superiority claims.",
+  "unit": "One patient; nine slices and three seeds never count as additional patients",
+  "preprocessing": "Existing unchanged exploratory_t1_axial_v1;1.5mm RAS, per-volume intensity scaling, fixed45-85% cranial-span fractions, aspect-preserving224PNG. No external-fitted normalization, cropping, harmonization or parameter adjustment.",
+  "quality_gate": "Provider-derived source/diagnosis mapping, complete9-slice bags, allpatient gross anatomical review with diagnosis and predictions hidden, exact raw/canonical/pixel overlap audit, documented unavailableT1 and no silent exclusion before model inference",
+  "limitations": [
+    "Convenience case-control cohorts and small source-heldout sample do not establish population risk calibration or real-world clinical readiness.",
+    "Source scanner and demographic confounding remain; no prospective study or clinician-adjudicated deployment validation.",
+    "Mean-logit and mean-probability systems differ in complete training and pooling pipelines; this is not an isolated architecture ablation.",
+    "MCI probabilities are descriptive, not binary accuracy, early-AD detection or progression prediction.",
+    "The original100 legacy stage images and neuroradiologist results are a different endpoint; this binary model is not scored against those four labels.",
+    "AlzaSet remains excluded while provider patient mapping and archive counts are unresolved."
+  ]
+}

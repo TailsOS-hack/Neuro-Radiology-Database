@@ -1,0 +1,25 @@
+{
+  "status": "passed_synthetic_migration_tests",
+  "tests_passed": 10,
+  "tests_failed": 0,
+  "scope": "Invented result files and archive/receipt fixtures only. Scientific-suite verifier is mocked for these integrity tests; real unchanged verification runs in a fresh process at source build and destination install.",
+  "real_suite_migration_built": false,
+  "real_suite_migration_installed": false,
+  "model_inference_performed": false,
+  "original_omission_rule": "Exactly three clinical_seed20261021/22/23 last.pt files, after full original archive and every local payload verification",
+  "tests": [
+    "Full byte-preserving roundtrip with separate original integrity controls",
+    "Missing original last.pt or modified optimizer state blocks packaging",
+    "Independent original SHA mismatch blocks packaging",
+    "Original scientific gate failure blocks packaging",
+    "Existing destination preserved",
+    "Destination verifier mismatch yields no success evidence",
+    "Changed frozen source blocks installation before writes",
+    "Payload tampering and unsafe links/traversal rejected"
+  ],
+  "source_sha256": {
+    "migrate_completed_clinical.py": "bc4ca9c6993592ab40870471b54eae443fc5230510a3a5d5e5f2f525f8e95154",
+    "test_migrate_completed_clinical.py": "566c80e60fd2486c5d74313115a56b7183936a8c05cd931cb2f5cb60fd3bd14a",
+    "CLINICAL_MIGRATION_USAGE.md": "fa54fc5d85dda7a40a8600ca84f6c5cd0787a89a5f454697beb505fb3b961f4c"
+  }
+}
