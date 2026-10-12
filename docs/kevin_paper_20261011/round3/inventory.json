@@ -1,0 +1,36 @@
+{
+  "schema_version": "round3_source_inventory_v1",
+  "sources": [
+    {
+      "access_status": "request_submitted_awaiting_provider_delivery_and_entitlement_verification",
+      "application_receipt_verified": true,
+      "independent_researcher_eligibility": "not_yet_confirmed",
+      "priority": 1,
+      "provider_stated_preparation": "1-3 business days; download within one week of link receipt",
+      "provider_url": "https://www.naccdata.org/data-request-process/",
+      "raw_mri_entitlement": "not_yet_verified",
+      "role_candidate": "multisite_development_and_reserved_institutions",
+      "source_family_id": "nacc",
+      "source_id": "nacc_scan"
+    },
+    {
+      "access_status": "application_required",
+      "independent_researcher_eligibility": "not_yet_confirmed",
+      "priority": 2,
+      "provider_url": "https://www.synapse.org/Synapse:syn51549340/wiki/624187",
+      "role_candidate": "independent_geographic_external_testing",
+      "source_family_id": "brainlat",
+      "source_id": "brainlat"
+    },
+    {
+      "access_status": "registration_and_server_access_required",
+      "independent_researcher_eligibility": "not_yet_confirmed",
+      "priority": 3,
+      "provider_url": "https://www.ucl.ac.uk/brain-sciences/ion/research/research-centres/dementia-research-centre/research-clinical-trials/minimal-interval-resonance-imaging-alzheimers-disease-miriad",
+      "role_candidate": "repeat_scan_stability_and_descriptive_external",
+      "source_family_id": "miriad",
+      "source_id": "miriad"
+    }
+  ],
+  "status": "no_new_source_authorized_or_acquired"
+}

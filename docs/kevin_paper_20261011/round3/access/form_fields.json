@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "checked_date_local": "2026-10-11",
+  "timezone": "America/New_York",
+  "checked_date_utc": "2026-10-12",
+  "scope": "Public field labels and options only; no personal field values or account identifiers.",
+  "nacc": {
+    "url": "https://nacc.redcap.rit.uw.edu/surveys/?s=KHNPKLJW8TKAD4DA",
+    "inspection": "Live Safari: three-page identity/DUA/response-confirmation workflow and two-page New Data Request, followed by provider submission receipt. CAPTCHA was cleared externally; agent did not complete it.",
+    "substantive_pages_observed": 5,
+    "later_pages_observed": true,
+    "personal_values_entered_by_agent": true,
+    "fields": [
+      {
+        "name": "Salutation",
+        "required": true,
+        "options": [
+          "Mr.",
+          "Mrs.",
+          "Ms.",
+          "Mx.",
+          "Dr.",
+          "Professor",
+          "None"
+        ]
+      },
+      {
+        "name": "First name",
+        "required": true
+      },
+      {
+        "name": "Last name",
+        "required": true
+      },
+      {
+        "name": "Institution",
+        "required": true
+      },
+      {
+        "name": "Type of Institution",
+        "required": true,
+        "options": [
+          "University",
+          "Non-profit Research",
+          "Government",
+          "Company",
+          "Other"
+        ]
+      },
+      {
+        "name": "Email address",
+        "required": true,
+        "observation": "Institutional address preferred if available; personal addresses are not prohibited by the observed instruction."
+      },
+      {
+        "name": "Country",
+        "required": true,
+        "observation": "A page default was present; it is not treated as an applicant fact."
+      },
+      {
+        "name": "State",
+        "required": false,
+        "required_basis": "No required marker observed"
+      },
+      {
+        "name": "City",
+        "required": true
+      },
+      {
+        "name": "Zip",
+        "required": false,
+        "required_basis": "No required marker observed"
+      },
+      {
+        "name": "ADRC Affiliation",
+        "required": false,
+        "required_basis": "No required marker observed",
+        "observed_instruction_option": "Not affiliated with an ADRC"
+      },
+      {
+        "name": "Request type",
+        "required": true,
+        "options": [
+          "New request",
+          "Update"
+        ]
+      }
+    ],
+    "public_disclosure": "Investigator name, institution, project title and aims are displayed on the provider's project list.",
+    "not_yet_observed": [
+      "Delivered extract and eligible raw image inventory",
+      "Separate standardized-image access instructions"
+    ],
+    "dua_fields": [
+      {
+        "name": "I have read the Data Use Agreement",
+        "required": true
+      },
+      {
+        "name": "I agree to all the conditions of the Data Use Agreement",
+        "required": true
+      },
+      {
+        "name": "Please enter your signature here",
+        "required": true,
+        "mechanism": "Typed signature saved after explicit action-time confirmation"
+      }
+    ],
+    "confirmation_field": {
+      "required": true,
+      "label": "I certify that all of my information in the document above is correct. I understand that clicking 'Submit' will electronically sign the form and that signing this form electronically is the equivalent of signing a physical document.",
+      "state": "accepted_after_explicit_action_time_confirmation"
+    },
+    "request_fields": [
+      {
+        "name": "Project Title",
+        "required": true
+      },
+      {
+        "name": "Specific aims (Project Description)",
+        "required": true,
+        "full_entry_visually_verified": true
+      },
+      {
+        "name": "Opt out of public project display",
+        "required": false
+      },
+      {
+        "name": "Goal of analysis",
+        "required": true,
+        "selected": "Publication"
+      },
+      {
+        "name": "Data categories",
+        "required": false,
+        "selected_science_categories": [
+          "UDS bundled with neuropathology/genetics",
+          "Standardized MRI numerical summaries",
+          "Combined standardized MR/PET images; T1 scope specified in aims",
+          "Mixed-protocol MRI calculated summaries",
+          "Mixed-protocol MRI scans"
+        ]
+      },
+      {
+        "name": "Preferred file format",
+        "required": true,
+        "selected": "CSV"
+      },
+      {
+        "name": "Machine learning/data mining methods",
+        "required": true,
+        "selected": "Yes"
+      },
+      {
+        "name": "Commercial institution/company or purpose",
+        "required": true,
+        "selected": "No"
+      }
+    ],
+    "new_access_notices": [
+      "Standardized-image instructions are sent separately; defacing limits image availability",
+      "Mixed-protocol MRI migration currently supplies 60% of files; no mixed PET images available",
+      "CSF assay/center heterogeneity warning; no CSF requested",
+      "Data elements change over time; do not indiscriminately include redundant variables"
+    ]
+  },
+  "brainlat": {
+    "url": "https://docs.google.com/forms/d/e/1FAIpQLSfSH-vHFvfIg4G0xCQlpfOGRHU4AutftzTQLLTp9GYtMk99aA/viewform",
+    "inspection": "Live Safari accessibility readback; complete visible one-page form",
+    "substantive_pages_observed": 1,
+    "visible_total_pages": 1,
+    "prior_synapse_account_required": true,
+    "personal_values_entered_by_agent": false,
+    "fields": [
+      {
+        "name": "Email",
+        "required": true
+      },
+      {
+        "name": "Full name of the researcher that will be using the data",
+        "required": true
+      },
+      {
+        "name": "Name of the institution conducting the research",
+        "required": true
+      },
+      {
+        "name": "Researcher's e-mail address",
+        "required": true
+      },
+      {
+        "name": "Researcher's Synapse Username",
+        "required": true
+      },
+      {
+        "name": "Send me a copy of my responses",
+        "required": false
+      }
+    ],
+    "project_description_field_observed": false,
+    "ethics_field_observed": false,
+    "independent_researcher_eligibility": "Unknown; institution field required but no categorical personal-email exclusion was observed."
+  },
+  "miriad": {
+    "url": "https://miriad.drc.ion.ucl.ac.uk/atrophychallenge",
+    "inspection": "Official endpoint failed in web read; independent anonymous GET timed out; Safari did not reach registration.",
+    "fields": null,
+    "unobserved_reason": "Registration endpoint unavailable in this check. No generic XNAT field guesses."
+  }
+}

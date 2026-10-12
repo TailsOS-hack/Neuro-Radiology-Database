@@ -24,3 +24,8 @@ __pycache__/
 
 # Acquired external cohorts remain local; only review summaries are published.
 data/external/
+
+# Round 3 patient-level inputs, access attestations and run artifacts stay private.
+docs/kevin_paper_20261011/round3_private/
+research/dementia_round3/private/
+docs/kevin_paper_20261011/round3/*.external_opened.json

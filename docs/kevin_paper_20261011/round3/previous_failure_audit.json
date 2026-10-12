@@ -1,0 +1,261 @@
+{
+  "cause_of_external_failure_proven": false,
+  "clean_binary_aggregates": [
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 10,
+      "model": "clinical_seed20261021",
+      "n": 11,
+      "predicted_AD": 8,
+      "score_max": 0.9786027073860168,
+      "score_min": 0.17438189685344696
+    },
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 10,
+      "model": "clinical_seed20261022",
+      "n": 11,
+      "predicted_AD": 8,
+      "score_max": 0.9384151101112366,
+      "score_min": 0.3878088891506195
+    },
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 9,
+      "model": "clinical_seed20261023",
+      "n": 11,
+      "predicted_AD": 7,
+      "score_max": 0.9784994125366211,
+      "score_min": 0.16585250198841095
+    },
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 10,
+      "model": "new_clinical_ensemble",
+      "n": 11,
+      "predicted_AD": 8,
+      "score_max": 0.9651724696159363,
+      "score_min": 0.2587116062641144
+    },
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 5,
+      "model": "round1_c2",
+      "n": 11,
+      "predicted_AD": 1,
+      "score_max": 0.7583912544780307,
+      "score_min": 0.09275290618340175
+    },
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 7,
+      "model": "round1_c4",
+      "n": 11,
+      "predicted_AD": 5,
+      "score_max": 0.8630951576762729,
+      "score_min": 0.24559393359555137
+    },
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 4,
+      "model": "round1_c6",
+      "n": 11,
+      "predicted_AD": 2,
+      "score_max": 0.8185742994149526,
+      "score_min": 0.19866925146844652
+    },
+    {
+      "AD_labels": 7,
+      "cohort": "besga_reused_test",
+      "correct": 5,
+      "model": "round1_clinical_ensemble",
+      "n": 11,
+      "predicted_AD": 1,
+      "score_max": 0.8133535705230854,
+      "score_min": 0.17900536374913323
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 9,
+      "model": "clinical_seed20261021",
+      "n": 19,
+      "predicted_AD": 19,
+      "score_max": 0.9908069968223572,
+      "score_min": 0.6770340800285339
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 9,
+      "model": "clinical_seed20261022",
+      "n": 19,
+      "predicted_AD": 19,
+      "score_max": 0.9374536275863647,
+      "score_min": 0.7365649342536926
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 9,
+      "model": "clinical_seed20261023",
+      "n": 19,
+      "predicted_AD": 19,
+      "score_max": 0.9733407497406006,
+      "score_min": 0.6562583446502686
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 9,
+      "model": "new_clinical_ensemble",
+      "n": 19,
+      "predicted_AD": 19,
+      "score_max": 0.9672004580497742,
+      "score_min": 0.6899524331092834
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 13,
+      "model": "round1_c2",
+      "n": 19,
+      "predicted_AD": 15,
+      "score_max": 0.9377759628825717,
+      "score_min": 0.2825128605796231
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 9,
+      "model": "round1_c4",
+      "n": 19,
+      "predicted_AD": 19,
+      "score_max": 0.9704633686277602,
+      "score_min": 0.725065204832289
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 13,
+      "model": "round1_c6",
+      "n": 19,
+      "predicted_AD": 15,
+      "score_max": 0.9546135928895738,
+      "score_min": 0.40525662733448875
+    },
+    {
+      "AD_labels": 9,
+      "cohort": "harvard_fresh_external",
+      "correct": 10,
+      "model": "round1_clinical_ensemble",
+      "n": 19,
+      "predicted_AD": 18,
+      "score_max": 0.9470982176286203,
+      "score_min": 0.4788749489795279
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 14,
+      "model": "clinical_seed20261021",
+      "n": 15,
+      "predicted_AD": 0,
+      "score_max": 0.441474050283432,
+      "score_min": 0.044390708208084106
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 10,
+      "model": "clinical_seed20261022",
+      "n": 15,
+      "predicted_AD": 4,
+      "score_max": 0.5480464100837708,
+      "score_min": 0.19150274991989136
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 15,
+      "model": "clinical_seed20261023",
+      "n": 15,
+      "predicted_AD": 1,
+      "score_max": 0.5129937529563904,
+      "score_min": 0.051689840853214264
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 14,
+      "model": "new_clinical_ensemble",
+      "n": 15,
+      "predicted_AD": 0,
+      "score_max": 0.49255475401878357,
+      "score_min": 0.09586109966039658
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 14,
+      "model": "round1_c2",
+      "n": 15,
+      "predicted_AD": 0,
+      "score_max": 0.3724563974473212,
+      "score_min": 0.1177310115761227
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 7,
+      "model": "round1_c4",
+      "n": 15,
+      "predicted_AD": 9,
+      "score_max": 0.7732913957701789,
+      "score_min": 0.31734205451276565
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 13,
+      "model": "round1_c6",
+      "n": 15,
+      "predicted_AD": 1,
+      "score_max": 0.5848847561412387,
+      "score_min": 0.16236280649900436
+    },
+    {
+      "AD_labels": 1,
+      "cohort": "openneuro_reused_external",
+      "correct": 12,
+      "model": "round1_clinical_ensemble",
+      "n": 15,
+      "predicted_AD": 2,
+      "score_max": 0.5073613425095876,
+      "score_min": 0.2031389135453436
+    }
+  ],
+  "interpretation": "Recorded labels, thresholds, bags and saved model states can be checked mechanically. Opposite source-level decision collapse motivates domain/preprocessing/calibration investigation, but this audit cannot identify its causal mechanism.",
+  "mechanics_failures": [],
+  "new_inference_or_fitting_performed": false,
+  "new_patient_aggregation": "softmax(mean of nine slice logits)",
+  "old_outputs_modified": false,
+  "old_patient_aggregation": "mean_nine_slice_probabilities",
+  "orientation_or_segmentation_validity_established": false,
+  "saved_records_checked": 3360,
+  "source_sha256": {
+    "predictions": "cf7c9bab66a6c94811e77ae0dfb6cced979675bb5ff6fc0cdb48e16843fd136e",
+    "state_verification": "94c8fdea5700601af7db53802db7905dfbab9c2914232120992787f4ecf486ee",
+    "training_protocol": "58061826e2c1b351845bf3a0a6022552a4f1e60ce637c6d267524f62b8bfe2cf"
+  },
+  "status": "completed_saved_output_audit",
+  "training_patient_count": 32,
+  "validation_patient_count": 11
+}

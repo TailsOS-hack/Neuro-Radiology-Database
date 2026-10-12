@@ -1,0 +1,31 @@
+{
+  "clinical_performance_measured": false,
+  "input": "deterministic synthetic random tensor; 9x3x224x224",
+  "models": [
+    {
+      "checkpoint_sha256": "dded15b8c2201e8f3d71fab1f0af547363a539f78b79db49f389337eef2654d9",
+      "exactly_equal": true,
+      "logits_max_abs_difference": 0.0,
+      "nine_slice_probability_max_abs_difference": 0.0,
+      "seed": 20261011
+    },
+    {
+      "checkpoint_sha256": "9435ae63d0ccb38b9474d2aee85f063bcb48f207d88c6f83d6fc495f8b52beac",
+      "exactly_equal": true,
+      "logits_max_abs_difference": 0.0,
+      "nine_slice_probability_max_abs_difference": 0.0,
+      "seed": 20261012
+    },
+    {
+      "checkpoint_sha256": "87d25d2e878caeb4aef33b99c210ebfdf303fc20058974b1a3c390d3aa5a39fe",
+      "exactly_equal": true,
+      "logits_max_abs_difference": 0.0,
+      "nine_slice_probability_max_abs_difference": 0.0,
+      "seed": 20261013
+    }
+  ],
+  "new_training_performed": false,
+  "patient_images_used": false,
+  "reference_helper_sha256": "cbf67b7c6e842ce35eeef2e0c0a6a0752b865cec3399d7aa58bd5e8ff0e2a5e2",
+  "status": "passed"
+}

@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "checked_date_local": "2026-10-11",
+  "timezone": "America/New_York",
+  "checked_date_utc": "2026-10-12",
+  "status": "nacc_submitted_provider_acknowledged_data_delivery_unverified",
+  "research_use": "Retrospective paper-first research; no patient-care use or approval claimed.",
+  "safety_record": {
+    "personal_values_entered_by_agent": true,
+    "captcha_completed_by_agent": false,
+    "applications_submitted_by_agent": true,
+    "contacts_or_emails_sent": false,
+    "accounts_created": false,
+    "agreements_accepted": true,
+    "restricted_patient_data_downloaded": false,
+    "paid_resources_created": false,
+    "agreement_scope": "NACC DUA, typed signature and separate accuracy/electronic-signature certification each explicitly confirmed by user at action time.",
+    "provider_generated_applicant_email": "Save-and-return page stated an automated continuation email was sent; no agent message to other persons."
+  },
+  "providers": [
+    {
+      "id": "nacc_scan",
+      "priority": 1,
+      "source_family": "NACC; SCAN is linked and may share participants",
+      "application_url": "https://nacc.redcap.rit.uw.edu/surveys/?s=KHNPKLJW8TKAD4DA",
+      "application_state": "submitted_provider_receipt_verified",
+      "approval_state": "not_verified",
+      "raw_mri_entitlement": "not_verified",
+      "raw_mri_provider_availability": "Standardized SCAN/CLARiTI image access instructions sent separately; live form states 60% of mixed-protocol MRI files currently available after platform migration. Actual entitled file inventory remains unverified.",
+      "independent_eligibility": "No exclusion in observed first-page fields; institution type Other and conditional institutional-email preference observed; provider approval unknown.",
+      "institution_email_required_observed": false,
+      "clinical_linkage": "UDS cognitive status and etiology plus scan/assessment dates required; imaging is not automatically matched to a UDS visit.",
+      "requested_identifiers": [
+        "NACCID",
+        "NACCADC",
+        "Clinical visit identifier/date",
+        "Study/series/image identifiers",
+        "Study/scan date"
+      ],
+      "requested_acquisition": [
+        "T1 image volume",
+        "Scanner manufacturer/model/field strength",
+        "Sequence and dimensionality",
+        "Study/series QC and release status"
+      ],
+      "usable_patients": null,
+      "usable_sites": null,
+      "terms_constraints": [
+        "No participant identification/contact or specific ADRC identification without approval",
+        "No redistribution beyond declared collaborators/coauthors; all team members must comply",
+        "Applicable institution/IRB rules and unauthorized disclosure reporting within 15 days",
+        "NACC/ADRC and applicable SCAN/CLARiTI acknowledgements; abstract tracking and manuscript administrative review before journal submission",
+        "NIH-supported publication deposit requirements where applicable",
+        "External compute and model/derived-data release remain subject to approved use"
+      ],
+      "blockers": [
+        "Provider access decision and actual delivery",
+        "Separate standardized-image access instructions",
+        "Actual released-file inventory and clinical linkage",
+        "Approved external-compute/derived-model use"
+      ],
+      "source_ids": [
+        "nacc_request_process",
+        "nacc_live_form",
+        "nacc_imaging",
+        "nacc_researcher_guide",
+        "scan_researcher_resources",
+        "scan_mri_dictionary"
+      ],
+      "delivery_notice": {
+        "estimated_business_days": [
+          1,
+          3
+        ],
+        "download_within_days_of_receipt": 7,
+        "actual_delivery_verified": false
+      },
+      "request_scope": "Clinical AD versus CN from T1 MRI; UDS, MRI summaries and MRI image access. Combined standardized MR/PET image option selected for T1 only; CSF and PET numerical requests omitted."
+    },
+    {
+      "id": "brainlat",
+      "priority": 2,
+      "source_family": "BrainLat/ReDLat; verify release and recruiting-source overlap",
+      "application_url": "https://docs.google.com/forms/d/e/1FAIpQLSfSH-vHFvfIg4G0xCQlpfOGRHU4AutftzTQLLTp9GYtMk99aA/viewform",
+      "application_state": "field_mapped_private_draft_prepared",
+      "approval_state": "not_verified",
+      "raw_mri_entitlement": "not_verified",
+      "raw_mri_provider_availability": "MRI requires provider form; EEG availability alone is not MRI access.",
+      "independent_eligibility": "Unknown; required institution field can receive a truthful proposal but no provider acceptance is claimed.",
+      "institution_email_required_observed": false,
+      "prior_account": "Synapse required; actual username not provided in draft",
+      "clinical_linkage": "Request current MRI participant-code mapping, diagnosis definition and site/acquisition metadata; actual T1 coverage and clinical timing unverified.",
+      "usable_patients": null,
+      "usable_sites": null,
+      "license_declaration": "Provider wiki lists CC0; verify actual release terms/version and approved access before use.",
+      "terms_constraints": [
+        "Synapse account terms handled by user",
+        "MRI provider approval",
+        "No generalization from multimodal total to T1 count"
+      ],
+      "blockers": [
+        "Actual Synapse account and intended contact details",
+        "Truthful institution entry/provider eligibility",
+        "MRI permission",
+        "Release-specific T1/diagnosis/site mapping"
+      ],
+      "source_ids": [
+        "brainlat_wiki",
+        "brainlat_wiki_api",
+        "brainlat_live_form",
+        "brainlat_provider_notice"
+      ]
+    },
+    {
+      "id": "miriad",
+      "priority": 3,
+      "source_family": "MIRIAD; repeated scans from a single acquisition source",
+      "application_url": "https://miriad.drc.ion.ucl.ac.uk/atrophychallenge",
+      "application_state": "official_registration_endpoint_unreachable",
+      "approval_state": "not_verified",
+      "raw_mri_entitlement": "not_verified",
+      "raw_mri_provider_availability": "UCL describes volumetric T1 images via XNAT.",
+      "independent_eligibility": "Unknown; no institution-email restriction stated on the reachable UCL page; actual registration fields unseen.",
+      "institution_email_required_observed": null,
+      "provider_catalog_people": 69,
+      "provider_catalog_ad": 46,
+      "provider_catalog_controls": 23,
+      "provider_catalog_scans": 708,
+      "usable_patients": null,
+      "usable_sites": null,
+      "clinical_linkage": "UCL describes AD/control group, age and sex in MR Sessions; MMSE visits and screening CDR in ClinicalAssessment.",
+      "terms_constraints": [
+        "No reidentification",
+        "Redistribution requires prior agreement",
+        "Required citation and acknowledgements",
+        "Accepted-manuscript provider obligation"
+      ],
+      "blockers": [
+        "Endpoint availability",
+        "Actual registration and terms review",
+        "User account and provider access",
+        "Authorized image/label readback"
+      ],
+      "source_ids": [
+        "miriad_ucl",
+        "miriad_xnat"
+      ]
+    }
+  ],
+  "next_stage_gate": [
+    "Authorized released T1 images and reference labels",
+    "Patient/visit/time alignment",
+    "Source/subject overlap and repeated-scan audit",
+    "Release/terms provenance",
+    "Frozen development and untouched external allocation"
+  ],
+  "not_claimed": [
+    "Institutional sponsorship",
+    "Ethics approval/exemption",
+    "Application acceptance",
+    "Eligible sample size",
+    "Clinical readiness",
+    "Guaranteed superiority"
+  ],
+  "updated_at_utc": "2026-10-12T02:24:14Z"
+}

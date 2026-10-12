@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "checked_date_local": "2026-10-11",
+  "checked_date_utc": "2026-10-12",
+  "scope": "Public metadata and sanitized live observations; no patient data, personal values or private survey identifiers.",
+  "sources": [
+    {
+      "id": "nacc_request_process",
+      "url": "https://www.naccdata.org/data-request-process/",
+      "method": "Official web read",
+      "status": "reachable",
+      "supports": [
+        "Free external researcher application",
+        "DUA and project-review obligations"
+      ]
+    },
+    {
+      "id": "nacc_live_form",
+      "url": "https://nacc.redcap.rit.uw.edu/surveys/?s=KHNPKLJW8TKAD4DA",
+      "method": "Native Safari form inspection and authorized identity/DUA entry; public labels only",
+      "status": "full_request_submitted_provider_receipt_read",
+      "supports": [
+        "Actual required fields",
+        "Institution options",
+        "Email preference",
+        "Public project disclosure",
+        "Current DUA terms and typed-signature mechanism",
+        "Separate information-accuracy/electronic-signature certification",
+        "Actual dataset options and separate standardized-image access instructions",
+        "Mixed MRI migration availability notice",
+        "Receipt timing and one-week download requirement"
+      ],
+      "raw_browser_state_published": false,
+      "receipt_contains_personal_values_published": false
+    },
+    {
+      "id": "nacc_imaging",
+      "url": "https://www.naccdata.org/about-nacc-data/imaging-data/",
+      "method": "Official web read",
+      "status": "reachable",
+      "supports": [
+        "Defaced SCAN images requestable",
+        "Mixed-protocol DICOM/NIfTI",
+        "Participant/date linkage"
+      ]
+    },
+    {
+      "id": "nacc_researcher_guide",
+      "url": "https://www.naccdata.org/the-nacc-researchers-guide",
+      "method": "Official web read",
+      "status": "reachable",
+      "supports": [
+        "Separate cognitive status and etiology",
+        "Investigator scan/visit temporal matching",
+        "Provider image delivery"
+      ]
+    },
+    {
+      "id": "scan_researcher_resources",
+      "url": "https://scan.naccdata.org/",
+      "method": "Official web read; Resources for Researchers / Raw Image Availability",
+      "status": "reachable",
+      "supports": [
+        "Images requestable via NACC",
+        "Only released processed images available"
+      ],
+      "caveat": "Older paragraph on this same page still describes future LONI access. Current researcher section and NACC imaging page explicitly document defaced-image requests; requester entitlement is not assumed."
+    },
+    {
+      "id": "scan_mri_dictionary",
+      "url": "https://files.alz.washington.edu/documentation/SCAN-MRI-Imaging-RDD.pdf",
+      "method": "Official PDF text read",
+      "status": "reachable",
+      "supports": [
+        "Participant/site/scan keys",
+        "Acquisition and quality fields",
+        "Current revision history includes September 2026 despite April 2024 cover label"
+      ]
+    },
+    {
+      "id": "brainlat_wiki",
+      "url": "https://www.synapse.org/Synapse:syn51549340/wiki/624187",
+      "method": "Official provider page and API",
+      "status": "reachable",
+      "supports": [
+        "MRI application link",
+        "CC0 declaration on provider wiki",
+        "Multimodal cohort description"
+      ]
+    },
+    {
+      "id": "brainlat_wiki_api",
+      "url": "https://repo-prod.prod.sagebase.org/repo/v1/entity/syn51549340/wiki/624187",
+      "method": "Anonymous GET of public provider metadata only",
+      "status": 200,
+      "response_bytes": 3313,
+      "response_sha256": "4fda30dedfdea00ef7da90ddf6989538b61e1508918bea4a4673a8bcd22ecdfe",
+      "provider_modified_on": "2024-04-17T02:52:03.709Z",
+      "verified_flags": {
+        "official_form_link_present": true,
+        "cc0_license_link_present": true,
+        "mri_form_requirement_present": true
+      },
+      "raw_response_published": false
+    },
+    {
+      "id": "brainlat_live_form",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSfSH-vHFvfIg4G0xCQlpfOGRHU4AutftzTQLLTp9GYtMk99aA/viewform",
+      "method": "Native Safari read-only form inspection",
+      "status": "all_visible_fields_read",
+      "supports": [
+        "Five required fields",
+        "Prior Synapse account",
+        "One page",
+        "No project-description field"
+      ],
+      "raw_browser_state_published": false
+    },
+    {
+      "id": "brainlat_provider_notice",
+      "url": "https://www.synapse.org/Synapse:syn51549340/discussion/threadId=10819",
+      "method": "Official provider notice read",
+      "status": "reachable",
+      "supports": [
+        "MRI-specific application",
+        "Participant-code changes; matched version needed"
+      ]
+    },
+    {
+      "id": "miriad_ucl",
+      "url": "https://www.ucl.ac.uk/brain-sciences/ion/research/research-centres/dementia-research-centre/research-clinical-trials/minimal-interval-resonance-imaging-alzheimers-disease-miriad",
+      "method": "Official UCL web read",
+      "status": "reachable",
+      "supports": [
+        "69 participants, repeated scans",
+        "Structural T1 acquisition",
+        "AD/control and demographic/assessment metadata",
+        "Registration route and redistribution/publication terms"
+      ]
+    },
+    {
+      "id": "miriad_xnat",
+      "url": "https://miriad.drc.ion.ucl.ac.uk/atrophychallenge",
+      "method": "Anonymous GET; no login",
+      "checked_at_utc": "2026-10-12T02:07:26.769986+00:00",
+      "status": "unreachable_in_this_check",
+      "error_type": "timeout",
+      "registration_fields_observed": false
+    }
+  ]
+}

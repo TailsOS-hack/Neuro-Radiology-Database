@@ -1,0 +1,60 @@
+{
+  "actual_legacy_checkpoints_synthetic_input_parity": {
+    "path": "legacy_checkpoint_parity.json",
+    "sha256": "76be61a84b2a01d02bdd423a400cf3d527d4d4922ea2e7f0c3e947366e502389"
+  },
+  "clinical_readiness_established": false,
+  "code_sha256": {
+    "__init__.py": "0626a128183aeec6d95d42ef8f6e885ad337d292a3e5307ca14c4fa5af82397a",
+    "__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "audit_previous.py": "56881e013252e393c1e24c78e1a9b39da54988a3b8978a76c882dd2f9d4228cf",
+    "calibration.py": "63ede47a68cf9074b134f21f7e60eaea57a1156f6fc3fb0d4cd984dbb09da80e",
+    "cli.py": "1078c236134f2212ecba76ac0ed6ee2eee7349163134424af5399e0c8f546aae",
+    "common.py": "58c07bd8a136dec6b78a6bc9155819c749146d88d10443471a5818d905752d26",
+    "data.py": "f747efa7bd05e3dd2d363e4f6cd3e37656e3c5f78ec6d9b0b26bb9eaa4da5093",
+    "explanations.py": "0f29c10136f4f38b47c2c77a074b4c809ea8e5c06f425cd40c300b270d74cf3d",
+    "inference.py": "65cdbd46b84a61e2fd66f84accfd85d19150cb5c00ffe4da6c0c5713460594a1",
+    "models.py": "adcbf8ad3e4c4071f75a344d24015cd9472e8e8e54db6987cf19c201735fb3cc",
+    "preprocessing.py": "dd915a6844c4c119a7bab037fc3147bb4a4d7903eb2dc7cb83910757bafb401a",
+    "report.py": "91b6d8746548e6047da8630bd1aa956248df0605916455966139dc36bc819707",
+    "sample_size.py": "ed09931c1444e1f66d991a52d1427b681ec13b4d513fe3a510ea4625b8b19dad",
+    "statistics.py": "37ebcda40c8ad7ee3a6526b8d5e956fb29cd742bed51491b2fdf6a9f2d469276",
+    "training.py": "04bff35c9c3c2b8c17bc16de0af553919b61984adf0dd0e736b46d36ac2a214b",
+    "workflow.py": "17f05e7684404cc337cd434b3b4e5814a718c4641bd02fd21fb4f789e8391394"
+  },
+  "compileall_passed": true,
+  "full_round3_suite": {
+    "command": "python -m pytest -q tests/test_round3*.py",
+    "failed": 0,
+    "passed": 109,
+    "seconds": 21.12
+  },
+  "production_checkpoint_sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+  "production_checkpoint_unchanged": true,
+  "real_preprocessing_runtime_verified": false,
+  "real_round3_patient_predictions": false,
+  "real_round3_training": false,
+  "status": "passed_software_verification_only",
+  "synthetic_figure_visual_qa": {
+    "checked": [
+      "new_site_confusion",
+      "new_site_intervals"
+    ],
+    "patient_results": false
+  },
+  "test_sha256": {
+    "test_round3_calibration.py": "e4236fac217aa710b69dd3ef465127df97f425f20ffeab5b5e937181c233f5bf",
+    "test_round3_cli.py": "eda51d9b793abdf61e58dc83a799e40c3e8ac36ba1a9376297d1e09c18b80a93",
+    "test_round3_data.py": "ff856eee41d319b488dd74b4044b5cf6a18554626f00d9065a4c61ef6e833686",
+    "test_round3_data_independent.py": "b6dd604941346be0cfbb1d4fe53d12bdb7f0614b8af2551fe6677175d2567530",
+    "test_round3_freeze.py": "b73d3c987bf7bd77067fc60dfa6c2dc817781492f594f84cefdbc0c60b41bdad",
+    "test_round3_inference.py": "5ede81a89bf2c136ad1dc95d7928eafd8c902df2f4d6919a5d3cc855ee114194",
+    "test_round3_models.py": "21ae73c791b188f91bf690fd276d3d7971ba9f4b0317fd6ec42d352bd89fca35",
+    "test_round3_preprocessing.py": "4aa2a63f4d73c4b8c9ece97bebabd39f982c8c8a02cdb2a00d8bd53220386182",
+    "test_round3_report.py": "8a9454eb3528d783fc96a939fef2b8f4b33fddc9a564557711f2c5fb2aceb31a",
+    "test_round3_sample_size.py": "e702a523c554a5762faf6481d783a1983277591551735aee0179f0170c58e1ab",
+    "test_round3_statistics.py": "d236dff8efe11b5060130601ecf3826595954c28f0bd248191e9cedb4b0eaa2a",
+    "test_round3_training.py": "83a98be274ad4c75e7f10ef1dd7901fae7a7c4b14e514a659bd079742d11f81b",
+    "test_round3_workflow.py": "93d9de1aa749b2d0cb6e57cbc77854e3d863bbedde0f21a8796c57f4ae3c5d14"
+  }
+}

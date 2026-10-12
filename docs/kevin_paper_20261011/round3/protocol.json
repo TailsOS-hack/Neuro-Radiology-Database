@@ -1,0 +1,126 @@
+{
+  "calibration": {
+    "method": "logistic_slope_and_intercept",
+    "minimum_development_sensitivity": 0.9,
+    "partition": "calibration",
+    "scores_are_validated_clinical_risk": false,
+    "threshold_selection": "maximum_specificity_subject_to_sensitivity_then_highest_threshold"
+  },
+  "class_order": [
+    "CN",
+    "AD"
+  ],
+  "clinical_deployment_permitted": false,
+  "clinical_followup_gate": "Independent reference standard, representative memory-clinic cases, clinical partner, appropriately reviewed reader/live studies and deployment controls required separately",
+  "endpoint": "clinical_AD_vs_CN",
+  "execution": {
+    "analysis_location": "local_mac",
+    "delete_GPU_and_storage_after_verified_retrieval": true,
+    "live_price_verification_required": true,
+    "machine_hourly_ceiling_usd": 10,
+    "maximum_gpu_hourly_usd": 8.99,
+    "paid_resources_before_data_gate": false,
+    "scheduled_monitor_enabled": false,
+    "total_spending_cap_usd": null,
+    "training_gpu": "NVIDIA B300"
+  },
+  "historical_only": [
+    "original100_four_class_reader_benchmark",
+    "all_previously_evaluated_round1_round2_cohorts"
+  ],
+  "intended_use": "Research toward clinician structural MRI support; no biological AD, dementia subtype, progression or deployment claim",
+  "matching": {
+    "ambiguous_same_day_labels": "exclude_and_report",
+    "nearest_tie": "earlier_assessment",
+    "primary_scan": "earliest_eligible_scan_then_scan_id",
+    "primary_window_days": 180,
+    "sensitivity_window_days": 90
+  },
+  "partitions": {
+    "calibration": "reserved_development_patients",
+    "minimum_development_institutions": 2,
+    "minimum_untouched_external_institutions": 2,
+    "source_names_do_not_prove_independence": true,
+    "unit": "global_patient_identity_all_visits_and_derivatives"
+  },
+  "primary_comparator": "unchanged_round1_binary_clinical_equal_probability_ensemble",
+  "required_checks": [
+    "patient_source_and_pretraining_overlap",
+    "scanner_demographic_subgroups",
+    "calibration",
+    "repeat_scan_stability",
+    "MRI_acquisition_stress",
+    "explanation_prediction_parity",
+    "parameter_randomization",
+    "region_removal",
+    "clean_environment_reproduction"
+  ],
+  "required_preprocessing": [
+    "N4_bias_correction",
+    "reviewed_brain_extraction",
+    "fixed_template_registration",
+    "consistent_orientation_spacing",
+    "QC_and_provenance"
+  ],
+  "research_progression_gate": {
+    "abstentions_and_processing_failures": "incorrect_in_all_eligible_primary_denominators",
+    "all_criteria_must_pass": true,
+    "each_site_exact_95CI_lower": 0.8,
+    "each_site_sensitivity": 0.85,
+    "each_site_specificity": 0.85,
+    "estimated_balanced_accuracy_difference": 0.05,
+    "paired_95CI_lower_strictly_above": 0,
+    "site_weights": "equal",
+    "universal_medical_standard": false
+  },
+  "schema_version": "dementia_round3_v1",
+  "search": {
+    "architectures": [
+      "full_brain_multiplanar",
+      "compact_3D_ResNet18"
+    ],
+    "dropout": [
+      0.2,
+      0.5
+    ],
+    "ensemble": "equal_probability_mean_all_three_selected_seeds",
+    "final_seeds": [
+      20261031,
+      20261032,
+      20261033
+    ],
+    "learning_rates": [
+      3e-05,
+      0.0001,
+      0.0003
+    ],
+    "longer_schedule": "requires_new_development_only_review_and_protocol_amendment_before_external_freeze",
+    "maximum_configurations": 24,
+    "maximum_epochs": 200,
+    "minimum_NLL_improvement": 0.0001,
+    "minimum_epochs": 30,
+    "patience": 25,
+    "selection": "highest_equal_site_mean_balanced_accuracy_then_lowest_NLL_then_config_id",
+    "validation": "leave_one_development_institution_out",
+    "weight_decay": [
+      0.0001,
+      0.01
+    ]
+  },
+  "search_space_hash": "8808072ad16c75a56e3127b3f475951dbe7bc1845bd35fb7227d5fd3235cdc54",
+  "secondary_comparators": [
+    "development_recalibrated_primary_comparator",
+    "round2_binary_clinical_ensemble",
+    "anatomical_volume_logistic",
+    "demographic_only",
+    "source_only_confounding_diagnostic"
+  ],
+  "statistics": {
+    "bootstrap_replicates": 10000,
+    "resampling": "paired_patients_within_fixed_site_and_diagnosis",
+    "sample_size_joint_power_lower_95CI_minimum": 0.8,
+    "seed": 20261031,
+    "site_population_generalization": false
+  },
+  "status": "registered_design_data_access_gate_pending"
+}

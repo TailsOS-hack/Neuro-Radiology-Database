@@ -1,0 +1,511 @@
+{
+  "configurations": [
+    {
+      "candidate_id": "candidate_01",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_02",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_03",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_04",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_05",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_06",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_07",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_08",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_09",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_10",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_11",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_12",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "multiplanar",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_13",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_14",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_15",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_16",
+      "learning_rate": 3e-05,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_17",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_18",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_19",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_20",
+      "learning_rate": 0.0001,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_21",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_22",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.0001
+    },
+    {
+      "candidate_id": "candidate_23",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.2,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    },
+    {
+      "candidate_id": "candidate_24",
+      "learning_rate": 0.0003,
+      "model": {
+        "dropout": 0.5,
+        "features": [
+          "left_hippocampus",
+          "right_hippocampus",
+          "left_lateral_ventricle",
+          "right_lateral_ventricle",
+          "left_cortex",
+          "right_cortex",
+          "left_cerebral_white_matter",
+          "right_cerebral_white_matter"
+        ],
+        "kind": "resnet3d18",
+        "slice_chunk": 32,
+        "width": 16
+      },
+      "weight_decay": 0.01
+    }
+  ],
+  "count": 24,
+  "search_space_hash": "8808072ad16c75a56e3127b3f475951dbe7bc1845bd35fb7227d5fd3235cdc54",
+  "training_performed": false
+}

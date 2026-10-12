@@ -1,0 +1,50 @@
+{
+  "analysis_location": "local_mac",
+  "data_gate": {
+    "blockers": [
+      "calibration_missing_AD_or_CN",
+      "cross_source_patient_identity_review_missing",
+      "external_missing_AD_or_CN",
+      "fewer_than_two_development_institutions",
+      "fewer_than_two_fresh_external_institutions",
+      "manifest_review_artifact_missing_or_changed",
+      "no_eligible_patients_acquired",
+      "provider_field_mapping_not_reviewed",
+      "sample_size_simulation_not_completed",
+      "scan_assessment_evidence_missing",
+      "train_missing_AD_or_CN",
+      "tune_missing_AD_or_CN"
+    ],
+    "clinical_readiness": false,
+    "counts": [],
+    "development_institutions": 0,
+    "external_institutions": 0,
+    "file_checks_performed": true,
+    "inventory_hash": "96afb7aecc0e0e16e9d5aeffc494da0c47b2d459e44a8a2ec3b273972ec4a3ec",
+    "manifest_hash": "e1c8781efd6a391cdefc7f829d265bb2e3c97bc8435fb9d3543374ae4fd86ef9",
+    "power_plan_hash": "cf818e17fad8ad000e695c3078a5a3bbb360163876b144a94f555002eec15da4",
+    "primary_patients": 0,
+    "protocol_hash": "e1fea61674f32480e65f9b0ae76889b6f0d280ab4b617bf974474f4e30ad6aae",
+    "status": "blocked",
+    "training_authorized": false,
+    "warnings": []
+  },
+  "paid_resources_started": false,
+  "preprocessing": {
+    "errors": [
+      "N4BiasFieldCorrection: Missing or changed pinned dependency: ",
+      "mri_synthstrip: Missing or changed pinned dependency: ",
+      "antsRegistration: Missing or changed pinned dependency: ",
+      "antsApplyTransforms: Missing or changed pinned dependency: ",
+      "SynthStrip weights: Missing or changed pinned dependency: ",
+      "template: Missing or changed pinned dependency: ",
+      "template mask: Missing or changed pinned dependency: ",
+      "Runtime dependency/container lock is not pinned"
+    ],
+    "preprocessing_hash": "7e32c5df888e2470143227b420e4b6864fe3ba1b285bbecce3b8edb3ae0e5eb0",
+    "preprocessing_version": "round3-n4-synthstrip-rigid-template-v1",
+    "status": "blocked",
+    "versions": {}
+  },
+  "real_training_performed": false
+}

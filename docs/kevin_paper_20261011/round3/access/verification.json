@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "passed_structural_and_public_privacy_checks",
+  "checked_date_local": "2026-10-11",
+  "checked_date_utc": "2026-10-12",
+  "scope": "Documentation and sanitized metadata validation; not provider approval or patient-data validation",
+  "checks": {
+    "all_three_json_documents_parse": true,
+    "provider_source_references_resolve": true,
+    "three_provider_entitlements_remain_unverified": true,
+    "usable_patient_counts_are_not_fabricated": true,
+    "five_required_brainlat_fields_match_visible_form": true,
+    "miriad_unobserved_fields_are_null": true,
+    "public_text_has_no_applicant_name_contact_account_id_or_personal_path": true,
+    "all_local_public_markdown_links_resolve": true,
+    "private_application_drafts_are_git_ignored": true,
+    "no_private_continuation_url_in_public_files": true,
+    "nacc_submission_receipt_verified_but_entitlement_unverified": true,
+    "public_request_identifiers_absent": true,
+    "private_submission_receipt_git_ignored": true,
+    "research_module_and_tests_contact_identifier_scan_passed": true
+  },
+  "reviewed_payloads": {
+    "ACCESS_CHECKLIST.md": "f9e88119ed81ba3f6c1cca911b630738c549685cb41c56b009abb6c442f6a8f4",
+    "PROJECT_DESCRIPTION.md": "f9e7f8ed84ab1a5b6c595cfd52154adb4ec1d78153c9d05c091adb65268dcf9c",
+    "README.md": "8f4e63a327c611086984f27d39844c80f60978b0458546960f4022cf454b9c5d",
+    "access_inventory.json": "3a55ef4906c41faefd88d7a2ee5826616bece27d96b2c7e00cc9b027309e02bc",
+    "form_fields.json": "e29cd7726fee1ba3ef4ec71545cb41beab3b7f18f479376e89db4546c54db4a9",
+    "source_evidence.json": "9bb314d1dce50fe13ce07432730c46fae3c70adb7bea30f84116435efc69bd19"
+  },
+  "public_files_privacy_scanned": 51
+}
