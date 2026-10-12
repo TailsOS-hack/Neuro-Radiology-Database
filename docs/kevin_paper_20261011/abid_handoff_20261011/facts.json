@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "audited_local_date": "2026-10-11",
+  "timezone": "America/New_York",
+  "purpose": "Scientific handoff to coauthor; no new inference, training or selection performed",
+  "source_root": "docs/kevin_paper_20261011",
+  "source_records": [
+    {
+      "path": "publication/reports/Completed_Methods.md",
+      "sha256": "0ac35f2ec0770d09e1bea1982e4d61345beef1e1b631746cfcb222304811af46"
+    },
+    {
+      "path": "publication/reports/Full_Results.md",
+      "sha256": "883caa532b064cb6efeeee154c890cb93ec3453cdf71f6c32715abcb40a24aba"
+    },
+    {
+      "path": "round2_publication/RESULTS.md",
+      "sha256": "f2254bca68909c24d1c8833d7677ea54e1b882c6e82f9d8b9653ac363608ed47"
+    },
+    {
+      "path": "round2_publication/Methods.md",
+      "sha256": "d4dbfe44d1bfbe831be1b651687cd8d135928f148574ed2254e8a17cb6fbaabd"
+    },
+    {
+      "path": "round2_publication/DATA_AND_LIMITATIONS.md",
+      "sha256": "3b585a3bd8cff1a95a256d18eacb66ecce256f103c9a327c12b91727a8ac5847"
+    },
+    {
+      "path": "round2_publication/artifacts/clinical/report/analysis.json",
+      "sha256": "3e60ec506b737b9a8d93ca94ab78c1701a761d0e724f66c8dd313827a11092ff"
+    },
+    {
+      "path": "round2_publication/artifacts/stage/attribution_diagnostics/source_attribution_complete.json",
+      "sha256": "834d493e8cd1b91cb3b15773ea2ee802db7b641af6459ee40730ea8e38b14dda"
+    },
+    {
+      "path": "round2_publication/artifacts/stage/attribution_diagnostics/recovery_receipt.json",
+      "sha256": "aa8be4ae5aca08321c0db635952950f2ba47e54e59660eee33cb2347736dedb0"
+    },
+    {
+      "path": "round2_publication/combined_graphs/atlas_verification.json",
+      "sha256": "5d6676392f2edfa6fab8c2e5faf5e9f6b851c0021297860a0b383fae911ae1ba"
+    },
+    {
+      "path": "round3/implementation_verification.json",
+      "sha256": "4951b97eaea0ad2bf4c6116903b227ffd7f84db936bcddfd6af1961bb86c42ec"
+    },
+    {
+      "path": "round3/current_status.json",
+      "sha256": "0bad458390913fac2069a1ade9420dea656255ea019a01d0d79a1a7dc01a2016"
+    },
+    {
+      "path": "round3/access/access_inventory.json",
+      "sha256": "3a55ef4906c41faefd88d7a2ee5826616bece27d96b2c7e00cc9b027309e02bc"
+    }
+  ],
+  "clinical": {
+    "positive_label": "AD",
+    "negative_label": "CN",
+    "threshold": 0.5,
+    "old": "fixed_round1_binary_ensemble_c2_c4_c6",
+    "new": "fixed_round2_binary_ensemble_seeds20261021_20261022_20261023",
+    "patient_aggregation_old": "mean_of_nine_slice_probabilities",
+    "patient_aggregation_new": "softmax_of_mean_nine_slice_logits",
+    "training": {
+      "source": "Besga",
+      "patients": 32,
+      "AD": 21,
+      "CN": 11
+    },
+    "validation": {
+      "source": "Besga",
+      "patients": 11,
+      "AD": 7,
+      "CN": 4
+    },
+    "cohorts": [
+      {
+        "source": "Harvard",
+        "status_at_round2_evaluation": "fresh_source_held_out",
+        "current_status": "observed_historical",
+        "n": 19,
+        "AD": 9,
+        "CN": 10,
+        "old_correct": 10,
+        "new_correct": 9,
+        "new_predict_AD": 19,
+        "new_sensitivity": 1.0,
+        "new_specificity": 0.0,
+        "new_accuracy_exact_95ci": [
+          0.244,
+          0.711
+        ],
+        "old_balanced_accuracy": 0.55,
+        "new_balanced_accuracy": 0.5
+      },
+      {
+        "source": "Besga",
+        "status_at_round2_evaluation": "reused_internal_test",
+        "n": 11,
+        "AD": 7,
+        "CN": 4,
+        "old_correct": 5,
+        "new_correct": 10,
+        "new_accuracy_exact_95ci": [
+          0.587,
+          0.998
+        ],
+        "old_balanced_accuracy": 0.5714285714285714,
+        "new_balanced_accuracy": 0.875
+      },
+      {
+        "source": "OpenNeuro",
+        "status_at_round2_evaluation": "reused_external",
+        "n": 15,
+        "AD": 1,
+        "CN": 14,
+        "old_correct": 12,
+        "new_correct": 14,
+        "new_predict_AD": 0,
+        "new_sensitivity": 0.0,
+        "new_specificity": 1.0,
+        "new_accuracy_exact_95ci": [
+          0.681,
+          0.998
+        ],
+        "old_balanced_accuracy": 0.42857142857142855,
+        "new_balanced_accuracy": 0.5
+      }
+    ],
+    "new_seed_correct_counts": {
+      "20261021": {
+        "Harvard": 9,
+        "Besga": 10,
+        "OpenNeuro": 14
+      },
+      "20261022": {
+        "Harvard": 9,
+        "Besga": 10,
+        "OpenNeuro": 10
+      },
+      "20261023": {
+        "Harvard": 9,
+        "Besga": 9,
+        "OpenNeuro": 15
+      }
+    },
+    "new_completed_epochs": [
+      80,
+      53,
+      78
+    ],
+    "new_selected_epochs": [
+      65,
+      38,
+      63
+    ],
+    "MCI_prediction_only": 15,
+    "clinical_superiority_demonstrated": false,
+    "clinical_readiness_demonstrated": false
+  },
+  "stage": {
+    "new_seeds": [
+      20261011,
+      20261012,
+      20261013
+    ],
+    "new_completed_epochs": [
+      21,
+      33,
+      35
+    ],
+    "new_selected_epochs": [
+      6,
+      18,
+      20
+    ],
+    "attribution_representative_seed": 20261011,
+    "original100": {
+      "n": 100,
+      "original_correct": 100,
+      "round1_c3_correct": 100,
+      "round2_each_correct": [
+        100,
+        100,
+        100
+      ],
+      "old_training_matches": 66,
+      "old_validation_matches": 9,
+      "old_test_matches": 25,
+      "fixed_reader_count": 3,
+      "reader_mean_accuracy_percent": 39.67,
+      "reader_accuracy_range_percent": [
+        37,
+        44
+      ],
+      "clinical_validation": false
+    }
+  },
+  "attribution": {
+    "task": "legacy_four_class_stage_classifier",
+    "binary_clinical_model_attribution": false,
+    "fixed_case_count": 115,
+    "original100_count": 100,
+    "historical_class_balanced_count": 8,
+    "prior_gallery_count": 7,
+    "valid_new_native_maps": 115,
+    "native_grid": [
+      7,
+      7
+    ],
+    "randomization_records": 72,
+    "probability_replay_status": "blocked",
+    "probability_replay_tolerance": 0.0001,
+    "cases_exceeding_tolerance": 2,
+    "maximum_absolute_probability_differences": [
+      0.0001177192,
+      0.0003736615
+    ],
+    "predicted_classes_changed": false,
+    "anatomical_localization_validated": false,
+    "corner_masking": {
+      "validation_images": 160,
+      "representative_correct_after_prescribed_erasure": 160,
+      "corner_only_accuracy": 0.25,
+      "all_shortcuts_excluded": false
+    }
+  },
+  "round3": {
+    "software_tests_passed": 109,
+    "real_training": false,
+    "real_patient_predictions": false,
+    "approved_acquired_eligible_patients": 0,
+    "nacc_request_submitted": true,
+    "nacc_approval_verified": false,
+    "nacc_mri_delivery_verified": false,
+    "brainlat_acquired": false,
+    "miriad_acquired": false,
+    "preprocessing_runtime_verified": false
+  },
+  "hardware": [
+    {
+      "phase": "round1_six_training_runs",
+      "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "source_record_sha256": "1b9c4e32293cbcc65bf36d3d9b722ecf57497fea245ecd2b42899adba0274b79"
+    },
+    {
+      "phase": "round2_three_clinical_training_runs",
+      "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "source_record_sha256": "c6f721c3ef363d470d0e36fc17e5e2cc0b4e5cf3f245bcd341a52bd389bd0310"
+    },
+    {
+      "phase": "round2_frozen_clinical_evaluation_only",
+      "gpu": "NVIDIA B300 SXM6 AC",
+      "source_record_sha256": "0f4052807bda229268fa61002ab9920b6747812f341e215e5bcb4925f16e8228",
+      "retraining_performed": false
+    },
+    {
+      "phase": "round2_stage_training",
+      "seed": 20261011,
+      "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "source_record_sha256": "c0b68d887778a9e87f13fa664d2aa46ba89f4c54bba48c31868d2ccb686afddd"
+    },
+    {
+      "phase": "round2_stage_training",
+      "seed": 20261012,
+      "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "source_record_sha256": "8927044b073292953a109614ec457f13a986a31d63c586efddfb551287521730"
+    },
+    {
+      "phase": "round2_stage_training",
+      "seed": 20261013,
+      "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "source_record_sha256": "b059d981faaa71e27c9e1f11182b00bbaabb093eb1690f982b265a858fb6c830"
+    }
+  ],
+  "production_checkpoint_sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+  "production_checkpoint_unchanged": true,
+  "clinical_subject_identifiers_included": false,
+  "personal_contact_or_application_signature_records_included": false
+}

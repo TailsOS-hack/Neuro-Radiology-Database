@@ -1,0 +1,10 @@
+{
+  "zip": "paper_package/Abid_Dementia_Update_20261011.zip",
+  "bytes": 109785529,
+  "sha256": "ab4b951ae7464b47839374526ceda9ce4253cd7f2bbe4880b1780671b283d9ff",
+  "files": 1519,
+  "figure_files": 479,
+  "new_gradcam_case_panels": 115,
+  "zip_test": "passed",
+  "archive_member_readback": "every member byte-identical to final package"
+}

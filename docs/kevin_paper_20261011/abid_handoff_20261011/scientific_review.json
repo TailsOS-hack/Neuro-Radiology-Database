@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "status": "passed_independent_scientific_content_review",
+  "review_date_local": "2026-10-11",
+  "timezone": "America/New_York",
+  "archive": {
+    "filename": "Abid_Dementia_Update_20261011.zip",
+    "sha256": "ab4b951ae7464b47839374526ceda9ce4253cd7f2bbe4880b1780671b283d9ff",
+    "bytes": 109785529,
+    "members": 1519,
+    "zip_crc_passed": true
+  },
+  "source_manifest": {
+    "sha256": "ea3ada35cd02886303dc07bcedb416a2c31d30d172d3e942eae0242dd09a104e",
+    "file_records": 1515,
+    "all_destination_hashes_verified": true
+  },
+  "authored_handoff_documents": [
+    {
+      "name": "MODEL_AND_DATASET_COMPARISON.md",
+      "sha256": "fcf021e8d43544f9bb204be296595965c4e14aa8940e709978a5ac1660d5f3b9"
+    },
+    {
+      "name": "FIGURE_CAPTION_GUIDANCE.md",
+      "sha256": "f87a439cbdc712e8c6b0896672c39c1d4ecdc69ff6052d4c6cd26afd209cfed2"
+    },
+    {
+      "name": "facts.json",
+      "sha256": "f8ce5b51d4c4c58117b90b18d851e4250bbee6041dafb53bbdc9dd86900c02d0"
+    }
+  ],
+  "scientific_checks": {
+    "clinical_patient_denominators_match_aggregate_analysis": true,
+    "old_and_new_ensemble_correct_counts_match": true,
+    "balanced_accuracy_sensitivity_specificity_match": true,
+    "all_nine_new_seed_by_cohort_correct_counts_match": true,
+    "historical_original100_claim_limited_to_actual_model_roster": true,
+    "original100_old_split_overlap_disclosed": true,
+    "fresh_at_round2_versus_reused_cohorts_distinguished": true,
+    "round3_software_only_status_disclosed": true,
+    "nacc_submission_not_mistaken_for_acquisition": true,
+    "training_versus_evaluation_hardware_verified_separately": true,
+    "clinical_failure_preserved": true,
+    "clinical_superiority_or_readiness_claimed": false
+  },
+  "attribution_checks": {
+    "fixed_regenerated_panels": 115,
+    "randomization_records": 72,
+    "two_probability_replay_exceptions_preserved": true,
+    "fixed_tolerance": 0.0001,
+    "four_class_stage_task_distinguished_from_binary_clinical_task": true,
+    "no_favorable_only_map_selection": true,
+    "native_map_and_region_control_limits_disclosed": true,
+    "packaged_image_001_visually_inspected": true,
+    "warning_visible_on_inspected_panel": true
+  },
+  "figure_integrity": {
+    "png_pdf_files": 479,
+    "all_original_bytes_unchanged": true,
+    "new_medical_inference_performed_for_handoff": false
+  },
+  "scope_checks": {
+    "dementia_only": true,
+    "excluded_execution_details_absent_from_scanned_text": true,
+    "application_contact_or_signature_records_not_included": true,
+    "clinical_raw_images_or_patient_prediction_files_not_included": true
+  },
+  "production_checkpoint": {
+    "sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+    "unchanged": true
+  },
+  "email_draft_review": {
+    "scientific_claims_accurate": true,
+    "source_freshness_precision_recommended": true,
+    "no_message_sent_by_this_review": true
+  },
+  "boundaries": [
+    "This verifies handoff content and artifact integrity, not clinical validity or journal acceptance.",
+    "Round 2 retains the fresh Harvard generalization failure; Round 3 has no real patient results.",
+    "The 109 recorded Round 3 software tests are not 109 clinical validation tests.",
+    "Source release terms, image reuse permission and actual ethics/oversight determination still require author review."
+  ]
+}

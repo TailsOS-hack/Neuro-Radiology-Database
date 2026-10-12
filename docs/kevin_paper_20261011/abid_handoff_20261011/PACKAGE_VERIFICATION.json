@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "text_files_scanned": 252,
+  "pdf_pages_text_and_metadata_scanned": 226,
+  "png_files_verified": 369,
+  "figures_byte_identical_to_source": 479,
+  "excluded_operational_text_matches": 0,
+  "unrelated_disease_content_matches": 0,
+  "lfs_pointer_files": 0,
+  "patient_raw_MRI_files": 0,
+  "new_gradcam_case_panels": 115,
+  "figure_files": 479,
+  "scientific_claim_review": "All seeds, reused benchmark status, external failure and attribution control failures retained.",
+  "visual_spot_check": "Fresh Harvard all-model confusion figure inspected; original source figures already reviewed in the completed experiment."
+}
