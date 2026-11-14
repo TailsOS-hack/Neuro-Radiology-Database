@@ -20,6 +20,8 @@ Tumor-Database/
 │   ├── mri_volume.py               # Canonical RAS+ volume container, NIfTI I/O, PHI kept separate
 │   ├── dicom_io.py                 # DICOM files/folders/zips -> MRIVolume (geometry from the header)
 │   ├── volume_analysis.py          # Whole-scan AD/CN research scoring + stacked 3D Grad-CAM
+│   ├── train_dementia_volume.py    # Patient-level, cross-validated training on labelled 3D scans
+│   ├── oasis1.py                   # OASIS-1 index + loader (data obtained separately, never committed)
 │   └── scan_view.py                # Slice rendering / header-derived form values for the GUI
 ├── data/
 │   ├── brain_tumor/
@@ -84,7 +86,7 @@ Input MRI Image (224×224 RGB)
 
 **Key design decisions (do not change without strong justification):**
 - The Gatekeeper unifies `notumor` (brain_tumor dataset) and `NonDemented` (Alzheimer's dataset) into a single **"Normal"** class (label 0). This avoids overlap between the two specialist domains.
-- Each model is saved as a **complete PyTorch object** (`torch.save(model, path)`), not just state_dict. Load with `torch.load(path, map_location=device)`.
+- Each model is saved as a **complete PyTorch object** (`torch.save(model, path)`), not just state_dict. Load with `torch.load(path, map_location=device)`. *This describes the legacy training scripts only.* The experiment pipeline, the research rounds and `src/train_dementia_volume.py` save a dict holding a state dict plus metadata (`model_state` or `model`); that is the format of the current production checkpoints, and the GUI loads both. Match the format of the loader you are targeting.
 - Device priority: CUDA → DirectML (Windows) → CPU.
 
 ---
@@ -150,6 +152,17 @@ python scripts/verify_dicom_volume_pipeline.py --openneuro-root data/external/op
 ```
 
 See `docs/DICOM_VOLUME_ANALYSIS.md` for what was verified and the limits.
+
+### Patient-Level Volume Training
+
+```bash
+python -m src.oasis1 data/external/oasis1 --qc oasis_qc.png      # cohort counts + orientation sheet: look at it first
+python -m src.train_dementia_volume --oasis-root data/external/oasis1 --output training_logs/experiments/dementia_volume/oasis1
+python -m src.train_dementia_volume --manifest cohort.csv --cohort-name NAME --output <new folder>
+```
+
+Splits are by person; every person is scored once by a fold model that never saw them. See
+`docs/OASIS1_VOLUME_TRAINING.md`. As of 2026-11-14 this has not been run on OASIS-1 (the data is not in the repo).
 
 ### Tests
 
@@ -302,6 +315,13 @@ When making changes, these are the most critical files to understand:
 - When stacking per-slice Grad-CAM into a volume, keep the raw maps and scale once for the whole volume. Per-slice min-max normalisation makes every slice look equally important.
 - The four-class stage model was trained on skull-stripped, atlas-aligned slices. On raw with-skull slices it labels everything as demented; do not present its label on a raw scan as valid.
 
+### Training on Labelled Scans
+- The person is the unit: split, sample, count and report by person. Never let slices or repeat scans of one person fall on both sides of a split.
+- Report internal cross-validation as exactly that. It is not external validation, and a cohort that earlier rounds already inspected is not a fresh test.
+- Per-person predictions and patient tables stay in git-ignored locations (`data/external/`, `training_logs/experiments/`, a run's `private/`). Commit aggregate summaries only.
+- State a fact about a dataset (counts, scanner, access route) only if it was checked against a source in that session or is already recorded in the project's dataset registry.
+- Open dict-style checkpoints with `torch.load(..., weights_only=True)` (`volume_analysis.load_clinical_checkpoint` does). Only the legacy whole-object checkpoints need full unpickling; never load one of those from outside this repository.
+
 ### Frozen Evidence (do not edit)
 - `research/dementia_round3/*.py` and `tests/test_round3*.py` are hash-pinned in `docs/kevin_paper_20261011/round3/implementation_verification.json`.
 - `docs/kevin_paper_20261011/**` and the review bundles are frozen experiment records.
@@ -312,7 +332,7 @@ When making changes, these are the most critical files to understand:
 
 ### Do Not
 - Do not merge `notumor` and `NonDemented` into separate "Normal" classes — this breaks the Gatekeeper routing logic
-- Do not use `state_dict` for saving models — the codebase loads complete model objects
+- Do not change the checkpoint format a loader expects. Legacy scripts save complete model objects; pipeline, research and volume-trainer checkpoints are dicts with a state dict plus metadata (see Key design decisions)
 - Do not run data augmentation on validation or test splits
 - Do not hardcode device as `cuda` — always use the device detection pattern from existing code
 

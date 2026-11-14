@@ -52,6 +52,12 @@ are removed again when another image is opened.
 Compressed transfer syntaxes (JPEG, JPEG-LS, JPEG 2000) need the optional
 `pylibjpeg` plugins from `requirements.txt`; uncompressed and RLE files do not.
 
+`--checkpoints` runs another ensemble of the same family, for example the fold
+models written by `src/train_dementia_volume.py`. Checkpoints are opened in
+PyTorch's weights-only mode (tensors and plain metadata only), so a file
+received from someone else is refused rather than executed if it carries
+pickled code.
+
 ## How a scan becomes model input
 
 1. Slices are ordered by `ImagePositionPatient . (row x column)`, never by file
@@ -121,11 +127,14 @@ clinical checkpoints give 14/15, 10/15 and 15/15 correct on the 15 binary cases
 and the ensemble gives 14/15 with every case labelled CN, exactly the counts in
 [RESULTS.md](kevin_paper_20261011/round2_publication/RESULTS.md).
 
-**Tests.** 73 new tests (233 in total with a display; the GUI-flow tests need
-`xvfb-run` on a headless machine and are skipped otherwise). `pydicom` was added
-to `requirements-verification.txt` so the 32 DICOM contracts that need no other
-package run in the offline CI job; that job's set of pre-existing import errors
-is unchanged.
+**Tests.** 103 new tests in six files: 75 for the DICOM reader, the volume
+analysis, the display helpers and the GUI scan flow, and 28 for the trainer and
+the OASIS-1 loader described in [OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md).
+The suite is 263 tests in total with a display; the GUI-flow tests need
+`xvfb-run` on a headless machine and are skipped otherwise. `pydicom` was added
+to `requirements-verification.txt` so the 33 DICOM contracts and the 8
+display-helper tests that need no other package run in the offline CI job; that
+job's set of pre-existing import errors is unchanged.
 
 ## What this showed about the existing dementia models
 
@@ -177,7 +186,9 @@ this project's own stage benchmark, should be read in that light.
 
 The preparation, scoring and 3D attribution code is independent of which
 checkpoint it is given, so a model trained on such data plugs into the same
-path. Cohort conversion for the gated Round 3 workflow is covered by
+path. A patient-level, cross-validated trainer for exactly that is prepared in
+`src/train_dementia_volume.py`, with OASIS-1 as its first intended cohort; it
+has not been run on OASIS-1 yet. See [OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md). Cohort conversion for the gated Round 3 workflow is covered by
 `python -m src.dicom_io <study> --to-nifti <out>`, whose record carries the
 `volume_sha256` and `canonical_volume_sha256` the patient manifest requires; the
 hash is computed the same way `research/dementia_round3/data.py` recomputes it
