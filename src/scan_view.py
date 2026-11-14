@@ -153,22 +153,28 @@ def volume_report_html(result, patient_info: Optional[dict] = None, technique: s
 
     patient_info = patient_info or {}
     escape = lambda value: html.escape(str(value)) if value else "Not provided"  # noqa: E731
+    positive = result.class_names[1]
     probabilities = {name: float(value) for name, value in zip(result.class_names, result.probabilities)}
     members = ", ".join(f"{float(row[1]):.2f}" for row in result.member_probabilities)
+    scored = "Nine axial slices at 45-85% of the cranial extent" if getattr(result, "slice_policy", "protocol9") == "protocol9" else (
+        "Every 1.5 mm axial slice between 45% and 85% of the cranial extent"
+    )
     rows = [
         ("Patient", escape(patient_info.get("name"))),
         ("Patient ID", escape(patient_info.get("patient_id"))),
         ("Date of birth", escape(patient_info.get("dob"))),
         ("Technique", escape(technique)),
-        ("Model", "Round 2 clinical AD/CN ensemble (3 MobileNetV3-Large members), research artifact"),
-        ("Input", "Nine axial slices at 45-85% of the cranial extent, 1.5 mm grid (recipe exploratory_t1_axial_v1)"),
-        ("Ensemble P(AD)", f"{probabilities.get('AD', float('nan')):.3f}"),
-        ("Member P(AD)", members),
-        ("Label at threshold 0.5", html.escape(result.predicted_label)),
+        ("Model", f"{html.escape(positive)}/{html.escape(result.class_names[0])} research ensemble "
+                  f"({len(result.member_probabilities)} MobileNetV3-Large members)"),
+        ("Input", f"{scored}, 1.5 mm grid (recipe exploratory_t1_axial_v1)"),
+        (f"Ensemble P({html.escape(positive)})", f"{probabilities.get(positive, float('nan')):.3f}"),
+        (f"Member P({html.escape(positive)})", members),
+        (f"Label at threshold {float(getattr(result, 'threshold', 0.5)):g}", html.escape(result.predicted_label)),
     ]
     # Bold-label lines rather than a table: the in-app HTML widget does not lay out tables.
     table = "".join(f"<p><b>{name}:</b> {value}</p>" for name, value in rows)
-    notes = [note for note in result.warnings if not note.startswith("Research output only")]
+    notice = getattr(result, "notice", "") or next((note for note in result.warnings if note.startswith("Research output only")), "")
+    notes = [note for note in result.warnings if note != notice and not note.startswith("Research output only")]
     note_html = "".join(f"<li>{html.escape(note)}</li>" for note in notes)
     cam_text = (
         "<p>The heatmap is Grad-CAM computed slice by slice across the analysed slab and scaled once for the whole "
@@ -181,10 +187,8 @@ def volume_report_html(result, patient_info: Optional[dict] = None, technique: s
         "<h2>Volume analysis - research score, not a diagnosis</h2>"
         f"{table}"
         "<h3>How to read this</h3>"
-        "<p>This is the output of an exploratory AD-versus-cognitively-normal classifier developed on 43 patients "
-        "from one source. On its only fresh external cohort it labelled all 19 participants AD, including all 10 "
-        "controls (specificity 0/10); on a second cohort it labelled all 15 participants CN, missing the one AD "
-        "case. It has not been validated for clinical use and must not inform patient care.</p>"
+        f"<p>{html.escape(notice)}</p>"
+        "<p>This model has not been validated for clinical use and must not inform patient care.</p>"
         f"{cam_text}"
         + (f"<h3>Notes for this scan</h3><ul>{note_html}</ul>" if note_html else "")
     )

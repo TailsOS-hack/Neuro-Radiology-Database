@@ -92,7 +92,10 @@ class ScanViewTests(unittest.TestCase):
             probabilities=np.array([0.536, 0.464]),
             member_probabilities=np.array([[0.59, 0.41], [0.45, 0.55], [0.56, 0.44]]),
             predicted_label="CN",
-            warnings=["The series looks like FLAIR, not T1-weighted", "Research output only, not a diagnosis. ..."],
+            warnings=["The series looks like FLAIR, not T1-weighted", "Research output only, not a diagnosis. Record: specificity 0/10."],
+            notice="Research output only, not a diagnosis. Record: specificity 0/10.",
+            slice_policy="protocol9",
+            threshold=0.5,
             cam_grid=np.zeros((2, 2, 2)),
         )
         text = scan_view.volume_report_html(result, {"name": "<b>Jane</b> Doe", "patient_id": "A&B", "dob": ""}, "MR 3 T")
@@ -105,10 +108,22 @@ class ScanViewTests(unittest.TestCase):
         self.assertIn("A&amp;B", text)
         self.assertIn("<b>Date of birth:</b> Not provided", text)
         self.assertIn("looks like FLAIR", text)
-        self.assertEqual(text.count("Research output only"), 0)  # the notice is not repeated as a scan note
+        self.assertEqual(text.count("Research output only"), 1)  # the model's notice, once; not repeated as a scan note
+        self.assertIn("Nine axial slices", text)
         self.assertIn("slice by slice", text)
         result.cam_grid = None
         self.assertNotIn("slice by slice", scan_view.volume_report_html(result))
+        # A model with its own record and policy is described by that record, not the Round 2 one.
+        result.notice = "Research output only. Cross-validated on 198 people from one site."
+        result.warnings = [result.notice]
+        result.slice_policy = "band"
+        result.class_names = ("NonDemented", "Demented")
+        other = scan_view.volume_report_html(result)
+        self.assertIn("198 people from one site", other)
+        self.assertNotIn("specificity 0/10", other)
+        self.assertIn("Every 1.5 mm axial slice", other)
+        self.assertIn("<b>Ensemble P(Demented):</b>", other)
+        self.assertNotIn("Notes for this scan", other)
 
 
 if __name__ == "__main__":

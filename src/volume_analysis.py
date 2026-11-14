@@ -59,12 +59,30 @@ CLINICAL_ARCHITECTURE = "mobilenet_v3_large_features_imagenet_v1_dropout02_linea
 DEFAULT_CLINICAL_CHECKPOINTS = tuple(
     PROJECT_ROOT / "models" / "kevin_round2_20261011" / f"clinical_seed{seed}.pt" for seed in (20261021, 20261022, 20261023)
 )
+#: Where a reviewed ensemble from ``train_dementia_volume`` is placed to become the default.
+TRAINED_VOLUME_MODEL_DIR = PROJECT_ROOT / "models" / "dementia_volume"
 
+
+def default_checkpoints() -> list:
+    """The ensemble used when none is named.
+
+    Fold checkpoints someone has deliberately copied into ``models/dementia_volume/``
+    take precedence; otherwise the three Round 2 clinical seeds. Every result
+    carries the notice of whichever ensemble produced it.
+    """
+
+    placed = sorted(TRAINED_VOLUME_MODEL_DIR.glob("fold*.pt")) if TRAINED_VOLUME_MODEL_DIR.is_dir() else []
+    return placed or list(DEFAULT_CLINICAL_CHECKPOINTS)
+
+#: Shown with every result of the Round 2 clinical ensemble (checkpoints that carry no notice of their own).
 RESEARCH_USE_NOTICE = (
     "Research output only, not a diagnosis. The AD/CN ensemble was developed on 43 patients from one "
-    "source and, on its only fresh external cohort, labelled all 19 participants AD (specificity 0/10). "
+    "source and, on its only fresh external cohort, labelled all 19 participants AD (specificity 0/10); "
+    "on a second cohort it labelled all 15 participants CN, missing the one AD case. "
     "The attention map shows what drove this model's score; it is not a localisation of pathology."
 )
+#: How a model turns slices into one score: the nine frozen protocol slices, or every slice of the trained band.
+SLICE_POLICIES = ("protocol9", "band")
 
 
 class PreparationError(VolumeError):
@@ -278,17 +296,29 @@ def build_clinical_slice_model():
 
 
 def load_clinical_checkpoint(path: PathLike, device=None):
-    """Strictly load one Round 2 clinical checkpoint; returns (model, metadata)."""
+    """Strictly load one slice-bag checkpoint (Round 2 clinical, or a ``train_dementia_volume`` fold).
+
+    Returns (model, metadata). Only tensors and plain metadata are unpickled, so
+    a checkpoint received from someone else cannot run code when it is opened.
+    """
+
+    import pickle
 
     import torch
 
     path = Path(path)
     if not path.is_file() or path.stat().st_size < 1024:
         raise FileNotFoundError(
-            f"{path} is missing or is a Git LFS pointer. Fetch it with: "
+            f"{path} is missing or is a Git LFS pointer. The bundled research checkpoints are fetched with: "
             'git lfs pull --include="models/kevin_round2_20261011/*.pt"'
         )
-    checkpoint = torch.load(path, map_location="cpu", weights_only=False)
+    try:
+        checkpoint = torch.load(path, map_location="cpu", weights_only=True)
+    except (pickle.UnpicklingError, RuntimeError, EOFError, KeyError, AttributeError) as exc:
+        raise ValueError(
+            f"{path} is not a loadable slice-bag checkpoint (a dict of tensors and plain metadata is required; "
+            f"whole pickled model objects are not accepted here): {type(exc).__name__}"
+        ) from exc
     if not isinstance(checkpoint, dict) or "model" not in checkpoint:
         raise ValueError(f"{path} is not a clinical patient-bag checkpoint")
     if checkpoint.get("architecture") != CLINICAL_ARCHITECTURE:
@@ -298,12 +328,22 @@ def load_clinical_checkpoint(path: PathLike, device=None):
     model.eval()
     if device is not None:
         model.to(device)
+    class_names = tuple(checkpoint.get("class_names", CLINICAL_CLASSES))
+    slice_policy = checkpoint.get("slice_policy", "protocol9")
+    threshold = float(checkpoint.get("threshold", CLINICAL_THRESHOLD))
+    if len(class_names) != 2 or slice_policy not in SLICE_POLICIES or not 0 < threshold < 1:
+        raise ValueError(f"{path} has unsupported class names, slice policy or threshold")
     metadata = {
         "file": path.name,
         "sha256": sha256_file(path),
         "seed": checkpoint.get("seed"),
         "selected_epoch": checkpoint.get("epoch"),
         "architecture": checkpoint.get("architecture"),
+        # Round 2 files predate these keys; their defaults are that round's frozen protocol.
+        "class_names": list(class_names),
+        "slice_policy": slice_policy,
+        "threshold": threshold,
+        "notice": checkpoint.get("notice") or RESEARCH_USE_NOTICE,
     }
     return model, metadata
 
@@ -438,6 +478,8 @@ class VolumeAnalysis:
     cam_grid: Optional[np.ndarray]  # (X, Y, Z) in [0, 1], scaled by the volume-wide maximum
     cam_target_index: Optional[int]
     cam_score: str
+    slice_policy: str
+    notice: str
     members: list
     source: dict
     acquisition: dict
@@ -537,14 +579,18 @@ class VolumeAnalysis:
             total = float(energy.sum())
             profile = [round(float(energy[z]) / total, 6) if total > 0 else 0.0 for z in self.cam_indices]
         return {
-            "task": "clinical AD versus cognitively normal (research score)",
+            "task": f"{self.class_names[1]} versus {self.class_names[0]} (research score)",
             "class_names": list(self.class_names),
             "probabilities": [float(value) for value in self.probabilities],
             "predicted_label": self.predicted_label,
-            "threshold_on_AD_probability": self.threshold,
+            "positive_class": self.class_names[1],
+            "threshold_on_positive_class_probability": self.threshold,
             "member_probabilities": [[float(value) for value in row] for row in self.member_probabilities],
-            "members": self.members,
-            "aggregation": "softmax(mean of the nine protocol slice logits) per member; equal-weight mean of member probabilities",
+            "members": [{key: value for key, value in member.items() if key != "notice"} for member in self.members],
+            "aggregation": (
+                f"softmax(mean of the {'nine protocol' if self.slice_policy == 'protocol9' else 'trained-band'} "
+                "slice logits) per member; equal-weight mean of member probabilities"
+            ),
             "preparation": {
                 "recipe": self.prepared.recipe,
                 "grid_shape": list(self.prepared.grid.shape),
@@ -569,7 +615,7 @@ class VolumeAnalysis:
             "source": self.source,
             "acquisition": self.acquisition,
             "warnings": list(self.warnings),
-            "notice": RESEARCH_USE_NOTICE,
+            "notice": self.notice,
         }
 
     def save(self, output_dir: PathLike, volume: Optional[MRIVolume] = None) -> dict:
@@ -617,12 +663,19 @@ class DementiaVolumeAnalyzer:
     def __init__(self, checkpoints: Optional[Sequence[PathLike]] = None, device=None) -> None:
         self.device = device if device is not None else default_device()
         self.models, self.members = [], []
-        for path in checkpoints or DEFAULT_CLINICAL_CHECKPOINTS:
+        for path in checkpoints or default_checkpoints():
             model, metadata = load_clinical_checkpoint(path, self.device)
             self.models.append(model)
             self.members.append(metadata)
         if not self.models:
             raise ValueError("At least one checkpoint is required")
+        for key in ("class_names", "slice_policy", "threshold", "notice"):
+            if any(member[key] != self.members[0][key] for member in self.members):
+                raise ValueError(f"Ensemble members disagree on {key}; they are not one model family")
+        self.class_names = tuple(self.members[0]["class_names"])
+        self.slice_policy = self.members[0]["slice_policy"]
+        self.threshold = self.members[0]["threshold"]
+        self.notice = self.members[0]["notice"]
 
     def _slice_logits(self, images: np.ndarray, batch_size: int = 32) -> np.ndarray:
         """(members, N, classes) logits for uint8 slice images."""
@@ -648,12 +701,14 @@ class DementiaVolumeAnalyzer:
         cam_score: str = "logit",
         progress: Optional[Callable[[str], None]] = None,
     ) -> VolumeAnalysis:
-        """Predict from the nine protocol slices; explain every slice of the trained band.
+        """Predict with the checkpoints' own slice policy; explain every slice of the trained band.
 
-        The prediction always uses exactly the frozen nine-slice protocol. With
-        ``dense`` the Grad-CAM stack covers every 1.5 mm axial slice between the
-        first and last protocol slice (a contiguous slab); otherwise only the
-        nine protocol slices. ``cam_target`` defaults to the predicted class.
+        Round 2 checkpoints predict from exactly the frozen nine-slice protocol;
+        checkpoints trained with the ``band`` policy predict from every slice of
+        the band, the same slices the map explains. With ``dense`` the Grad-CAM
+        stack covers every 1.5 mm axial slice between the first and last
+        protocol slice (a contiguous slab); otherwise only the nine protocol
+        slices. ``cam_target`` defaults to the predicted class.
         """
 
         say = progress or (lambda _message: None)
@@ -676,16 +731,19 @@ class DementiaVolumeAnalyzer:
         warnings.extend(prepared.notes)
 
         say("Scoring the scan")
-        protocol_logits = self._slice_logits(prepared.render_slices(prepared.protocol_indices))
-        member_probabilities = _softmax(protocol_logits.mean(axis=1))
+        scored = prepared.protocol_indices if self.slice_policy == "protocol9" else prepared.band_indices
+        slice_logits = self._slice_logits(prepared.render_slices(scored))
+        member_probabilities = _softmax(slice_logits.mean(axis=1))
         probabilities = member_probabilities.mean(axis=0)
         if not np.isfinite(probabilities).all():
             raise RuntimeError("Model produced nonfinite probabilities")
-        predicted = 1 if probabilities[1] >= CLINICAL_THRESHOLD else 0
+        predicted = 1 if probabilities[1] >= self.threshold else 0
 
-        cam_grid, cam_indices, slice_probabilities, target = None, [], np.zeros((0, len(CLINICAL_CLASSES))), None
+        cam_grid, cam_indices, slice_probabilities, target = None, [], np.zeros((0, len(self.class_names))), None
+        if cam_target is not None and cam_target not in self.class_names:
+            raise ValueError(f"cam_target must be one of {list(self.class_names)}, not {cam_target!r}")
         if grad_cam:
-            target = predicted if cam_target is None else CLINICAL_CLASSES.index(cam_target)
+            target = predicted if cam_target is None else self.class_names.index(cam_target)
             try:
                 cam_grid, cam_indices, slice_probabilities = self._grad_cam_volume(
                     prepared, target, dense, cam_score, say, warnings
@@ -694,21 +752,23 @@ class DementiaVolumeAnalyzer:
                 # An explanation failure must never cost the user the prediction.
                 logger.exception("Grad-CAM failed; returning the prediction without a map")
                 warnings.append(f"Grad-CAM could not be computed ({type(exc).__name__}: {exc})")
-                cam_grid, cam_indices, slice_probabilities = None, [], np.zeros((0, len(CLINICAL_CLASSES)))
+                cam_grid, cam_indices, slice_probabilities = None, [], np.zeros((0, len(self.class_names)))
 
-        warnings.append(RESEARCH_USE_NOTICE)
+        warnings.append(self.notice)
         return VolumeAnalysis(
-            class_names=CLINICAL_CLASSES,
+            class_names=self.class_names,
             probabilities=probabilities,
             member_probabilities=member_probabilities,
             predicted_index=predicted,
-            threshold=CLINICAL_THRESHOLD,
+            threshold=self.threshold,
             prepared=prepared,
             cam_indices=list(cam_indices),
             slice_probabilities=slice_probabilities,
             cam_grid=cam_grid,
             cam_target_index=target,
             cam_score=cam_score,
+            slice_policy=self.slice_policy,
+            notice=self.notice,
             members=list(self.members),
             source=dict(volume.source),
             acquisition={key: value for key, value in volume.acquisition.items() if key not in ("series_description", "protocol_name")},
@@ -727,7 +787,7 @@ class DementiaVolumeAnalyzer:
             maps, logits = slice_stack_grad_cam(model, model.features[-1], inputs, target, score=cam_score)
             peak = float(maps.max())
             if peak <= 0:
-                warnings.append(f"Member {number} produced an all-zero Grad-CAM map for class {CLINICAL_CLASSES[target]}")
+                warnings.append(f"Member {number} produced an all-zero Grad-CAM map for class {self.class_names[target]}")
             # Members have different feature scales; give each an equal voice.
             member_maps.append(maps / peak if peak > 0 else maps)
             member_slice_probabilities.append(_softmax(logits))
@@ -763,8 +823,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("scan", help="DICOM file, folder or zip, or a .nii/.nii.gz volume")
     parser.add_argument("--output", required=True, help="Directory for result.json, NIfTI maps and the montage")
     parser.add_argument("--series", help="DICOM series key (see: python -m src.dicom_io <path>)")
-    parser.add_argument("--checkpoints", nargs="+", help="Clinical checkpoints; default: the three Round 2 seeds")
-    parser.add_argument("--cam-target", choices=CLINICAL_CLASSES, help="Class to explain; default: the predicted class")
+    parser.add_argument("--checkpoints", nargs="+",
+                        help="Ensemble checkpoints; default: models/dementia_volume/fold*.pt if present, else the three Round 2 seeds")
+    parser.add_argument("--cam-target", help="Class name to explain (e.g. AD); default: the predicted class")
     parser.add_argument("--cam-score", choices=("logit", "margin"), default="logit")
     parser.add_argument("--protocol-slices-only", action="store_true", help="Grad-CAM on the nine protocol slices only")
     parser.add_argument("--no-grad-cam", action="store_true")

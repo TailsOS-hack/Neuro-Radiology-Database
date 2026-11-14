@@ -428,6 +428,68 @@ class AnalyzerTests(unittest.TestCase):
         np.testing.assert_allclose(result.probabilities, self.result.probabilities, atol=1e-6)
         self.assertTrue(any("Grad-CAM could not be computed" in note for note in result.warnings))
 
+    def test_checkpoint_metadata_sets_policy_classes_and_notice(self):
+        def save(name, seed, **extra):
+            torch.manual_seed(seed)
+            path = self.directory / name
+            torch.save({"model": va.build_clinical_slice_model().state_dict(), "architecture": va.CLINICAL_ARCHITECTURE,
+                        "seed": seed, "epoch": 1, **extra}, path)
+            return path
+
+        notice = "Research output only. Cross-validated on synthetic people."
+        extra = dict(slice_policy="band", class_names=["NonDemented", "Demented"], threshold=0.4, notice=notice)
+        band = [save(f"band{seed}.pt", seed, **extra) for seed in (11, 12)]
+        analyzer = va.DementiaVolumeAnalyzer(band, device=torch.device("cpu"))
+        result = analyzer.analyze(self.volume)
+        # Band policy: the score comes from every slice of the band, the same slices the map explains.
+        tensor = va.images_to_tensor(result.prepared.render_slices(result.prepared.band_indices))
+        with torch.no_grad():
+            expected = np.stack([torch.softmax(model(tensor).mean(dim=0), dim=0).numpy() for model in analyzer.models])
+        np.testing.assert_allclose(result.member_probabilities, expected, atol=1e-6)
+        self.assertEqual(result.cam_indices, result.prepared.band_indices)
+        self.assertEqual(result.class_names, ("NonDemented", "Demented"))
+        self.assertEqual(result.predicted_label, "Demented" if result.probabilities[1] >= 0.4 else "NonDemented")
+        self.assertEqual(result.notice, notice)
+        self.assertEqual(result.warnings[-1], notice)
+        summary = result.summary()
+        self.assertEqual(summary["notice"], notice)
+        self.assertNotIn("specificity 0/10", json.dumps(summary))  # not the Round 2 record
+        self.assertEqual(summary["positive_class"], "Demented")
+        self.assertEqual(summary["threshold_on_positive_class_probability"], 0.4)
+        self.assertIn("trained-band", summary["aggregation"])
+        self.assertTrue(all("notice" not in member and member["slice_policy"] == "band" for member in summary["members"]))
+        self.assertEqual(analyzer.analyze(self.volume, grad_cam=False, cam_target=None).predicted_label, result.predicted_label)
+        with self.assertRaisesRegex(ValueError, "must be one of .*NonDemented"):
+            analyzer.analyze(self.volume, cam_target="AD")  # not one of this model's classes
+
+        # Round 2 files carry none of these keys and keep that round's frozen protocol and record.
+        self.assertEqual(self.analyzer.slice_policy, "protocol9")
+        self.assertEqual(self.analyzer.class_names, ("CN", "AD"))
+        self.assertEqual(self.analyzer.notice, va.RESEARCH_USE_NOTICE)
+        self.assertIn("nine protocol", self.result.summary()["aggregation"])
+
+        with self.assertRaisesRegex(ValueError, "Ensemble members disagree on"):
+            va.DementiaVolumeAnalyzer([band[0], self.checkpoints[0]], device=torch.device("cpu"))
+        only_policy_differs = save("policy.pt", 13, **{**extra, "slice_policy": "protocol9"})
+        with self.assertRaisesRegex(ValueError, "disagree on slice_policy"):
+            va.DementiaVolumeAnalyzer([band[0], only_policy_differs], device=torch.device("cpu"))
+        for bad in (dict(slice_policy="everything"), dict(class_names=["a", "b", "c"]), dict(threshold=1.5)):
+            with self.assertRaisesRegex(ValueError, "unsupported class names, slice policy or threshold"):
+                va.load_clinical_checkpoint(save("bad.pt", 3, **bad))
+
+    def test_placed_ensemble_takes_precedence_over_round2_defaults(self):
+        placed = self.directory / "placed"
+        with patch.object(va, "TRAINED_VOLUME_MODEL_DIR", placed):
+            self.assertEqual(va.default_checkpoints(), list(va.DEFAULT_CLINICAL_CHECKPOINTS))  # nothing placed
+            placed.mkdir()
+            (placed / "notes.txt").write_text("not a checkpoint")
+            self.assertEqual(va.default_checkpoints(), list(va.DEFAULT_CLINICAL_CHECKPOINTS))
+            for number, source in enumerate(reversed(self.checkpoints)):
+                shutil.copyfile(source, placed / f"fold{number}.pt")
+            self.assertEqual([path.name for path in va.default_checkpoints()], ["fold0.pt", "fold1.pt"])
+            analyzer = va.DementiaVolumeAnalyzer(device=torch.device("cpu"))
+            self.assertEqual([member["file"] for member in analyzer.members], ["fold0.pt", "fold1.pt"])
+
     def test_checkpoint_loading_is_strict(self):
         pointer = self.directory / "pointer.pt"
         pointer.write_text("version https://git-lfs.github.com/spec/v1\noid sha256:abc\nsize 12\n")
@@ -441,6 +503,23 @@ class AnalyzerTests(unittest.TestCase):
         torch.save({"model_state": {}, "arch": "mobilenet_v3_large", "pad": "x" * 2048}, stage)
         with self.assertRaisesRegex(ValueError, "not a clinical patient-bag checkpoint"):
             va.load_clinical_checkpoint(stage)
+        # Opening a checkpoint must not be able to run code: only tensors and plain metadata are unpickled.
+        whole = self.directory / "whole_model.pt"
+        torch.save(torch.nn.Linear(64, 64), whole)  # a whole pickled module, the legacy scripts' format
+        with self.assertRaisesRegex(ValueError, "not a loadable slice-bag checkpoint"):
+            va.load_clinical_checkpoint(whole)
+        marker = self.directory / "code_ran.txt"
+
+        class RunsCodeWhenUnpickled:
+            def __reduce__(self):
+                return (open, (str(marker), "w"))
+
+        hostile = self.directory / "hostile.pt"
+        torch.save({"model": va.build_clinical_slice_model().state_dict(), "architecture": va.CLINICAL_ARCHITECTURE,
+                    "notice": RunsCodeWhenUnpickled()}, hostile)
+        with self.assertRaisesRegex(ValueError, "not a loadable slice-bag checkpoint"):
+            va.load_clinical_checkpoint(hostile)
+        self.assertFalse(marker.exists())
 
     @unittest.skipIf(pydicom is None, "pydicom is not installed")
     def test_dicom_and_nifti_inputs_give_the_same_answer_and_no_phi_leaves(self):

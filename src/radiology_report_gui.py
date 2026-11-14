@@ -778,7 +778,9 @@ class App(ttk.Frame):
         )
         members = ", ".join(f"{float(row[1]):.2f}" for row in result.member_probabilities)
         self.pred_label.configure(text=f"Prediction: {result.predicted_label} (research AD/CN score)")
-        self.confidence_label.configure(text=f"P(AD): {float(result.probabilities[1]):.3f}   members: {members}")
+        self.confidence_label.configure(
+            text=f"P({result.class_names[1]}): {float(result.probabilities[1]):.3f}   members: {members}"
+        )
         self.model_used_label.configure(text="Model Used: AD/CN research ensemble (not validated)")
         self.last_model_name = "research AD/CN ensemble"
         patient_info = {

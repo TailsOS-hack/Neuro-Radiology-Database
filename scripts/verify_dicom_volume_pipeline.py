@@ -205,7 +205,8 @@ def check_replay(subjects: list) -> dict:
     from src import volume_analysis as va
     from src.mri_volume import load_nifti
 
-    analyzer = va.DementiaVolumeAnalyzer()
+    # Always the Round 2 files: this replays that round's published counts, whatever the current default is.
+    analyzer = va.DementiaVolumeAnalyzer(va.DEFAULT_CLINICAL_CHECKPOINTS)
     truth, members, ensemble = [], [], []
     for _, diagnosis, source in subjects:
         if diagnosis not in ("Control", "AD"):
