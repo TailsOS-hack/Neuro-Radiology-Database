@@ -2,3 +2,5 @@
 numpy==2.5.3
 scipy==1.18.1
 Pillow==12.3.0
+# Lets the offline DICOM ingestion contracts (tests/test_dicom_io.py) run in CI; pure Python, no network.
+pydicom==3.0.2

@@ -14,3 +14,11 @@ seaborn
 scikit-learn
 pandas
 tqdm
+# DICOM / NIfTI volume input (src/dicom_io.py, src/volume_analysis.py)
+pydicom
+nibabel
+scipy
+# Decoders for compressed DICOM (JPEG, JPEG-LS, JPEG 2000); uncompressed and RLE files work without them
+pylibjpeg
+pylibjpeg-libjpeg
+pylibjpeg-openjpeg
