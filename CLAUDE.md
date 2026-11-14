@@ -16,7 +16,11 @@ Tumor-Database/
 │   ├── train_gatekeeper.py         # Standalone Gatekeeper (ResNet50) training
 │   ├── train_alzheimers.py         # Standalone Dementia model (MobileNetV3) training
 │   ├── gatekeeper_model.py         # ResNet50 architecture definition (35 lines)
-│   └── data_loader.py              # Dataset loading and transforms (134 lines)
+│   ├── data_loader.py              # Dataset loading and transforms (134 lines)
+│   ├── mri_volume.py               # Canonical RAS+ volume container, NIfTI I/O, PHI kept separate
+│   ├── dicom_io.py                 # DICOM files/folders/zips -> MRIVolume (geometry from the header)
+│   ├── volume_analysis.py          # Whole-scan AD/CN research scoring + stacked 3D Grad-CAM
+│   └── scan_view.py                # Slice rendering / header-derived form values for the GUI
 ├── data/
 │   ├── brain_tumor/
 │   │   ├── Training/{glioma,meningioma,notumor,pituitary}/   # ~5,700 training images
@@ -97,6 +101,7 @@ Input MRI Image (224×224 RGB)
 | LLM Integration | Ollama (`llava:7b`, local, optional) |
 | Data Analysis | pandas, NumPy, scikit-learn, matplotlib, seaborn |
 | Dataset Download | kagglehub |
+| Scan Input | pydicom (+ pylibjpeg decoders), nibabel, SciPy |
 
 ---
 
@@ -134,6 +139,28 @@ Individual model training:
 python src/train_gatekeeper.py
 python src/train_alzheimers.py
 ```
+
+### DICOM and Volume Analysis
+
+```bash
+python -m src.dicom_io <file|folder|zip>                       # list series
+python -m src.dicom_io <path> --to-nifti scan.nii.gz           # canonical NIfTI + sidecar
+python -m src.volume_analysis <scan> --output results/         # research AD/CN score + 3D Grad-CAM
+python scripts/verify_dicom_volume_pipeline.py --openneuro-root data/external/openneuro_ds007561_v1
+```
+
+See `docs/DICOM_VOLUME_ANALYSIS.md` for what was verified and the limits.
+
+### Tests
+
+```bash
+python -m pytest -q tests/                                     # full suite
+xvfb-run -a python -m pytest -q tests/test_gui_scan_flow.py    # GUI scan flow needs tkinter + a display
+python -m unittest discover -s tests -p 'test_*.py'            # what CI runs (numpy/scipy/Pillow/pydicom only)
+```
+
+New tests must skip, not error, when torch / nibabel / pydicom / a display are missing: the CI
+verification job installs only `requirements-verification.txt`.
 
 ### Evaluation and Visualization
 
@@ -266,6 +293,20 @@ When making changes, these are the most critical files to understand:
 - GPU detection tries CUDA first, then `torch_directml` (Windows), then CPU — do not assume CUDA
 - WeasyPrint requires GTK3 on Windows (separate installer); Linux needs `libgtk-3-dev`
 - Ollama must be running locally before launching the GUI if using AI auto-detection
+
+### Working With Scans (DICOM / NIfTI)
+- Every reader returns an `MRIVolume`: voxels in closest-canonical RAS+ order plus the voxel-to-world affine. Keep that single convention; it is what lets a slice-wise Grad-CAM stack overlay the scan.
+- Take geometry from the header (`ImagePositionPatient`, `ImageOrientationPatient`, `PixelSpacing`), never from file names, `InstanceNumber` or `SliceThickness`.
+- Identifying header fields live only in `MRIVolume.identity`. Never log them or write them to exports, sidecars or result JSON.
+- `prepare_clinical_volume` must stay pixel-identical to `docs/kevin_paper_20261011/preprocess_clinical_t1.py`; the clinical checkpoints were trained on exactly that input. Re-run `scripts/verify_dicom_volume_pipeline.py` after touching it.
+- When stacking per-slice Grad-CAM into a volume, keep the raw maps and scale once for the whole volume. Per-slice min-max normalisation makes every slice look equally important.
+- The four-class stage model was trained on skull-stripped, atlas-aligned slices. On raw with-skull slices it labels everything as demented; do not present its label on a raw scan as valid.
+
+### Frozen Evidence (do not edit)
+- `research/dementia_round3/*.py` and `tests/test_round3*.py` are hash-pinned in `docs/kevin_paper_20261011/round3/implementation_verification.json`.
+- `docs/kevin_paper_20261011/**` and the review bundles are frozen experiment records.
+- Checkpoints under `models/` are hash-pinned across the evidence trail. Never overwrite one; a new model gets a new file name.
+- Put new functionality in new modules rather than changing the pinned ones.
 
 ### Do Not
 - Do not merge `notumor` and `NonDemented` into separate "Normal" classes — this breaks the Gatekeeper routing logic

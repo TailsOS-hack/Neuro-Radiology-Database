@@ -6,6 +6,8 @@
 
 > **2026-10-11 Kevin dementia experiment:** Six research runs completed 305 epochs. The validation-selected new checkpoint and the old baseline both score 100/100 on the reused reader benchmark; the new checkpoint falls to 96/100 under one fixed added-noise diagnostic. The separate clinical pilot performed poorly. Overall superiority and clinical readiness are not established, and the production checkpoint is unchanged. See the [complete paper materials](docs/kevin_paper_20261011/publication/README.md), [recreated figures](docs/kevin_paper_20261011/publication/FIGURES.md), and [all six research checkpoints](models/kevin_20261011/README.md).
 
+> **2026-11-14 DICOM input and volume analysis:** The app and CLI now read DICOM series (files, folders, zips; classic and Enhanced multi-frame) and NIfTI volumes, and can score a whole T1 scan with the research AD/CN ensemble and stack per-slice Grad-CAM into a 3D map that overlays the scan. Geometry agrees with `dcm2niix` on 98/98 test series, and the model input is pixel-identical to the frozen research preprocessing on 20/20 real scans. **No model was retrained.** The same check showed that the four-class stage model labels raw with-skull slices as demented regardless of diagnosis (180/180 slices, including all 14 cognitively normal participants), so its label is flagged as unreliable on raw scans. See [DICOM input and volume analysis](docs/DICOM_VOLUME_ANALYSIS.md).
+
 This project is an advanced medical imaging analysis tool. It uses deep learning to analyze MRI scans for both **Brain Tumors** and **Alzheimer's/Dementia** signs, then generates grounded draft reports from structured classifier evidence. The reporting path is deterministic by default so it does not ask an LLM to invent lesion measurements, locations, mass effect, atrophy measurements, or other unsupported clinical findings.
 
 ## Features
@@ -16,6 +18,8 @@ This project is an advanced medical imaging analysis tool. It uses deep learning
         -   **Brain Tumor Classifier:** `EfficientNet-B3` (PyTorch) for Glioma, Meningioma, Pituitary, or No Tumor.
         -   **Alzheimer's Classifier:** `MobileNetV3-Large` (PyTorch) for Mild, Moderate, Very Mild, or NonDemented.
     -   **Checkpoint Preprocessing:** Classification and Grad-CAM use the specialist checkpoint's image size and training normalization.
+-   **DICOM and NIfTI Input:** Opens a DICOM file, a study folder or a zipped study (classic series and Enhanced multi-frame MR) or a NIfTI volume. Slices are ordered and spaced from the header geometry, the most likely 3D T1 series is chosen automatically, and patient name, ID, date of birth and technique are taken from the header. Identifying fields are never written to exports.
+-   **Whole-Scan Research Analysis with 3D Grad-CAM:** Scores a T1 volume with the research AD/CN ensemble and computes Grad-CAM for every slice of the analysed slab, scaled once for the whole volume and saved as NIfTI on both the model grid and the scan's own grid. Research output only; see the limits in [the DICOM document](docs/DICOM_VOLUME_ANALYSIS.md).
 -   **Grounded Report Maker:** Generates draft reports from the classifier label, confidence, user-entered exam details, and model validation context. Unsupported findings are explicitly marked as not assessed instead of being hallucinated.
 -   **Optional AI Metadata Assist:** The GUI can use a multimodal AI model only for basic acquisition metadata. The prompt refuses diagnosis/pathology inference and falls back to manual entry when uncertain.
 -   **Standardized Reporting:** Generates reports with a strict evidence schema for consistency across Findings, Impression, Technique, classifier evidence, and safety limitations.
@@ -28,6 +32,9 @@ This project is an advanced medical imaging analysis tool. It uses deep learning
 -   `src/radiology_report_gui.py`: The main application.
 -   `src/train_complete_suite.py`: The master script to train all 3 models sequentially.
 -   `src/gatekeeper_model.py`: Definition of the routing model.
+-   `src/dicom_io.py`, `src/mri_volume.py`: DICOM/NIfTI reading into one canonical volume representation.
+-   `src/volume_analysis.py`: Whole-scan AD/CN research scoring and the stacked 3D Grad-CAM map.
+-   `scripts/verify_dicom_volume_pipeline.py`: Regenerates the DICOM/volume verification record.
 -   `data_visualization/`:
     -   `visualize_performance.py`: General model benchmark tools.
     -   `compare_rad_vs_ai.py`: Script to compare AI accuracy vs human radiologist.
@@ -161,13 +168,24 @@ Run the main GUI application (using the module flag to ensure imports work corre
 python -m src.radiology_report_gui
 ```
 
-1.  **Patient Info:** Enter Patient Name, ID, and Date of Birth.
-2.  **Scan:** Click **"Scan"** to load an MRI image.
+1.  **Patient Info:** Enter Patient Name, ID, and Date of Birth (filled from the header when a DICOM scan is loaded).
+2.  **Scan:** Click **"Scan"** to load an MRI image, a DICOM file, a NIfTI volume or a zipped DICOM study, or **"DICOM Folder..."** to load a study folder. For a scan, use the slider to page through axial slices and **"Series..."** to pick another series.
 3.  **Exam Details:** Switch to the "Exam Details" tab.
     -   Click **"AI Auto-Detect"** to let the optional AI assistant fill basic acquisition metadata only.
     -   Or click **"Manual Entry"** to fill the details yourself.
 4.  **Analyze:** Once details are confirmed, click **"Analyze & Generate Report"**.
 5.  **Export:** Review the generated report and click **"Save as PDF"**.
+6.  **Whole scan (optional, research):** With a 3D T1 scan loaded, click **"Analyze Volume (AD/CN research model)"**, page through the stacked heatmap with the slider, and use **"Save 3D Map..."** to write the NIfTI volumes.
+
+### DICOM and Volume Analysis CLI
+
+```bash
+python -m src.dicom_io /path/to/study                         # list series, most likely 3D T1 first
+python -m src.dicom_io /path/to/study --to-nifti scan.nii.gz  # canonical NIfTI + sidecar without identifying fields
+python -m src.volume_analysis /path/to/study --output results/  # research AD/CN score + 3D Grad-CAM (NIfTI, montage)
+```
+
+The volume analysis needs the research checkpoints (`git lfs pull --include="models/kevin_round2_20261011/*.pt"`). Its output is a research score with documented external-validation failures, not a diagnosis; read [docs/DICOM_VOLUME_ANALYSIS.md](docs/DICOM_VOLUME_ANALYSIS.md) first.
 
 ### Grounded Report CLI
 

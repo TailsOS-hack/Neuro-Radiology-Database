@@ -1,0 +1,80 @@
+{
+  "generated_utc": "2026-11-14T15:45:48+00:00",
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pydicom": "3.0.2",
+    "nibabel": "5.5.0",
+    "scipy": "1.18.1",
+    "torch": "2.15.0+cu132",
+    "torchvision": "0.29.2+cu132",
+    "dcm2niix": "v1.0.20261029"
+  },
+  "scope": "Software verification on public data; aggregate counts only; not clinical validation.",
+  "geometry": {
+    "cases": 98,
+    "source_mismatches": 0,
+    "max_affine_error_vs_source_mm": 4.887000670805719e-08,
+    "dcm2niix_available": true,
+    "dcm2niix_compared": 98,
+    "dcm2niix_mismatches": 0,
+    "max_affine_error_vs_dcm2niix_mm": 0.0003433226038964676,
+    "passed": true
+  },
+  "cohort": {
+    "source": "OpenNeuro ds007561 v1.0.0 (CC0), previously evaluated: historical cohort",
+    "scans": 20,
+    "complete": true
+  },
+  "frozen_pipeline_parity": {
+    "scans": 20,
+    "nifti_pixel_identical": 20,
+    "dicom_volume_identical": 20,
+    "dicom_pixel_identical": 20,
+    "frozen_preprocessor_sha256": "bc3e1c7012cc54e9453af38d554073b3666cbc115fbb2a2072ed10a822f49475",
+    "recipe": "exploratory_t1_axial_v1",
+    "passed": true
+  },
+  "published_result_replay": {
+    "binary_cases": 15,
+    "seed_correct": {
+      "20261021": 14,
+      "20261022": 10,
+      "20261023": 15
+    },
+    "ensemble_correct": 14,
+    "ensemble_predicted_ad": 0,
+    "checkpoint_sha256": {
+      "clinical_seed20261021.pt": "cb984775c99bc7108863c77329f984df4de863faa6755b4def28271a32da247a",
+      "clinical_seed20261022.pt": "2c0dea86db73075729e51deb3cf189d244042e862253f6362e733a918ca403ce",
+      "clinical_seed20261023.pt": "def69f2c01d57f9cc543141ace02229ef24206a1a4bb578f42554e4ce86165fa"
+    },
+    "published": {
+      "binary_cases": 15,
+      "seed_correct": {
+        "20261021": 14,
+        "20261022": 10,
+        "20261023": 15
+      },
+      "ensemble_correct": 14,
+      "ensemble_predicted_ad": 0
+    },
+    "passed": true
+  },
+  "stage_model_on_raw_slices": {
+    "input": "nine axial with-skull slices per scan (the clinical recipe's rendering), no skull stripping",
+    "scans": 20,
+    "slices": 180,
+    "slice_votes": {
+      "MildDemented": 159,
+      "ModerateDemented": 0,
+      "NonDemented": 0,
+      "VeryMildDemented": 21
+    },
+    "cognitively_normal_participants": 14,
+    "cognitively_normal_participants_with_any_NonDemented_slice": 0,
+    "checkpoint_sha256": "a8cc03aea74f5310c1fc7936c72f94a44e55af11e2ada2a8ba5f8edd6d924db5",
+    "interpretation": "Raw scanner slices are outside the stage model's training domain (skull-stripped, atlas-aligned slices)."
+  },
+  "all_executed_checks_passed": true
+}
