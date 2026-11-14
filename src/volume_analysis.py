@@ -81,7 +81,7 @@ RESEARCH_USE_NOTICE = (
     "Research output only, not a diagnosis. The AD/CN ensemble was developed on 43 patients from one "
     "source and, on its only fresh external cohort, labelled all 19 participants AD (specificity 0/10); "
     "on a second cohort it labelled all 15 participants CN, missing the one AD case. "
-    "The attention map shows what drove this model's score; it is not a localisation of pathology."
+    "The attention map shows what this model responds to in each slice; it is not a localisation of pathology."
 )
 #: How a model turns slices into one score: the nine frozen protocol slices, or every slice of the trained band.
 SLICE_POLICIES = ("protocol9", "band")
@@ -477,7 +477,7 @@ class VolumeAnalysis:
     prepared: PreparedVolume
     cam_indices: list  # axial grid indices that received a Grad-CAM map
     slice_probabilities: np.ndarray  # (len(cam_indices), classes), member-mean per-slice softmax
-    cam_grid: Optional[np.ndarray]  # (X, Y, Z) in [0, 1], scaled by the volume-wide maximum
+    cam_grid: Optional[np.ndarray]  # (X, Y, Z) in [0, 1]; 1 is the strongest voxel of the whole volume
     cam_target_index: Optional[int]
     cam_score: str
     slice_policy: str
@@ -602,12 +602,16 @@ class VolumeAnalysis:
                 "cranial_extent_z": list(self.prepared.cranial_extent),
                 "intensity_window": list(self.prepared.window),
                 "protocol_slice_indices": list(self.prepared.protocol_indices),
+                # The slices the score is computed from: the nine protocol slices, or the whole trained band.
+                "scored_slice_indices": list(
+                    self.prepared.protocol_indices if self.slice_policy == "protocol9" else self.prepared.band_indices
+                ),
             },
             "grad_cam": None
             if self.cam_grid is None
             else {
-                "method": "Grad-CAM at the last feature block, per slice, raw maps scaled once by the volume-wide maximum; "
-                "members scaled individually then averaged",
+                "method": "Grad-CAM at the last feature block, per slice; members scaled individually then averaged; "
+                "the stacked map is scaled once, so that its strongest voxel is 1",
                 "target_class": self.class_names[self.cam_target_index],
                 "score": self.cam_score,
                 "slice_indices": list(self.cam_indices),
@@ -654,13 +658,18 @@ class VolumeAnalysis:
             written["projections.png"] = str(output_dir / "projections.png")
         (output_dir / "result.json").write_text(json.dumps(self.summary(), indent=2, allow_nan=False) + "\n")
         written["result.json"] = str(output_dir / "result.json")
+        viewer = output_dir / volume_viewer.VIEWER_FILENAME
         try:
-            viewer = output_dir / volume_viewer.VIEWER_FILENAME
-            viewer.write_text(volume_viewer.build_viewer(self), encoding="utf-8")
+            volume_viewer.write_viewer(self, viewer)
             written[volume_viewer.VIEWER_FILENAME] = str(viewer)
         except Exception:
             # The viewer is a convenience on top of the files above; failing to write it must not lose them.
             logger.exception("Could not write the interactive viewer")
+            # A viewer left over from an earlier analysis must not sit next to this result.json.
+            try:
+                viewer.unlink()
+            except OSError:
+                pass
         return written
 
 
@@ -801,9 +810,12 @@ class DementiaVolumeAnalyzer:
             # Members have different feature scales; give each an equal voice.
             member_maps.append(maps / peak if peak > 0 else maps)
             member_slice_probabilities.append(_softmax(logits))
-        mean_maps = np.mean(member_maps, axis=0)
-        peak = float(mean_maps.max())
-        cam_grid = prepared.maps_to_grid(mean_maps / peak if peak > 0 else mean_maps, cam_indices)
+        cam_grid = prepared.maps_to_grid(np.mean(member_maps, axis=0), cam_indices)
+        # One scale for the whole volume, fixed after the coarse maps are enlarged (enlarging lowers
+        # their peaks a little), so that the strongest voxel of the stack is exactly 1.
+        peak = float(cam_grid.max())
+        if peak > 0:
+            cam_grid = cam_grid / np.float32(peak)
         return cam_grid, cam_indices, np.mean(member_slice_probabilities, axis=0)
 
 

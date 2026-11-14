@@ -20,14 +20,15 @@ body { margin: 0; background: var(--vv-bg); }
 <!--vv:fragment-start-->
 <style>
 /* Layout: one column of working surfaces. Four square viewports (three slice planes and a 3D projection)
-   in a 2 x 2 grid, controls underneath, then the per-slice charts and the reading notes. */
+   in one row, or 2 x 2 on narrow screens, controls underneath, then the per-slice charts and the reading notes. */
 :root {
   --vv-bg: #f4f6f9;
   --vv-surface: #ffffff;
   --vv-ink: #101722;
   --vv-ink-2: #465163;
-  --vv-muted: #6f7a8c;
+  --vv-muted: #667184;
   --vv-line: #dce1e9;
+  --vv-control-line: #828c9d;
   --vv-accent: #256abf;
   --vv-accent-ink: #ffffff;
   --vv-series: #2a78d6;
@@ -47,6 +48,7 @@ body { margin: 0; background: var(--vv-bg); }
     --vv-ink-2: #b4bdcb;
     --vv-muted: #8a95a7;
     --vv-line: #262d39;
+    --vv-control-line: #646e7e;
     --vv-accent: #5598e7;
     --vv-accent-ink: #0b1220;
     --vv-series: #3987e5;
@@ -62,6 +64,7 @@ body { margin: 0; background: var(--vv-bg); }
   --vv-ink-2: #b4bdcb;
   --vv-muted: #8a95a7;
   --vv-line: #262d39;
+  --vv-control-line: #646e7e;
   --vv-accent: #5598e7;
   --vv-accent-ink: #0b1220;
   --vv-series: #3987e5;
@@ -100,7 +103,7 @@ body { margin: 0; background: var(--vv-bg); }
 .vv-note ul { padding-left: 1.2em; color: var(--vv-ink-2); }
 .vv-stage { display: flex; flex-direction: column; gap: 14px; }
 .vv-views { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-@media (min-width: 1080px) { .vv-views { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 700px) { .vv-views { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .vv-panel { margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .vv-viewport {
   position: relative;
@@ -110,7 +113,7 @@ body { margin: 0; background: var(--vv-bg); }
   aspect-ratio: 1 / 1;
   max-width: 100%;
 }
-.vv-viewport canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: crosshair; }
+.vv-viewport canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: crosshair; }
 .vv-viewport canvas.vv-3d { cursor: grab; }
 .vv-viewport canvas.vv-3d.vv-dragging { cursor: grabbing; }
 .vv-viewport canvas:focus-visible { outline: 2px solid var(--vv-accent); outline-offset: -2px; }
@@ -128,7 +131,8 @@ body { margin: 0; background: var(--vv-bg); }
 }
 .vv-caption { display: flex; justify-content: space-between; gap: 8px; font-size: 0.8rem; color: var(--vv-ink-2); flex-wrap: wrap; }
 .vv-caption b { font-weight: 600; color: var(--vv-ink); }
-.vv-caption span:last-child { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); }
+.vv-caption span:last-child { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); min-width: 9ch; text-align: right; white-space: nowrap; }
+.vv-caption span#vv-3d-info { min-width: 19ch; }
 .vv-status { margin: 0; font-size: 0.85rem; color: var(--vv-ink-2); }
 .vv-readout {
   font: 0.8rem/1.5 var(--vv-mono);
@@ -139,8 +143,13 @@ body { margin: 0; background: var(--vv-bg); }
   border-radius: 6px;
   padding: 8px 12px;
   margin: 0;
-  overflow-wrap: anywhere;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5ch;
 }
+.vv-readout span { white-space: nowrap; }
+.vv-readout .vv-pos { min-width: 18ch; }
+.vv-readout .vv-val { min-width: 27ch; }
 .vv-controls { display: flex; flex-direction: column; gap: 14px; }
 .vv-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 24px; align-items: end; }
 .vv-bar { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: flex-end; justify-content: space-between; }
@@ -158,7 +167,7 @@ body { margin: 0; background: var(--vv-bg); }
   font-size: 0.84rem;
   color: var(--vv-ink);
   background: var(--vv-surface);
-  border: 1px solid var(--vv-line);
+  border: 1px solid var(--vv-control-line);
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
@@ -172,18 +181,19 @@ body { margin: 0; background: var(--vv-bg); }
 .vv-legend-text { font-size: 0.8rem; color: var(--vv-ink-2); }
 .vv-charts { display: flex; flex-direction: column; gap: 14px; }
 .vv-chart { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.vv-chart h3, .vv-read h3 { font-size: 0.95rem; font-weight: 650; margin: 0; }
+.vv-sub { font-size: 0.95rem; font-weight: 650; margin: 0; }
 .vv-chart p { margin: 0; font-size: 0.8rem; color: var(--vv-ink-2); max-width: 80ch; }
-.vv-chart p.vv-chart-now { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); font-variant-numeric: tabular-nums; }
+.vv-chart p.vv-chart-now { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); font-variant-numeric: tabular-nums; min-height: 1.5em; }
 .vv-chart-box { position: relative; }
 .vv-chart svg { display: block; width: 100%; overflow: visible; }
 .vv-chart svg text { font: 10px var(--vv-mono); fill: var(--vv-muted); }
 .vv-chart svg .vv-axis { stroke: var(--vv-line); stroke-width: 1; }
-.vv-chart svg .vv-bar-mark { fill: var(--vv-series); opacity: 0.55; }
-.vv-chart svg .vv-bar-mark.vv-current { opacity: 1; }
-.vv-chart svg .vv-dot { fill: var(--vv-series); opacity: 0.55; }
-.vv-chart svg .vv-dot.vv-scored { opacity: 1; stroke: var(--vv-surface); stroke-width: 1.5; }
-.vv-chart svg .vv-dot.vv-current { opacity: 1; stroke: var(--vv-ink); stroke-width: 1.5; }
+/* Marks are solid so each one stands out from the page; the slice at the crosshair is drawn in ink. */
+.vv-chart svg .vv-bar-mark { fill: var(--vv-series); }
+.vv-chart svg .vv-bar-mark.vv-current { fill: var(--vv-ink); }
+.vv-chart svg .vv-dot { fill: var(--vv-series); }
+.vv-chart svg .vv-dot.vv-scored { stroke: var(--vv-bg); stroke-width: 1.5; }
+.vv-chart svg .vv-dot.vv-current { fill: var(--vv-ink); stroke: var(--vv-bg); stroke-width: 1.5; }
 .vv-chart svg .vv-cursor { stroke: var(--vv-ink); stroke-width: 1; opacity: 0.5; }
 .vv-chart svg .vv-hit { fill: transparent; cursor: pointer; }
 .vv-chart-tip {
@@ -196,7 +206,8 @@ body { margin: 0; background: var(--vv-bg); }
   border-radius: 4px;
   padding: 3px 7px;
   font: 11px/1.4 var(--vv-mono);
-  white-space: nowrap;
+  width: max-content;
+  max-width: 100%;
   transform: translate(-50%, -4px);
 }
 .vv details { font-size: 0.82rem; color: var(--vv-ink-2); }
@@ -209,13 +220,15 @@ body { margin: 0; background: var(--vv-bg); }
 .vv-read { display: flex; flex-direction: column; gap: 6px; max-width: 80ch; }
 .vv-read ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 4px; color: var(--vv-ink-2); }
 .vv-read li b { color: var(--vv-ink); font-weight: 600; }
+@media (max-width: 640px) { .vv-chart p.vv-chart-now { min-height: 3em; } }
 @media (max-width: 520px) {
   .vv-title { font-size: 1.35rem; }
   .vv-views { gap: 8px; }
   .vv-caption { flex-direction: column; gap: 0; }
+  .vv-caption span:last-child, .vv-caption span#vv-3d-info { min-width: 0; text-align: left; }
 }
 </style>
-<section class="vv" id="vv" aria-label="Interactive 3D attention map">
+<section class="vv" id="vv" aria-label="Interactive scan viewer">
   <header class="vv-head">
     <__VV_HEADING__ class="vv-title">__VV_TITLE__</__VV_HEADING__>
     <p class="vv-facts" id="vv-facts"></p>
@@ -229,20 +242,20 @@ body { margin: 0; background: var(--vv-bg); }
     <p class="vv-status" id="vv-status" role="status">Loading the scan&hellip;</p>
     <div class="vv-views">
       <figure class="vv-panel">
-        <div class="vv-viewport"><canvas id="vv-axial" tabindex="0" role="img" aria-label="Axial slice with attention overlay. Arrow keys move the crosshair; Page Up and Page Down change the slice."></canvas></div>
+        <div class="vv-viewport"><canvas id="vv-axial" tabindex="0" role="application" aria-roledescription="slice view" aria-label="Axial slice. Arrow keys move the crosshair; Page Up and Page Down change the slice. The sliders below do the same."></canvas></div>
         <figcaption class="vv-caption"><span><b>Axial</b> from above</span><span id="vv-axial-info"></span></figcaption>
       </figure>
       <figure class="vv-panel">
-        <div class="vv-viewport"><canvas id="vv-coronal" tabindex="0" role="img" aria-label="Coronal slice with attention overlay. Arrow keys move the crosshair; Page Up and Page Down change the slice."></canvas></div>
+        <div class="vv-viewport"><canvas id="vv-coronal" tabindex="0" role="application" aria-roledescription="slice view" aria-label="Coronal slice. Arrow keys move the crosshair; Page Up and Page Down change the slice. The sliders below do the same."></canvas></div>
         <figcaption class="vv-caption"><span><b>Coronal</b> from behind</span><span id="vv-coronal-info"></span></figcaption>
       </figure>
       <figure class="vv-panel">
-        <div class="vv-viewport"><canvas id="vv-sagittal" tabindex="0" role="img" aria-label="Sagittal slice with attention overlay. Arrow keys move the crosshair; Page Up and Page Down change the slice."></canvas></div>
-        <figcaption class="vv-caption"><span><b>Sagittal</b> from the left</span><span id="vv-sagittal-info"></span></figcaption>
+        <div class="vv-viewport"><canvas id="vv-sagittal" tabindex="0" role="application" aria-roledescription="slice view" aria-label="Sagittal slice. Arrow keys move the crosshair; Page Up and Page Down change the slice. The sliders below do the same."></canvas></div>
+        <figcaption class="vv-caption"><span><b>Sagittal</b> from the right</span><span id="vv-sagittal-info"></span></figcaption>
       </figure>
       <figure class="vv-panel">
-        <div class="vv-viewport"><canvas id="vv-3d" class="vv-3d" tabindex="0" role="img" aria-label="Rotating 3D projection of the head with the attention map. Drag or use the arrow keys to rotate."></canvas></div>
-        <figcaption class="vv-caption"><span><b>3D</b> drag to rotate</span><span id="vv-3d-info"></span></figcaption>
+        <div class="vv-viewport"><canvas id="vv-3d" class="vv-3d" tabindex="0" role="application" aria-roledescription="3D view" aria-label="3D projection of the head. Drag, or use the arrow keys, to turn it."></canvas></div>
+        <figcaption class="vv-caption"><span><b>3D</b> drag to turn</span><span id="vv-3d-info"></span></figcaption>
       </figure>
     </div>
     <p class="vv-readout" id="vv-readout" aria-live="polite">&nbsp;</p>
@@ -273,13 +286,13 @@ body { margin: 0; background: var(--vv-bg); }
   </div>
   <div class="vv-charts vv-attention" id="vv-charts">
     <div class="vv-chart">
-      <h3>Attention in each slice of the slab</h3>
+      <__VV_SUBHEADING__ class="vv-sub">Attention in each analysed slice</__VV_SUBHEADING__>
       <p>Share of the whole map that falls in each analysed axial slice, inferior to superior. Select a bar to go to that slice.</p>
       <div class="vv-chart-box"><svg id="vv-share" role="img" aria-label="Bar chart of the share of attention in each analysed axial slice"></svg><div class="vv-chart-tip" id="vv-share-tip" hidden></div></div>
       <p class="vv-chart-now" id="vv-share-now">&nbsp;</p>
     </div>
     <div class="vv-chart">
-      <h3 id="vv-prob-title">Score from each slice alone</h3>
+      <__VV_SUBHEADING__ class="vv-sub" id="vv-prob-title">Score from each slice alone</__VV_SUBHEADING__>
       <p id="vv-prob-text"></p>
       <div class="vv-chart-box"><svg id="vv-prob" role="img" aria-label="Dot chart of the probability each analysed slice gives on its own"></svg><div class="vv-chart-tip" id="vv-prob-tip" hidden></div></div>
       <p class="vv-chart-now" id="vv-prob-now">&nbsp;</p>
@@ -290,7 +303,7 @@ body { margin: 0; background: var(--vv-bg); }
     </details>
   </div>
   <div class="vv-read">
-    <h3>How to read this</h3>
+    <__VV_SUBHEADING__ class="vv-sub">How to read this</__VV_SUBHEADING__>
     <ul id="vv-read"></ul>
   </div>
 </section>
@@ -305,7 +318,7 @@ body { margin: 0; background: var(--vv-bg); }
   const STRIDE = [1, nx, nx * ny];
   const SP = data.spacing;
   const OFF = data.offset;
-  const hasMap = Boolean(data.attention_png);
+  const hasMap = Boolean(data.attention_z);
   const positive = data.class_names[1];
   const fmt = (value, digits) => Number(value).toFixed(digits);
 
@@ -321,7 +334,7 @@ body { margin: 0; background: var(--vv-bg); }
   fact(", label ", data.predicted_label);
   facts.append(" at threshold " + data.threshold + " (" + data.member_probabilities.length + " members: " + members + "). ");
   facts.append(data.scored_text + " ");
-  if (hasMap) facts.append("The map explains the " + data.target_class + " score.");
+  if (hasMap) facts.append(data.map_short);
   $("vv-notice").textContent = data.notice;
   if (data.warnings.length) {
     const list = $("vv-warnings");
@@ -341,15 +354,23 @@ body { margin: 0; background: var(--vv-bg); }
     read.append(item);
   };
   if (hasMap) {
-    point("One scale for the whole scan.", "Each axial slice of the slab was explained separately with Grad-CAM and the slice maps were stacked. They share one scale, so a slice the model barely used stays dark.");
-    point("Only the slab carries evidence.", "The model reads the axial slices between the two marked levels (" + data.slab_text + "). Outside them the map is empty by construction, not because the model found nothing.");
+    point("One scale for the whole scan.", "Each analysed axial slice was explained separately with Grad-CAM and the slice maps were stacked. They share one scale, on which 1 is the strongest voxel in the scan, so a slice the model barely responded to stays dark.");
+    point("Only the analysed slices carry a map.", data.slab_text);
     point("Coarse by design.", "Each slice map is 7 by 7 cells before it is enlarged, so edges are soft and the map can spill outside the brain onto skull, scalp or background.");
-    point("What it is.", "The map shows what moved this model's " + data.target_class + " score. It does not locate disease, and a tidy-looking map is not evidence of a good model.");
+    point("What it is.", data.map_text);
   } else {
-    point("No attention map.", "This analysis was run without Grad-CAM, so only the scan on the model's 1.5 mm grid is shown.");
+    point("No attention map.", data.no_map_text);
   }
-  point("Orientation.", "The patient's left is on the left of the axial and coronal views; the sagittal view is seen from the patient's left, face to the right. Positions are millimetres in scanner coordinates (R, A and S positive).");
-  if (!hasMap) for (const node of document.querySelectorAll(".vv-attention")) node.hidden = true;
+  point("Orientation.", "The patient's left is on the left of the axial and coronal views. The sagittal view is seen from the patient's right side, so the face points to the right of the image. Positions are millimetres in scanner coordinates (R, A and S positive).");
+  if (hasMap) {
+    // The markup describes the views without a map; say so when one is drawn over them.
+    for (const id of ["vv-axial", "vv-coronal", "vv-sagittal", "vv-3d"]) {
+      const view = $(id);
+      view.setAttribute("aria-label", view.getAttribute("aria-label").replace(/^([^.]*)\./, "$1 with the attention map drawn over it."));
+    }
+  } else {
+    for (const node of document.querySelectorAll(".vv-attention")) node.hidden = true;
+  }
 
   // ---------------------------------------------------------------- colour
   // Single-hue sequential ramp (dark to light blue); opacity carries the value as well.
@@ -387,24 +408,21 @@ body { margin: 0; background: var(--vv-bg); }
 
   // ---------------------------------------------------------------- volumes
   let anatomy = null, attention = null;
-  async function decodeSprite(uri) {
-    const image = new Image();
-    image.src = uri;
-    await image.decode();
-    const canvas = document.createElement("canvas");
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
-    const context = canvas.getContext("2d", { willReadFrequently: true });
-    context.drawImage(image, 0, 0);
-    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
-    const columns = data.tiles[0];
-    const volume = new Uint8Array(nx * ny * nz);
-    for (let z = 0; z < nz; z++) {
-      const left = (z % columns) * nx, top = Math.floor(z / columns) * ny;
-      for (let y = 0; y < ny; y++) {
-        let p = ((top + y) * canvas.width + left) * 4;
-        let q = nx * (y + ny * z);
-        for (let x = 0; x < nx; x++, p += 4, q++) volume[q] = pixels[p];
+  // The volumes travel as base64 text of a zlib stream and are unpacked as plain bytes. No image decoder
+  // or canvas takes part, so no browser setting can alter a value. Voxel (x, y, z) is byte x + nx * (y + ny * z).
+  async function unpack(text) {
+    const binary = atob(text);
+    const packed = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) packed[i] = binary.charCodeAt(i);
+    const stream = new Blob([packed]).stream().pipeThrough(new DecompressionStream("deflate"));
+    const volume = new Uint8Array(await new Response(stream).arrayBuffer());
+    if (volume.length !== nx * ny * nz) throw new RangeError("unexpected volume size");
+    // Each row holds its first voxel and then differences along x; a running sum restores the values.
+    for (let row = 0, q = 0; row < ny * nz; row++) {
+      let value = 0;
+      for (let x = 0; x < nx; x++, q++) {
+        value = (value + volume[q]) & 255;
+        volume[q] = value;
       }
     }
     return volume;
@@ -526,20 +544,27 @@ body { margin: 0; background: var(--vv-bg); }
     g.fillText(plane.edges[2], W / 2, 8 * ratio);
     g.fillText(plane.edges[3], W / 2, H - 8 * ratio);
   }
-  function voxelAt(plane, event) {
+  // The voxel under the pointer. Outside the image it is null, or the nearest voxel when `nearest` is set
+  // (a drag that leaves the image keeps following the pointer along the edge).
+  function voxelAt(plane, event, nearest) {
     const bounds = plane.canvas.getBoundingClientRect();
     const px = ((event.clientX - bounds.left) / bounds.width) * plane.canvas.width;
     const py = ((event.clientY - bounds.top) / bounds.height) * plane.canvas.height;
     const { x, y, w, h } = plane.rect;
-    const i = Math.floor(((px - x) / w) * plane.nu);
-    const j = Math.floor(((py - y) / h) * plane.nv);
-    if (i < 0 || j < 0 || i >= plane.nu || j >= plane.nv) return null;
+    let i = Math.floor(((px - x) / w) * plane.nu);
+    let j = Math.floor(((py - y) / h) * plane.nv);
+    if (nearest) {
+      i = Math.max(0, Math.min(plane.nu - 1, i));
+      j = Math.max(0, Math.min(plane.nv - 1, j));
+    } else if (i < 0 || j < 0 || i >= plane.nu || j >= plane.nv) {
+      return null;
+    }
     return { u: i, v: plane.nv - 1 - j };
   }
 
   // ---------------------------------------------------------------- 3D projection
-  // Orthographic ray casting through a reduced copy: summed anatomy (an X-ray-like head) and the
-  // strongest attention along each ray.
+  // Orthographic ray casting through a reduced copy: summed anatomy (an X-ray-like head) with the
+  // attention composited front to back over it.
   const view3d = { canvas: $("vv-3d"), factor: 2, quality: 1, slow: 0 };
   view3d.context = view3d.canvas.getContext("2d");
   view3d.buffer = document.createElement("canvas");
@@ -705,15 +730,26 @@ body { margin: 0; background: var(--vv-bg); }
       g.stroke();
       g.fillText(letter, origin[0] + (a / length) * (reach * length + 8) * ratio, origin[1] - (b / length) * (reach * length + 8) * ratio);
     }
-    // Keep rotation smooth on slow devices by halving the projection resolution.
+    // Keep motion smooth on slow devices by halving the projection resolution after three slow frames in a
+    // row; once the view has been still for a moment it is drawn again at full resolution.
     const elapsed = performance.now() - started;
-    if (elapsed > 45 && view3d.quality === 1) {
-      if (++view3d.slow >= 3) view3d.quality = 2;
-    } else if (elapsed <= 45) {
-      view3d.slow = 0;
+    if (view3d.quality === 1 && !view3d.settling) {
+      view3d.slow = elapsed > 45 ? view3d.slow + 1 : 0;
+      if (view3d.slow >= 3) view3d.quality = 2;
     }
-    const degrees = (((state.yaw * 180) / Math.PI) % 360 + 360) % 360;
-    $("vv-3d-info").textContent = "turn " + Math.round(degrees) + "\u00b0, tilt " + Math.round((state.pitch * 180) / Math.PI) + "\u00b0";
+    view3d.settling = false;
+    clearTimeout(view3d.timer);
+    if (view3d.quality === 2) {
+      view3d.timer = setTimeout(() => {
+        view3d.quality = 1;
+        view3d.slow = 0;
+        view3d.settling = true;
+        if (anatomy) draw3d();
+      }, 350);
+    }
+    const degrees = Math.round((((state.yaw * 180) / Math.PI) % 360 + 360) % 360) % 360;
+    const tilt = Math.round((state.pitch * 180) / Math.PI);
+    $("vv-3d-info").textContent = "turn " + degrees + "\u00b0 tilt " + (tilt < 0 ? "\u2212" : "") + Math.abs(tilt) + "\u00b0";
   }
 
   // ---------------------------------------------------------------- readout and controls
@@ -725,26 +761,39 @@ body { margin: 0; background: var(--vv-bg); }
     return data.affine.slice(0, 3).map((row) => row[0] * i + row[1] * j + row[2] * k + row[3]);
   }
   const SIDES = [["left", "right"], ["posterior", "anterior"], ["inferior", "superior"]];
-  function describe(index) {
-    const mm = world(index);
-    const parts = mm.map((value, axis) => fmt(Math.abs(value), 1) + " mm " + SIDES[axis][value < 0 ? 0 : 1]);
-    let text = parts.join(", ");
-    if (attention) {
-      const gridZ = index[2] + OFF[2];
-      const inside = gridZ >= data.slab_grid[0] && gridZ <= data.slab_grid[1];
-      const value = attention[index[0] + nx * (index[1] + ny * index[2])] / 255;
-      text += inside ? "  |  attention " + fmt(value, 2) : "  |  outside the analysed slab: no model evidence here";
+  const explained = new Set(hasMap ? data.explained : []);
+  // What the map says at a voxel: its value on a slice that has a map, otherwise why there is none.
+  function attentionNote(index, brief) {
+    const gridZ = index[2] + OFF[2];
+    if (explained.has(gridZ)) return "attention " + fmt(attention[index[0] + nx * (index[1] + ny * index[2])] / 255, 2);
+    if (gridZ > data.slab_grid[0] && gridZ < data.slab_grid[1]) return brief ? "no map here" : "no map on this slice";
+    return brief ? "outside the slab" : "outside the analysed slices";
+  }
+  // The read-out is a row of cells of fixed width, so its height does not change with the numbers in it.
+  const cells = [];
+  {
+    const readout = $("vv-readout");
+    readout.textContent = "";
+    for (const kind of ["vv-label", "vv-pos", "vv-pos", "vv-pos", "vv-val"]) {
+      const cell = document.createElement("span");
+      cell.className = kind;
+      if (cells.length) readout.append(" ");
+      readout.append(cell);
+      cells.push(cell);
     }
-    return text;
+    cells[0].textContent = "Crosshair";
+    cells[4].hidden = !hasMap;
   }
   function updateReadout() {
-    $("vv-readout").textContent = "Crosshair: " + describe(state.idx);
+    const mm = world(state.idx);
     for (let axis = 0; axis < 3; axis++) {
+      cells[axis + 1].textContent = fmt(Math.abs(mm[axis]), 1) + " mm " + SIDES[axis][mm[axis] < 0 ? 0 : 1];
       sliders[axis].value = state.idx[axis];
-      const mm = world(state.idx)[axis];
-      outputs[axis].textContent = (mm < 0 ? "\u2212" : "") + fmt(Math.abs(mm), 1) + " mm";
+      outputs[axis].textContent = (mm[axis] < 0 ? "\u2212" : "") + fmt(Math.abs(mm[axis]), 1) + " mm";
       infos[axis].textContent = "slice " + (state.idx[axis] + OFF[axis]);
+      sliders[axis].setAttribute("aria-valuetext", infos[axis].textContent + ", " + cells[axis + 1].textContent);
     }
+    if (attention) cells[4].textContent = attentionNote(state.idx, false);
   }
   let pending = 0;
   function refresh(parts) {
@@ -771,37 +820,56 @@ body { margin: 0; background: var(--vv-bg); }
     slider.max = N[axis] - 1;
     slider.addEventListener("input", () => { if (setIndex(axis, Number(slider.value))) refresh(3); });
   });
+  // A finger that lands on a view may be about to scroll the page (the views allow vertical panning), so a
+  // touch acts only as a tap or once it has moved sideways; a mouse or pen acts at once, primary button only.
+  const SIDEWAYS = 6;
+  const capture = (canvas, event) => {
+    try { canvas.setPointerCapture(event.pointerId); } catch (error) { /* the pointer has already gone */ }
+  };
+  const sideways = (drag, event) => {
+    const dx = Math.abs(event.clientX - drag.x), dy = Math.abs(event.clientY - drag.y);
+    return dx >= SIDEWAYS && dx >= dy;
+  };
   for (const plane of PLANES) {
-    let dragging = false;
-    const move = (event) => {
-      const hit = voxelAt(plane, event);
+    let drag = null;
+    const place = (event, nearest) => {
+      const hit = voxelAt(plane, event, nearest);
       if (!hit) return;
       const a = setIndex(plane.u, hit.u), b = setIndex(plane.v, hit.v);
       if (a || b) refresh(3);
     };
     plane.canvas.addEventListener("pointerdown", (event) => {
-      dragging = true;
-      plane.canvas.setPointerCapture(event.pointerId);
+      if (event.button !== 0) return;
+      const touch = event.pointerType === "touch";
+      drag = { x: event.clientX, y: event.clientY, touch, active: !touch };
+      capture(plane.canvas, event);
       plane.tip.hidden = true;
-      move(event);
+      if (drag.active) place(event, false);
     });
     plane.canvas.addEventListener("pointermove", (event) => {
-      if (dragging) { move(event); return; }
-      const hit = attention && voxelAt(plane, event);
+      if (drag) {
+        if (!drag.active && !sideways(drag, event)) return;
+        drag.active = true;
+        place(event, true);
+        return;
+      }
+      const hit = attention && voxelAt(plane, event, false);
       if (!hit) { plane.tip.hidden = true; return; }
       const index = [0, 0, 0];
       index[plane.u] = hit.u; index[plane.v] = hit.v; index[plane.w] = state.idx[plane.w];
-      const gridZ = index[2] + OFF[2];
-      const inside = gridZ >= data.slab_grid[0] && gridZ <= data.slab_grid[1];
-      plane.tip.textContent = inside ? "attention " + fmt(attention[index[0] + nx * (index[1] + ny * index[2])] / 255, 2) : "outside the slab";
+      plane.tip.textContent = attentionNote(index, true);
+      plane.tip.hidden = false; // shown before it is measured
       const bounds = plane.canvas.getBoundingClientRect();
-      plane.tip.style.left = Math.min(event.clientX - bounds.left, bounds.width - 110) + "px";
-      plane.tip.style.top = Math.max(event.clientY - bounds.top, 26) + "px";
-      plane.tip.hidden = false;
+      const width = plane.tip.getBoundingClientRect().width;
+      plane.tip.style.left = Math.max(0, Math.min(event.clientX - bounds.left, bounds.width - width - 10)) + "px";
+      plane.tip.style.top = Math.max(event.clientY - bounds.top, 30) + "px";
     });
-    const end = () => { dragging = false; };
-    plane.canvas.addEventListener("pointerup", end);
-    plane.canvas.addEventListener("pointercancel", end);
+    plane.canvas.addEventListener("pointerup", (event) => {
+      if (drag && drag.touch && !drag.active) place(event, false); // a tap
+      drag = null;
+    });
+    plane.canvas.addEventListener("pointercancel", () => { drag = null; });
+    plane.canvas.addEventListener("lostpointercapture", () => { drag = null; });
     plane.canvas.addEventListener("pointerleave", () => { plane.tip.hidden = true; });
     plane.canvas.addEventListener("keydown", (event) => {
       const steps = { ArrowLeft: [plane.u, -1], ArrowRight: [plane.u, 1], ArrowUp: [plane.v, 1], ArrowDown: [plane.v, -1], PageUp: [plane.w, 1], PageDown: [plane.w, -1] };
@@ -812,20 +880,30 @@ body { margin: 0; background: var(--vv-bg); }
     });
   }
   const spinButton = $("vv-spin");
-  let visible = true, lastTick = 0, ticking = false;
+  // The rotation runs only while the 3D view is on screen. `seen` is the share of the view that is visible;
+  // the one automatic opening turn waits until most of it is.
+  let seen = "IntersectionObserver" in window ? 0 : 1, lastTick = 0, ticking = false, opening = false;
+  const canTick = () => state.spin && seen > 0 && !document.hidden && Boolean(anatomy);
+  function wake() {
+    if (ticking || !canTick()) return;
+    ticking = true;
+    lastTick = 0;
+    requestAnimationFrame(tick);
+  }
   function setSpin(on) {
     state.spin = on;
     spinButton.setAttribute("aria-pressed", String(on));
-    spinButton.textContent = on ? "Stop rotating" : "Rotate";
-    if (on && !ticking) {
-      ticking = true;
-      lastTick = 0;
-      requestAnimationFrame(tick);
-    }
+    wake();
+  }
+  // Anything the viewer does to the 3D view ends the automatic turn.
+  function takeOver() {
+    opening = false;
+    state.stopAt = null;
+    if (state.spin) setSpin(false);
   }
   function tick(now) {
-    if (!state.spin) { ticking = false; return; }
-    if (visible && !document.hidden && anatomy && now - lastTick > 55) {
+    if (!canTick()) { ticking = false; return; }
+    if (now - lastTick > 55) {
       state.yaw += lastTick ? Math.min(now - lastTick, 200) * 0.00042 : 0;
       lastTick = now;
       if (state.stopAt !== null && state.yaw >= state.stopAt) {
@@ -837,37 +915,63 @@ body { margin: 0; background: var(--vv-bg); }
     }
     requestAnimationFrame(tick);
   }
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; }).observe(view3d.canvas);
+  function openingTurn() {
+    if (!opening || seen < 0.6 || !anatomy) return;
+    opening = false;
+    state.stopAt = state.yaw + 2 * Math.PI; // one slow turn shows that the view is three-dimensional
+    setSpin(true);
   }
-  spinButton.addEventListener("click", () => { state.stopAt = null; setSpin(!state.spin); });
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => {
+      const entry = entries[entries.length - 1];
+      seen = entry.isIntersecting ? Math.max(entry.intersectionRatio, 0.001) : 0;
+      openingTurn();
+      wake();
+    }, { threshold: [0, 0.6] }).observe(view3d.canvas);
+  }
+  document.addEventListener("visibilitychange", wake);
+  spinButton.addEventListener("click", () => {
+    const on = !state.spin;
+    takeOver();
+    setSpin(on);
+  });
   {
     let drag = null;
     const canvas = view3d.canvas;
+    const tilted = (value) => Math.max(-1.35, Math.min(1.35, value));
+    const grab = () => { canvas.classList.add("vv-dragging"); takeOver(); };
     canvas.addEventListener("pointerdown", (event) => {
-      drag = { x: event.clientX, y: event.clientY, yaw: state.yaw, pitch: state.pitch };
-      canvas.setPointerCapture(event.pointerId);
-      canvas.classList.add("vv-dragging");
-      state.stopAt = null;
-      if (state.spin) setSpin(false);
+      if (event.button !== 0) return;
+      const touch = event.pointerType === "touch";
+      drag = { x: event.clientX, y: event.clientY, yaw: state.yaw, pitch: state.pitch, active: !touch };
+      capture(canvas, event);
+      if (drag.active) grab();
     });
     canvas.addEventListener("pointermove", (event) => {
       if (!drag) return;
-      state.yaw = drag.yaw + (event.clientX - drag.x) * 0.01;
-      state.pitch = Math.max(-1.35, Math.min(1.35, drag.pitch + (event.clientY - drag.y) * 0.01));
+      if (!drag.active) {
+        if (!sideways(drag, event)) return;
+        drag.active = true;
+        grab();
+      }
+      // The near side of the head follows the pointer, across and up and down alike.
+      state.yaw = drag.yaw - (event.clientX - drag.x) * 0.01;
+      state.pitch = tilted(drag.pitch + (event.clientY - drag.y) * 0.01);
       refresh(2);
     });
     const end = () => { drag = null; canvas.classList.remove("vv-dragging"); };
     canvas.addEventListener("pointerup", end);
     canvas.addEventListener("pointercancel", end);
+    canvas.addEventListener("lostpointercapture", end);
     canvas.addEventListener("keydown", (event) => {
-      const turns = { ArrowLeft: [-0.12, 0], ArrowRight: [0.12, 0], ArrowUp: [0, -0.1], ArrowDown: [0, 0.1] };
+      // Like a drag: the near side of the head moves the way the arrow points.
+      const turns = { ArrowLeft: [0.12, 0], ArrowRight: [-0.12, 0], ArrowUp: [0, -0.1], ArrowDown: [0, 0.1] };
       const turn = turns[event.key];
       if (!turn) return;
       event.preventDefault();
-      if (state.spin) setSpin(false);
+      takeOver();
       state.yaw += turn[0];
-      state.pitch = Math.max(-1.35, Math.min(1.35, state.pitch + turn[1]));
+      state.pitch = tilted(state.pitch + turn[1]);
       refresh(2);
     });
   }
@@ -875,6 +979,8 @@ body { margin: 0; background: var(--vv-bg); }
   function updateLegend() {
     $("vv-opacity-out").textContent = Math.round(state.opacity * 100) + "%";
     $("vv-floor-out").textContent = fmt(state.floor, 2);
+    opacity.setAttribute("aria-valuetext", $("vv-opacity-out").textContent);
+    floor.setAttribute("aria-valuetext", $("vv-floor-out").textContent);
     const canvas = $("vv-legend");
     const g = canvas.getContext("2d");
     const image = g.createImageData(canvas.width, canvas.height);
@@ -914,8 +1020,7 @@ body { margin: 0; background: var(--vv-bg); }
   const home = hasMap ? data.peak : state.idx.slice();
   $("vv-peak").addEventListener("click", () => goTo(data.peak));
   $("vv-reset").addEventListener("click", () => {
-    state.stopAt = null;
-    if (state.spin) setSpin(false);
+    takeOver();
     state.yaw = -0.6;
     state.pitch = 0.28;
     goTo(home);
@@ -941,7 +1046,7 @@ body { margin: 0; background: var(--vv-bg); }
     charts = [];
     const make = (id, height, yMax, ticks, tickText, tipText, draw) => {
       const svg = $(id);
-      svg.replaceChildren();
+      while (svg.firstChild) svg.firstChild.remove();
       // Drawn at the element's own pixel width so the labels keep their size.
       const W = Math.max(280, Math.round(svg.getBoundingClientRect().width));
       const left = 38, right = 6, top = 8, plot = height - top - 20;
@@ -965,8 +1070,9 @@ body { margin: 0; background: var(--vv-bg); }
         const hit = element("rect", { class: "vv-hit", x: xOf(i), y: top, width: band, height: plot }, svg);
         hit.addEventListener("pointerenter", () => {
           tip.textContent = text(i);
-          tip.style.left = Math.max(90, Math.min(W - 90, xOf(i) + band / 2)) + "px";
-          tip.hidden = false;
+          tip.hidden = false; // shown before it is measured
+          const half = tip.getBoundingClientRect().width / 2;
+          tip.style.left = Math.max(half, Math.min(W - half, xOf(i) + band / 2)) + "px";
         });
         hit.addEventListener("pointerleave", () => { tip.hidden = true; });
         hit.addEventListener("click", () => { if (setIndex(2, localZ(slices[i]))) refresh(3); });
@@ -1003,10 +1109,13 @@ body { margin: 0; background: var(--vv-bg); }
   }
   function markCharts() {
     if (!charts.length) return;
-    const position = data.explained.indexOf(state.idx[2] + OFF[2]);
+    const gridZ = state.idx[2] + OFF[2];
+    const position = data.explained.indexOf(gridZ);
+    const between = gridZ > data.slab_grid[0] && gridZ < data.slab_grid[1];
     for (const chart of charts) {
       chart.marks.forEach((mark, i) => mark.classList.toggle("vv-current", i === position));
-      chart.now.textContent = position < 0 ? "The crosshair is outside the analysed slab." : "At the crosshair: " + chart.text(position);
+      chart.now.textContent = position >= 0 ? "At the crosshair: " + chart.text(position)
+        : between ? "The crosshair is on a slice without a map." : "The crosshair is outside the analysed slices.";
       if (position < 0) {
         chart.cursor.setAttribute("visibility", "hidden");
       } else {
@@ -1019,21 +1128,33 @@ body { margin: 0; background: var(--vv-bg); }
   }
 
   // ---------------------------------------------------------------- start
-  async function start() {
+  // Nothing is drawn unless both volumes arrive exactly as they were saved: a wrong picture is worse than none.
+  function fail(text) {
+    anatomy = attention = null;
     const status = $("vv-status");
-    try {
-      anatomy = await decodeSprite(data.anatomy_png);
-      if (hasMap) attention = await decodeSprite(data.attention_png);
-    } catch (error) {
-      status.textContent = "The scan embedded in this page could not be decoded by this browser.";
+    status.textContent = text;
+    status.setAttribute("role", "alert");
+    status.hidden = false;
+  }
+  async function start() {
+    if (typeof DecompressionStream !== "function" || typeof Blob.prototype.stream !== "function") {
+      fail("This browser cannot unpack the scan embedded in this page. Open the page in a current browser.");
       return;
     }
-    const sums = [checksum(anatomy), attention ? checksum(attention) : 0];
-    if (sums[0] !== data.checksums[0] || sums[1] !== data.checksums[1]) {
-      status.textContent = "This browser changed the embedded image values while decoding them, so the views below may be slightly off.";
-    } else {
-      status.hidden = true;
+    let volumes;
+    try {
+      volumes = [await unpack(data.anatomy_z), hasMap ? await unpack(data.attention_z) : null];
+    } catch (error) {
+      fail("The scan embedded in this page could not be unpacked, so nothing is shown. The file may be incomplete; build the page again.");
+      return;
     }
+    const sums = [checksum(volumes[0]), volumes[1] ? checksum(volumes[1]) : 0];
+    if (sums[0] !== data.checksums[0] || sums[1] !== data.checksums[1]) {
+      fail("The scan embedded in this page does not match its checksum, so nothing is shown. Build the page again.");
+      return;
+    }
+    [anatomy, attention] = volumes;
+    $("vv-status").hidden = true;
     window.__vv = { anatomy, attention, state, data, checksums: sums, planes: PLANES }; // for inspection and tests
     if (hasMap) state.idx = data.peak.slice();
     updateAlpha();
@@ -1056,11 +1177,13 @@ body { margin: 0; background: var(--vv-bg); }
     }
     const calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!calm) {
-      state.stopAt = state.yaw + 2 * Math.PI; // one slow turn shows that the view is three-dimensional
-      setSpin(true);
+      opening = true;
+      openingTurn();
     }
   }
-  start();
+  start().catch((error) => {
+    fail("This page could not be drawn in this browser (" + ((error && error.name) || "error") + "). Open it in a current browser.");
+  });
 })();
 </script>
 <!--vv:fragment-end-->

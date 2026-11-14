@@ -188,7 +188,7 @@ python -m src.volume_analysis /path/to/study --output results/  # research AD/CN
 python -m src.volume_viewer results/                            # rebuild results/viewer.html from a saved folder
 ```
 
-Open `results/viewer.html` in a browser to scroll through the scan in three planes with the attention map on top and to rotate it in 3D. The file works offline and contains the scan, so handle it like the scan.
+Open `results/viewer.html` in a current browser to scroll through the scan in three planes with the attention map on top and to rotate it in 3D. The file works offline and contains the scan, so handle it like the scan.
 
 Patient-level training on labelled 3D scans (prepared for OASIS-1; **not yet run on it**, see [docs/OASIS1_VOLUME_TRAINING.md](docs/OASIS1_VOLUME_TRAINING.md)):
 

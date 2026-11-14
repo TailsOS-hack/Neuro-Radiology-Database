@@ -121,6 +121,19 @@ class GuiScanFlowTests(unittest.TestCase):
 
         cls.dialogs = []
         cls.opened = []
+        cls.answer = True  # what the person answers to a yes/no question
+        cls.browser = True  # what starting a browser returns; an exception instance is raised instead
+
+        def ask(title, text):
+            cls.dialogs.append(("askyesno", title, text))
+            return cls.answer
+
+        def launch(url):
+            cls.opened.append(url)
+            if isinstance(cls.browser, Exception):
+                raise cls.browser
+            return cls.browser
+
         missing = str(cls.directory / "no_such_model.pt")
         cls.patches = [
             patch.object(cls.gui, "DateEntry", FakeDateEntry),
@@ -129,9 +142,9 @@ class GuiScanFlowTests(unittest.TestCase):
               ("BINARY_ROUTER_MODEL_PATH", "GATEKEEPER_MODEL_PATH", "TUMOR_MODEL_PATH", "ALZHEIMERS_MODEL_PATH")),
             *(patch.object(cls.gui.messagebox, name, side_effect=lambda title, text, _kind=name: cls.dialogs.append((_kind, title, text)))
               for name in ("showinfo", "showwarning", "showerror")),
-            # Answer "yes" to questions, and record instead of launching a browser.
-            patch.object(cls.gui.messagebox, "askyesno", side_effect=lambda title, text: cls.dialogs.append(("askyesno", title, text)) or True),
-            patch.object(cls.gui.webbrowser, "open", side_effect=lambda url: cls.opened.append(url)),
+            # Questions are answered with cls.answer, and a browser launch is recorded instead of made.
+            patch.object(cls.gui.messagebox, "askyesno", side_effect=ask),
+            patch.object(cls.gui.webbrowser, "open", side_effect=launch),
         ]
         for item in cls.patches:
             item.start()
@@ -244,11 +257,57 @@ class GuiScanFlowTests(unittest.TestCase):
             self.assertTrue((target / name).is_file(), name)
         self.assertNotIn("SYNTHETIC", (target / "result.json").read_text())
         # Saving offers the interactive viewer; saying yes opens the saved file, which names nobody.
-        self.assertIn("Open the interactive 3D viewer", next(text for kind, _, text in self.dialogs if kind == "askyesno"))
+        question = next(text for kind, _, text in self.dialogs if kind == "askyesno")
+        self.assertIn("Open the interactive 3D viewer (viewer.html) in your browser?", question)
+        self.assertIn("If no browser window appears, open that file from the folder above.", question)
+        self.pump(lambda: bool(self.opened))  # the browser is started from a worker thread
         self.assertEqual(self.opened, [(target / "viewer.html").resolve().as_uri()])
         viewer = (target / "viewer.html").read_text()
         self.assertNotIn("SYNTHETIC", viewer)
         self.assertNotIn("FAKE-ID", viewer)
+
+        def save_again(name, dialogs=1):
+            """Save into a new folder; returns the folder and the dialogs that the save produced."""
+
+            folder, before = self.directory / name, len(self.dialogs)
+            with patch.object(self.gui.filedialog, "askdirectory", return_value=str(folder)):
+                app.on_save_volume_result()
+            self.pump(lambda: len(self.dialogs) >= before + dialogs and str(app.save_volume_btn.cget("state")) == "normal")
+            settled = time.time() + 0.5
+            while time.time() < settled:  # anything else that was on its way has arrived
+                self.root.update()
+                time.sleep(0.02)
+            return folder, self.dialogs[before:]
+
+        # Saying no opens nothing and leaves the app ready.
+        type(self).answer = False
+        folder, shown = save_again("saved_no")
+        self.assertEqual([kind for kind, _, _ in shown], ["askyesno"])
+        self.assertEqual(len(self.opened), 1)
+        self.assertTrue((folder / "viewer.html").is_file())
+        self.assertEqual(str(app.volume_btn.cget("state")), "normal")
+
+        # When no browser can be started, the app says where the file is instead of doing nothing.
+        type(self).answer = True
+        for outcome in (False, self.gui.webbrowser.Error("could not locate runnable browser")):
+            type(self).browser = outcome
+            folder, shown = save_again(f"saved_browser_{type(outcome).__name__}", dialogs=2)
+            self.assertEqual([(kind, title) for kind, title, _ in shown], [("askyesno", "Saved"), ("showinfo", "Viewer")])
+            self.assertIn(str((folder / "viewer.html").resolve()), shown[1][2])
+        type(self).browser = True
+
+        # When the viewer could not be written there is nothing to offer, and the app says so.
+        from src import volume_viewer
+
+        opened = len(self.opened)
+        with patch.object(volume_viewer, "build_viewer", side_effect=RuntimeError("no viewer today")):
+            with self.assertLogs("src.volume_analysis", level="ERROR"):
+                folder, shown = save_again("saved_without_viewer")
+        self.assertEqual([(kind, title) for kind, title, _ in shown], [("showinfo", "Saved")])
+        self.assertIn("viewer.html) could not be written", shown[0][2])
+        self.assertFalse((folder / "viewer.html").exists())
+        self.assertTrue((folder / "gradcam.nii.gz").is_file())
+        self.assertEqual(len(self.opened), opened)
 
         # Running the single-slice analysis returns the viewer to the raw scan.
         with patch.object(app, "_start_report_generation"):

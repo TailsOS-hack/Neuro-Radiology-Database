@@ -280,8 +280,9 @@ class App(ttk.Frame):
         self.pred_label.pack(anchor="w")
         self.confidence_label = ttk.Label(result_frame, text="Confidence: -")
         self.confidence_label.pack(anchor="w")
-        self.model_used_label = ttk.Label(result_frame, text="Model Used: -", foreground="#555")
-        self.model_used_label.pack(anchor="w")
+        self.model_used_label = ttk.Label(result_frame, text="Model Used: -", foreground="#555", justify="left")
+        self.model_used_label.pack(anchor="w", fill="x")
+        self._wrap_to_width(self.model_used_label)
 
         # 4. Progress Bar (Bottom, above results)
         self.progress_bar = ttk.Progressbar(left_frame, mode='indeterminate')
@@ -323,12 +324,14 @@ class App(ttk.Frame):
             self.slice_frame, text="", foreground="#555", font=("Segoe UI", 8), wraplength=320, justify="left"
         )
         self.scan_info_label.pack(side="top", fill="x")
+        self._wrap_to_width(self.scan_info_label)
 
         # Grad-CAM toggle + caption (disabled until a heatmap is generated)
         self.heatmap_caption_label = ttk.Label(
             img_frame, text="", foreground="#555", font=("Segoe UI", 8), wraplength=320, justify="left"
         )
         self.heatmap_caption_label.pack(side="bottom", fill="x", pady=(2, 0))
+        self._wrap_to_width(self.heatmap_caption_label)
 
         heatmap_row = ttk.Frame(img_frame)
         heatmap_row.pack(side="bottom", fill="x", pady=(5, 0))
@@ -627,13 +630,48 @@ class App(ttk.Frame):
             self.pred_label.configure(text=f"Prediction: {self.volume_result.predicted_label} (research AD/CN score)")
             text = f"3D Grad-CAM written to:\n{message[1]}\n\n" + "\n".join(sorted(message[2]))
             if "viewer.html" not in message[2]:
-                messagebox.showinfo("Saved", text)
-            elif messagebox.askyesno("Saved", text + "\n\nOpen the interactive 3D viewer in your browser?"):
-                webbrowser.open(Path(message[1], "viewer.html").resolve().as_uri())
+                messagebox.showinfo(
+                    "Saved",
+                    text + "\n\nThe interactive viewer (viewer.html) could not be written. The files listed are complete.",
+                )
+            elif messagebox.askyesno(
+                "Saved",
+                text + "\n\nOpen the interactive 3D viewer (viewer.html) in your browser?\n"
+                "If no browser window appears, open that file from the folder above.",
+            ):
+                self._open_viewer(Path(message[1], "viewer.html"))
+        elif kind == "viewer":
+            if not message[1]:
+                messagebox.showinfo("Viewer", f"No browser could be started. Open this file in a browser:\n{message[2]}")
         else:
             self._set_busy(False)
             self.pred_label.configure(text="Prediction: -")
             messagebox.showerror(message[1], message[2])
+
+    @staticmethod
+    def _wrap_to_width(label) -> None:
+        """Wrap a label's text at the width the label is actually given, so no line is cut off at the panel edge."""
+
+        label.bind("<Configure>", lambda event: label.configure(wraplength=max(80, event.width - 4)))
+
+    def _open_viewer(self, viewer: Path) -> None:
+        """Hand ``viewer.html`` to the default browser; say where the file is when no browser could be started.
+
+        Some launchers do not return until the browser is closed, so the call runs on its own thread and
+        the window stays responsive meanwhile.
+        """
+
+        target = viewer.resolve()
+
+        def worker():
+            try:
+                started = bool(webbrowser.open(target.as_uri()))
+            except Exception:  # webbrowser raises its own Error, and launchers fail in their own ways
+                started = False
+            self.scan_queue.put(("viewer", started, str(target)))
+
+        threading.Thread(target=worker, daemon=True).start()
+        self.master.after(100, self._poll_scan_queue)
 
     def _on_scan_loaded(self, path, volume, series):
         self._reset_scan_state()

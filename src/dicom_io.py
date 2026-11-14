@@ -857,7 +857,8 @@ def load_volume(path: PathLike, *, series_key: Optional[str] = None, volume_inde
     volume = load_series(chosen, volume_index=volume_index)
     if series_key is None and len(series) > 1:
         volume.warnings.append(
-            f"{len(series)} series found; loaded {chosen.technical_label}. Pass series_key to choose another."
+            f"{len(series)} series found; loaded {chosen.technical_label}. "
+            "Another can be chosen by its series key (--series on the command line, series_key in Python)."
         )
     return volume
 

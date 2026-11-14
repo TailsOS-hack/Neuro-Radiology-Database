@@ -338,8 +338,7 @@ class AnalyzerTests(unittest.TestCase):
         cam = result.cam_grid
         self.assertEqual(cam.shape, result.prepared.grid.shape)
         self.assertGreaterEqual(float(cam.min()), 0.0)
-        self.assertLessEqual(float(cam.max()), 1.0 + 1e-6)
-        self.assertGreater(float(cam.max()), 0.5)
+        self.assertEqual(float(cam.max()), 1.0)  # one scale for the whole volume: its strongest voxel is exactly 1
         self.assertEqual(result.cam_indices, result.prepared.band_indices)
         inside = np.zeros(cam.shape[2], dtype=bool)
         inside[result.cam_indices] = True
@@ -396,8 +395,14 @@ class AnalyzerTests(unittest.TestCase):
         self.assertIn("specificity 0/10", summary["notice"])
         self.assertAlmostEqual(sum(summary["grad_cam"]["slice_share_of_attention"]), 1.0, places=4)
         self.assertEqual(summary["preparation"]["protocol_slice_indices"], self.result.prepared.protocol_indices)
+        # Round 2 members score the nine protocol slices; the summary says so in a form other code can read.
+        self.assertEqual(summary["preparation"]["scored_slice_indices"], self.result.prepared.protocol_indices)
+        self.assertEqual({member["slice_policy"] for member in summary["members"]}, {"protocol9"})
 
     def test_saved_viewer_shows_the_same_map_at_the_same_place(self):
+        import base64
+        import zlib
+
         from src import volume_viewer
 
         output = self.directory / "saved_viewer"
@@ -407,6 +412,14 @@ class AnalyzerTests(unittest.TestCase):
         offset = payload["offset"]
         peak = tuple(int(value) + int(start) for value, start in zip(payload["peak"], offset))
         self.assertEqual(float(self.result.cam_grid[peak]), float(self.result.cam_grid.max()))  # same strongest voxel
+        # The page's map is the saved map, voxel for voxel, at 8-bit precision.
+        nx, ny, nz = payload["shape"]
+        steps = np.frombuffer(zlib.decompress(base64.b64decode(payload["attention_z"])), dtype=np.uint8).reshape(nz, ny, nx)
+        shown = (np.cumsum(steps.astype(np.int64), axis=2) % 256).transpose(2, 1, 0)
+        window = tuple(slice(start, start + size) for start, size in zip(offset, payload["shape"]))
+        np.testing.assert_array_equal(shown, np.rint(self.result.cam_grid[window].astype(np.float64) * 255))
+        whole = np.rint(self.result.cam_grid.astype(np.float64) * 255)
+        self.assertEqual(int(whole.sum()), payload["checksums"][1])  # nothing was cropped away
         self.assertEqual(payload["slab_grid"], [self.result.cam_indices[0], self.result.cam_indices[-1]])
         self.assertEqual(payload["scored"], self.result.prepared.protocol_indices)  # Round 2: the nine protocol slices
         np.testing.assert_allclose(payload["affine"], self.result.prepared.grid_affine)
@@ -414,12 +427,16 @@ class AnalyzerTests(unittest.TestCase):
         self.assertEqual(payload["target_class"], self.result.class_names[self.result.cam_target_index])
         # The saved folder alone is enough to rebuild the same page.
         self.assertEqual(volume_viewer.payload_from_saved(output), payload)
-        # A failure while writing the viewer must not cost the volumes.
+        # A failure while writing the viewer must not cost the volumes, and must not leave the page of an
+        # earlier analysis in the folder next to the new result.json.
         with patch.object(volume_viewer, "build_viewer", side_effect=RuntimeError("no viewer today")):
             with self.assertLogs("src.volume_analysis", level="ERROR"):
-                written = self.result.save(self.directory / "saved_without_viewer", self.volume)
+                written = self.result.save(output, self.volume)
         self.assertNotIn("viewer.html", written)
-        self.assertTrue((self.directory / "saved_without_viewer" / "gradcam.nii.gz").is_file())
+        self.assertFalse((output / "viewer.html").exists())
+        self.assertEqual(sorted(path.name for path in output.iterdir()),
+                         ["anatomy.nii.gz", "gradcam.nii.gz", "gradcam_native.nii.gz", "montage.png", "projections.png", "result.json"])
+        self.assertEqual(sorted(written), sorted(path.name for path in output.iterdir()))
 
     def test_overlays_have_the_model_input_geometry(self):
         z = self.result.cam_indices[len(self.result.cam_indices) // 2]
@@ -571,7 +588,14 @@ class AnalyzerTests(unittest.TestCase):
         second.save(output, from_dicom)
         text = (output / "result.json").read_text()
         viewer = (output / "viewer.html").read_text(encoding="utf-8")
-        for needle in ("SYNTHETIC", "PHANTOM", "FAKE-ID", "19400229", "FAKE-ACC", "Nowhere", "FAKESCANNER", "t1_mprage_sag_p2_iso"):
+        # Every identifying value the reader took from the header, plus the free-text series names. Values of
+        # one or two characters (the sex code) occur in any text and prove nothing.
+        import dataclasses
+
+        identity = {value for value in dataclasses.asdict(from_dicom.identity).values() if isinstance(value, str) and len(value) > 2}
+        self.assertGreaterEqual(len(identity), 8)
+        for needle in sorted(identity | {"SYNTHETIC", "PHANTOM", "FAKE-ID", "19400229", "FAKE-ACC", "Nowhere", "FAKESCANNER",
+                                         "t1_mprage_sag_p2_iso"}):
             self.assertNotIn(needle, text)
             self.assertNotIn(needle, viewer)
         self.assertEqual(json.loads(text)["source"]["format"], "dicom_series")

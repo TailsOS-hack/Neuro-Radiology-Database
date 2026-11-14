@@ -46,7 +46,7 @@ python -m src.volume_viewer results/
 | `anatomy.nii.gz`, `gradcam.nii.gz` | The scan and the attention map on the model's 1.5 mm RAS grid (same shape and affine). |
 | `gradcam_native.nii.gz` | The same map resampled onto the scan's own voxel grid: one value per original voxel, so it overlays the DICOM series directly in 3D Slicer, ITK-SNAP or FSLeyes. |
 | `montage.png`, `projections.png` | Every analysed slice with its heatmap; axial/coronal/sagittal maximum-intensity projections of the map. |
-| `viewer.html` | The same scan and map in one page that opens in any browser, offline: axial, coronal and sagittal views that move together, a 3D projection to rotate, the share of attention and the single-slice score for every slice of the slab. No identifying fields; it does contain the scan, so treat it like the scan. |
+| `viewer.html` | The same scan and map in one page that opens in any current browser, offline: axial, coronal and sagittal views that move together, a 3D projection to rotate, the share of attention and the single-slice score for every slice of the slab. No identifying fields; it does contain the scan, so treat it like the scan. |
 
 In the GUI: **Scan** (file) or **DICOM Folder...** loads a scan, the slider pages
 through axial slices, **Series...** picks another series of the study,
@@ -97,13 +97,26 @@ pickled code.
   (tolerance 1e-4) or the explanation is refused.
 * The native map is 7 x 7 per slice. It is coarse, and in the scans checked here
   it includes regions outside the brain (skull, scalp, image borders). It shows
-  what moved this model's score. It is not a localisation of pathology, and a
+  what this model responds to in each slice. Only the slices the score is
+  computed from (nine, for the Round 2 ensemble) fed the result; on the other
+  slices of the slab the map shows what the same model responds to when given
+  that slice alone. It is not a localisation of pathology, and a
   better-looking map is not evidence of a better model.
 * `viewer.html` draws that same volume-scaled map. The slice views use one blue
   ramp whose opacity follows the value, with a control that hides values below
   a chosen level. The 3D view lays the map, front to back, over a summed
   projection of the scan: it is a picture for orientation, not a measurement,
   and the slice views and `gradcam.nii.gz` are the reference.
+* The page says which slices the score is computed from and which ones have a
+  map, and words its claims accordingly; a slice without a map reads "no map",
+  never "attention 0.00". The scan and the map are embedded as compressed bytes
+  with a checksum. A page that cannot unpack them exactly says so and draws
+  nothing.
+* `python -m src.volume_viewer` reads `anatomy.nii.gz` and `gradcam.nii.gz`
+  through the same canonical reader as every other scan and compares their
+  geometry with `result.json`. A file that another tool re-saved in a different
+  voxel order is put back; one that no longer sits on the recorded grid is
+  refused.
 
 ## Verification (2026-11-14)
 
@@ -138,18 +151,24 @@ clinical checkpoints give 14/15, 10/15 and 15/15 correct on the 15 binary cases
 and the ensemble gives 14/15 with every case labelled CN, exactly the counts in
 [RESULTS.md](kevin_paper_20261011/round2_publication/RESULTS.md).
 
-**Tests.** 119 new tests in seven files: 91 for the DICOM reader, the volume
+**Tests.** 132 new tests in seven files: 104 for the DICOM reader, the volume
 analysis, the interactive viewer, the display helpers and the GUI scan flow,
 and 28 for the trainer and the OASIS-1 loader described in
-[OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md). The suite is 279 tests
+[OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md). The suite is 292 tests
 in total with a display; the GUI-flow tests need `xvfb-run` on a headless
 machine and are skipped otherwise. `pydicom` was added to
 `requirements-verification.txt` so the 33 DICOM contracts, the 8 display-helper
-tests and the 9 viewer tests that need no other package run in the offline CI
-job; that job's set of pre-existing import errors is unchanged. Four further
-viewer tests load the page in headless Chromium and check that it decodes the
-embedded volumes exactly and draws a marker voxel where each view's edge
-letters say; they run only where Node.js with Playwright is installed.
+tests and the 13 viewer tests that need no other package run in the offline CI
+job; that job's set of pre-existing import errors is unchanged. Eleven further
+viewer tests load pages in headless Chromium and read back what is on screen:
+the unpacked volumes match their checksums, a marker voxel is bright where each
+view's drawn edge letters say and dark at the mirror image of that place, the
+positions, slice numbers and scores are the ones in the summary, text from the
+analysis stays text, a page without a map works, and a damaged page draws
+nothing. They run only where Node.js with Playwright and its Chromium are
+installed. Each of 32 deliberate defects in the viewer (a mirrored view,
+swapped edge letters, a reversed chart, a dropped crop offset and so on) makes
+at least one of these tests fail.
 
 ## What this showed about the existing dementia models
 
