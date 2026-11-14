@@ -11,6 +11,8 @@ from torchvision import transforms
 from src.gatekeeper_model import GatekeeperClassifier
 from src.grounded_report import build_grounded_report, render_report_html, render_report_markdown
 from src.grad_cam import GradCAM, get_target_layer, overlay_cam_on_image
+from src import scan_view
+from src.mri_volume import VolumeError
 try:
     from src.experiment_pipeline import build_model as build_pipeline_model
     from src.experiment_pipeline import build_transforms as build_pipeline_transforms
@@ -46,6 +48,22 @@ ALZ_CLASSES = ALZ_CLASSES_4
 TUMOR_CLASSES_3 = ["glioma", "meningioma", "pituitary"]
 TUMOR_CLASSES_4 = ["glioma", "meningioma", "notumor", "pituitary"]
 ALZ_IMG_SIZE = 224
+
+PLAIN_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp"}
+SCAN_FILETYPES = [
+    ("Images and scans", ("*.jpg", "*.jpeg", "*.png", "*.bmp", "*.dcm", "*.dicom", "*.ima", "*.nii", "*.gz", "*.zip")),
+    ("Image files", ("*.jpg", "*.jpeg", "*.png", "*.bmp")),
+    ("DICOM / NIfTI / zipped DICOM", ("*.dcm", "*.dicom", "*.ima", "*.nii", "*.gz", "*.zip")),
+    ("All files (DICOM often has no extension)", "*"),
+]
+# Shown whenever the 4-class stage classifier is applied to a slice of a raw scan.
+# Evidence and reproduction: docs/DICOM_VOLUME_ANALYSIS.md.
+RAW_SCAN_STAGE_CAUTION = (
+    "Caution: this slice comes from a raw scan. The dementia-stage classifier was trained on skull-stripped, "
+    "atlas-aligned slices; on raw T1 slices from 20 research participants it labelled 180 of 180 slices as "
+    "demented, including every cognitively normal control. Treat this stage label as unreliable. "
+    "Use 'Analyze Volume' for whole-scan research scoring."
+)
 
 def build_tumor_model(arch: str, num_classes: int):
     if arch == "efficientnet_b3":
@@ -149,6 +167,18 @@ class App(ttk.Frame):
         self.tumor_tfms = get_tumor_transform()
         self.alz_tfms = get_alzheimers_transform()
         self.gate_tfms = get_gatekeeper_transform()
+
+        # Scan volumes (DICOM series / NIfTI). None for ordinary image files.
+        self.volume = None
+        self.volume_window = None
+        self.volume_series = []
+        self.volume_result = None
+        self.volume_analyzer = None
+        self.scan_slice_image = None  # displayed slice; the 2D cascade classifies this
+        self.slice_index = 0
+        self.scan_queue = queue.Queue()
+        self._header_fields = []  # (entry, value taken from a scan header, default) - see _clear_header_fields
+        self._header_dob = None
 
         # Reporting
         self.report_queue = queue.Queue()
@@ -263,13 +293,34 @@ class App(ttk.Frame):
         self.generate_btn = ttk.Button(analysis_frame, text="Analyze & Generate Report", command=self.on_analyze_and_generate, state="disabled")
         self.generate_btn.pack(fill="x", expand=True)
 
+        # Whole-scan analysis (enabled once a 3D DICOM/NIfTI volume is loaded)
+        self.volume_btn = ttk.Button(
+            analysis_frame, text="Analyze Volume (AD/CN research model)", command=self.on_analyze_volume, state="disabled"
+        )
+        self.volume_btn.pack(fill="x", expand=True, pady=(6, 0))
+
         # 2. Image/Scan Frame (Middle - Expands)
         img_frame = ttk.LabelFrame(left_frame, text="Scan", padding=10)
         img_frame.pack(side="top", fill="both", expand=True)
         
-        # Scan Button (Upload) - Pack to BOTTOM first so it stays visible
-        self.choose_img_btn = ttk.Button(img_frame, text="Scan", command=self.on_choose_image)
-        self.choose_img_btn.pack(side="bottom", fill="x", pady=(5, 0))
+        # Scan Buttons (Upload) - Pack to BOTTOM first so they stay visible
+        scan_row = ttk.Frame(img_frame)
+        scan_row.pack(side="bottom", fill="x", pady=(5, 0))
+        self.choose_img_btn = ttk.Button(scan_row, text="Scan", command=self.on_choose_image)
+        self.choose_img_btn.pack(side="left", fill="x", expand=True, padx=(0, 5))
+        self.choose_folder_btn = ttk.Button(scan_row, text="DICOM Folder...", command=self.on_choose_dicom_folder)
+        self.choose_folder_btn.pack(side="left", fill="x", expand=True, padx=(0, 5))
+        self.series_btn = ttk.Button(scan_row, text="Series...", command=self.on_choose_series, state="disabled")
+        self.series_btn.pack(side="right")
+
+        # Slice navigation for volumes (hidden until a volume is loaded)
+        self.slice_frame = ttk.Frame(img_frame)
+        self.slice_scale = ttk.Scale(self.slice_frame, from_=0, to=1, orient="horizontal", command=self._on_slice_scale)
+        self.slice_scale.pack(side="top", fill="x")
+        self.scan_info_label = ttk.Label(
+            self.slice_frame, text="", foreground="#555", font=("Segoe UI", 8), wraplength=320, justify="left"
+        )
+        self.scan_info_label.pack(side="top", fill="x")
 
         # Grad-CAM toggle + caption (disabled until a heatmap is generated)
         self.heatmap_caption_label = ttk.Label(
@@ -277,14 +328,23 @@ class App(ttk.Frame):
         )
         self.heatmap_caption_label.pack(side="bottom", fill="x", pady=(2, 0))
 
+        heatmap_row = ttk.Frame(img_frame)
+        heatmap_row.pack(side="bottom", fill="x", pady=(5, 0))
         self.heatmap_toggle_btn = ttk.Button(
-            img_frame, text="Show Heatmap", command=self._toggle_heatmap_view, state="disabled"
+            heatmap_row, text="Show Heatmap", command=self._toggle_heatmap_view, state="disabled"
         )
-        self.heatmap_toggle_btn.pack(side="bottom", fill="x", pady=(5, 0))
+        self.heatmap_toggle_btn.pack(side="left", fill="x", expand=True)
+        self.save_volume_btn = ttk.Button(
+            heatmap_row, text="Save 3D Map...", command=self.on_save_volume_result, state="disabled"
+        )
+        self.save_volume_btn.pack(side="right", padx=(5, 0))
 
         # Canvas - Pack to TOP and expand to fill remaining space
         self.canvas = tk.Canvas(img_frame, width=350, height=350, bg="#f0f0f0", relief="sunken", borderwidth=1)
         self.canvas.pack(side="top", fill="both", expand=True)
+        self._displayed_image = None
+        self._resize_job = None
+        self.canvas.bind("<Configure>", self._on_canvas_resize)
 
         # --- Right Column: Generated Report ---
         right_frame = ttk.Frame(main_pane, padding=5)
@@ -435,21 +495,330 @@ class App(ttk.Frame):
 
     def on_choose_image(self):
         path = filedialog.askopenfilename(
-            title="Select MRI Image",
-            filetypes=[["Image files", "*.jpg;*.jpeg;*.png;*.bmp"]],
+            title="Select MRI image, DICOM file, NIfTI volume or zipped DICOM study",
+            filetypes=SCAN_FILETYPES,
             initialdir=os.path.abspath(os.path.join("data", "evaluation", "images")),
         )
         if path:
+            self._open_path(path)
+
+    def on_choose_dicom_folder(self):
+        path = filedialog.askdirectory(title="Select a folder containing a DICOM study or series")
+        if path:
+            self._open_path(path)
+
+    def _open_path(self, path):
+        """Plain image files open directly; anything else is read as a scan off the main thread."""
+        if os.path.isfile(path) and os.path.splitext(path)[1].lower() in PLAIN_IMAGE_EXTENSIONS:
+            self._reset_scan_state()
             self.image_path = path
-            self.heatmap_pil_image = None
-            self.showing_heatmap = False
-            self.heatmap_toggle_btn.configure(text="Show Heatmap", state="disabled")
-            self.heatmap_caption_label.configure(text="")
+            self._clear_heatmap()
             self._display_image(path)
 
             # Enable Exam Detail Controls
             self.manual_btn.configure(state="normal")
             self.ai_fill_btn.configure(state="normal")
+        else:
+            self._start_scan_load(path)
+
+    def _clear_heatmap(self):
+        self.heatmap_pil_image = None
+        self.showing_heatmap = False
+        self.heatmap_toggle_btn.configure(text="Show Heatmap", state="disabled")
+        self.heatmap_caption_label.configure(text="")
+
+    def _clear_header_fields(self):
+        """Form values copied from one scan's header must never follow the user to another image."""
+        for entry, value, default in self._header_fields:
+            if entry.get() == value:  # untouched since it was filled in; user edits are kept
+                state = str(entry.cget("state"))
+                entry.configure(state="normal")
+                entry.delete(0, tk.END)
+                entry.insert(0, default)
+                entry.configure(state=state)
+        self._header_fields = []
+        if self._header_dob is not None:
+            try:
+                if self.dob_entry.get_date() == self._header_dob:
+                    self.dob_entry.set_date(self._header_dob.replace(year=datetime.now().year - 40, month=1, day=1))
+            except Exception:
+                pass
+            self._header_dob = None
+
+    def _fill_from_header(self, entry, value, default=""):
+        entry.delete(0, tk.END)
+        entry.insert(0, value)
+        self._header_fields.append((entry, value, default))
+
+    def _reset_scan_state(self):
+        self._clear_header_fields()
+        self.volume = None
+        self.volume_window = None
+        self.volume_series = []
+        self.volume_result = None
+        self.scan_slice_image = None
+        self.slice_index = 0
+        self.slice_frame.pack_forget()
+        self.scan_info_label.configure(text="")
+        self.volume_btn.configure(state="disabled")
+        self.save_volume_btn.configure(state="disabled")
+        self.series_btn.configure(state="disabled")
+
+    def _set_busy(self, busy, message=None):
+        """Long scan work runs in a thread; block conflicting actions meanwhile."""
+        state = "disabled" if busy else "normal"
+        for button in (self.choose_img_btn, self.choose_folder_btn):
+            button.configure(state=state)
+        if busy:
+            for button in (self.generate_btn, self.volume_btn, self.save_volume_btn, self.series_btn):
+                button.configure(state="disabled")
+            if message:
+                self.pred_label.configure(text=message)
+            self.progress_bar.pack(fill="x", pady=5)
+            self.progress_bar.start()
+        else:
+            self.progress_bar.stop()
+            self.progress_bar.pack_forget()
+            if self.image_path and (self.tumor_model or self.alz_model) and str(self.reason_entry.cget("state")) == "normal":
+                self.generate_btn.configure(state="normal")
+            if self.volume is not None:
+                self.volume_btn.configure(state="normal" if scan_view.is_volume(self.volume) else "disabled")
+                self.series_btn.configure(state="normal" if len(self.volume_series) > 1 else "disabled")
+                self.save_volume_btn.configure(
+                    state="normal" if self.volume_result is not None and self.volume_result.cam_grid is not None else "disabled"
+                )
+
+    def _start_scan_load(self, path, series_key=None):
+        self._set_busy(True, "Reading scan...")
+        threading.Thread(target=self._load_scan_worker, args=(path, series_key), daemon=True).start()
+        self.master.after(100, self._poll_scan_queue)
+
+    def _load_scan_worker(self, path, series_key):
+        try:
+            series = []
+            if path.lower().endswith((".nii", ".nii.gz")):
+                from src.mri_volume import load_nifti
+                volume = load_nifti(path)
+            else:
+                from src import dicom_io
+                series = dicom_io.discover_series(path)
+                if not series:
+                    raise dicom_io.NotDicomError("No DICOM image series was found in the selection.")
+                volume = dicom_io.load_series(dicom_io.select_series(series, key=series_key))
+            self.scan_queue.put(("loaded", path, volume, series))
+        except Exception as e:
+            self.scan_queue.put(("error", "Scan Error", f"Could not read the scan:\n{e}"))
+
+    def _poll_scan_queue(self):
+        try:
+            message = self.scan_queue.get_nowait()
+        except queue.Empty:
+            self.master.after(100, self._poll_scan_queue)
+            return
+        kind = message[0]
+        if kind == "loaded":
+            self._on_scan_loaded(*message[1:])
+        elif kind == "analysis":
+            self._on_volume_result(message[1])
+        elif kind == "saved":
+            self._set_busy(False)
+            self.pred_label.configure(text=f"Prediction: {self.volume_result.predicted_label} (research AD/CN score)")
+            messagebox.showinfo("Saved", f"3D Grad-CAM written to:\n{message[1]}\n\n" + "\n".join(sorted(message[2])))
+        else:
+            self._set_busy(False)
+            self.pred_label.configure(text="Prediction: -")
+            messagebox.showerror(message[1], message[2])
+
+    def _on_scan_loaded(self, path, volume, series):
+        self._reset_scan_state()
+        self._clear_heatmap()
+        self.image_path = path
+        self.volume = volume
+        self.volume_series = series
+        self.volume_window = scan_view.display_window(volume)
+        self.slice_index = volume.shape[2] // 2
+        self._configure_slice_slider(volume.shape[2])
+        self._show_scan_slice()
+        self.pred_label.configure(text="Prediction: -")
+        self.confidence_label.configure(text="Confidence: -")
+        self.model_used_label.configure(text="Model Used: -")
+
+        # The header already says who was scanned and how; use it rather than retyping.
+        identity = volume.identity
+        if identity is not None:
+            for entry, value in ((self.patient_name_entry, scan_view.format_person_name(identity.name)),
+                                 (self.patient_id_entry, identity.patient_id)):
+                if value:
+                    self._fill_from_header(entry, value)
+            birth_date = scan_view.parse_dicom_date(identity.birth_date)
+            if birth_date is not None:
+                try:
+                    self.dob_entry.set_date(birth_date)
+                    self._header_dob = birth_date
+                except Exception:
+                    pass
+        self.manual_btn.configure(state="normal")
+        self.ai_fill_btn.configure(state="normal")
+        self.enable_manual_input()
+        if volume.source.get("format", "").startswith("dicom"):
+            self._fill_from_header(self.technique_entry, scan_view.technique_from_header(volume), "Standard MRI Brain Protocol")
+            self._fill_from_header(self.contrast_entry, scan_view.contrast_from_header(volume), "None")
+        self._set_busy(False)
+
+        guess = volume.acquisition.get("contrast_guess") or {}
+        if guess.get("label") not in (None, "T1w"):
+            messagebox.showwarning(
+                "Check the series",
+                f"This series looks like {guess.get('label')} rather than T1-weighted MRI "
+                f"({'; '.join(guess.get('reasons', []))}).\n\nThe classifiers were trained on T1 images only."
+                + ("\n\nUse 'Series...' to pick another series from this study." if len(series) > 1 else ""),
+            )
+
+    def _configure_slice_slider(self, count):
+        if count > 1:
+            self.slice_scale.configure(from_=0, to=count - 1)
+            self.slice_scale.set(self.slice_index)
+        # Always shown for scans: the caption underneath carries the scan description.
+        self.slice_frame.pack(side="bottom", fill="x", pady=(5, 0), before=self.canvas)
+
+    def _on_slice_scale(self, value):
+        if self.volume is None:
+            return
+        index = int(round(float(value)))
+        if index == self.slice_index:
+            return
+        self.slice_index = index
+        if self.volume_result is None:
+            self._clear_heatmap()  # a 2D heatmap belongs to the slice it was computed on
+        self._show_scan_slice()
+
+    def _show_scan_slice(self):
+        """Render the slice under the slider: the raw scan, or the analysed grid once a result exists."""
+        if self.volume is None:
+            return
+        result = self.volume_result
+        if result is None:
+            plain = scan_view.axial_slice_image(self.volume, self.slice_index, self.volume_window, annotate=False)
+            self.scan_slice_image = plain
+            self._original_pil_image = plain
+            self._render_pil_image(plain)
+            self.scan_info_label.configure(text=scan_view.scan_caption(self.volume, self.slice_index))
+            return
+
+        zlo, _ = result.prepared.cranial_extent
+        z = zlo + self.slice_index
+        plain = Image.fromarray(result.prepared.render_slice(z)).convert("RGB")
+        self.scan_slice_image = plain
+        self._original_pil_image = plain
+        in_slab = z in result.cam_indices
+        overlay = result.slice_overlay(z) if result.cam_grid is not None and in_slab else None
+        self.heatmap_pil_image = overlay
+        shown = overlay if (self.showing_heatmap and overlay is not None) else plain
+        self._render_pil_image(shown)
+        first, last = result.prepared.protocol_indices[0], result.prepared.protocol_indices[-1]
+        self.scan_info_label.configure(
+            text=f"Model grid 1.5 mm, axial slice {z}  |  trained band {first}-{last}: "
+            + ("inside" if in_slab else "outside, no model evidence here")
+        )
+
+    def on_choose_series(self):
+        if len(self.volume_series) < 2:
+            return
+        dialog = tk.Toplevel(self.master)
+        dialog.title("Choose a series")
+        dialog.transient(self.master)
+        ttk.Label(dialog, text="Series in this study (most likely 3D T1 first):", padding=8).pack(anchor="w")
+        listbox = tk.Listbox(dialog, width=90, height=min(16, len(self.volume_series)))
+        for series in self.volume_series:
+            listbox.insert(tk.END, series.label)
+        listbox.selection_set(0)
+        listbox.pack(fill="both", expand=True, padx=8)
+
+        def load_selected():
+            selection = listbox.curselection()
+            if selection:
+                key = self.volume_series[selection[0]].key
+                dialog.destroy()
+                self._start_scan_load(self.image_path, series_key=key)
+
+        ttk.Button(dialog, text="Load series", command=load_selected).pack(pady=8)
+        dialog.grab_set()
+
+    # ------------------------------------------------------------------ volume analysis
+    def on_analyze_volume(self):
+        if self.volume is None:
+            return
+        self.report_html.set_html("<p><i>Scoring the whole scan and computing slice-wise Grad-CAM...</i></p>")
+        self._set_busy(True, "Prediction: Analyzing volume...")
+        threading.Thread(target=self._volume_worker, daemon=True).start()
+        self.master.after(100, self._poll_scan_queue)
+
+    def _volume_worker(self):
+        try:
+            from src import volume_analysis
+            if self.volume_analyzer is None:
+                self.volume_analyzer = volume_analysis.DementiaVolumeAnalyzer(device=self.device)
+            self.scan_queue.put(("analysis", self.volume_analyzer.analyze(self.volume)))
+        except Exception as e:
+            self.scan_queue.put(("error", "Volume Analysis Error", f"The volume could not be analysed:\n{e}"))
+
+    def _on_volume_result(self, result):
+        self.volume_result = result
+        zlo, zhi = result.prepared.cranial_extent
+        middle = (result.cam_indices or result.prepared.protocol_indices)
+        self.slice_index = middle[len(middle) // 2] - zlo
+        self._configure_slice_slider(zhi - zlo + 1)
+        self.showing_heatmap = result.cam_grid is not None
+        self.heatmap_toggle_btn.configure(
+            text="Show Original" if self.showing_heatmap else "Show Heatmap",
+            state="normal" if result.cam_grid is not None else "disabled",
+        )
+        self.heatmap_caption_label.configure(
+            text="Slice-wise Grad-CAM, scaled once for the whole volume. Not a localization of pathology."
+        )
+        members = ", ".join(f"{float(row[1]):.2f}" for row in result.member_probabilities)
+        self.pred_label.configure(text=f"Prediction: {result.predicted_label} (research AD/CN score)")
+        self.confidence_label.configure(text=f"P(AD): {float(result.probabilities[1]):.3f}   members: {members}")
+        self.model_used_label.configure(text="Model Used: AD/CN research ensemble (not validated)")
+        self.last_model_name = "research AD/CN ensemble"
+        patient_info = {
+            "name": self.patient_name_entry.get(),
+            "dob": self.dob_entry.get_date().strftime('%Y-%m-%d'),
+            "patient_id": self.patient_id_entry.get(),
+        }
+        self.last_report_html = scan_view.volume_report_html(result, patient_info, self.technique_entry.get())
+        self.last_report_markdown = None
+        self.report_html.set_html(self.last_report_html)
+        self.save_pdf_btn.configure(state="normal")
+        self._show_scan_slice()
+        self._set_busy(False)
+
+    def on_save_volume_result(self):
+        if self.volume_result is None or self.volume is None:
+            return
+        directory = filedialog.askdirectory(title="Choose a folder for the 3D Grad-CAM volumes")
+        if not directory:
+            return
+        self._set_busy(True, "Saving 3D Grad-CAM...")
+
+        def worker():
+            try:
+                written = self.volume_result.save(directory, self.volume)
+                self.scan_queue.put(("saved", directory, [os.path.basename(path) for path in written.values()]))
+            except Exception as e:
+                self.scan_queue.put(("error", "Save Error", f"Could not write the 3D map:\n{e}"))
+
+        threading.Thread(target=worker, daemon=True).start()
+        self.master.after(100, self._poll_scan_queue)
+
+    def _current_image_png(self):
+        """PNG bytes of what is being analysed: the displayed scan slice, or the image file."""
+        if self.scan_slice_image is not None:
+            buffer = io.BytesIO()
+            self.scan_slice_image.save(buffer, format="PNG")
+            return buffer.getvalue(), "image/png"
+        with open(self.image_path, "rb") as f:
+            return f.read(), "image/jpeg"
 
     def enable_manual_input(self):
         # Unlock fields and fill with generic defaults if empty
@@ -476,9 +845,7 @@ class App(ttk.Frame):
 
     def _run_ai_autodetect(self):
         try:
-            image_bytes = None
-            with open(self.image_path, "rb") as f:
-                image_bytes = f.read()
+            image_bytes, _ = self._current_image_png()
 
             prompt = (
                 "Analyze only basic MRI acquisition metadata from the image appearance. "
@@ -556,13 +923,39 @@ class App(ttk.Frame):
         self.master.update_idletasks()
         w, h = self.canvas.winfo_width(), self.canvas.winfo_height()
         if w <= 1 or h <= 1: w, h = 350, 350
-        thumb = img.copy()
-        thumb.thumbnail((w, h))
+        self._displayed_image = img
+        if self.volume is not None:
+            # Scan slices are small (often 224-256 px): enlarge to use the canvas,
+            # then mark L/R/A/P at display size so the letters stay legible.
+            scale = min(w / img.width, h / img.height)
+            size = (max(1, int(img.width * scale)), max(1, int(img.height * scale)))
+            thumb = scan_view.annotate_orientation(img.resize(size, resample=Image.Resampling.BILINEAR))
+        else:
+            thumb = img.copy()
+            thumb.thumbnail((w, h))
         self.tk_image = ImageTk.PhotoImage(thumb)
         self.canvas.delete("all")
         self.canvas.create_image(w // 2, h // 2, image=self.tk_image)
 
+    def _on_canvas_resize(self, _event):
+        # Redraw once the user has finished resizing; the canvas size never depends on the image.
+        if self._displayed_image is None:
+            return
+        if self._resize_job is not None:
+            self.master.after_cancel(self._resize_job)
+        self._resize_job = self.master.after(120, self._redraw_after_resize)
+
+    def _redraw_after_resize(self):
+        self._resize_job = None
+        if self._displayed_image is not None:
+            self._render_pil_image(self._displayed_image)
+
     def _toggle_heatmap_view(self):
+        if self.volume_result is not None:
+            self.showing_heatmap = not self.showing_heatmap
+            self.heatmap_toggle_btn.configure(text="Show Original" if self.showing_heatmap else "Show Heatmap")
+            self._show_scan_slice()
+            return
         if self.heatmap_pil_image is None or self._original_pil_image is None:
             return
         self.showing_heatmap = not self.showing_heatmap
@@ -575,6 +968,15 @@ class App(ttk.Frame):
 
     def on_analyze_and_generate(self):
         if not self.image_path: return
+        if self.volume_result is not None:
+            # Back to the raw scan: the single-slice classifiers work on native slices.
+            native_z = self.volume.shape[2] // 2
+            self.volume_result = None
+            self.save_volume_btn.configure(state="disabled")
+            self.slice_index = native_z
+            self._configure_slice_slider(self.volume.shape[2])
+            self._clear_heatmap()
+            self._show_scan_slice()
 
         self.generate_btn.configure(state="disabled")
         self.choose_img_btn.configure(state="disabled")
@@ -598,6 +1000,7 @@ class App(ttk.Frame):
 
             self.heatmap_pil_image = self._run_grad_cam(result)
             self.showing_heatmap = False
+            stage_caution = self._raw_scan_stage_caution(model_name)
             if self.heatmap_pil_image is not None:
                 self.showing_heatmap = True
                 self._render_pil_image(self.heatmap_pil_image)
@@ -605,12 +1008,14 @@ class App(ttk.Frame):
                 self.heatmap_caption_label.configure(
                     text=(
                         f"Grad-CAM: regions that most influenced the {model_name} prediction. "
-                        "Not a diagnostic localization of pathology."
+                        "Not a diagnostic localization of pathology. " + stage_caution
                     )
                 )
             else:
                 self.heatmap_toggle_btn.configure(text="Show Heatmap", state="disabled")
-                self.heatmap_caption_label.configure(text="")
+                self.heatmap_caption_label.configure(text=stage_caution)
+            if stage_caution:
+                self.model_used_label.configure(text=f"Model Used: {model_name} - raw scan slice, outside training domain")
 
             confidence_str = f"{pred_conf:.1f}%"
             patient_info = {
@@ -637,9 +1042,17 @@ class App(ttk.Frame):
             self.progress_bar.stop()
             self.progress_bar.pack_forget()
 
+    def _raw_scan_stage_caution(self, model_name):
+        """Non-empty when the 4-class stage model was just applied to a slice of a raw scan."""
+        if self.volume is not None and model_name and "Alzheimer" in model_name:
+            return RAW_SCAN_STAGE_CAUTION
+        return ""
+
     @torch.no_grad()
     def _run_cascaded_classification(self):
-        img = Image.open(self.image_path).convert("RGB")
+        # A loaded scan is classified on the slice currently displayed; files are read from disk.
+        scan_slice = getattr(self, "scan_slice_image", None)
+        img = scan_slice.convert("RGB") if scan_slice is not None else Image.open(self.image_path).convert("RGB")
         
         # 1. Gatekeeper Phase (Routing)
         target_domain = "tumor" # Default fallback
@@ -772,15 +1185,24 @@ class App(ttk.Frame):
                 exam_details=user_inputs,
                 report_date=report_date,
                 model_used=model_name,
-                source_image=self.image_path,
+                source_image=self._source_description(),
             )
             html_text = render_report_html(report)
+            caution = self._raw_scan_stage_caution(model_name)
+            if caution:
+                html_text = f'<p style="color:#a00000;"><b>{caution}</b></p>' + html_text
             self.last_report_html = html_text
             self.last_report_markdown = render_report_markdown(report)
             self.report_queue.put(html_text)
 
         except Exception as e:
             self.report_queue.put(f"<p><b>Error generating report:</b></p><pre>{e}</pre>")
+
+    def _source_description(self):
+        """What the report says was analysed; a scan is described, never by a patient-bearing path."""
+        if self.volume is None:
+            return self.image_path
+        return f"{scan_view.scan_caption(self.volume, self.slice_index)} (single-slice classification)"
 
     def _check_report_queue(self):
         try:
@@ -814,9 +1236,8 @@ class App(ttk.Frame):
             # Embed image
             image_data_uri = None
             try:
-                with open(self.image_path, "rb") as f:
-                    encoded = base64.b64encode(f.read()).decode('utf-8')
-                    image_data_uri = f"data:image/jpeg;base64,{encoded}"
+                image_bytes, mime = self._current_image_png()
+                image_data_uri = f"data:{mime};base64,{base64.b64encode(image_bytes).decode('utf-8')}"
             except Exception: pass
 
             if image_data_uri:
@@ -882,7 +1303,7 @@ class App(ttk.Frame):
 def main():
     root = tk.Tk()
     root.title(APP_TITLE)
-    root.geometry("1100x750")
+    root.geometry("1200x880")
     try:
         style = ttk.Style()
         style.theme_use("vista" if sys.platform.startswith("win") else "clam")
