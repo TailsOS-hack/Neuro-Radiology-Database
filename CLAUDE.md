@@ -306,6 +306,8 @@ When making changes, these are the most critical files to understand:
 - `research/dementia_round3/*.py` and `tests/test_round3*.py` are hash-pinned in `docs/kevin_paper_20261011/round3/implementation_verification.json`.
 - `docs/kevin_paper_20261011/**` and the review bundles are frozen experiment records.
 - Checkpoints under `models/` are hash-pinned across the evidence trail. Never overwrite one; a new model gets a new file name.
+- `.gitattributes` marks the frozen bundles `-text`. Several sealed CSVs there have CRLF line endings on purpose: `csv.DictWriter` wrote them that way and their checksums cover those bytes. Never renormalise them (`git add --renormalize`) or let an editor convert them; one changed byte fails `scripts/check_explainability_bundle.py` and `scripts/check_validation_review.py`.
+- When a recorded hash does not match, restore the original bytes. Never edit the recorded hash.
 - Put new functionality in new modules rather than changing the pinned ones.
 
 ### Do Not
