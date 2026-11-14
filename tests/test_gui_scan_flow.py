@@ -120,6 +120,7 @@ class GuiScanFlowTests(unittest.TestCase):
             checkpoints.append(path)
 
         cls.dialogs = []
+        cls.opened = []
         missing = str(cls.directory / "no_such_model.pt")
         cls.patches = [
             patch.object(cls.gui, "DateEntry", FakeDateEntry),
@@ -128,6 +129,9 @@ class GuiScanFlowTests(unittest.TestCase):
               ("BINARY_ROUTER_MODEL_PATH", "GATEKEEPER_MODEL_PATH", "TUMOR_MODEL_PATH", "ALZHEIMERS_MODEL_PATH")),
             *(patch.object(cls.gui.messagebox, name, side_effect=lambda title, text, _kind=name: cls.dialogs.append((_kind, title, text)))
               for name in ("showinfo", "showwarning", "showerror")),
+            # Answer "yes" to questions, and record instead of launching a browser.
+            patch.object(cls.gui.messagebox, "askyesno", side_effect=lambda title, text: cls.dialogs.append(("askyesno", title, text)) or True),
+            patch.object(cls.gui.webbrowser, "open", side_effect=lambda url: cls.opened.append(url)),
         ]
         for item in cls.patches:
             item.start()
@@ -235,10 +239,16 @@ class GuiScanFlowTests(unittest.TestCase):
         target = self.directory / "saved"
         with patch.object(self.gui.filedialog, "askdirectory", return_value=str(target)):
             app.on_save_volume_result()
-        self.pump(lambda: any(kind == "showinfo" and title == "Saved" for kind, title, _ in self.dialogs))
-        for name in ("result.json", "anatomy.nii.gz", "gradcam.nii.gz", "gradcam_native.nii.gz", "montage.png", "projections.png"):
+        self.pump(lambda: any(kind == "askyesno" and title == "Saved" for kind, title, _ in self.dialogs))
+        for name in ("result.json", "anatomy.nii.gz", "gradcam.nii.gz", "gradcam_native.nii.gz", "montage.png", "projections.png", "viewer.html"):
             self.assertTrue((target / name).is_file(), name)
         self.assertNotIn("SYNTHETIC", (target / "result.json").read_text())
+        # Saving offers the interactive viewer; saying yes opens the saved file, which names nobody.
+        self.assertIn("Open the interactive 3D viewer", next(text for kind, _, text in self.dialogs if kind == "askyesno"))
+        self.assertEqual(self.opened, [(target / "viewer.html").resolve().as_uri()])
+        viewer = (target / "viewer.html").read_text()
+        self.assertNotIn("SYNTHETIC", viewer)
+        self.assertNotIn("FAKE-ID", viewer)
 
         # Running the single-slice analysis returns the viewer to the raw scan.
         with patch.object(app, "_start_report_generation"):

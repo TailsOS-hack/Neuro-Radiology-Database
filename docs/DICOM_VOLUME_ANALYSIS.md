@@ -17,9 +17,10 @@ unchanged. Nothing here is evidence of clinical performance.
 | Volume container | `src/mri_volume.py` | One representation for every scan: voxels in closest-canonical RAS+ order plus the voxel-to-world affine. Identifying header fields are held separately and never written or logged. NIfTI export with the two hashes the Round 3 patient manifest pins. |
 | DICOM reader | `src/dicom_io.py` | Files, folders or zip archives; classic single-frame series and Enhanced multi-frame MR; series discovery and T1 ranking; slice ordering and spacing from positions; per-slice rescale; fails loudly on missing slices, irregular spacing, mosaics, colour captures and undecodable pixel data. |
 | Volume analysis | `src/volume_analysis.py` | Scan -> the exact slices the clinical AD/CN checkpoints were trained on -> ensemble score -> Grad-CAM for every slice of the trained band, stacked into a 3D map that overlays the scan. |
+| Interactive viewer | `src/volume_viewer.py`, `src/volume_viewer_template.html` | One self-contained HTML page per analysis: three linked slice views with the stacked Grad-CAM overlay, a rotating 3D projection and per-slice charts. No network access and no identifying header fields. |
 | Display helpers | `src/scan_view.py` | Slice rendering and header-derived form values for the GUI. |
 | GUI | `src/radiology_report_gui.py` | Open a DICOM file/folder/zip or NIfTI, page through slices, run the single-slice cascade on the displayed slice or the whole-volume analysis, export the 3D map. |
-| Verification | `scripts/verify_dicom_volume_pipeline.py`, `tests/test_dicom_io.py`, `tests/test_volume_analysis.py`, `tests/test_scan_view.py`, `tests/test_gui_scan_flow.py` | See below. |
+| Verification | `scripts/verify_dicom_volume_pipeline.py`, `tests/test_dicom_io.py`, `tests/test_volume_analysis.py`, `tests/test_volume_viewer.py`, `tests/test_scan_view.py`, `tests/test_gui_scan_flow.py` | See below. |
 
 ## Using it
 
@@ -32,6 +33,9 @@ python -m src.dicom_io /path/to/study --to-nifti scan.nii.gz
 
 # Whole-volume research analysis with the stacked Grad-CAM map
 python -m src.volume_analysis /path/to/study --output results/
+
+# Rebuild the interactive viewer from a results folder written earlier
+python -m src.volume_viewer results/
 ```
 
 `results/` then holds:
@@ -42,12 +46,14 @@ python -m src.volume_analysis /path/to/study --output results/
 | `anatomy.nii.gz`, `gradcam.nii.gz` | The scan and the attention map on the model's 1.5 mm RAS grid (same shape and affine). |
 | `gradcam_native.nii.gz` | The same map resampled onto the scan's own voxel grid: one value per original voxel, so it overlays the DICOM series directly in 3D Slicer, ITK-SNAP or FSLeyes. |
 | `montage.png`, `projections.png` | Every analysed slice with its heatmap; axial/coronal/sagittal maximum-intensity projections of the map. |
+| `viewer.html` | The same scan and map in one page that opens in any browser, offline: axial, coronal and sagittal views that move together, a 3D projection to rotate, the share of attention and the single-slice score for every slice of the slab. No identifying fields; it does contain the scan, so treat it like the scan. |
 
 In the GUI: **Scan** (file) or **DICOM Folder...** loads a scan, the slider pages
 through axial slices, **Series...** picks another series of the study,
 **Analyze Volume** runs the whole-scan analysis, **Save 3D Map...** writes the
-files above. Patient name, ID and date of birth are taken from the header, and
-are removed again when another image is opened.
+files above and offers to open `viewer.html` in the browser. Patient name, ID
+and date of birth are taken from the header, and are removed again when another
+image is opened.
 
 Compressed transfer syntaxes (JPEG, JPEG-LS, JPEG 2000) need the optional
 `pylibjpeg` plugins from `requirements.txt`; uncompressed and RLE files do not.
@@ -93,6 +99,11 @@ pickled code.
   it includes regions outside the brain (skull, scalp, image borders). It shows
   what moved this model's score. It is not a localisation of pathology, and a
   better-looking map is not evidence of a better model.
+* `viewer.html` draws that same volume-scaled map. The slice views use one blue
+  ramp whose opacity follows the value, with a control that hides values below
+  a chosen level. The 3D view lays the map, front to back, over a summed
+  projection of the scan: it is a picture for orientation, not a measurement,
+  and the slice views and `gradcam.nii.gz` are the reference.
 
 ## Verification (2026-11-14)
 
@@ -127,14 +138,18 @@ clinical checkpoints give 14/15, 10/15 and 15/15 correct on the 15 binary cases
 and the ensemble gives 14/15 with every case labelled CN, exactly the counts in
 [RESULTS.md](kevin_paper_20261011/round2_publication/RESULTS.md).
 
-**Tests.** 103 new tests in six files: 75 for the DICOM reader, the volume
-analysis, the display helpers and the GUI scan flow, and 28 for the trainer and
-the OASIS-1 loader described in [OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md).
-The suite is 263 tests in total with a display; the GUI-flow tests need
-`xvfb-run` on a headless machine and are skipped otherwise. `pydicom` was added
-to `requirements-verification.txt` so the 33 DICOM contracts and the 8
-display-helper tests that need no other package run in the offline CI job; that
-job's set of pre-existing import errors is unchanged.
+**Tests.** 119 new tests in seven files: 91 for the DICOM reader, the volume
+analysis, the interactive viewer, the display helpers and the GUI scan flow,
+and 28 for the trainer and the OASIS-1 loader described in
+[OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md). The suite is 279 tests
+in total with a display; the GUI-flow tests need `xvfb-run` on a headless
+machine and are skipped otherwise. `pydicom` was added to
+`requirements-verification.txt` so the 33 DICOM contracts, the 8 display-helper
+tests and the 9 viewer tests that need no other package run in the offline CI
+job; that job's set of pre-existing import errors is unchanged. Four further
+viewer tests load the page in headless Chromium and check that it decodes the
+embedded volumes exactly and draws a marker voxel where each view's edge
+letters say; they run only where Node.js with Playwright is installed.
 
 ## What this showed about the existing dementia models
 

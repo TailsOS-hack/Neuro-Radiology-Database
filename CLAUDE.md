@@ -20,6 +20,8 @@ Tumor-Database/
 │   ├── mri_volume.py               # Canonical RAS+ volume container, NIfTI I/O, PHI kept separate
 │   ├── dicom_io.py                 # DICOM files/folders/zips -> MRIVolume (geometry from the header)
 │   ├── volume_analysis.py          # Whole-scan AD/CN research scoring + stacked 3D Grad-CAM
+│   ├── volume_viewer.py            # viewer.html: offline 3-plane + 3D page for a volume analysis
+│   ├── volume_viewer_template.html # The viewer's markup, styles and script (ASCII, no external URLs)
 │   ├── train_dementia_volume.py    # Patient-level, cross-validated training on labelled 3D scans
 │   ├── oasis1.py                   # OASIS-1 index + loader (data obtained separately, never committed)
 │   └── scan_view.py                # Slice rendering / header-derived form values for the GUI
@@ -147,7 +149,8 @@ python src/train_alzheimers.py
 ```bash
 python -m src.dicom_io <file|folder|zip>                       # list series
 python -m src.dicom_io <path> --to-nifti scan.nii.gz           # canonical NIfTI + sidecar
-python -m src.volume_analysis <scan> --output results/         # research AD/CN score + 3D Grad-CAM
+python -m src.volume_analysis <scan> --output results/         # research AD/CN score + 3D Grad-CAM + viewer.html
+python -m src.volume_viewer results/                           # rebuild viewer.html from a saved results folder
 python scripts/verify_dicom_volume_pipeline.py --openneuro-root data/external/openneuro_ds007561_v1
 ```
 
@@ -173,7 +176,8 @@ python -m unittest discover -s tests -p 'test_*.py'            # what CI runs (n
 ```
 
 New tests must skip, not error, when torch / nibabel / pydicom / a display are missing: the CI
-verification job installs only `requirements-verification.txt`.
+verification job installs only `requirements-verification.txt`. The viewer's browser tests in
+`tests/test_volume_viewer.py` run only where Node.js with Playwright is available.
 
 ### Evaluation and Visualization
 
@@ -314,6 +318,8 @@ When making changes, these are the most critical files to understand:
 - `prepare_clinical_volume` must stay pixel-identical to `docs/kevin_paper_20261011/preprocess_clinical_t1.py`; the clinical checkpoints were trained on exactly that input. Re-run `scripts/verify_dicom_volume_pipeline.py` after touching it.
 - When stacking per-slice Grad-CAM into a volume, keep the raw maps and scale once for the whole volume. Per-slice min-max normalisation makes every slice look equally important.
 - The four-class stage model was trained on skull-stripped, atlas-aligned slices. On raw with-skull slices it labels everything as demented; do not present its label on a raw scan as valid.
+- `viewer.html` must stay one self-contained file: no external URL, script, font or request, ASCII only, and every string from the analysis embedded as escaped JSON and inserted with `textContent`. It carries no header fields but does contain the scan; never commit one made from a person's scan.
+- The viewer's slice views follow the app's convention (patient left on image left, anterior and superior up, sagittal seen from the patient's left). Change the orientation only together with the edge letters and the browser test that pins them.
 
 ### Training on Labelled Scans
 - The person is the unit: split, sample, count and report by person. Never let slices or repeat scans of one person fall on both sides of a split.

@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__VV_TITLE__</title>
+<style>
+body { margin: 0; background: var(--vv-bg); }
+.vv-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+</style>
+</head>
+<body>
+<main class="vv-page">
+<!--vv:fragment-start-->
+<style>
+/* Layout: one column of working surfaces. Four square viewports (three slice planes and a 3D projection)
+   in a 2 x 2 grid, controls underneath, then the per-slice charts and the reading notes. */
+:root {
+  --vv-bg: #f4f6f9;
+  --vv-surface: #ffffff;
+  --vv-ink: #101722;
+  --vv-ink-2: #465163;
+  --vv-muted: #6f7a8c;
+  --vv-line: #dce1e9;
+  --vv-accent: #256abf;
+  --vv-accent-ink: #ffffff;
+  --vv-series: #2a78d6;
+  --vv-note-bg: #fbf3df;
+  --vv-note-line: #e6d3a1;
+  --vv-viewport: #05070b;
+  --vv-viewport-ink: rgba(255, 255, 255, 0.8);
+  --vv-viewport-line: rgba(255, 255, 255, 0.45);
+  --vv-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --vv-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --vv-bg: #0d1016;
+    --vv-surface: #151a22;
+    --vv-ink: #e8edf4;
+    --vv-ink-2: #b4bdcb;
+    --vv-muted: #8a95a7;
+    --vv-line: #262d39;
+    --vv-accent: #5598e7;
+    --vv-accent-ink: #0b1220;
+    --vv-series: #3987e5;
+    --vv-note-bg: #2a2414;
+    --vv-note-line: #5a4a1e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --vv-bg: #0d1016;
+  --vv-surface: #151a22;
+  --vv-ink: #e8edf4;
+  --vv-ink-2: #b4bdcb;
+  --vv-muted: #8a95a7;
+  --vv-line: #262d39;
+  --vv-accent: #5598e7;
+  --vv-accent-ink: #0b1220;
+  --vv-series: #3987e5;
+  --vv-note-bg: #2a2414;
+  --vv-note-line: #5a4a1e;
+  color-scheme: dark;
+}
+.vv, .vv * { box-sizing: border-box; }
+.vv [hidden] { display: none !important; }
+.vv {
+  font-family: var(--vv-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--vv-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+.vv-title { font-size: 1.6rem; line-height: 1.2; font-weight: 650; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.vv-head { display: flex; flex-direction: column; gap: 8px; }
+.vv-facts { margin: 0; color: var(--vv-ink-2); max-width: 75ch; }
+.vv-facts b { color: var(--vv-ink); font-weight: 600; }
+.vv-note {
+  background: var(--vv-note-bg);
+  border: 1px solid var(--vv-note-line);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 90ch;
+}
+.vv-note-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--vv-ink-2); }
+.vv-note p, .vv-note ul { margin: 0; }
+.vv-note ul { padding-left: 1.2em; color: var(--vv-ink-2); }
+.vv-stage { display: flex; flex-direction: column; gap: 14px; }
+.vv-views { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 1080px) { .vv-views { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.vv-panel { margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.vv-viewport {
+  position: relative;
+  background: var(--vv-viewport);
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+}
+.vv-viewport canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: crosshair; }
+.vv-viewport canvas.vv-3d { cursor: grab; }
+.vv-viewport canvas.vv-3d.vv-dragging { cursor: grabbing; }
+.vv-viewport canvas:focus-visible { outline: 2px solid var(--vv-accent); outline-offset: -2px; }
+.vv-tip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(5, 7, 11, 0.86);
+  color: var(--vv-viewport-ink);
+  border: 1px solid var(--vv-viewport-line);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font: 11px/1.4 var(--vv-mono);
+  white-space: nowrap;
+  transform: translate(10px, -130%);
+}
+.vv-caption { display: flex; justify-content: space-between; gap: 8px; font-size: 0.8rem; color: var(--vv-ink-2); flex-wrap: wrap; }
+.vv-caption b { font-weight: 600; color: var(--vv-ink); }
+.vv-caption span:last-child { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); }
+.vv-status { margin: 0; font-size: 0.85rem; color: var(--vv-ink-2); }
+.vv-readout {
+  font: 0.8rem/1.5 var(--vv-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--vv-ink-2);
+  background: var(--vv-surface);
+  border: 1px solid var(--vv-line);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.vv-controls { display: flex; flex-direction: column; gap: 14px; }
+.vv-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 24px; align-items: end; }
+.vv-bar { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: flex-end; justify-content: space-between; }
+.vv-field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.vv-field label { font-size: 0.8rem; color: var(--vv-ink-2); display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.vv-field output { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vv-field input[type="range"] { width: 100%; margin: 0; accent-color: var(--vv-accent); }
+.vv-field.vv-check { flex-direction: row; align-items: center; gap: 8px; padding-bottom: 2px; }
+.vv-field.vv-check label { font-size: 0.86rem; color: var(--vv-ink); }
+.vv-check input { accent-color: var(--vv-accent); width: 16px; height: 16px; margin: 0; flex: none; }
+@media (max-width: 640px) { .vv-group { grid-template-columns: minmax(0, 1fr); } }
+.vv-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.vv button {
+  font: inherit;
+  font-size: 0.84rem;
+  color: var(--vv-ink);
+  background: var(--vv-surface);
+  border: 1px solid var(--vv-line);
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.vv button:hover { border-color: var(--vv-accent); }
+.vv button:focus-visible, .vv input:focus-visible, .vv summary:focus-visible { outline: 2px solid var(--vv-accent); outline-offset: 2px; }
+.vv button[aria-pressed="true"] { background: var(--vv-accent); border-color: var(--vv-accent); color: var(--vv-accent-ink); }
+.vv-legend { display: flex; flex-direction: column; gap: 4px; flex: 1 1 280px; max-width: 460px; min-width: 0; }
+.vv-legend canvas { width: 100%; height: 24px; border-radius: 3px; display: block; background: var(--vv-viewport); }
+.vv-legend-scale { display: flex; justify-content: space-between; font: 0.72rem var(--vv-mono); color: var(--vv-muted); }
+.vv-legend-text { font-size: 0.8rem; color: var(--vv-ink-2); }
+.vv-charts { display: flex; flex-direction: column; gap: 14px; }
+.vv-chart { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.vv-chart h3, .vv-read h3 { font-size: 0.95rem; font-weight: 650; margin: 0; }
+.vv-chart p { margin: 0; font-size: 0.8rem; color: var(--vv-ink-2); max-width: 80ch; }
+.vv-chart p.vv-chart-now { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); font-variant-numeric: tabular-nums; }
+.vv-chart-box { position: relative; }
+.vv-chart svg { display: block; width: 100%; overflow: visible; }
+.vv-chart svg text { font: 10px var(--vv-mono); fill: var(--vv-muted); }
+.vv-chart svg .vv-axis { stroke: var(--vv-line); stroke-width: 1; }
+.vv-chart svg .vv-bar-mark { fill: var(--vv-series); opacity: 0.55; }
+.vv-chart svg .vv-bar-mark.vv-current { opacity: 1; }
+.vv-chart svg .vv-dot { fill: var(--vv-series); opacity: 0.55; }
+.vv-chart svg .vv-dot.vv-scored { opacity: 1; stroke: var(--vv-surface); stroke-width: 1.5; }
+.vv-chart svg .vv-dot.vv-current { opacity: 1; stroke: var(--vv-ink); stroke-width: 1.5; }
+.vv-chart svg .vv-cursor { stroke: var(--vv-ink); stroke-width: 1; opacity: 0.5; }
+.vv-chart svg .vv-hit { fill: transparent; cursor: pointer; }
+.vv-chart-tip {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  background: var(--vv-surface);
+  color: var(--vv-ink);
+  border: 1px solid var(--vv-line);
+  border-radius: 4px;
+  padding: 3px 7px;
+  font: 11px/1.4 var(--vv-mono);
+  white-space: nowrap;
+  transform: translate(-50%, -4px);
+}
+.vv details { font-size: 0.82rem; color: var(--vv-ink-2); }
+.vv summary { cursor: pointer; width: fit-content; }
+.vv-table-wrap { overflow-x: auto; max-height: 260px; overflow-y: auto; border: 1px solid var(--vv-line); border-radius: 6px; margin-top: 6px; }
+.vv table { border-collapse: collapse; width: 100%; font: 0.76rem var(--vv-mono); font-variant-numeric: tabular-nums; }
+.vv th, .vv td { text-align: right; padding: 3px 10px; border-bottom: 1px solid var(--vv-line); white-space: nowrap; }
+.vv th { position: sticky; top: 0; background: var(--vv-surface); color: var(--vv-ink-2); font-weight: 600; }
+.vv th:last-child, .vv td:last-child { text-align: left; }
+.vv-read { display: flex; flex-direction: column; gap: 6px; max-width: 80ch; }
+.vv-read ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 4px; color: var(--vv-ink-2); }
+.vv-read li b { color: var(--vv-ink); font-weight: 600; }
+@media (max-width: 520px) {
+  .vv-title { font-size: 1.35rem; }
+  .vv-views { gap: 8px; }
+  .vv-caption { flex-direction: column; gap: 0; }
+}
+</style>
+<section class="vv" id="vv" aria-label="Interactive 3D attention map">
+  <header class="vv-head">
+    <__VV_HEADING__ class="vv-title">__VV_TITLE__</__VV_HEADING__>
+    <p class="vv-facts" id="vv-facts"></p>
+  </header>
+  <div class="vv-note" role="note">
+    <span class="vv-note-label">Research output</span>
+    <p id="vv-notice"></p>
+    <ul id="vv-warnings" hidden></ul>
+  </div>
+  <div class="vv-stage">
+    <p class="vv-status" id="vv-status" role="status">Loading the scan&hellip;</p>
+    <div class="vv-views">
+      <figure class="vv-panel">
+        <div class="vv-viewport"><canvas id="vv-axial" tabindex="0" role="img" aria-label="Axial slice with attention overlay. Arrow keys move the crosshair; Page Up and Page Down change the slice."></canvas></div>
+        <figcaption class="vv-caption"><span><b>Axial</b> from above</span><span id="vv-axial-info"></span></figcaption>
+      </figure>
+      <figure class="vv-panel">
+        <div class="vv-viewport"><canvas id="vv-coronal" tabindex="0" role="img" aria-label="Coronal slice with attention overlay. Arrow keys move the crosshair; Page Up and Page Down change the slice."></canvas></div>
+        <figcaption class="vv-caption"><span><b>Coronal</b> from behind</span><span id="vv-coronal-info"></span></figcaption>
+      </figure>
+      <figure class="vv-panel">
+        <div class="vv-viewport"><canvas id="vv-sagittal" tabindex="0" role="img" aria-label="Sagittal slice with attention overlay. Arrow keys move the crosshair; Page Up and Page Down change the slice."></canvas></div>
+        <figcaption class="vv-caption"><span><b>Sagittal</b> from the left</span><span id="vv-sagittal-info"></span></figcaption>
+      </figure>
+      <figure class="vv-panel">
+        <div class="vv-viewport"><canvas id="vv-3d" class="vv-3d" tabindex="0" role="img" aria-label="Rotating 3D projection of the head with the attention map. Drag or use the arrow keys to rotate."></canvas></div>
+        <figcaption class="vv-caption"><span><b>3D</b> drag to rotate</span><span id="vv-3d-info"></span></figcaption>
+      </figure>
+    </div>
+    <p class="vv-readout" id="vv-readout" aria-live="polite">&nbsp;</p>
+    <div class="vv-controls">
+      <div class="vv-group">
+        <div class="vv-field"><label for="vv-z"><span>Axial slice, inferior to superior</span><output id="vv-z-out"></output></label><input type="range" id="vv-z" min="0" max="1" step="1" value="0"></div>
+        <div class="vv-field"><label for="vv-y"><span>Coronal slice, posterior to anterior</span><output id="vv-y-out"></output></label><input type="range" id="vv-y" min="0" max="1" step="1" value="0"></div>
+        <div class="vv-field"><label for="vv-x"><span>Sagittal slice, left to right</span><output id="vv-x-out"></output></label><input type="range" id="vv-x" min="0" max="1" step="1" value="0"></div>
+      </div>
+      <div class="vv-group vv-attention">
+        <div class="vv-field"><label for="vv-opacity"><span>Attention opacity</span><output id="vv-opacity-out"></output></label><input type="range" id="vv-opacity" min="0" max="100" step="1" value="85"></div>
+        <div class="vv-field"><label for="vv-floor"><span>Hide attention below</span><output id="vv-floor-out"></output></label><input type="range" id="vv-floor" min="0" max="95" step="1" value="25"></div>
+        <div class="vv-field vv-check"><input type="checkbox" id="vv-show" checked><label for="vv-show">Show the attention map</label></div>
+      </div>
+      <div class="vv-bar">
+        <div class="vv-legend vv-attention">
+          <canvas id="vv-legend" width="420" height="24" role="img" aria-label="Colour scale for attention, from 0 to 1"></canvas>
+          <div class="vv-legend-scale"><span>0</span><span>0.25</span><span>0.5</span><span>0.75</span><span>1</span></div>
+          <div class="vv-legend-text" id="vv-legend-text">Attention as a fraction of the strongest voxel in this scan.</div>
+        </div>
+        <div class="vv-buttons">
+          <button type="button" id="vv-peak" class="vv-attention">Go to strongest attention</button>
+          <button type="button" id="vv-spin" aria-pressed="false">Rotate</button>
+          <button type="button" id="vv-reset">Reset view</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vv-charts vv-attention" id="vv-charts">
+    <div class="vv-chart">
+      <h3>Attention in each slice of the slab</h3>
+      <p>Share of the whole map that falls in each analysed axial slice, inferior to superior. Select a bar to go to that slice.</p>
+      <div class="vv-chart-box"><svg id="vv-share" role="img" aria-label="Bar chart of the share of attention in each analysed axial slice"></svg><div class="vv-chart-tip" id="vv-share-tip" hidden></div></div>
+      <p class="vv-chart-now" id="vv-share-now">&nbsp;</p>
+    </div>
+    <div class="vv-chart">
+      <h3 id="vv-prob-title">Score from each slice alone</h3>
+      <p id="vv-prob-text"></p>
+      <div class="vv-chart-box"><svg id="vv-prob" role="img" aria-label="Dot chart of the probability each analysed slice gives on its own"></svg><div class="vv-chart-tip" id="vv-prob-tip" hidden></div></div>
+      <p class="vv-chart-now" id="vv-prob-now">&nbsp;</p>
+    </div>
+    <details>
+      <summary>Show the per-slice numbers as a table</summary>
+      <div class="vv-table-wrap"><table id="vv-table"><thead></thead><tbody></tbody></table></div>
+    </details>
+  </div>
+  <div class="vv-read">
+    <h3>How to read this</h3>
+    <ul id="vv-read"></ul>
+  </div>
+</section>
+<script type="application/json" id="vv-data">__VV_DATA__</script>
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const data = JSON.parse($("vv-data").textContent);
+  const [nx, ny, nz] = data.shape;
+  const N = [nx, ny, nz];
+  const STRIDE = [1, nx, nx * ny];
+  const SP = data.spacing;
+  const OFF = data.offset;
+  const hasMap = Boolean(data.attention_png);
+  const positive = data.class_names[1];
+  const fmt = (value, digits) => Number(value).toFixed(digits);
+
+  // ---------------------------------------------------------------- static text
+  const members = data.member_probabilities.map((row) => fmt(row[1], 2)).join(", ");
+  const facts = $("vv-facts");
+  const fact = (label, value) => {
+    const b = document.createElement("b");
+    b.textContent = value;
+    facts.append(label, b);
+  };
+  fact("Ensemble P(" + positive + ") ", fmt(data.probabilities[1], 3));
+  fact(", label ", data.predicted_label);
+  facts.append(" at threshold " + data.threshold + " (" + data.member_probabilities.length + " members: " + members + "). ");
+  facts.append(data.scored_text + " ");
+  if (hasMap) facts.append("The map explains the " + data.target_class + " score.");
+  $("vv-notice").textContent = data.notice;
+  if (data.warnings.length) {
+    const list = $("vv-warnings");
+    list.hidden = false;
+    for (const text of data.warnings) {
+      const item = document.createElement("li");
+      item.textContent = text;
+      list.append(item);
+    }
+  }
+  const read = $("vv-read");
+  const point = (lead, text) => {
+    const item = document.createElement("li");
+    const b = document.createElement("b");
+    b.textContent = lead + " ";
+    item.append(b, text);
+    read.append(item);
+  };
+  if (hasMap) {
+    point("One scale for the whole scan.", "Each axial slice of the slab was explained separately with Grad-CAM and the slice maps were stacked. They share one scale, so a slice the model barely used stays dark.");
+    point("Only the slab carries evidence.", "The model reads the axial slices between the two marked levels (" + data.slab_text + "). Outside them the map is empty by construction, not because the model found nothing.");
+    point("Coarse by design.", "Each slice map is 7 by 7 cells before it is enlarged, so edges are soft and the map can spill outside the brain onto skull, scalp or background.");
+    point("What it is.", "The map shows what moved this model's " + data.target_class + " score. It does not locate disease, and a tidy-looking map is not evidence of a good model.");
+  } else {
+    point("No attention map.", "This analysis was run without Grad-CAM, so only the scan on the model's 1.5 mm grid is shown.");
+  }
+  point("Orientation.", "The patient's left is on the left of the axial and coronal views; the sagittal view is seen from the patient's left, face to the right. Positions are millimetres in scanner coordinates (R, A and S positive).");
+  if (!hasMap) for (const node of document.querySelectorAll(".vv-attention")) node.hidden = true;
+
+  // ---------------------------------------------------------------- colour
+  // Single-hue sequential ramp (dark to light blue); opacity carries the value as well.
+  const STOPS = [[16, 66, 129], [37, 106, 191], [57, 135, 229], [134, 182, 239], [205, 226, 251]];
+  const lutR = new Uint8Array(256), lutG = new Uint8Array(256), lutB = new Uint8Array(256);
+  for (let i = 0; i < 256; i++) {
+    const t = (i / 255) * (STOPS.length - 1);
+    const k = Math.min(Math.floor(t), STOPS.length - 2);
+    const f = t - k;
+    lutR[i] = Math.round(STOPS[k][0] + (STOPS[k + 1][0] - STOPS[k][0]) * f);
+    lutG[i] = Math.round(STOPS[k][1] + (STOPS[k + 1][1] - STOPS[k][1]) * f);
+    lutB[i] = Math.round(STOPS[k][2] + (STOPS[k + 1][2] - STOPS[k][2]) * f);
+  }
+  const alphaLut = new Float32Array(256);
+  const stepLut = new Float32Array(256); // opacity of one ray step in the 3D view
+  const state = {
+    idx: [Math.floor(nx / 2), Math.floor(ny / 2), Math.floor(nz / 2)],
+    opacity: 0.85,
+    floor: 0.25,
+    show: hasMap,
+    yaw: -0.6,
+    pitch: 0.28,
+    spin: false,
+    stopAt: null, // the automatic opening turn ends here; null once the viewer takes over
+  };
+  function updateAlpha() {
+    for (let i = 0; i < 256; i++) {
+      const v = i / 255;
+      const w = state.show && v > state.floor ? (v - state.floor) / (1 - state.floor) : 0;
+      alphaLut[i] = w > 0 ? state.opacity * Math.pow(w, 0.7) : 0;
+      // Steeper than the slice overlay: weak attention stays a thin haze, so the strong cores show through it.
+      stepLut[i] = w > 0 ? Math.min(0.9, state.opacity * 0.55 * Math.pow(w, 2.4)) : 0;
+    }
+  }
+
+  // ---------------------------------------------------------------- volumes
+  let anatomy = null, attention = null;
+  async function decodeSprite(uri) {
+    const image = new Image();
+    image.src = uri;
+    await image.decode();
+    const canvas = document.createElement("canvas");
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    context.drawImage(image, 0, 0);
+    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    const columns = data.tiles[0];
+    const volume = new Uint8Array(nx * ny * nz);
+    for (let z = 0; z < nz; z++) {
+      const left = (z % columns) * nx, top = Math.floor(z / columns) * ny;
+      for (let y = 0; y < ny; y++) {
+        let p = ((top + y) * canvas.width + left) * 4;
+        let q = nx * (y + ny * z);
+        for (let x = 0; x < nx; x++, p += 4, q++) volume[q] = pixels[p];
+      }
+    }
+    return volume;
+  }
+  function checksum(volume) {
+    let total = 0;
+    for (let i = 0; i < volume.length; i++) total += volume[i];
+    return total;
+  }
+
+  // ---------------------------------------------------------------- slice views
+  // u runs left to right on screen, v bottom to top, w is the slice axis.
+  const PLANES = [
+    { id: "vv-axial", u: 0, v: 1, w: 2, edges: ["L", "R", "A", "P"] },
+    { id: "vv-coronal", u: 0, v: 2, w: 1, edges: ["L", "R", "S", "I"] },
+    { id: "vv-sagittal", u: 1, v: 2, w: 0, edges: ["P", "A", "S", "I"] },
+  ];
+  const extentMax = Math.max(nx * SP[0], ny * SP[1], nz * SP[2]);
+  for (const plane of PLANES) {
+    plane.canvas = $(plane.id);
+    plane.context = plane.canvas.getContext("2d");
+    plane.nu = N[plane.u];
+    plane.nv = N[plane.v];
+    plane.buffer = document.createElement("canvas");
+    plane.buffer.width = plane.nu;
+    plane.buffer.height = plane.nv;
+    plane.bufferContext = plane.buffer.getContext("2d");
+    plane.image = plane.bufferContext.createImageData(plane.nu, plane.nv);
+    plane.rect = { x: 0, y: 0, w: 1, h: 1 };
+    plane.tip = document.createElement("div");
+    plane.tip.className = "vv-tip";
+    plane.tip.hidden = true;
+    plane.canvas.parentNode.append(plane.tip);
+  }
+  function fitCanvas(canvas) {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const width = Math.max(1, Math.round(canvas.clientWidth * ratio));
+    const height = Math.max(1, Math.round(canvas.clientHeight * ratio));
+    if (canvas.width !== width || canvas.height !== height) {
+      canvas.width = width;
+      canvas.height = height;
+    }
+    return ratio;
+  }
+  function paintPlane(plane) {
+    const { u, v, w, nu, nv } = plane;
+    const out = plane.image.data;
+    const base = state.idx[w] * STRIDE[w];
+    for (let j = 0; j < nv; j++) {
+      let q = base + (nv - 1 - j) * STRIDE[v];
+      let o = j * nu * 4;
+      for (let i = 0; i < nu; i++, q += STRIDE[u], o += 4) {
+        const grey = anatomy[q];
+        const t = attention ? attention[q] : 0;
+        const a = alphaLut[t];
+        if (a > 0) {
+          out[o] = grey + (lutR[t] - grey) * a;
+          out[o + 1] = grey + (lutG[t] - grey) * a;
+          out[o + 2] = grey + (lutB[t] - grey) * a;
+        } else {
+          out[o] = out[o + 1] = out[o + 2] = grey;
+        }
+        out[o + 3] = 255;
+      }
+    }
+    plane.bufferContext.putImageData(plane.image, 0, 0);
+  }
+  function drawPlane(plane) {
+    const ratio = fitCanvas(plane.canvas);
+    const g = plane.context;
+    const W = plane.canvas.width, H = plane.canvas.height;
+    const pad = 16 * ratio;
+    const scale = Math.min(W - 2 * pad, H - 2 * pad) / extentMax;
+    const w = plane.nu * SP[plane.u] * scale, h = plane.nv * SP[plane.v] * scale;
+    const x = (W - w) / 2, y = (H - h) / 2;
+    plane.rect = { x, y, w, h };
+    g.fillStyle = "#05070b";
+    g.fillRect(0, 0, W, H);
+    g.imageSmoothingEnabled = true;
+    g.imageSmoothingQuality = "high";
+    g.drawImage(plane.buffer, x, y, w, h);
+    // Levels between which the model reads (only where the vertical axis is superior-inferior).
+    if (hasMap && plane.v === 2) {
+      g.strokeStyle = "rgba(255,255,255,0.38)";
+      g.lineWidth = ratio;
+      g.fillStyle = "rgba(255,255,255,0.7)";
+      g.font = 10 * ratio + "px ui-monospace, Menlo, Consolas, monospace";
+      g.textAlign = "left";
+      g.textBaseline = "bottom";
+      const top = y + ((nz - 1 - data.slab[1]) / nz) * h;
+      const bottom = y + ((nz - data.slab[0]) / nz) * h;
+      for (const level of [top, bottom]) {
+        g.beginPath();
+        g.moveTo(x, Math.round(level) + 0.5);
+        g.lineTo(x + w, Math.round(level) + 0.5);
+        g.stroke();
+      }
+      g.fillText("slab", x + 3 * ratio, top - 2 * ratio);
+    }
+    // Crosshair, with a gap at the centre so it does not hide the voxel.
+    const cx = x + ((state.idx[plane.u] + 0.5) / plane.nu) * w;
+    const cy = y + ((plane.nv - 1 - state.idx[plane.v] + 0.5) / plane.nv) * h;
+    const gap = 7 * ratio;
+    g.strokeStyle = "rgba(255,255,255,0.55)";
+    g.lineWidth = ratio;
+    g.beginPath();
+    g.moveTo(x, cy); g.lineTo(cx - gap, cy);
+    g.moveTo(cx + gap, cy); g.lineTo(x + w, cy);
+    g.moveTo(cx, y); g.lineTo(cx, cy - gap);
+    g.moveTo(cx, cy + gap); g.lineTo(cx, y + h);
+    g.stroke();
+    // Orientation letters at the four edges.
+    g.fillStyle = "rgba(255,255,255,0.8)";
+    g.font = "600 " + 11 * ratio + "px ui-monospace, Menlo, Consolas, monospace";
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    g.fillText(plane.edges[0], 8 * ratio, H / 2);
+    g.fillText(plane.edges[1], W - 8 * ratio, H / 2);
+    g.fillText(plane.edges[2], W / 2, 8 * ratio);
+    g.fillText(plane.edges[3], W / 2, H - 8 * ratio);
+  }
+  function voxelAt(plane, event) {
+    const bounds = plane.canvas.getBoundingClientRect();
+    const px = ((event.clientX - bounds.left) / bounds.width) * plane.canvas.width;
+    const py = ((event.clientY - bounds.top) / bounds.height) * plane.canvas.height;
+    const { x, y, w, h } = plane.rect;
+    const i = Math.floor(((px - x) / w) * plane.nu);
+    const j = Math.floor(((py - y) / h) * plane.nv);
+    if (i < 0 || j < 0 || i >= plane.nu || j >= plane.nv) return null;
+    return { u: i, v: plane.nv - 1 - j };
+  }
+
+  // ---------------------------------------------------------------- 3D projection
+  // Orthographic ray casting through a reduced copy: summed anatomy (an X-ray-like head) and the
+  // strongest attention along each ray.
+  const view3d = { canvas: $("vv-3d"), factor: 2, quality: 1, slow: 0 };
+  view3d.context = view3d.canvas.getContext("2d");
+  view3d.buffer = document.createElement("canvas");
+  view3d.bufferContext = view3d.buffer.getContext("2d");
+  function buildReduced() {
+    const f = view3d.factor;
+    const mx = Math.ceil(nx / f), my = Math.ceil(ny / f), mz = Math.ceil(nz / f);
+    const sums = new Uint32Array(mx * my * mz), counts = new Uint16Array(mx * my * mz), peaks = new Uint8Array(mx * my * mz);
+    for (let z = 0; z < nz; z++) {
+      const rz = Math.floor(z / f);
+      for (let y = 0; y < ny; y++) {
+        const row = mx * (Math.floor(y / f) + my * rz);
+        let q = nx * (y + ny * z);
+        for (let x = 0; x < nx; x++, q++) {
+          const r = row + Math.floor(x / f);
+          sums[r] += anatomy[q];
+          counts[r]++;
+          if (attention && attention[q] > peaks[r]) peaks[r] = attention[q];
+        }
+      }
+    }
+    const mean = new Uint8Array(mx * my * mz);
+    for (let i = 0; i < mean.length; i++) mean[i] = counts[i] ? Math.round(sums[i] / counts[i]) : 0;
+    let longest = 1;
+    for (let z = 0; z < mz; z++) {
+      for (let x = 0; x < mx; x++) {
+        let total = 0;
+        for (let y = 0; y < my; y++) total += mean[x + mx * (y + my * z)];
+        if (total > longest) longest = total;
+      }
+    }
+    Object.assign(view3d, { mx, my, mz, mean, peaks, gain: 1 / (0.72 * longest) });
+    const mm = [mx * SP[0] * f, my * SP[1] * f, mz * SP[2] * f];
+    view3d.radius = 0.5 * Math.hypot(mm[0], mm[1], mm[2]);
+  }
+  function basis() {
+    const cy = Math.cos(state.yaw), sy = Math.sin(state.yaw), cp = Math.cos(state.pitch), sp = Math.sin(state.pitch);
+    return {
+      right: [cy, sy, 0],
+      up: [-sp * sy, sp * cy, cp],
+      forward: [-sy * cp, cy * cp, -sp], // into the screen; yaw 0 looks from behind the head
+    };
+  }
+  function draw3d() {
+    const ratio = fitCanvas(view3d.canvas);
+    const started = performance.now();
+    const f = view3d.factor;
+    const { mx, my, mz, mean, peaks } = view3d;
+    const step = SP[0] * f * view3d.quality; // mm per output pixel and per ray step
+    const size = Math.max(8, Math.ceil((2 * view3d.radius) / step));
+    if (view3d.buffer.width !== size) {
+      view3d.buffer.width = view3d.buffer.height = size;
+      view3d.image = view3d.bufferContext.createImageData(size, size);
+    }
+    const out = view3d.image.data;
+    const { right, up, forward } = basis();
+    // Index-space vectors: mm divided by the reduced voxel size on each axis.
+    const vox = [SP[0] * f, SP[1] * f, SP[2] * f];
+    const R = right.map((c, a) => (c * step) / vox[a]);
+    const U = up.map((c, a) => (c * step) / vox[a]);
+    const F = forward.map((c, a) => (c * step) / vox[a]);
+    const centre = [mx / 2, my / 2, mz / 2];
+    const half = size / 2;
+    const dims = [mx, my, mz];
+    const gain = view3d.gain * view3d.quality;
+    const quality = view3d.quality;
+    for (let row = 0; row < size; row++) {
+      const b = half - row - 0.5;
+      for (let col = 0; col < size; col++) {
+        const a = col - half + 0.5;
+        // Ray: origin + t * F, with t in steps from the plane through the centre.
+        const ox = centre[0] + a * R[0] + b * U[0], oy = centre[1] + a * R[1] + b * U[1], oz = centre[2] + a * R[2] + b * U[2];
+        let t0 = -half, t1 = half;
+        const origin = [ox, oy, oz];
+        for (let axis = 0; axis < 3; axis++) {
+          const d = F[axis];
+          if (Math.abs(d) < 1e-9) {
+            if (origin[axis] < 0 || origin[axis] >= dims[axis]) { t0 = 1; t1 = 0; }
+          } else {
+            let near = (0 - origin[axis]) / d, far = (dims[axis] - origin[axis]) / d;
+            if (near > far) { const swap = near; near = far; far = swap; }
+            if (near > t0) t0 = near;
+            if (far < t1) t1 = far;
+          }
+        }
+        let total = 0, clear = 1, red = 0, green = 0, blue = 0;
+        if (t1 > t0) {
+          const first = Math.ceil(t0), last = Math.floor(t1);
+          let px = ox + first * F[0], py = oy + first * F[1], pz = oz + first * F[2];
+          for (let t = first; t <= last; t++, px += F[0], py += F[1], pz += F[2]) {
+            const ix = px | 0, iy = py | 0, iz = pz | 0;
+            if (ix < 0 || iy < 0 || iz < 0 || ix >= mx || iy >= my || iz >= mz) continue;
+            const q = ix + mx * (iy + my * iz);
+            total += mean[q];
+            // Front to back: each step of attention adds its colour and hides a little of what lies behind,
+            // so thick or strong regions read as solid and the nearer ones stay in front while the head turns.
+            const p = peaks[q];
+            if (clear > 0.03) {
+              const a = quality === 1 ? stepLut[p] : 1 - (1 - stepLut[p]) * (1 - stepLut[p]);
+              if (a > 0) {
+                const k = clear * a;
+                red += k * lutR[p];
+                green += k * lutG[p];
+                blue += k * lutB[p];
+                clear *= 1 - a;
+              }
+            }
+          }
+        }
+        const grey = Math.min(255, 255 * Math.pow(Math.min(1, total * gain), 0.8));
+        const o = (row * size + col) * 4;
+        out[o] = red + clear * grey;
+        out[o + 1] = green + clear * grey;
+        out[o + 2] = blue + clear * grey;
+        out[o + 3] = 255;
+      }
+    }
+    view3d.bufferContext.putImageData(view3d.image, 0, 0);
+    const g = view3d.context;
+    const W = view3d.canvas.width, H = view3d.canvas.height;
+    g.fillStyle = "#05070b";
+    g.fillRect(0, 0, W, H);
+    g.imageSmoothingEnabled = true;
+    g.imageSmoothingQuality = "high";
+    const side = Math.min(W, H);
+    const x0 = (W - side) / 2, y0 = (H - side) / 2;
+    g.drawImage(view3d.buffer, x0, y0, side, side);
+    const project = (mm) => {
+      const a = mm[0] * right[0] + mm[1] * right[1] + mm[2] * right[2];
+      const b = mm[0] * up[0] + mm[1] * up[1] + mm[2] * up[2];
+      const k = side / (size * step);
+      return [W / 2 + a * k, H / 2 - b * k];
+    };
+    // The crosshair position, so the 3D view and the slices can be related.
+    const here = project([
+      (state.idx[0] + 0.5 - nx / 2) * SP[0], (state.idx[1] + 0.5 - ny / 2) * SP[1], (state.idx[2] + 0.5 - nz / 2) * SP[2],
+    ]);
+    g.strokeStyle = "rgba(255,255,255,0.85)";
+    g.lineWidth = 1.5 * ratio;
+    g.beginPath();
+    g.arc(here[0], here[1], 5 * ratio, 0, 2 * Math.PI);
+    g.stroke();
+    // Orientation gizmo: where right, anterior and superior point in this view.
+    const origin = [36 * ratio, H - 36 * ratio];
+    g.font = "600 " + 10 * ratio + "px ui-monospace, Menlo, Consolas, monospace";
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    const axes = [["R", [1, 0, 0]], ["A", [0, 1, 0]], ["S", [0, 0, 1]]];
+    for (const [letter, axis] of axes) {
+      const a = axis[0] * right[0] + axis[1] * right[1] + axis[2] * right[2];
+      const b = axis[0] * up[0] + axis[1] * up[1] + axis[2] * up[2];
+      const depth = axis[0] * forward[0] + axis[1] * forward[1] + axis[2] * forward[2];
+      if (Math.hypot(a, b) < 0.3) continue; // pointing at or away from the viewer: nothing useful to draw
+      const shade = 0.5 + 0.4 * (1 - (depth + 1) / 2);
+      g.strokeStyle = "rgba(255,255,255," + shade.toFixed(2) + ")";
+      g.fillStyle = "rgba(255,255,255," + shade.toFixed(2) + ")";
+      g.lineWidth = ratio;
+      g.beginPath();
+      g.moveTo(origin[0], origin[1]);
+      const length = Math.hypot(a, b);
+      const reach = letter === "A" ? 22 : 15; // a longer arm for A keeps its letter apart from R when the two line up
+      g.lineTo(origin[0] + a * reach * ratio, origin[1] - b * reach * ratio);
+      g.stroke();
+      g.fillText(letter, origin[0] + (a / length) * (reach * length + 8) * ratio, origin[1] - (b / length) * (reach * length + 8) * ratio);
+    }
+    // Keep rotation smooth on slow devices by halving the projection resolution.
+    const elapsed = performance.now() - started;
+    if (elapsed > 45 && view3d.quality === 1) {
+      if (++view3d.slow >= 3) view3d.quality = 2;
+    } else if (elapsed <= 45) {
+      view3d.slow = 0;
+    }
+    const degrees = (((state.yaw * 180) / Math.PI) % 360 + 360) % 360;
+    $("vv-3d-info").textContent = "turn " + Math.round(degrees) + "\u00b0, tilt " + Math.round((state.pitch * 180) / Math.PI) + "\u00b0";
+  }
+
+  // ---------------------------------------------------------------- readout and controls
+  const sliders = [$("vv-x"), $("vv-y"), $("vv-z")];
+  const outputs = [$("vv-x-out"), $("vv-y-out"), $("vv-z-out")];
+  const infos = { 2: $("vv-axial-info"), 1: $("vv-coronal-info"), 0: $("vv-sagittal-info") };
+  function world(index) {
+    const i = index[0] + OFF[0], j = index[1] + OFF[1], k = index[2] + OFF[2];
+    return data.affine.slice(0, 3).map((row) => row[0] * i + row[1] * j + row[2] * k + row[3]);
+  }
+  const SIDES = [["left", "right"], ["posterior", "anterior"], ["inferior", "superior"]];
+  function describe(index) {
+    const mm = world(index);
+    const parts = mm.map((value, axis) => fmt(Math.abs(value), 1) + " mm " + SIDES[axis][value < 0 ? 0 : 1]);
+    let text = parts.join(", ");
+    if (attention) {
+      const gridZ = index[2] + OFF[2];
+      const inside = gridZ >= data.slab_grid[0] && gridZ <= data.slab_grid[1];
+      const value = attention[index[0] + nx * (index[1] + ny * index[2])] / 255;
+      text += inside ? "  |  attention " + fmt(value, 2) : "  |  outside the analysed slab: no model evidence here";
+    }
+    return text;
+  }
+  function updateReadout() {
+    $("vv-readout").textContent = "Crosshair: " + describe(state.idx);
+    for (let axis = 0; axis < 3; axis++) {
+      sliders[axis].value = state.idx[axis];
+      const mm = world(state.idx)[axis];
+      outputs[axis].textContent = (mm < 0 ? "\u2212" : "") + fmt(Math.abs(mm), 1) + " mm";
+      infos[axis].textContent = "slice " + (state.idx[axis] + OFF[axis]);
+    }
+  }
+  let pending = 0;
+  function refresh(parts) {
+    pending |= parts;
+    if (refresh.queued) return;
+    refresh.queued = true;
+    requestAnimationFrame(() => {
+      refresh.queued = false;
+      const todo = pending;
+      pending = 0;
+      if (!anatomy) return;
+      if (todo & 1) for (const plane of PLANES) { paintPlane(plane); drawPlane(plane); }
+      if (todo & 2) draw3d();
+      if (todo & 1) { updateReadout(); markCharts(); }
+    });
+  }
+  function setIndex(axis, value) {
+    const clamped = Math.max(0, Math.min(N[axis] - 1, Math.round(value)));
+    if (clamped === state.idx[axis]) return false;
+    state.idx[axis] = clamped;
+    return true;
+  }
+  sliders.forEach((slider, axis) => {
+    slider.max = N[axis] - 1;
+    slider.addEventListener("input", () => { if (setIndex(axis, Number(slider.value))) refresh(3); });
+  });
+  for (const plane of PLANES) {
+    let dragging = false;
+    const move = (event) => {
+      const hit = voxelAt(plane, event);
+      if (!hit) return;
+      const a = setIndex(plane.u, hit.u), b = setIndex(plane.v, hit.v);
+      if (a || b) refresh(3);
+    };
+    plane.canvas.addEventListener("pointerdown", (event) => {
+      dragging = true;
+      plane.canvas.setPointerCapture(event.pointerId);
+      plane.tip.hidden = true;
+      move(event);
+    });
+    plane.canvas.addEventListener("pointermove", (event) => {
+      if (dragging) { move(event); return; }
+      const hit = attention && voxelAt(plane, event);
+      if (!hit) { plane.tip.hidden = true; return; }
+      const index = [0, 0, 0];
+      index[plane.u] = hit.u; index[plane.v] = hit.v; index[plane.w] = state.idx[plane.w];
+      const gridZ = index[2] + OFF[2];
+      const inside = gridZ >= data.slab_grid[0] && gridZ <= data.slab_grid[1];
+      plane.tip.textContent = inside ? "attention " + fmt(attention[index[0] + nx * (index[1] + ny * index[2])] / 255, 2) : "outside the slab";
+      const bounds = plane.canvas.getBoundingClientRect();
+      plane.tip.style.left = Math.min(event.clientX - bounds.left, bounds.width - 110) + "px";
+      plane.tip.style.top = Math.max(event.clientY - bounds.top, 26) + "px";
+      plane.tip.hidden = false;
+    });
+    const end = () => { dragging = false; };
+    plane.canvas.addEventListener("pointerup", end);
+    plane.canvas.addEventListener("pointercancel", end);
+    plane.canvas.addEventListener("pointerleave", () => { plane.tip.hidden = true; });
+    plane.canvas.addEventListener("keydown", (event) => {
+      const steps = { ArrowLeft: [plane.u, -1], ArrowRight: [plane.u, 1], ArrowUp: [plane.v, 1], ArrowDown: [plane.v, -1], PageUp: [plane.w, 1], PageDown: [plane.w, -1] };
+      const action = steps[event.key];
+      if (!action) return;
+      event.preventDefault();
+      if (setIndex(action[0], state.idx[action[0]] + action[1] * (event.shiftKey ? 5 : 1))) refresh(3);
+    });
+  }
+  const spinButton = $("vv-spin");
+  let visible = true, lastTick = 0, ticking = false;
+  function setSpin(on) {
+    state.spin = on;
+    spinButton.setAttribute("aria-pressed", String(on));
+    spinButton.textContent = on ? "Stop rotating" : "Rotate";
+    if (on && !ticking) {
+      ticking = true;
+      lastTick = 0;
+      requestAnimationFrame(tick);
+    }
+  }
+  function tick(now) {
+    if (!state.spin) { ticking = false; return; }
+    if (visible && !document.hidden && anatomy && now - lastTick > 55) {
+      state.yaw += lastTick ? Math.min(now - lastTick, 200) * 0.00042 : 0;
+      lastTick = now;
+      if (state.stopAt !== null && state.yaw >= state.stopAt) {
+        state.yaw = state.stopAt - 2 * Math.PI;
+        state.stopAt = null;
+        setSpin(false);
+      }
+      draw3d();
+    }
+    requestAnimationFrame(tick);
+  }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; }).observe(view3d.canvas);
+  }
+  spinButton.addEventListener("click", () => { state.stopAt = null; setSpin(!state.spin); });
+  {
+    let drag = null;
+    const canvas = view3d.canvas;
+    canvas.addEventListener("pointerdown", (event) => {
+      drag = { x: event.clientX, y: event.clientY, yaw: state.yaw, pitch: state.pitch };
+      canvas.setPointerCapture(event.pointerId);
+      canvas.classList.add("vv-dragging");
+      state.stopAt = null;
+      if (state.spin) setSpin(false);
+    });
+    canvas.addEventListener("pointermove", (event) => {
+      if (!drag) return;
+      state.yaw = drag.yaw + (event.clientX - drag.x) * 0.01;
+      state.pitch = Math.max(-1.35, Math.min(1.35, drag.pitch + (event.clientY - drag.y) * 0.01));
+      refresh(2);
+    });
+    const end = () => { drag = null; canvas.classList.remove("vv-dragging"); };
+    canvas.addEventListener("pointerup", end);
+    canvas.addEventListener("pointercancel", end);
+    canvas.addEventListener("keydown", (event) => {
+      const turns = { ArrowLeft: [-0.12, 0], ArrowRight: [0.12, 0], ArrowUp: [0, -0.1], ArrowDown: [0, 0.1] };
+      const turn = turns[event.key];
+      if (!turn) return;
+      event.preventDefault();
+      if (state.spin) setSpin(false);
+      state.yaw += turn[0];
+      state.pitch = Math.max(-1.35, Math.min(1.35, state.pitch + turn[1]));
+      refresh(2);
+    });
+  }
+  const opacity = $("vv-opacity"), floor = $("vv-floor"), show = $("vv-show");
+  function updateLegend() {
+    $("vv-opacity-out").textContent = Math.round(state.opacity * 100) + "%";
+    $("vv-floor-out").textContent = fmt(state.floor, 2);
+    const canvas = $("vv-legend");
+    const g = canvas.getContext("2d");
+    const image = g.createImageData(canvas.width, canvas.height);
+    for (let x = 0; x < canvas.width; x++) {
+      const t = Math.round((x / (canvas.width - 1)) * 255);
+      const a = alphaLut[t];
+      for (let y = 0; y < canvas.height; y++) {
+        // Upper half over mid-grey tissue, lower half over black background.
+        const grey = y < canvas.height / 2 ? 120 : 5;
+        const o = (y * canvas.width + x) * 4;
+        image.data[o] = grey + (lutR[t] - grey) * a;
+        image.data[o + 1] = grey + (lutG[t] - grey) * a;
+        image.data[o + 2] = grey + (lutB[t] - grey) * a;
+        image.data[o + 3] = 255;
+      }
+    }
+    g.putImageData(image, 0, 0);
+    $("vv-legend-text").textContent = "Attention as a fraction of the strongest voxel in this scan, over grey tissue (top) and background (bottom)."
+      + (state.show ? (state.floor > 0 ? " Below " + fmt(state.floor, 2) + " it is hidden." : "") : " The map is switched off.");
+  }
+  function attentionChanged() {
+    state.opacity = Number(opacity.value) / 100;
+    state.floor = Number(floor.value) / 100;
+    state.show = show.checked && hasMap;
+    updateAlpha();
+    updateLegend();
+    refresh(3);
+  }
+  opacity.addEventListener("input", attentionChanged);
+  floor.addEventListener("input", attentionChanged);
+  show.addEventListener("change", attentionChanged);
+  function goTo(index) {
+    let changed = false;
+    for (let axis = 0; axis < 3; axis++) changed = setIndex(axis, index[axis]) || changed;
+    if (changed) refresh(3);
+  }
+  const home = hasMap ? data.peak : state.idx.slice();
+  $("vv-peak").addEventListener("click", () => goTo(data.peak));
+  $("vv-reset").addEventListener("click", () => {
+    state.stopAt = null;
+    if (state.spin) setSpin(false);
+    state.yaw = -0.6;
+    state.pitch = 0.28;
+    goTo(home);
+    refresh(3);
+  });
+
+  // ---------------------------------------------------------------- per-slice charts
+  const SVG = "http://www.w3.org/2000/svg";
+  let charts = [];
+  function element(name, attributes, parent) {
+    const node = document.createElementNS(SVG, name);
+    for (const key in attributes) node.setAttribute(key, attributes[key]);
+    if (parent) parent.append(node);
+    return node;
+  }
+  const localZ = (gridZ) => gridZ - OFF[2];
+  const heightOf = (gridZ) => world([0, 0, localZ(gridZ)])[2];
+  const sliceName = (gridZ) => "slice " + gridZ + ", " + fmt(heightOf(gridZ), 1) + " mm";
+  function drawCharts() {
+    if (!hasMap) return;
+    const slices = data.explained, count = slices.length, scored = new Set(data.scored);
+    const shares = data.slice_share, chance = data.slice_positive_probability;
+    charts = [];
+    const make = (id, height, yMax, ticks, tickText, tipText, draw) => {
+      const svg = $(id);
+      svg.replaceChildren();
+      // Drawn at the element's own pixel width so the labels keep their size.
+      const W = Math.max(280, Math.round(svg.getBoundingClientRect().width));
+      const left = 38, right = 6, top = 8, plot = height - top - 20;
+      svg.setAttribute("viewBox", "0 0 " + W + " " + height);
+      svg.style.height = height + "px";
+      const band = (W - left - right) / count;
+      const xOf = (i) => left + i * band;
+      const yOf = (value) => top + plot * (1 - value / yMax);
+      for (const tick of ticks) {
+        element("line", { class: "vv-axis", x1: left, x2: W - right, y1: yOf(tick), y2: yOf(tick) }, svg);
+        element("text", { x: left - 5, y: yOf(tick) + 3, "text-anchor": "end" }, svg).textContent = tickText(tick);
+      }
+      element("text", { x: left, y: height - 5, "text-anchor": "start" }, svg).textContent = "inferior, slice " + slices[0];
+      element("text", { x: W - right, y: height - 5, "text-anchor": "end" }, svg).textContent = "superior, slice " + slices[count - 1];
+      const marks = [];
+      for (let i = 0; i < count; i++) marks.push(draw(svg, i, xOf(i), band, yOf));
+      const cursor = element("line", { class: "vv-cursor", y1: top, y2: top + plot, x1: 0, x2: 0, visibility: "hidden" }, svg);
+      const tip = $(id + "-tip");
+      const text = (i) => sliceName(slices[i]) + ": " + tipText(i);
+      for (let i = 0; i < count; i++) {
+        const hit = element("rect", { class: "vv-hit", x: xOf(i), y: top, width: band, height: plot }, svg);
+        hit.addEventListener("pointerenter", () => {
+          tip.textContent = text(i);
+          tip.style.left = Math.max(90, Math.min(W - 90, xOf(i) + band / 2)) + "px";
+          tip.hidden = false;
+        });
+        hit.addEventListener("pointerleave", () => { tip.hidden = true; });
+        hit.addEventListener("click", () => { if (setIndex(2, localZ(slices[i]))) refresh(3); });
+      }
+      charts.push({ marks, cursor, xOf, band, now: $(id + "-now"), text });
+    };
+    const shareMax = Math.max(1, Math.ceil(Math.max(...shares) * 100));
+    make("vv-share", 120, shareMax, [0, shareMax / 2, shareMax], (tick) => fmt(tick, tick % 1 ? 1 : 0) + "%",
+      (i) => fmt(shares[i] * 100, 2) + "% of the map",
+      (svg, i, x, width, yOf) => element("rect", { class: "vv-bar-mark", x: x + 1, width: Math.max(1, width - 2), y: yOf(shares[i] * 100), height: Math.max(0, yOf(0) - yOf(shares[i] * 100)), rx: Math.min(2, Math.max(0, (width - 2) / 2)) }, svg));
+    make("vv-prob", 130, 1, [0, data.threshold, 1], (tick) => String(tick),
+      (i) => "P(" + positive + ") " + fmt(chance[i], 2) + (scored.has(slices[i]) ? ", used for the score" : ""),
+      (svg, i, x, width, yOf) => element("circle", { class: "vv-dot" + (scored.has(slices[i]) ? " vv-scored" : ""), cx: x + width / 2, cy: yOf(chance[i]), r: scored.has(slices[i]) ? 4 : 2.5 }, svg));
+    markCharts();
+  }
+  function buildTable() {
+    if (!hasMap) return;
+    const slices = data.explained, scored = new Set(data.scored);
+    $("vv-prob-title").textContent = "P(" + positive + ") from each slice alone";
+    $("vv-prob-text").textContent = "What each analysed slice would say on its own, averaged over the ensemble members. " + data.scored_chart_text
+      + " The line at " + data.threshold + " is the decision threshold.";
+    const head = $("vv-table").tHead.insertRow();
+    for (const title of ["Slice", "Height (mm)", "Share of map", "P(" + positive + ") alone", "Used for the score"]) {
+      const cell = document.createElement("th");
+      cell.textContent = title;
+      head.append(cell);
+    }
+    const body = $("vv-table").tBodies[0];
+    slices.forEach((gridZ, i) => {
+      const row = body.insertRow();
+      const cells = [gridZ, fmt(heightOf(gridZ), 1), fmt(data.slice_share[i] * 100, 2) + "%", fmt(data.slice_positive_probability[i], 3), scored.has(gridZ) ? "yes" : ""];
+      for (const text of cells) row.insertCell().textContent = text;
+    });
+  }
+  function markCharts() {
+    if (!charts.length) return;
+    const position = data.explained.indexOf(state.idx[2] + OFF[2]);
+    for (const chart of charts) {
+      chart.marks.forEach((mark, i) => mark.classList.toggle("vv-current", i === position));
+      chart.now.textContent = position < 0 ? "The crosshair is outside the analysed slab." : "At the crosshair: " + chart.text(position);
+      if (position < 0) {
+        chart.cursor.setAttribute("visibility", "hidden");
+      } else {
+        const x = chart.xOf(position) + chart.band / 2;
+        chart.cursor.setAttribute("x1", x);
+        chart.cursor.setAttribute("x2", x);
+        chart.cursor.setAttribute("visibility", "visible");
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------- start
+  async function start() {
+    const status = $("vv-status");
+    try {
+      anatomy = await decodeSprite(data.anatomy_png);
+      if (hasMap) attention = await decodeSprite(data.attention_png);
+    } catch (error) {
+      status.textContent = "The scan embedded in this page could not be decoded by this browser.";
+      return;
+    }
+    const sums = [checksum(anatomy), attention ? checksum(attention) : 0];
+    if (sums[0] !== data.checksums[0] || sums[1] !== data.checksums[1]) {
+      status.textContent = "This browser changed the embedded image values while decoding them, so the views below may be slightly off.";
+    } else {
+      status.hidden = true;
+    }
+    window.__vv = { anatomy, attention, state, data, checksums: sums, planes: PLANES }; // for inspection and tests
+    if (hasMap) state.idx = data.peak.slice();
+    updateAlpha();
+    updateLegend();
+    buildReduced();
+    buildTable();
+    drawCharts();
+    refresh(3);
+    let chartWidth = 0;
+    const resized = () => {
+      refresh(3);
+      const width = Math.round($("vv-charts").getBoundingClientRect().width);
+      if (width !== chartWidth) { chartWidth = width; drawCharts(); }
+    };
+    if ("ResizeObserver" in window) {
+      const observer = new ResizeObserver(resized);
+      for (const node of [$("vv-charts"), view3d.canvas, ...PLANES.map((plane) => plane.canvas)]) observer.observe(node);
+    } else {
+      window.addEventListener("resize", resized);
+    }
+    const calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!calm) {
+      state.stopAt = state.yaw + 2 * Math.PI; // one slow turn shows that the view is three-dimensional
+      setSpin(true);
+    }
+  }
+  start();
+})();
+</script>
+<!--vv:fragment-end-->
+</main>
+</body>
+</html>

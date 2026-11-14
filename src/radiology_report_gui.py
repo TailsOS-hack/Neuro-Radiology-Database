@@ -22,6 +22,8 @@ except Exception:
 import ollama
 import threading
 import queue
+import webbrowser
+from pathlib import Path
 import io
 import base64
 from datetime import datetime
@@ -623,7 +625,11 @@ class App(ttk.Frame):
         elif kind == "saved":
             self._set_busy(False)
             self.pred_label.configure(text=f"Prediction: {self.volume_result.predicted_label} (research AD/CN score)")
-            messagebox.showinfo("Saved", f"3D Grad-CAM written to:\n{message[1]}\n\n" + "\n".join(sorted(message[2])))
+            text = f"3D Grad-CAM written to:\n{message[1]}\n\n" + "\n".join(sorted(message[2]))
+            if "viewer.html" not in message[2]:
+                messagebox.showinfo("Saved", text)
+            elif messagebox.askyesno("Saved", text + "\n\nOpen the interactive 3D viewer in your browser?"):
+                webbrowser.open(Path(message[1], "viewer.html").resolve().as_uri())
         else:
             self._set_busy(False)
             self.pred_label.configure(text="Prediction: -")

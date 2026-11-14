@@ -34,6 +34,7 @@ This project is an advanced medical imaging analysis tool. It uses deep learning
 -   `src/gatekeeper_model.py`: Definition of the routing model.
 -   `src/dicom_io.py`, `src/mri_volume.py`: DICOM/NIfTI reading into one canonical volume representation.
 -   `src/volume_analysis.py`: Whole-scan AD/CN research scoring and the stacked 3D Grad-CAM map.
+-   `src/volume_viewer.py`: Writes `viewer.html`, an offline page for exploring the 3D map in a browser.
 -   `src/train_dementia_volume.py`, `src/oasis1.py`: Patient-level, cross-validated training on labelled 3D scans, and the OASIS-1 loader.
 -   `scripts/verify_dicom_volume_pipeline.py`: Regenerates the DICOM/volume verification record.
 -   `data_visualization/`:
@@ -183,8 +184,11 @@ python -m src.radiology_report_gui
 ```bash
 python -m src.dicom_io /path/to/study                         # list series, most likely 3D T1 first
 python -m src.dicom_io /path/to/study --to-nifti scan.nii.gz  # canonical NIfTI + sidecar without identifying fields
-python -m src.volume_analysis /path/to/study --output results/  # research AD/CN score + 3D Grad-CAM (NIfTI, montage)
+python -m src.volume_analysis /path/to/study --output results/  # research AD/CN score + 3D Grad-CAM (NIfTI, montage, viewer.html)
+python -m src.volume_viewer results/                            # rebuild results/viewer.html from a saved folder
 ```
+
+Open `results/viewer.html` in a browser to scroll through the scan in three planes with the attention map on top and to rotate it in 3D. The file works offline and contains the scan, so handle it like the scan.
 
 Patient-level training on labelled 3D scans (prepared for OASIS-1; **not yet run on it**, see [docs/OASIS1_VOLUME_TRAINING.md](docs/OASIS1_VOLUME_TRAINING.md)):
 

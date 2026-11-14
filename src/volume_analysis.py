@@ -37,8 +37,10 @@ import numpy as np
 from PIL import Image
 
 try:
+    from src import volume_viewer
     from src.mri_volume import MRIVolume, PathLike, VolumeError, sha256_file, voxel_sizes
 except ModuleNotFoundError:  # executed from inside src/
+    import volume_viewer
     from mri_volume import MRIVolume, PathLike, VolumeError, sha256_file, voxel_sizes
 
 logger = logging.getLogger(__name__)
@@ -619,11 +621,12 @@ class VolumeAnalysis:
         }
 
     def save(self, output_dir: PathLike, volume: Optional[MRIVolume] = None) -> dict:
-        """Write ``result.json``, the montage and NIfTI volumes; returns the written paths.
+        """Write ``result.json``, the montage, NIfTI volumes and the viewer; returns the written paths.
 
         ``anatomy.nii.gz`` and ``gradcam.nii.gz`` share the model grid. When the
         source ``volume`` is given, ``gradcam_native.nii.gz`` is the same map on
-        the scan's own voxel grid (one value per original voxel).
+        the scan's own voxel grid (one value per original voxel). ``viewer.html``
+        is a self-contained page for looking at the map in a browser.
         """
 
         import nibabel as nib
@@ -651,6 +654,13 @@ class VolumeAnalysis:
             written["projections.png"] = str(output_dir / "projections.png")
         (output_dir / "result.json").write_text(json.dumps(self.summary(), indent=2, allow_nan=False) + "\n")
         written["result.json"] = str(output_dir / "result.json")
+        try:
+            viewer = output_dir / volume_viewer.VIEWER_FILENAME
+            viewer.write_text(volume_viewer.build_viewer(self), encoding="utf-8")
+            written[volume_viewer.VIEWER_FILENAME] = str(viewer)
+        except Exception:
+            # The viewer is a convenience on top of the files above; failing to write it must not lose them.
+            logger.exception("Could not write the interactive viewer")
         return written
 
 
