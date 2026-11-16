@@ -197,7 +197,7 @@ python -m src.oasis1 data/external/oasis1 --qc oasis_qc.png   # cohort counts an
 python -m src.train_dementia_volume --oasis-root data/external/oasis1 --output training_logs/experiments/dementia_volume/oasis1
 ```
 
-The volume analysis needs the research checkpoints (`git lfs pull --include="models/kevin_round2_20261011/*.pt"`). Its output is a research score with documented external-validation failures, not a diagnosis; read [docs/DICOM_VOLUME_ANALYSIS.md](docs/DICOM_VOLUME_ANALYSIS.md) first.
+The volume analysis needs the research checkpoints, which are stored with Git LFS: install it first (`git lfs version` shows whether it is there), then run `git lfs pull --include="models/kevin_round2_20261011/*.pt"`. Without Git LFS the `.pt` files are small pointer files and no model loads. Its output is a research score with documented external-validation failures, not a diagnosis; read [docs/DICOM_VOLUME_ANALYSIS.md](docs/DICOM_VOLUME_ANALYSIS.md) first.
 
 ### Grounded Report CLI
 

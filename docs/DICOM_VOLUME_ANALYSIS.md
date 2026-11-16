@@ -51,7 +51,9 @@ python -m src.volume_viewer results/
 In the GUI: **Scan** (file) or **DICOM Folder...** loads a scan, the slider pages
 through axial slices, **Series...** picks another series of the study,
 **Analyze Volume** runs the whole-scan analysis, **Save 3D Map...** writes the
-files above and offers to open `viewer.html` in the browser. Patient name, ID
+files above and offers to open `viewer.html` in the browser. The folder stays
+on screen ("3D map saved in: ..."), because a browser launcher can report
+success without opening anything. Patient name, ID
 and date of birth are taken from the header, and are removed again when another
 image is opened.
 
@@ -110,8 +112,17 @@ pickled code.
 * The page says which slices the score is computed from and which ones have a
   map, and words its claims accordingly; a slice without a map reads "no map",
   never "attention 0.00". The scan and the map are embedded as compressed bytes
-  with a checksum. A page that cannot unpack them exactly says so and draws
-  nothing.
+  with a CRC-32, which also catches voxels that arrive in another order. A page
+  that cannot unpack them exactly says so, draws nothing and offers no
+  controls.
+* The research notice carries its sentence about the attention map only on a
+  result that has a map. A page rebuilt with `python -m src.volume_viewer`
+  shows the notice and warnings recorded in `result.json` when the scan was
+  analysed; rebuilding does not bring them up to date.
+* The 3D view assumes a head-sized volume. It lowers its exposure for a volume
+  whose rays are much longer in the current view, but it samples without
+  interpolation, so a series only a few voxels thick shows banding there. The
+  slice views are not affected.
 * `python -m src.volume_viewer` reads `anatomy.nii.gz` and `gradcam.nii.gz`
   through the same canonical reader as every other scan and compares their
   geometry with `result.json`. A file that another tool re-saved in a different
@@ -151,24 +162,30 @@ clinical checkpoints give 14/15, 10/15 and 15/15 correct on the 15 binary cases
 and the ensemble gives 14/15 with every case labelled CN, exactly the counts in
 [RESULTS.md](kevin_paper_20261011/round2_publication/RESULTS.md).
 
-**Tests.** 132 new tests in seven files: 104 for the DICOM reader, the volume
+**Tests.** 135 new tests in seven files: 107 for the DICOM reader, the volume
 analysis, the interactive viewer, the display helpers and the GUI scan flow,
 and 28 for the trainer and the OASIS-1 loader described in
-[OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md). The suite is 292 tests
+[OASIS1_VOLUME_TRAINING.md](OASIS1_VOLUME_TRAINING.md). The suite is 295 tests
 in total with a display; the GUI-flow tests need `xvfb-run` on a headless
 machine and are skipped otherwise. `pydicom` was added to
 `requirements-verification.txt` so the 33 DICOM contracts, the 8 display-helper
 tests and the 13 viewer tests that need no other package run in the offline CI
-job; that job's set of pre-existing import errors is unchanged. Eleven further
-viewer tests load pages in headless Chromium and read back what is on screen:
-the unpacked volumes match their checksums, a marker voxel is bright where each
-view's drawn edge letters say and dark at the mirror image of that place, the
-positions, slice numbers and scores are the ones in the summary, text from the
-analysis stays text, a page without a map works, and a damaged page draws
-nothing. They run only where Node.js with Playwright and its Chromium are
-installed. Each of 32 deliberate defects in the viewer (a mirrored view,
-swapped edge letters, a reversed chart, a dropped crop offset and so on) makes
-at least one of these tests fail.
+job; that job's set of pre-existing import errors is unchanged. Fourteen
+further viewer tests load pages in headless Chromium and read back what is on
+screen: the unpacked volumes match their checksums; a marker voxel is bright
+where each view's drawn edge letters say and dark at the mirror image of that
+place, and a lone voxel of attention is tinted at its own place only; the 3D
+picture has the patient's right on the side its letter R points to; the
+positions, slice numbers and scores are the ones in the summary; touch, layout
+and the controls behave; text from the analysis stays text; a page without a
+map works; and a damaged page draws nothing. They run only where Node.js with
+Playwright and its Chromium are installed.
+
+`python scripts/check_viewer_tests.py` checks that these tests can fail. It
+applies each of 49 deliberate defects (a mirrored view or map, swapped edge
+letters, a reversed chart, a dropped crop offset, a checksum that is not
+checked, and so on) to a temporary copy of the viewer and runs the 31 viewer
+tests on it; every defect makes that run fail.
 
 ## What this showed about the existing dementia models
 

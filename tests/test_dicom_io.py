@@ -319,7 +319,9 @@ class DicomDiscoveryTests(unittest.TestCase):
         self.assertTrue(all(series[0].t1_structural_score() > other.t1_structural_score() for other in series[1:]))
         volume = dicom_io.load_volume(self.directory)
         self.assertEqual(volume.shape[2] * volume.shape[1] * volume.shape[0], 12 * 10 * 64)
-        self.assertTrue(any("3 series found" in note for note in volume.warnings))
+        note = next(note for note in volume.warnings if "3 series found" in note)
+        # A fact for whoever reads the result; how to choose another series is for the caller to say.
+        self.assertRegex(note, r"^3 series found; loaded series 5: [^.]*\.$")
         t2 = next(entry for entry in series if entry.contrast.label == "T2w")
         chosen = dicom_io.load_volume(self.directory, series_key=t2.key)
         self.assertEqual(chosen.acquisition["contrast_guess"]["label"], "T2w")

@@ -76,13 +76,14 @@ def default_checkpoints() -> list:
     placed = sorted(TRAINED_VOLUME_MODEL_DIR.glob("fold*.pt")) if TRAINED_VOLUME_MODEL_DIR.is_dir() else []
     return placed or list(DEFAULT_CLINICAL_CHECKPOINTS)
 
-#: Shown with every result of the Round 2 clinical ensemble (checkpoints that carry no notice of their own).
+#: The record of the Round 2 clinical ensemble, shown with every result of it (checkpoints that carry no notice of their own).
 RESEARCH_USE_NOTICE = (
     "Research output only, not a diagnosis. The AD/CN ensemble was developed on 43 patients from one "
     "source and, on its only fresh external cohort, labelled all 19 participants AD (specificity 0/10); "
-    "on a second cohort it labelled all 15 participants CN, missing the one AD case. "
-    "The attention map shows what this model responds to in each slice; it is not a localisation of pathology."
+    "on a second cohort it labelled all 15 participants CN, missing the one AD case."
 )
+#: Added to the notice of a result that carries an attention map, and only then.
+MAP_NOTICE = "The attention map shows what this model responds to in each slice; it is not a localisation of pathology."
 #: How a model turns slices into one score: the nine frozen protocol slices, or every slice of the trained band.
 SLICE_POLICIES = ("protocol9", "band")
 
@@ -346,6 +347,9 @@ def load_clinical_checkpoint(path: PathLike, device=None):
         "slice_policy": slice_policy,
         "threshold": threshold,
         "notice": checkpoint.get("notice") or RESEARCH_USE_NOTICE,
+        # The sentence about the attention map is kept apart, so that a result without a map does not carry it.
+        # A checkpoint that brings its own notice and no such sentence is shown exactly as it says.
+        "map_notice": str(checkpoint.get("map_notice", "" if checkpoint.get("notice") else MAP_NOTICE)),
     }
     return model, metadata
 
@@ -588,7 +592,7 @@ class VolumeAnalysis:
             "positive_class": self.class_names[1],
             "threshold_on_positive_class_probability": self.threshold,
             "member_probabilities": [[float(value) for value in row] for row in self.member_probabilities],
-            "members": [{key: value for key, value in member.items() if key != "notice"} for member in self.members],
+            "members": [{key: value for key, value in member.items() if key not in ("notice", "map_notice")} for member in self.members],
             "aggregation": (
                 f"softmax(mean of the {'nine protocol' if self.slice_policy == 'protocol9' else 'trained-band'} "
                 "slice logits) per member; equal-weight mean of member probabilities"
@@ -688,13 +692,14 @@ class DementiaVolumeAnalyzer:
             self.members.append(metadata)
         if not self.models:
             raise ValueError("At least one checkpoint is required")
-        for key in ("class_names", "slice_policy", "threshold", "notice"):
+        for key in ("class_names", "slice_policy", "threshold", "notice", "map_notice"):
             if any(member[key] != self.members[0][key] for member in self.members):
                 raise ValueError(f"Ensemble members disagree on {key}; they are not one model family")
         self.class_names = tuple(self.members[0]["class_names"])
         self.slice_policy = self.members[0]["slice_policy"]
         self.threshold = self.members[0]["threshold"]
         self.notice = self.members[0]["notice"]
+        self.map_notice = self.members[0]["map_notice"]
 
     def _slice_logits(self, images: np.ndarray, batch_size: int = 32) -> np.ndarray:
         """(members, N, classes) logits for uint8 slice images."""
@@ -773,7 +778,9 @@ class DementiaVolumeAnalyzer:
                 warnings.append(f"Grad-CAM could not be computed ({type(exc).__name__}: {exc})")
                 cam_grid, cam_indices, slice_probabilities = None, [], np.zeros((0, len(self.class_names)))
 
-        warnings.append(self.notice)
+        # The sentence about the attention map belongs only to a result that has one.
+        notice = f"{self.notice} {self.map_notice}".strip() if cam_grid is not None else self.notice
+        warnings.append(notice)
         return VolumeAnalysis(
             class_names=self.class_names,
             probabilities=probabilities,
@@ -787,7 +794,7 @@ class DementiaVolumeAnalyzer:
             cam_target_index=target,
             cam_score=cam_score,
             slice_policy=self.slice_policy,
-            notice=self.notice,
+            notice=notice,
             members=list(self.members),
             source=dict(volume.source),
             acquisition={key: value for key, value in volume.acquisition.items() if key not in ("series_description", "protocol_name")},
@@ -856,6 +863,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     try:
         volume = load_any_volume(args.scan, series_key=args.series)
+        if args.series is None and any(" series found; loaded " in note for note in volume.warnings):
+            logger.info("Another series can be analysed with --series; list the series keys with: python -m src.dicom_io %s", args.scan)
         analyzer = DementiaVolumeAnalyzer(args.checkpoints)
         result = analyzer.analyze(
             volume,

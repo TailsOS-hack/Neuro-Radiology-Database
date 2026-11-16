@@ -31,5 +31,8 @@ research/dementia_round3/private/
 docs/kevin_paper_20261011/round3/*.external_opened.json
 
 # Volume-analysis outputs hold the scan itself (viewer.html embeds it); keep them out of the repository.
+# Scans in general do not belong here: no NIfTI file is tracked.
 /results/
 viewer.html
+*.nii
+*.nii.gz

@@ -540,6 +540,10 @@ def train_fold(
 # --------------------------------------------------------------------------- cross-validation
 
 
+#: Stored in every checkpoint next to its notice; the analysis adds it to a result only when that result has a map.
+MAP_NOTICE = "The attention map shows what drove this model's score; it is not a localisation of pathology."
+
+
 def _notice(cohort: str, people: int, folds: int, pooled: dict, class_names: Sequence[str]) -> str:
     confusion = pooled["confusion"]
     return (
@@ -547,8 +551,7 @@ def _notice(cohort: str, people: int, folds: int, pooled: dict, class_names: Seq
         f"{people} people from one cohort ({cohort}). In {folds}-fold cross-validation by person on that cohort, "
         f"sensitivity was {confusion['true_positive']}/{pooled['positives']} and specificity "
         f"{confusion['true_negative']}/{pooled['negatives']}. It has not been tested on scans from any other site "
-        "or scanner, where performance is usually lower. The attention map shows what drove this model's score; "
-        "it is not a localisation of pathology."
+        "or scanner, where performance is usually lower."
     )
 
 
@@ -650,6 +653,7 @@ def cross_validate(
                 "recipe": va.CLINICAL_RECIPE,
                 "initialization": initialisation,
                 "notice": notice,
+                "map_notice": MAP_NOTICE,
                 "training": {"cohort": cohort, "fold": fold, "folds": config.folds, "people": len(subjects),
                              "selection": "lowest validation NLL on people held out of fitting; test fold never used",
                              "config": asdict(config)},
@@ -679,6 +683,7 @@ def cross_validate(
         "per_fold": per_fold,
         "checkpoints": checkpoints,
         "notice": notice,
+        "map_notice": MAP_NOTICE,
         "limits": [
             "Internal cross-validation on one cohort: one site, one scanner, one protocol. Not external validation.",
             "The fold models are selected on validation people of the same cohort; the threshold is fixed, not tuned.",

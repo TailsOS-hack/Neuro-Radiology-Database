@@ -856,10 +856,9 @@ def load_volume(path: PathLike, *, series_key: Optional[str] = None, volume_inde
     chosen = select_series(series, key=series_key)
     volume = load_series(chosen, volume_index=volume_index)
     if series_key is None and len(series) > 1:
-        volume.warnings.append(
-            f"{len(series)} series found; loaded {chosen.technical_label}. "
-            "Another can be chosen by its series key (--series on the command line, series_key in Python)."
-        )
+        # A fact for whoever reads the result. How to choose another series is the caller's to say (series_key
+        # here, --series on the command line): a result page is no place for an instruction.
+        volume.warnings.append(f"{len(series)} series found; loaded {chosen.technical_label}.")
     return volume
 
 

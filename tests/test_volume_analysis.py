@@ -419,7 +419,8 @@ class AnalyzerTests(unittest.TestCase):
         window = tuple(slice(start, start + size) for start, size in zip(offset, payload["shape"]))
         np.testing.assert_array_equal(shown, np.rint(self.result.cam_grid[window].astype(np.float64) * 255))
         whole = np.rint(self.result.cam_grid.astype(np.float64) * 255)
-        self.assertEqual(int(whole.sum()), payload["checksums"][1])  # nothing was cropped away
+        self.assertEqual(int(shown.sum()), int(whole.sum()))  # nothing was cropped away
+        self.assertEqual(zlib.crc32(np.ascontiguousarray(shown.astype(np.uint8).transpose(2, 1, 0)).tobytes()), payload["checksums"][1])
         self.assertEqual(payload["slab_grid"], [self.result.cam_indices[0], self.result.cam_indices[-1]])
         self.assertEqual(payload["scored"], self.result.prepared.protocol_indices)  # Round 2: the nine protocol slices
         np.testing.assert_allclose(payload["affine"], self.result.prepared.grid_affine)
@@ -499,7 +500,39 @@ class AnalyzerTests(unittest.TestCase):
         self.assertEqual(summary["positive_class"], "Demented")
         self.assertEqual(summary["threshold_on_positive_class_probability"], 0.4)
         self.assertIn("trained-band", summary["aggregation"])
-        self.assertTrue(all("notice" not in member and member["slice_policy"] == "band" for member in summary["members"]))
+        self.assertTrue(all("notice" not in member and "map_notice" not in member and member["slice_policy"] == "band"
+                            for member in summary["members"]))
+
+        # A band model's summary lists every slice of the band as scored, and the page built from it says the
+        # same whether the map is dense, limited to the protocol slices, or absent.
+        from src import volume_viewer
+
+        scored = result.prepared.band_indices
+        self.assertEqual(summary["preparation"]["scored_slice_indices"], scored)
+        self.assertEqual(
+            volume_viewer.viewer_payload(result.prepared.grid, result.cam_grid, summary)["scored_text"],
+            f"The score uses every one of the {len(scored)} axial slices of the slab, and the map covers each of them.",
+        )
+        sparse = analyzer.analyze(self.volume, dense=False)
+        self.assertEqual(sparse.summary()["preparation"]["scored_slice_indices"], scored)
+        self.assertEqual(
+            volume_viewer.viewer_payload(sparse.prepared.grid, sparse.cam_grid, sparse.summary())["scored_text"],
+            f"The score uses {len(scored)} axial slices; the map covers {len(sparse.cam_indices)} of them.",
+        )
+        unmapped = analyzer.analyze(self.volume, grad_cam=False)
+        self.assertEqual(
+            volume_viewer.viewer_payload(unmapped.prepared.grid, None, unmapped.summary())["scored_text"],
+            f"The score uses {len(scored)} axial slices.",
+        )
+        saved = self.directory / "band_saved"
+        result.save(saved, self.volume)
+        self.assertEqual(volume_viewer.payload_from_saved(saved)["scored"], scored)
+
+        # A checkpoint may bring its own sentence about the map. Like the built-in one it is shown only with a map.
+        own = [save(f"own{seed}.pt", seed, **extra, map_notice="Own sentence about the map.") for seed in (11, 12)]
+        own_analyzer = va.DementiaVolumeAnalyzer(own, device=torch.device("cpu"))
+        self.assertEqual(own_analyzer.analyze(self.volume).notice, f"{notice} Own sentence about the map.")
+        self.assertEqual(own_analyzer.analyze(self.volume, grad_cam=False).notice, notice)
         self.assertEqual(analyzer.analyze(self.volume, grad_cam=False, cam_target=None).predicted_label, result.predicted_label)
         with self.assertRaisesRegex(ValueError, "must be one of .*NonDemented"):
             analyzer.analyze(self.volume, cam_target="AD")  # not one of this model's classes
@@ -509,6 +542,15 @@ class AnalyzerTests(unittest.TestCase):
         self.assertEqual(self.analyzer.class_names, ("CN", "AD"))
         self.assertEqual(self.analyzer.notice, va.RESEARCH_USE_NOTICE)
         self.assertIn("nine protocol", self.result.summary()["aggregation"])
+        # The sentence about the attention map is on a result that has a map, and on no other.
+        self.assertNotIn("attention map", va.RESEARCH_USE_NOTICE)
+        self.assertEqual(va.MAP_NOTICE, "The attention map shows what this model responds to in each slice; it is not a localisation of pathology.")
+        self.assertEqual(self.result.notice, f"{va.RESEARCH_USE_NOTICE} {va.MAP_NOTICE}")
+        self.assertEqual(self.result.warnings[-1], self.result.notice)
+        without_map = self.analyzer.analyze(self.volume, grad_cam=False)
+        self.assertEqual(without_map.notice, va.RESEARCH_USE_NOTICE)
+        self.assertEqual(without_map.warnings[-1], va.RESEARCH_USE_NOTICE)
+        self.assertNotIn("attention map", json.dumps(without_map.summary()))
 
         with self.assertRaisesRegex(ValueError, "Ensemble members disagree on"):
             va.DementiaVolumeAnalyzer([band[0], self.checkpoints[0]], device=torch.device("cpu"))

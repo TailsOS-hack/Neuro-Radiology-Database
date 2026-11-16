@@ -68,6 +68,16 @@ def _pack(volume: np.ndarray) -> str:
     return base64.b64encode(zlib.compress(steps.tobytes(), 9)).decode("ascii")
 
 
+def _checksum(volume: np.ndarray) -> int:
+    """CRC-32 of the voxels in the order the page holds them (x fastest, then y, then z).
+
+    The page computes the same value after unpacking. Unlike a plain sum it
+    also changes when the voxels arrive in another order, for example mirrored.
+    """
+
+    return zlib.crc32(np.ascontiguousarray(volume.transpose(2, 1, 0)).tobytes())
+
+
 def _crop_bounds(anatomy: np.ndarray, attention: Optional[np.ndarray], keep_z: Optional[tuple] = None) -> tuple:
     """Index ranges that keep the head, every voxel of the map and the axial slices ``keep_z`` (first, last)."""
 
@@ -102,8 +112,8 @@ def _scored_slices(summary: dict) -> list:
     return list(range(protocol[0], protocol[-1] + 1)) if band else protocol
 
 
-def _slices(count: int) -> str:
-    return f"{count} axial slice" + ("" if count == 1 else "s")
+def _slices(count: int, noun: str = "axial slice") -> str:
+    return f"{count} {noun}" + ("" if count == 1 else "s")
 
 
 def _map_texts(scored: list, explained: list, target: str, spacing_mm: float) -> dict:
@@ -118,14 +128,23 @@ def _map_texts(scored: list, explained: list, target: str, spacing_mm: float) ->
     both = [z for z in explained if z in scored_set]
     unscored = len(explained) - len(both)
     first, last = explained[0], explained[-1]
+    single = len(explained) == 1
     contiguous = explained == list(range(first, last + 1))
-    levels = f"slices {first} to {last} of the {spacing_mm:g} mm grid"
+    grid = f"of the {spacing_mm:g} mm grid"
+    levels = f"slices {first} to {last} {grid}"
     caution = "It does not locate disease, and a tidy-looking map is not evidence of a good model."
     if unscored == 0:
-        map_short = f"The map shows what pushed the {target} output up on the slices it covers."
+        map_short = f"The map shows what pushed the {target} output up on the {'slice' if single else 'slices'} it covers."
         map_text = (
-            f"The map shows what pushed this model's {target} output up on the slices it covers, "
-            f"all of which count toward the score. {caution}"
+            f"The map shows what pushed this model's {target} output up on the "
+            + ("slice it covers, which counts toward the score." if single else "slices it covers, all of which count toward the score.")
+            + f" {caution}"
+        )
+    elif not both:
+        map_short = f"The map shows what the model responds to slice by slice; none of its {_slices(len(explained), 'slice')} fed the score."
+        map_text = (
+            "The map shows what this model responds to when it is given each mapped slice alone. "
+            f"None of them entered the score. {caution}"
         )
     else:
         map_short = (
@@ -134,36 +153,52 @@ def _map_texts(scored: list, explained: list, target: str, spacing_mm: float) ->
         )
         map_text = (
             f"On the {_slices(len(both))} the score is computed from, the map shows what pushed this model's {target} "
-            f"output up. On the other {unscored} it shows what the same model responds to when it is given that slice "
-            f"alone; those slices did not enter the score. {caution}"
+            f"output up. On the other {'one' if unscored == 1 else unscored} it shows what the same model responds to "
+            f"when it is given that slice alone; {'that slice' if unscored == 1 else 'those slices'} did not enter the score. {caution}"
         )
     if explained_set == scored_set:
-        scored_text = (
-            f"The score uses every one of the {_slices(len(scored))} of the slab, and the map covers each of them."
-            if contiguous
-            else f"The score uses {_slices(len(scored))}, and the map covers exactly those; the slices between them were not analysed."
-        )
-        chart_text = "Every slice shown counts toward the score."
+        if single:
+            scored_text = "The score uses one axial slice, and the map covers it."
+        elif contiguous:
+            scored_text = f"The score uses every one of the {_slices(len(scored))} of the slab, and the map covers each of them."
+        else:
+            scored_text = f"The score uses {_slices(len(scored))}, and the map covers exactly those; the slices between them were not analysed."
+        chart_text = "The slice shown counts toward the score." if single else "Every slice shown counts toward the score."
     elif scored_set < explained_set:
-        scored_text = (
-            f"The score uses {_slices(len(scored))}; the map covers "
-            + (f"all {len(explained)} slices of the slab between the lowest and the highest of them." if contiguous
-               else f"{len(explained)} slices, including all of them.")
-        )
-        chart_text = f"Only the {len(both)} larger dots are the slices the score is computed from."
-    elif explained_set < scored_set:
-        scored_text = f"The score uses {_slices(len(scored))}; the map covers {len(explained)} of them."
+        if not contiguous:
+            covered = f"{len(explained)} slices, including {'it' if len(scored) == 1 else 'all of them'}."
+        elif len(scored) == 1:
+            covered = f"all {len(explained)} slices of the slab around it."
+        else:
+            covered = f"all {len(explained)} slices of the slab between the lowest and the highest of them."
+        scored_text = f"The score uses {_slices(len(scored))}; the map covers {covered}"
         chart_text = (
-            f"All {len(explained)} slices shown count toward the score, "
-            f"which also uses {len(scored) - len(both)} slices that have no map."
+            "Only the larger dot is the slice the score is computed from."
+            if len(both) == 1
+            else f"Only the {len(both)} larger dots are the slices the score is computed from."
+        )
+    elif explained_set < scored_set:
+        without = len(scored) - len(both)
+        rest = f"which also uses {_slices(without, 'slice')} that {'has' if without == 1 else 'have'} no map."
+        scored_text = f"The score uses {_slices(len(scored))}; the map covers {'one' if single else len(explained)} of them."
+        chart_text = (
+            f"The slice shown counts toward the score, {rest}"
+            if single
+            else f"All {len(explained)} slices shown count toward the score, {rest}"
         )
     else:
-        scored_text = (
-            f"The score uses {_slices(len(scored))}; the map covers {len(explained)} slices, "
-            f"{len(both)} of which count toward the score."
+        counted = {0: "none of which counts", 1: "one of which counts"}.get(len(both), f"{len(both)} of which count")
+        scored_text = f"The score uses {_slices(len(scored))}; the map covers {_slices(len(explained), 'slice')}, {counted} toward the score."
+        chart_text = {
+            0: "None of the slices shown counts toward the score.",
+            1: "The larger dot is the slice the score is computed from.",
+        }.get(len(both), f"The {len(both)} larger dots are the slices the score is computed from.")
+    if single:
+        slab_text = (
+            f"The map covers one axial slice, at the marked level (slice {first} {grid}). "
+            "Everywhere else it is empty by construction, not because the model found nothing."
         )
-        chart_text = f"The {len(both)} larger dots are the slices the score is computed from."
-    if contiguous:
+    elif contiguous:
         slab_text = (
             f"The map covers the {_slices(len(explained))} between the two marked levels ({levels}). "
             "Outside them it is empty by construction, not because the model found nothing."
@@ -224,8 +259,13 @@ def viewer_payload(grid: np.ndarray, cam_grid: Optional[np.ndarray], summary: di
             no_map_text = "Grad-CAM produced no attention for this scan, so only the scan on the model's grid is shown."
 
     explained = [int(z) for z in explanation["slice_indices"]] if explanation is not None else []
-    if explanation is not None and (not explained or explained != sorted(set(explained))):
-        raise ViewerError("The analysis summary does not list the explained slices in ascending order")
+    if explanation is not None:
+        if not explained or explained != sorted(set(explained)):
+            raise ViewerError("The analysis summary does not list the explained slices in ascending order")
+        if explained[0] < 0 or explained[-1] >= grid.shape[2]:
+            raise ViewerError("The analysis summary lists explained slices outside the grid")
+        if not {int(z) for z in np.flatnonzero(attention.any(axis=(0, 1)))} <= set(explained):
+            raise ViewerError("The attention volume has values on slices that the analysis summary does not list")
     bounds = _crop_bounds(anatomy, attention, (explained[0], explained[-1]) if explained else None)
     window = tuple(slice(start, stop) for start, stop in bounds)
     offset = [start for start, _ in bounds]
@@ -234,6 +274,8 @@ def viewer_payload(grid: np.ndarray, cam_grid: Optional[np.ndarray], summary: di
     if len(class_names) != 2:
         raise ViewerError("The viewer expects a two-class analysis")
     scored = _scored_slices(summary)
+    if any(z < 0 or z >= grid.shape[2] for z in scored):
+        raise ViewerError("The analysis summary lists scored slices outside the grid")
     payload = {
         "shape": list(anatomy.shape),
         "offset": offset,
@@ -242,7 +284,7 @@ def viewer_payload(grid: np.ndarray, cam_grid: Optional[np.ndarray], summary: di
         "encoding": "base64 of zlib; uint8, x fastest then y then z; each row as differences along x modulo 256",
         "anatomy_z": _pack(anatomy),
         "attention_z": None,
-        "checksums": [int(anatomy.sum(dtype=np.int64)), 0],
+        "checksums": [_checksum(anatomy), 0],
         "class_names": class_names,
         "probabilities": [float(value) for value in summary["probabilities"]],
         "member_probabilities": [[float(value) for value in row] for row in summary["member_probabilities"]],
@@ -262,7 +304,7 @@ def viewer_payload(grid: np.ndarray, cam_grid: Optional[np.ndarray], summary: di
     first, last = explained[0], explained[-1]
     peak = np.unravel_index(int(attention.argmax()), attention.shape)
     payload["attention_z"] = _pack(attention)
-    payload["checksums"][1] = int(attention.sum(dtype=np.int64))
+    payload["checksums"][1] = _checksum(attention)
     payload.update(
         {
             "target_class": str(explanation["target_class"]),
@@ -390,7 +432,11 @@ def _saved_volume(path: Path, grid_shape: Sequence[int], grid_affine: np.ndarray
 
 
 def payload_from_saved(results_dir) -> dict:
-    """The viewer payload rebuilt from a folder written by ``VolumeAnalysis.save``."""
+    """The viewer payload rebuilt from a folder written by ``VolumeAnalysis.save``.
+
+    The notice and the warnings are the ones recorded in ``result.json`` when
+    the scan was analysed; rebuilding a page does not bring them up to date.
+    """
 
     results_dir = Path(results_dir)
     summary_path, anatomy_path, map_path = (results_dir / name for name in ("result.json", "anatomy.nii.gz", "gradcam.nii.gz"))
@@ -399,8 +445,8 @@ def payload_from_saved(results_dir) -> dict:
             raise ViewerError(f"{required} not found; expected a folder written by the volume analysis")
     try:
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
-    except ValueError as exc:  # invalid JSON or not UTF-8
-        raise ViewerError(f"result.json cannot be read ({exc})") from exc
+    except (ValueError, RecursionError) as exc:  # invalid JSON, not UTF-8, or nested beyond reason
+        raise ViewerError(f"result.json cannot be read ({type(exc).__name__}: {exc})") from exc
     try:
         preparation = summary["preparation"]
         grid_shape = [int(n) for n in preparation["grid_shape"]]
@@ -414,7 +460,7 @@ def payload_from_saved(results_dir) -> dict:
         raise
     except KeyError as exc:
         raise ViewerError(f"result.json lacks {exc}") from exc
-    except (IndexError, TypeError, ValueError, AttributeError) as exc:
+    except (IndexError, TypeError, ValueError, AttributeError, ArithmeticError, RecursionError) as exc:
         raise ViewerError(f"result.json is not in the form the volume analysis writes ({type(exc).__name__}: {exc})") from exc
 
 

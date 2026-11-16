@@ -315,10 +315,14 @@ class RealArchitectureTests(unittest.TestCase):
         self.assertEqual(analyzer.notice, self.summary["notice"])
         self.assertIn("2-fold cross-validation by person", analyzer.notice)
         self.assertNotIn("specificity 0/10", analyzer.notice)  # its own record, not the Round 2 ensemble's
+        # The sentence about the map travels beside the record and is added only to a result that has a map.
+        self.assertNotIn("attention map", analyzer.notice)
+        self.assertEqual((analyzer.map_notice, self.summary["map_notice"]), (tdv.MAP_NOTICE, tdv.MAP_NOTICE))
         for member, entry in zip(analyzer.members, self.summary["checkpoints"]):
             self.assertEqual(member["sha256"], entry["sha256"])
         volume = self.cases[0].load()
         result = analyzer.analyze(volume)
+        self.assertEqual(result.notice, f"{analyzer.notice} {tdv.MAP_NOTICE}")
         self.assertEqual(result.cam_grid.shape, result.prepared.grid.shape)
         self.assertEqual(result.cam_indices, result.prepared.band_indices)
         # The trainer's own scoring and the analyzer agree on a scan: one definition of the model's output.

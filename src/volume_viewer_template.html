@@ -103,7 +103,7 @@ body { margin: 0; background: var(--vv-bg); }
 .vv-note ul { padding-left: 1.2em; color: var(--vv-ink-2); }
 .vv-stage { display: flex; flex-direction: column; gap: 14px; }
 .vv-views { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-@media (min-width: 700px) { .vv-views { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 620px) { .vv-views { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .vv-panel { margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .vv-viewport {
   position: relative;
@@ -113,7 +113,7 @@ body { margin: 0; background: var(--vv-bg); }
   aspect-ratio: 1 / 1;
   max-width: 100%;
 }
-.vv-viewport canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: crosshair; }
+.vv-viewport canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y pinch-zoom; cursor: crosshair; }
 .vv-viewport canvas.vv-3d { cursor: grab; }
 .vv-viewport canvas.vv-3d.vv-dragging { cursor: grabbing; }
 .vv-viewport canvas:focus-visible { outline: 2px solid var(--vv-accent); outline-offset: -2px; }
@@ -134,6 +134,16 @@ body { margin: 0; background: var(--vv-bg); }
 .vv-caption span:last-child { font-family: var(--vv-mono); font-size: 0.74rem; color: var(--vv-muted); min-width: 9ch; text-align: right; white-space: nowrap; }
 .vv-caption span#vv-3d-info { min-width: 19ch; }
 .vv-status { margin: 0; font-size: 0.85rem; color: var(--vv-ink-2); }
+/* A page that cannot show the scan says so where it cannot be missed. */
+.vv-status.vv-failed {
+  background: var(--vv-note-bg);
+  border: 1px solid var(--vv-note-line);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: var(--vv-ink);
+  max-width: 90ch;
+}
 .vv-readout {
   font: 0.8rem/1.5 var(--vv-mono);
   font-variant-numeric: tabular-nums;
@@ -221,11 +231,14 @@ body { margin: 0; background: var(--vv-bg); }
 .vv-read ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 4px; color: var(--vv-ink-2); }
 .vv-read li b { color: var(--vv-ink); font-weight: 600; }
 @media (max-width: 640px) { .vv-chart p.vv-chart-now { min-height: 3em; } }
+/* Below this width a caption and its read-out do not fit on one line under every view, so all four stack. */
+@media (max-width: 1019px) {
+  .vv-caption { flex-direction: column; gap: 0; }
+  .vv-caption span:last-child, .vv-caption span#vv-3d-info { min-width: 0; text-align: left; }
+}
 @media (max-width: 520px) {
   .vv-title { font-size: 1.35rem; }
   .vv-views { gap: 8px; }
-  .vv-caption { flex-direction: column; gap: 0; }
-  .vv-caption span:last-child, .vv-caption span#vv-3d-info { min-width: 0; text-align: left; }
 }
 </style>
 <section class="vv" id="vv" aria-label="Interactive scan viewer">
@@ -286,15 +299,15 @@ body { margin: 0; background: var(--vv-bg); }
   </div>
   <div class="vv-charts vv-attention" id="vv-charts">
     <div class="vv-chart">
-      <__VV_SUBHEADING__ class="vv-sub">Attention in each analysed slice</__VV_SUBHEADING__>
-      <p>Share of the whole map that falls in each analysed axial slice, inferior to superior. Select a bar to go to that slice.</p>
-      <div class="vv-chart-box"><svg id="vv-share" role="img" aria-label="Bar chart of the share of attention in each analysed axial slice"></svg><div class="vv-chart-tip" id="vv-share-tip" hidden></div></div>
+      <__VV_SUBHEADING__ class="vv-sub">Attention in each mapped slice</__VV_SUBHEADING__>
+      <p>Share of the whole map that falls in each mapped axial slice, inferior to superior. Select a bar to go to that slice.</p>
+      <div class="vv-chart-box"><svg id="vv-share" role="img" aria-label="Bar chart of the share of attention in each mapped axial slice"></svg><div class="vv-chart-tip" id="vv-share-tip" hidden></div></div>
       <p class="vv-chart-now" id="vv-share-now">&nbsp;</p>
     </div>
     <div class="vv-chart">
       <__VV_SUBHEADING__ class="vv-sub" id="vv-prob-title">Score from each slice alone</__VV_SUBHEADING__>
       <p id="vv-prob-text"></p>
-      <div class="vv-chart-box"><svg id="vv-prob" role="img" aria-label="Dot chart of the probability each analysed slice gives on its own"></svg><div class="vv-chart-tip" id="vv-prob-tip" hidden></div></div>
+      <div class="vv-chart-box"><svg id="vv-prob" role="img" aria-label="Dot chart of the probability each mapped slice gives on its own"></svg><div class="vv-chart-tip" id="vv-prob-tip" hidden></div></div>
       <p class="vv-chart-now" id="vv-prob-now">&nbsp;</p>
     </div>
     <details>
@@ -354,8 +367,8 @@ body { margin: 0; background: var(--vv-bg); }
     read.append(item);
   };
   if (hasMap) {
-    point("One scale for the whole scan.", "Each analysed axial slice was explained separately with Grad-CAM and the slice maps were stacked. They share one scale, on which 1 is the strongest voxel in the scan, so a slice the model barely responded to stays dark.");
-    point("Only the analysed slices carry a map.", data.slab_text);
+    point("One scale for the whole scan.", "Each mapped axial slice was explained separately with Grad-CAM and the slice maps were stacked. They share one scale, on which 1 is the strongest voxel in the scan, so a slice the model barely responded to stays dark.");
+    point("Where there is a map.", data.slab_text);
     point("Coarse by design.", "Each slice map is 7 by 7 cells before it is enlarged, so edges are soft and the map can spill outside the brain onto skull, scalp or background.");
     point("What it is.", data.map_text);
   } else {
@@ -427,10 +440,17 @@ body { margin: 0; background: var(--vv-bg); }
     }
     return volume;
   }
+  // CRC-32 of the unpacked bytes. Unlike a plain sum it also changes when voxels arrive in another order.
+  const CRC = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    CRC[n] = c >>> 0;
+  }
   function checksum(volume) {
-    let total = 0;
-    for (let i = 0; i < volume.length; i++) total += volume[i];
-    return total;
+    let crc = 0xffffffff;
+    for (let i = 0; i < volume.length; i++) crc = CRC[(crc ^ volume[i]) & 255] ^ (crc >>> 8);
+    return (crc ^ 0xffffffff) >>> 0;
   }
 
   // ---------------------------------------------------------------- slice views
@@ -618,8 +638,11 @@ body { margin: 0; background: var(--vv-bg); }
     if (view3d.buffer.width !== size) {
       view3d.buffer.width = view3d.buffer.height = size;
       view3d.image = view3d.bufferContext.createImageData(size, size);
+      view3d.rays = new Float32Array(size * size * 4); // per pixel: summed anatomy, then the map's red, green, blue
+      view3d.clears = new Float32Array(size * size); // per pixel: how much of the anatomy still shows through the map
     }
-    const out = view3d.image.data;
+    const out = view3d.image.data, rays = view3d.rays, clears = view3d.clears;
+    let brightest = 1;
     const { right, up, forward } = basis();
     // Index-space vectors: mm divided by the reduced voxel size on each axis.
     const vox = [SP[0] * f, SP[1] * f, SP[2] * f];
@@ -674,13 +697,25 @@ body { margin: 0; background: var(--vv-bg); }
             }
           }
         }
-        const grey = Math.min(255, 255 * Math.pow(Math.min(1, total * gain), 0.8));
         const o = (row * size + col) * 4;
-        out[o] = red + clear * grey;
-        out[o + 1] = green + clear * grey;
-        out[o + 2] = blue + clear * grey;
-        out[o + 3] = 255;
+        rays[o] = total;
+        rays[o + 1] = red;
+        rays[o + 2] = green;
+        rays[o + 3] = blue;
+        clears[row * size + col] = clear;
+        if (total > brightest) brightest = total;
       }
+    }
+    // Exposure. The fixed gain suits a head. A volume whose rays are much longer in this view (a thin slab
+    // seen edge-on) would wash out to white, so the gain is lowered until its brightest ray is where a head's is.
+    const exposure = Math.min(gain, 1 / (0.72 * brightest));
+    for (let p = 0, o = 0; p < size * size; p++, o += 4) {
+      const grey = Math.min(255, 255 * Math.pow(Math.min(1, rays[o] * exposure), 0.8));
+      const clear = clears[p];
+      out[o] = rays[o + 1] + clear * grey;
+      out[o + 1] = rays[o + 2] + clear * grey;
+      out[o + 2] = rays[o + 3] + clear * grey;
+      out[o + 3] = 255;
     }
     view3d.bufferContext.putImageData(view3d.image, 0, 0);
     const g = view3d.context;
@@ -839,20 +874,23 @@ body { margin: 0; background: var(--vv-bg); }
       if (a || b) refresh(3);
     };
     plane.canvas.addEventListener("pointerdown", (event) => {
+      // A second finger means a pinch or a two-finger scroll: the view lets go and the browser takes the gesture.
+      if (!event.isPrimary) { drag = null; return; }
       if (event.button !== 0) return;
       const touch = event.pointerType === "touch";
-      drag = { x: event.clientX, y: event.clientY, touch, active: !touch };
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, touch, active: !touch };
       capture(plane.canvas, event);
       plane.tip.hidden = true;
       if (drag.active) place(event, false);
     });
     plane.canvas.addEventListener("pointermove", (event) => {
       if (drag) {
-        if (!drag.active && !sideways(drag, event)) return;
+        if (event.pointerId !== drag.id || (!drag.active && !sideways(drag, event))) return;
         drag.active = true;
         place(event, true);
         return;
       }
+      if (event.pointerType === "touch") return; // the hover label is for a mouse or a pen
       const hit = attention && voxelAt(plane, event, false);
       if (!hit) { plane.tip.hidden = true; return; }
       const index = [0, 0, 0];
@@ -864,12 +902,14 @@ body { margin: 0; background: var(--vv-bg); }
       plane.tip.style.left = Math.max(0, Math.min(event.clientX - bounds.left, bounds.width - width - 10)) + "px";
       plane.tip.style.top = Math.max(event.clientY - bounds.top, 30) + "px";
     });
+    const mine = (event) => drag && event.pointerId === drag.id;
     plane.canvas.addEventListener("pointerup", (event) => {
-      if (drag && drag.touch && !drag.active) place(event, false); // a tap
+      if (!mine(event)) return;
+      if (drag.touch && !drag.active) place(event, false); // a tap
       drag = null;
     });
-    plane.canvas.addEventListener("pointercancel", () => { drag = null; });
-    plane.canvas.addEventListener("lostpointercapture", () => { drag = null; });
+    plane.canvas.addEventListener("pointercancel", (event) => { if (mine(event)) drag = null; });
+    plane.canvas.addEventListener("lostpointercapture", (event) => { if (mine(event)) drag = null; });
     plane.canvas.addEventListener("pointerleave", () => { plane.tip.hidden = true; });
     plane.canvas.addEventListener("keydown", (event) => {
       const steps = { ArrowLeft: [plane.u, -1], ArrowRight: [plane.u, 1], ArrowUp: [plane.v, 1], ArrowDown: [plane.v, -1], PageUp: [plane.w, 1], PageDown: [plane.w, -1] };
@@ -940,29 +980,36 @@ body { margin: 0; background: var(--vv-bg); }
     const canvas = view3d.canvas;
     const tilted = (value) => Math.max(-1.35, Math.min(1.35, value));
     const grab = () => { canvas.classList.add("vv-dragging"); takeOver(); };
+    const release = () => { drag = null; canvas.classList.remove("vv-dragging"); };
     canvas.addEventListener("pointerdown", (event) => {
+      if (!event.isPrimary) { release(); return; } // a second finger: leave the gesture to the browser
       if (event.button !== 0) return;
       const touch = event.pointerType === "touch";
-      drag = { x: event.clientX, y: event.clientY, yaw: state.yaw, pitch: state.pitch, active: !touch };
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, yaw: state.yaw, pitch: state.pitch, touch, active: !touch };
       capture(canvas, event);
       if (drag.active) grab();
     });
     canvas.addEventListener("pointermove", (event) => {
-      if (!drag) return;
+      if (!drag || event.pointerId !== drag.id) return;
       if (!drag.active) {
         if (!sideways(drag, event)) return;
-        drag.active = true;
         grab();
+        // The head may have kept turning while the finger rested on it: the drag starts from where it is now.
+        Object.assign(drag, { active: true, x: event.clientX, y: event.clientY, yaw: state.yaw, pitch: state.pitch });
       }
       // The near side of the head follows the pointer, across and up and down alike.
       state.yaw = drag.yaw - (event.clientX - drag.x) * 0.01;
       state.pitch = tilted(drag.pitch + (event.clientY - drag.y) * 0.01);
       refresh(2);
     });
-    const end = () => { drag = null; canvas.classList.remove("vv-dragging"); };
-    canvas.addEventListener("pointerup", end);
-    canvas.addEventListener("pointercancel", end);
-    canvas.addEventListener("lostpointercapture", end);
+    canvas.addEventListener("pointerup", (event) => {
+      if (!drag || event.pointerId !== drag.id) return;
+      if (drag.touch && !drag.active) takeOver(); // a tap stops the turning, as a mouse press does
+      release();
+    });
+    for (const type of ["pointercancel", "lostpointercapture"]) {
+      canvas.addEventListener(type, (event) => { if (drag && event.pointerId === drag.id) release(); });
+    }
     canvas.addEventListener("keydown", (event) => {
       // Like a drag: the near side of the head moves the way the arrow points.
       const turns = { ArrowLeft: [0.12, 0], ArrowRight: [-0.12, 0], ArrowUp: [0, -0.1], ArrowDown: [0, 0.1] };
@@ -1092,7 +1139,7 @@ body { margin: 0; background: var(--vv-bg); }
     if (!hasMap) return;
     const slices = data.explained, scored = new Set(data.scored);
     $("vv-prob-title").textContent = "P(" + positive + ") from each slice alone";
-    $("vv-prob-text").textContent = "What each analysed slice would say on its own, averaged over the ensemble members. " + data.scored_chart_text
+    $("vv-prob-text").textContent = "What each mapped slice would say on its own, averaged over the ensemble members. " + data.scored_chart_text
       + " The line at " + data.threshold + " is the decision threshold.";
     const head = $("vv-table").tHead.insertRow();
     for (const title of ["Slice", "Height (mm)", "Share of map", "P(" + positive + ") alone", "Used for the score"]) {
@@ -1131,10 +1178,14 @@ body { margin: 0; background: var(--vv-bg); }
   // Nothing is drawn unless both volumes arrive exactly as they were saved: a wrong picture is worse than none.
   function fail(text) {
     anatomy = attention = null;
+    state.spin = false;
     const status = $("vv-status");
     status.textContent = text;
     status.setAttribute("role", "alert");
+    status.classList.add("vv-failed");
     status.hidden = false;
+    // Without the scan nothing below can work: empty views and dead controls are taken away with it.
+    for (const node of document.querySelectorAll("#vv .vv-views, #vv .vv-readout, #vv .vv-controls, #vv .vv-charts, #vv .vv-read")) node.hidden = true;
   }
   async function start() {
     if (typeof DecompressionStream !== "function" || typeof Blob.prototype.stream !== "function") {

@@ -10,6 +10,7 @@ import importlib
 import shutil
 import sys
 import tempfile
+import threading
 import time
 import types
 import unittest
@@ -128,11 +129,14 @@ class GuiScanFlowTests(unittest.TestCase):
             cls.dialogs.append(("askyesno", title, text))
             return cls.answer
 
+        cls.launch_threads = []
+
         def launch(url):
             cls.opened.append(url)
+            cls.launch_threads.append(threading.current_thread())
             if isinstance(cls.browser, Exception):
                 raise cls.browser
-            return cls.browser
+            return cls.browser(url) if callable(cls.browser) else cls.browser
 
         missing = str(cls.directory / "no_such_model.pt")
         cls.patches = [
@@ -262,18 +266,31 @@ class GuiScanFlowTests(unittest.TestCase):
         self.assertIn("If no browser window appears, open that file from the folder above.", question)
         self.pump(lambda: bool(self.opened))  # the browser is started from a worker thread
         self.assertEqual(self.opened, [(target / "viewer.html").resolve().as_uri()])
+        self.assertIsNot(self.launch_threads[0], threading.main_thread())  # a launcher may not return for a long time
+        # The folder is named in full in the question and stays on screen afterwards.
+        import os
+
+        self.assertIn(os.path.abspath(str(target)), question)
+        self.assertEqual(app.saved_var.get(), os.path.abspath(str(target)))
+        self.assertTrue(app.saved_row.winfo_ismapped())
+        # Labels wrap at the width they are given, so no line is cut off at the edge of the panel.
+        for label in (app.model_used_label, app.scan_info_label, app.heatmap_caption_label):
+            self.assertEqual(int(str(label.cget("wraplength"))), max(80, label.winfo_width() - 4))
+        from src import volume_analysis as analysis
+
+        self.assertTrue(app.volume_result.notice.endswith(analysis.MAP_NOTICE))
         viewer = (target / "viewer.html").read_text()
         self.assertNotIn("SYNTHETIC", viewer)
         self.assertNotIn("FAKE-ID", viewer)
 
-        def save_again(name, dialogs=1):
+        def save_again(name, dialogs=1, settle=0.6):
             """Save into a new folder; returns the folder and the dialogs that the save produced."""
 
             folder, before = self.directory / name, len(self.dialogs)
             with patch.object(self.gui.filedialog, "askdirectory", return_value=str(folder)):
                 app.on_save_volume_result()
             self.pump(lambda: len(self.dialogs) >= before + dialogs and str(app.save_volume_btn.cget("state")) == "normal")
-            settled = time.time() + 0.5
+            settled = time.time() + settle
             while time.time() < settled:  # anything else that was on its way has arrived
                 self.root.update()
                 time.sleep(0.02)
@@ -294,6 +311,35 @@ class GuiScanFlowTests(unittest.TestCase):
             folder, shown = save_again(f"saved_browser_{type(outcome).__name__}", dialogs=2)
             self.assertEqual([(kind, title) for kind, title, _ in shown], [("askyesno", "Saved"), ("showinfo", "Viewer")])
             self.assertIn(str((folder / "viewer.html").resolve()), shown[1][2])
+
+        # A launcher that returns only when the browser is closed did show one, whatever it reports then.
+        def closed_after_a_while(url):
+            time.sleep(0.4)
+            return False
+
+        type(self).browser = closed_after_a_while
+        with patch.object(self.gui.App, "VIEWER_LAUNCH_GRACE_SECONDS", 0.1):
+            folder, shown = save_again("saved_launcher_returns_late", settle=1.2)
+        self.assertEqual([kind for kind, _, _ in shown], ["askyesno"])
+
+        # While a launcher holds on, the app stays usable, and it stops waiting for it after a while.
+        release = threading.Event()
+
+        def holding(url):
+            release.wait(20)
+            return False
+
+        type(self).browser = holding
+        with patch.object(self.gui.App, "VIEWER_LAUNCH_WAIT_SECONDS", 0.3):
+            folder, shown = save_again("saved_launcher_holds", settle=1.0)
+            self.assertEqual([kind for kind, _, _ in shown], ["askyesno"])
+            self.assertEqual(str(app.volume_btn.cget("state")), "normal")
+            release.set()
+            settled = time.time() + 0.6
+            while time.time() < settled:
+                self.root.update()
+                time.sleep(0.02)
+        self.assertEqual(len(self.dialogs), len(shown) + self.dialogs.index(shown[0]))  # nothing was said afterwards either
         type(self).browser = True
 
         # When the viewer could not be written there is nothing to offer, and the app says so.
@@ -308,6 +354,13 @@ class GuiScanFlowTests(unittest.TestCase):
         self.assertFalse((folder / "viewer.html").exists())
         self.assertTrue((folder / "gradcam.nii.gz").is_file())
         self.assertEqual(len(self.opened), opened)
+
+        # The line names the folder of the latest save, and goes when another analysis starts.
+        self.assertEqual(app.saved_var.get(), os.path.abspath(str(folder)))
+        app.on_analyze_volume()
+        self.assertEqual(app.saved_var.get(), "")
+        self.pump(lambda: app.volume_result is not None and str(app.save_volume_btn.cget("state")) == "normal")
+        self.assertFalse(app.saved_row.winfo_ismapped())
 
         # Running the single-slice analysis returns the viewer to the raw scan.
         with patch.object(app, "_start_report_generation"):

@@ -173,11 +173,14 @@ Splits are by person; every person is scored once by a fold model that never saw
 python -m pytest -q tests/                                     # full suite
 xvfb-run -a python -m pytest -q tests/test_gui_scan_flow.py    # GUI scan flow needs tkinter + a display
 python -m unittest discover -s tests -p 'test_*.py'            # what CI runs (numpy/scipy/Pillow/pydicom only)
+python scripts/check_viewer_tests.py                           # do the viewer tests catch planted defects? (minutes)
 ```
 
 New tests must skip, not error, when torch / nibabel / pydicom / a display are missing: the CI
 verification job installs only `requirements-verification.txt`. The viewer's browser tests in
 `tests/test_volume_viewer.py` run only where Node.js with Playwright and its Chromium are available.
+After changing the viewer or its tests, run `python scripts/check_viewer_tests.py`: it plants each listed defect in a
+copy of the viewer and fails if the viewer tests stay green. Add a defect to its list with every new behaviour.
 
 ### Evaluation and Visualization
 
@@ -318,8 +321,8 @@ When making changes, these are the most critical files to understand:
 - `prepare_clinical_volume` must stay pixel-identical to `docs/kevin_paper_20261011/preprocess_clinical_t1.py`; the clinical checkpoints were trained on exactly that input. Re-run `scripts/verify_dicom_volume_pipeline.py` after touching it.
 - When stacking per-slice Grad-CAM into a volume, keep the raw maps and scale once for the whole volume. Per-slice min-max normalisation makes every slice look equally important.
 - The four-class stage model was trained on skull-stripped, atlas-aligned slices. On raw with-skull slices it labels everything as demented; do not present its label on a raw scan as valid.
-- `viewer.html` must stay one self-contained file: no external URL, script, font or request, ASCII only, and every string from the analysis embedded as escaped JSON and inserted with `textContent`. It carries no header fields but does contain the scan; never commit one made from a person's scan (`viewer.html` and `/results/` are git-ignored).
-- The viewer embeds the scan and the map as zlib bytes with a checksum and must draw nothing when they do not unpack exactly. What it says about the map follows two lists: the slices the score uses (`scored_slice_indices` in `result.json`) and the slices that have a map. A slice without a map is never reported as zero attention.
+- `viewer.html` must stay one self-contained file: no external URL, script, font or request, ASCII only, and every string from the analysis embedded as escaped JSON and inserted with `textContent`. It carries no header fields but does contain the scan; never commit one made from a person's scan. `viewer.html`, NIfTI files and `/results/` are git-ignored; `montage.png` and `projections.png` show the scan too and are ignored only inside `/results/`.
+- The viewer embeds the scan and the map as zlib bytes with a CRC-32 and must draw nothing, and offer no controls, when they do not unpack exactly. What it says about the map follows two lists: the slices the score uses (`scored_slice_indices` in `result.json`) and the slices that have a map. A slice without a map is never reported as zero attention.
 - The viewer's slice views follow the app's convention (patient left on image left, anterior and superior up, sagittal with the face to the right, which is the view from the patient's right). Change the orientation only together with the edge letters and the browser test, which reads the visible canvases and the letters drawn on them.
 
 ### Training on Labelled Scans

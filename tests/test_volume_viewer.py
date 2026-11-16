@@ -33,7 +33,7 @@ EXPLAINED = list(range(14, 26))
 PROTOCOL = [14, 17, 20, 23, 25]
 PEAK = (13, 30, 20)
 MARKER = (9, 37, 27)  # a bright voxel in air toward the patient's left, front and top: fixes the orientation of every view
-STRAY = (4, 6, 18)  # attention outside the head's bounding box: cropping to the head must not lose it
+STRAY = (4, 6, 16)  # attention in air, outside the head's bounding box: cropping must keep it, and it shows where the map is drawn
 BROWSER_CHECK = Path(__file__).with_name("viewer_browser_check.js")
 #: Every key a page may embed. Anything else would be data nobody decided to publish.
 PAYLOAD_KEYS = {
@@ -62,6 +62,7 @@ def synthetic_inputs(with_map=True, policy="protocol9", explained=None, record="
     inside = ((x - 20) / 12) ** 2 + ((y - 25) / 15) ** 2 + ((z - 18) / 11) ** 2 < 1
     grid = np.zeros(SHAPE, dtype=np.float32)
     grid[inside] = 300 + 300 * rng.random(int(inside.sum()))
+    grid[inside & (x >= 24)] += 180.0  # the patient's right half is the brighter one: a mirrored 3D picture shows
     grid[MARKER] = 800.0
     cam = np.zeros(SHAPE, dtype=np.float32)
     cam[10:30, 14:36, EXPLAINED[0] : EXPLAINED[-1] + 1] = rng.random((20, 22, len(EXPLAINED))) * 0.6
@@ -125,6 +126,12 @@ def unpack(text, shape):
     return (np.cumsum(steps.astype(np.int64), axis=2) % 256).astype(np.uint8).transpose(2, 1, 0)
 
 
+def crc(volume):
+    """CRC-32 of a volume's voxels with x varying fastest, the order in which the page holds them."""
+
+    return zlib.crc32(np.ascontiguousarray(volume.transpose(2, 1, 0)).tobytes())
+
+
 def embedded_payload(page):
     return json.loads(page.split('<script type="application/json" id="vv-data">')[1].split("</script>")[0])
 
@@ -149,7 +156,10 @@ class PayloadTests(unittest.TestCase):
         np.testing.assert_array_equal(anatomy, expected_anatomy[window])
         np.testing.assert_array_equal(attention, expected_map[window])
         self.assertEqual(int(attention.max()), 255)
-        self.assertEqual(payload["checksums"], [int(anatomy.sum(dtype=np.int64)), int(attention.sum(dtype=np.int64))])
+        self.assertEqual(payload["checksums"], [crc(anatomy), crc(attention)])
+        # The checksum depends on where each voxel is: the same values mirrored do not pass for the map.
+        self.assertEqual(int(attention[::-1].sum()), int(attention.sum()))
+        self.assertNotEqual(crc(attention[::-1]), payload["checksums"][1])
         # Cropping to the head loses neither tissue nor attention, including attention outside the head's box.
         outside = np.ones(SHAPE, dtype=bool)
         outside[window] = False
@@ -223,6 +233,18 @@ class PayloadTests(unittest.TestCase):
             partial["scored_chart_text"],
             "All 5 slices shown count toward the score, which also uses 7 slices that have no map.",
         )
+
+        # One slice reads as one slice, whichever role it has.
+        single = vv._map_texts(PROTOCOL, [20], "CN", 1.5)
+        self.assertEqual(single["scored_text"], "The score uses 5 axial slices; the map covers one of them.")
+        self.assertEqual(single["scored_chart_text"], "The slice shown counts toward the score, which also uses 4 slices that have no map.")
+        self.assertIn("The map covers one axial slice, at the marked level (slice 20 of the 1.5 mm grid).", single["slab_text"])
+        self.assertEqual(vv._map_texts([20], [20], "CN", 1.5)["scored_text"], "The score uses one axial slice, and the map covers it.")
+        self.assertEqual(vv._map_texts([20], EXPLAINED, "CN", 1.5)["scored_chart_text"], "Only the larger dot is the slice the score is computed from.")
+        self.assertIn("none of which counts toward the score", vv._map_texts([30, 31], [14, 15], "CN", 1.5)["scored_text"])
+        for scored, explained in ((PROTOCOL, [20]), ([20], [20]), ([20], EXPLAINED), ([14, 30], [14, 15]), (EXPLAINED[:6], EXPLAINED[:5])):
+            for sentence in vv._map_texts(scored, explained, "CN", 1.5).values():
+                self.assertNotRegex(sentence, r"\b1 (axial )?slices\b|\bAll 1 \b|\b1 larger dots\b|slices (\d+) to \1\b|\b1 of which count\b")
 
         # No map at all: the count still follows the policy.
         grid, _, summary, _ = synthetic_inputs(with_map=False, policy="band")
@@ -341,6 +363,21 @@ class PayloadTests(unittest.TestCase):
         unordered["grad_cam"]["slice_indices"] = EXPLAINED[::-1]
         with self.assertRaisesRegex(vv.ViewerError, "ascending"):
             vv.viewer_payload(self.grid, self.cam, unordered)
+        # The slice lists must describe this grid and this map.
+        _, _, beyond, _ = synthetic_inputs()
+        beyond["grad_cam"]["slice_indices"] = [z + 500 for z in EXPLAINED]
+        with self.assertRaisesRegex(vv.ViewerError, "explained slices outside the grid"):
+            vv.viewer_payload(self.grid, self.cam, beyond)
+        _, _, unlisted, _ = synthetic_inputs()
+        unlisted["grad_cam"]["slice_indices"] = EXPLAINED[2:]
+        unlisted["grad_cam"]["slice_share_of_attention"] = unlisted["grad_cam"]["slice_share_of_attention"][2:]
+        unlisted["grad_cam"]["slice_probabilities"] = unlisted["grad_cam"]["slice_probabilities"][2:]
+        with self.assertRaisesRegex(vv.ViewerError, "slices that the analysis summary does not list"):
+            vv.viewer_payload(self.grid, self.cam, unlisted)
+        _, _, off_grid, _ = synthetic_inputs()
+        off_grid["preparation"]["scored_slice_indices"] = [20, SHAPE[2]]
+        with self.assertRaisesRegex(vv.ViewerError, "scored slices outside the grid"):
+            vv.viewer_payload(self.grid, self.cam, off_grid)
         _, _, three, _ = synthetic_inputs()
         three["class_names"] = ["CN", "MCI", "AD"]
         with self.assertRaisesRegex(vv.ViewerError, "two-class"):
@@ -431,6 +468,9 @@ class SavedFolderTests(unittest.TestCase):
             "not UTF-8": lambda: (self.directory / "result.json").write_bytes(b"\xff\xfe\x00"),
             "a NaN score": lambda: (self.directory / "result.json").write_text(good.replace("[0.6, 0.4]", "[NaN, 0.4]")),
             "one class": lambda: (self.directory / "result.json").write_text(good.replace('["CN", "AD"]', '["CN"]')),
+            "an infinite slice number": lambda: (self.directory / "result.json").write_text(good.replace('"slice_indices": [14,', '"slice_indices": [Infinity,')),
+            "an infinite grid size": lambda: (self.directory / "result.json").write_text(good.replace('"grid_shape": [40,', '"grid_shape": [Infinity,')),
+            "nested beyond reason": lambda: (self.directory / "result.json").write_text("[" * 200000 + "]" * 200000),
             "garbage volume": lambda: (self.directory / "anatomy.nii.gz").write_bytes(b"not a NIfTI file"),
             "cut volume": lambda: (self.directory / "gradcam.nii.gz").write_bytes(
                 (self.directory / "gradcam.nii.gz").read_bytes()[:200]
@@ -493,6 +533,11 @@ class BrowserTests(unittest.TestCase):
         truncated["attention_z"] = truncated["attention_z"][: len(truncated["attention_z"]) // 12 * 4]
         altered = dict(cls.payload)
         altered["checksums"] = [altered["checksums"][0] + 1, altered["checksums"][1]]
+        altered_map = dict(cls.payload)
+        altered_map["checksums"] = [altered_map["checksums"][0], altered_map["checksums"][1] + 1]
+        # The same map values in another order (mirrored left to right), under the checksum of the true map.
+        mirrored_map = dict(cls.payload)
+        mirrored_map["attention_z"] = vv._pack(np.ascontiguousarray(unpack(cls.payload["attention_z"], cls.payload["shape"])[::-1]))
         pages = {
             "main": render(cls.payload),
             "nomap": render(cls.plain),
@@ -500,8 +545,11 @@ class BrowserTests(unittest.TestCase):
             "sparse": render(cls.sparse),
             "truncated": render(truncated),
             "altered": render(altered),
+            "altered_map": render(altered_map),
+            "mirrored_map": render(mirrored_map),
         }
-        spec = {"pages": {}, "marker": [value - start for value, start in zip(MARKER, cls.payload["offset"])]}
+        local = lambda voxel: [value - start for value, start in zip(voxel, cls.payload["offset"])]
+        spec = {"pages": {}, "marker": local(MARKER), "stray": local(STRAY), "slab": cls.payload["slab"]}
         for name, text in pages.items():
             (cls.directory / f"{name}.html").write_text(text, encoding="utf-8")
             spec["pages"][name] = str(cls.directory / f"{name}.html")
@@ -516,15 +564,22 @@ class BrowserTests(unittest.TestCase):
     def world(self, index):
         return (self.affine @ [*index, 1.0])[:3]
 
+    def page(self, name):
+        """The report for one page; a page that never showed the scan fails here with the reason it gave."""
+
+        report = self.report[name]
+        self.assertTrue(report.get("started"), f"the {name} page did not start: {report}")
+        return report
+
     def test_loads_without_errors_or_requests(self):
-        main = self.report["main"]
+        main = self.page("main")
         self.assertEqual(main["problems"], [])
         self.assertTrue(main["status_hidden"])
         self.assertEqual(main["overflow"], 0)
         self.assertEqual(main["checksums"], self.payload["checksums"])  # the browser unpacked exactly the saved values
         self.assertEqual(main["start_idx"], self.payload["peak"])
         self.assertEqual(main["heading_levels"], ["H1", "H2", "H2", "H2"])
-        self.assertEqual(main["touch_action"], "pan-y")  # a finger on a view can still scroll the page
+        self.assertEqual(main["touch_action"], "pan-y pinch-zoom")  # a finger on a view can still scroll or zoom the page
         self.assertEqual(main["spin_label"], "Rotate")
         self.assertIn("with the attention map drawn over it", main["axial_label"])
 
@@ -540,7 +595,7 @@ class BrowserTests(unittest.TestCase):
             "vv-sagittal": {"left": "P", "right": "A", "top": "S", "bottom": "I"},  # face to the right
         }
         true_side = {"vv-axial": ("L", "A"), "vv-coronal": ("L", "S"), "vv-sagittal": ("A", "S")}
-        for view, seen in self.report["main"]["screen"].items():
+        for view, seen in self.page("main")["screen"].items():
             with self.subTest(view=view):
                 self.assertGreater(seen["marker"], 150)
                 self.assertLess(seen["mirrored_across"], 60)
@@ -549,8 +604,26 @@ class BrowserTests(unittest.TestCase):
                 across, up_down = seen["marker_side"]
                 self.assertEqual((seen["letters"][across], seen["letters"][up_down]), true_side[view])
 
+    def test_the_map_is_drawn_over_the_voxels_it_belongs_to(self):
+        # A lone voxel of attention in air: on screen it is tinted blue where the convention puts that voxel
+        # and nothing is tinted at the mirror images of that place, in every slice view.
+        main = self.page("main")
+        tint = lambda colour: colour[2] - colour[0]
+        for view, seen in main["map_screen"].items():
+            with self.subTest(view=view):
+                self.assertGreater(tint(seen["here"]), 15, seen)
+                self.assertLess(max(seen["mirrored_across"]), 20, seen)
+                self.assertLess(max(seen["mirrored_up_down"]), 20, seen)
+        # Raising "Hide attention below" above the voxel's value takes its tint away.
+        self.assertLess(max(main["stray_above_floor"]), 20)
+        # The two marked levels are drawn at the first and the last mapped slice of the cropped picture.
+        rows = main["slab_rows"]
+        self.assertEqual(len(rows["found"]), 2, rows)
+        for found, expected in zip(rows["found"], rows["expected"]):
+            self.assertLess(abs(found - expected), 1.6, rows)
+
     def test_positions_and_slice_numbers_are_those_of_the_model_grid(self):
-        main = self.report["main"]
+        main = self.page("main")
         x, y, z = self.world(MARKER)
         self.assertEqual(
             main["marker_readout"],
@@ -568,7 +641,7 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual(main["bar_click_slice"], EXPLAINED[3])
 
     def test_numbers_on_the_page_are_the_ones_in_the_summary(self):
-        main, payload = self.report["main"], self.payload
+        main, payload = self.page("main"), self.payload
         self.assertEqual(
             main["facts"],
             "Ensemble P(AD) 0.400, label CN at threshold 0.5 (2 members: 0.30, 0.50). " + payload["scored_text"] + " " + payload["map_short"],
@@ -589,10 +662,12 @@ class BrowserTests(unittest.TestCase):
         self.assertIn("seen from the patient's right side, so the face points to the right", main["read"])
 
     def test_controls_and_pointers(self):
-        main = self.report["main"]
+        main = self.page("main")
         red, green, blue = main["colour_with_map"]
         self.assertGreater(blue - red, 20)  # the map is drawn over the strongest voxel
-        self.assertEqual(len(set(main["colour_without_map"])), 1)  # and gone when it is switched off
+        faint = main["colour_at_low_opacity"]
+        self.assertLess(faint[2] - faint[0], (blue - red) - 12)  # it fades with the opacity slider
+        self.assertEqual(len(set(main["colour_without_map"])), 1)  # and is gone when it is switched off
         for tip in main["chart_tips"]:
             self.assertEqual((tip["shown"], tip["inside"], tip["overflow"]), (True, True, 0), tip)
         self.assertTrue(main["chart_tips"][0]["text"].startswith(f"slice {EXPLAINED[0]}, "))
@@ -600,12 +675,40 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual((main["view_tip"]["shown"], main["view_tip"]["inside"]), (True, True), main["view_tip"])
         self.assertFalse(main["right_button_moves"])
         self.assertEqual(main["drag_past_edge"][0], main["drag_past_edge"][1])  # a drag past the image reaches the last voxel
-        self.assertTrue(self.report["touch"]["tap_places_crosshair"])
-        self.assertEqual(self.report["touch"]["problems"], [])
+
+    def test_touch(self):
+        touch = self.page("touch")
+        self.assertEqual(touch["problems"], [])
+        self.assertTrue(touch["tap_places_crosshair"])
+        self.assertFalse(touch["two_fingers_move_crosshair"])  # a pinch belongs to the browser
+        # A finger that rests on the turning head and then drags starts from where the head is by then.
+        rest = touch["rest_then_drag"]
+        self.assertTrue(rest["turned_while_resting"])
+        self.assertLess(abs(rest["jump_on_grab"]), 0.06, rest)
+        self.assertAlmostEqual(rest["turn_for_8_px"], -0.08, places=6)
+        self.assertFalse(rest["still_turning"])
+        self.assertTrue(touch["tap_stops_turning"])
+
+    def test_layout_holds_at_every_width(self):
+        layout = self.page("layout")
+        self.assertEqual(layout["problems"], [])
+        for size in layout["sizes"]:
+            with self.subTest(window=(size["width"], size["height"])):
+                self.assertEqual(len(set(size["captions"])), 1, size)  # the four captions line up
+                self.assertEqual(size["overflow"], 0)
+                if size["width"] >= 620:  # four views in a row: they share a screen with the slider that drives them
+                    self.assertLessEqual(size["views_to_slider"], size["height"], size)
 
     def test_3d_view_shows_the_head_and_turns_with_the_pointer(self):
-        view = self.report["main"]["view3d"]
+        view = self.page("main")["view3d"]
         self.assertGreater(view["head_share"], 0.15)  # the projection itself, not only the orientation marker
+        # Handedness: the scan's right half is the brighter one. From behind it is on the right of the picture and
+        # the letter R points right of the orientation marker's centre (36 px in); from the front both are reversed.
+        behind, front = view["from_behind"], view["from_the_front"]
+        self.assertGreater(behind["right"], behind["left"] + 5, behind)
+        self.assertGreater(front["left"], front["right"] + 5, front)
+        self.assertGreater(behind["letters"]["R"][0], 36)
+        self.assertLess(front["letters"]["R"][0], 36)
         self.assertTrue(view["picture_changes"])
         # Dragging right or down, or pressing the right arrow, moves the near side of the head the same way.
         self.assertAlmostEqual(view["drag_right_yaw"], -0.4, places=6)
@@ -614,7 +717,7 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual(view["caption_near_full_turn"], "turn 0° tilt −17°")
 
     def test_rotation_runs_only_while_the_view_is_on_screen(self):
-        motion = self.report["motion"]
+        motion = self.page("motion")
         self.assertEqual(motion["problems"], [])
         self.assertEqual(motion["turning_after_load"], "true")
         self.assertTrue(motion["turns_while_visible"])
@@ -627,7 +730,7 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual(motion["short_window"]["pressed_once_in_view"], "true")
 
     def test_page_without_a_map_works_and_does_not_mention_one(self):
-        plain = self.report["plain"]
+        plain = self.page("plain")
         self.assertEqual(plain["problems"], [])
         self.assertTrue(plain["status_hidden"])
         self.assertEqual(plain["overflow"], 0)
@@ -644,7 +747,7 @@ class BrowserTests(unittest.TestCase):
         self.assertIn("No attention map. " + self.plain["no_map_text"], plain["read"])
 
     def test_text_from_the_analysis_is_shown_as_text(self):
-        hostile = self.report["hostile"]
+        hostile = self.page("hostile")
         self.assertEqual(hostile["problems"], [])
         self.assertEqual(hostile["pwned"], [])
         self.assertEqual(hostile["scripts"], 2)  # the data block and the page's own script
@@ -658,7 +761,7 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual(hostile["table_head"][3], f"P({HOSTILE_CLASS}) alone")
 
     def test_slices_without_a_map_are_not_reported_as_zero_attention(self):
-        sparse = self.report["sparse"]
+        sparse = self.page("sparse")
         self.assertEqual(sparse["problems"], [])
         self.assertIn(self.sparse["scored_text"], sparse["facts"])
         self.assertIn("5 separate axial slices", sparse["read"])
@@ -676,15 +779,25 @@ class BrowserTests(unittest.TestCase):
                     self.assertEqual(step["now"], "The crosshair is outside the analysed slices.")
 
     def test_a_page_that_cannot_be_right_draws_nothing_and_says_so(self):
-        expected = {"truncated": "could not be unpacked", "altered": "does not match its checksum", "old_browser": "cannot unpack"}
+        expected = {
+            "truncated": "could not be unpacked",
+            "altered": "does not match its checksum",
+            "altered_map": "does not match its checksum",
+            "mirrored_map": "does not match its checksum",  # the right values in the wrong places
+            "old_browser": "cannot unpack",
+        }
         for name, words in expected.items():
             with self.subTest(page=name):
                 refused = self.report[name]
+                self.assertFalse(refused["drew"])
                 self.assertIn(words, refused["status"])
                 self.assertFalse(refused["status_hidden"])
+                self.assertTrue(refused["status_marked"])
                 self.assertEqual(refused["drawn"], 0)
                 self.assertFalse(refused["exposed"])
-                self.assertEqual(refused["problems"], [])  # using the controls afterwards raises no error
+                self.assertEqual(refused["left_on_screen"], 0)  # no empty views, no dead controls
+                self.assertEqual(refused["spinning"], "false")
+                self.assertEqual(refused["problems"], [])  # poking the controls afterwards raises no error
 
 
 if __name__ == "__main__":

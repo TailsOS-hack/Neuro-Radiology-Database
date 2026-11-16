@@ -22,6 +22,7 @@ except Exception:
 import ollama
 import threading
 import queue
+import time
 import webbrowser
 from pathlib import Path
 import io
@@ -283,6 +284,13 @@ class App(ttk.Frame):
         self.model_used_label = ttk.Label(result_frame, text="Model Used: -", foreground="#555", justify="left")
         self.model_used_label.pack(anchor="w", fill="x")
         self._wrap_to_width(self.model_used_label)
+        # Where the last 3D map was saved: one line that stays on screen after the dialogs and can be selected
+        # and copied. It is shown once there is something to show (see _show_saved_folder).
+        self.saved_var = tk.StringVar(value="")
+        self.saved_row = ttk.Frame(result_frame)
+        ttk.Label(self.saved_row, text="3D map saved in:", foreground="#555").pack(side="left")
+        self.saved_entry = ttk.Entry(self.saved_row, textvariable=self.saved_var, state="readonly")
+        self.saved_entry.pack(side="left", fill="x", expand=True, padx=(4, 0))
 
         # 4. Progress Bar (Bottom, above results)
         self.progress_bar = ttk.Progressbar(left_frame, mode='indeterminate')
@@ -555,8 +563,19 @@ class App(ttk.Frame):
         entry.insert(0, value)
         self._header_fields.append((entry, value, default))
 
+    def _show_saved_folder(self, folder: str = "") -> None:
+        """Show where the 3D map was saved, or take the line away when there is nothing saved for this scan."""
+
+        self.saved_var.set(folder)
+        if folder:
+            self.saved_row.pack(anchor="w", fill="x", pady=(2, 0))
+            self.saved_entry.xview_moveto(1.0)  # a long path shows its end, which names the folder
+        else:
+            self.saved_row.pack_forget()
+
     def _reset_scan_state(self):
         self._clear_header_fields()
+        self._show_saved_folder()
         self.volume = None
         self.volume_window = None
         self.volume_series = []
@@ -628,7 +647,9 @@ class App(ttk.Frame):
         elif kind == "saved":
             self._set_busy(False)
             self.pred_label.configure(text=f"Prediction: {self.volume_result.predicted_label} (research AD/CN score)")
-            text = f"3D Grad-CAM written to:\n{message[1]}\n\n" + "\n".join(sorted(message[2]))
+            folder = os.path.abspath(message[1])
+            self._show_saved_folder(folder)
+            text = f"3D Grad-CAM written to:\n{folder}\n\n" + "\n".join(sorted(message[2]))
             if "viewer.html" not in message[2]:
                 messagebox.showinfo(
                     "Saved",
@@ -639,10 +660,7 @@ class App(ttk.Frame):
                 text + "\n\nOpen the interactive 3D viewer (viewer.html) in your browser?\n"
                 "If no browser window appears, open that file from the folder above.",
             ):
-                self._open_viewer(Path(message[1], "viewer.html"))
-        elif kind == "viewer":
-            if not message[1]:
-                messagebox.showinfo("Viewer", f"No browser could be started. Open this file in a browser:\n{message[2]}")
+                self._open_viewer(Path(folder, "viewer.html"))
         else:
             self._set_busy(False)
             self.pred_label.configure(text="Prediction: -")
@@ -654,24 +672,46 @@ class App(ttk.Frame):
 
         label.bind("<Configure>", lambda event: label.configure(wraplength=max(80, event.width - 4)))
 
+    #: Python's own launchers can take about five seconds to report that nothing started. A launcher that ran
+    #: longer than this did show a browser (it returned when the browser was closed), whatever it reports then.
+    VIEWER_LAUNCH_GRACE_SECONDS = 8.0
+    #: How long the app waits to hear from the launcher. After that it is taken to be holding a browser open,
+    #: and whatever it reports later is not read.
+    VIEWER_LAUNCH_WAIT_SECONDS = 15.0
+
     def _open_viewer(self, viewer: Path) -> None:
         """Hand ``viewer.html`` to the default browser; say where the file is when no browser could be started.
 
-        Some launchers do not return until the browser is closed, so the call runs on its own thread and
-        the window stays responsive meanwhile.
+        Some launchers do not return until the browser is closed, so the call runs on its own thread and the
+        window stays responsive meanwhile. A launcher can also report success without opening anything, which
+        cannot be detected: the question before this step and the "3D map saved in" line name the folder for that case.
         """
 
         target = viewer.resolve()
+        outcome: queue.Queue = queue.Queue()
 
         def worker():
+            began = time.monotonic()
             try:
                 started = bool(webbrowser.open(target.as_uri()))
             except Exception:  # webbrowser raises its own Error, and launchers fail in their own ways
                 started = False
-            self.scan_queue.put(("viewer", started, str(target)))
+            outcome.put(started or time.monotonic() - began > self.VIEWER_LAUNCH_GRACE_SECONDS)
 
         threading.Thread(target=worker, daemon=True).start()
-        self.master.after(100, self._poll_scan_queue)
+        deadline = time.monotonic() + self.VIEWER_LAUNCH_WAIT_SECONDS
+
+        def check():
+            try:
+                started = outcome.get_nowait()
+            except queue.Empty:
+                if time.monotonic() < deadline:
+                    self.master.after(200, check)
+                return
+            if not started:
+                messagebox.showinfo("Viewer", f"No browser could be started. Open this file in a browser:\n{target}")
+
+        self.master.after(200, check)
 
     def _on_scan_loaded(self, path, volume, series):
         self._reset_scan_state()
@@ -793,6 +833,7 @@ class App(ttk.Frame):
         if self.volume is None:
             return
         self.report_html.set_html("<p><i>Scoring the whole scan and computing slice-wise Grad-CAM...</i></p>")
+        self._show_saved_folder()
         self._set_busy(True, "Prediction: Analyzing volume...")
         threading.Thread(target=self._volume_worker, daemon=True).start()
         self.master.after(100, self._poll_scan_queue)

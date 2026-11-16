@@ -100,7 +100,7 @@ Outputs in the output folder:
 | File | Content |
 |---|---|
 | `cross_validation.json` | Aggregate results: every person scored once by a model fitted without them; sensitivity and specificity with exact 95% intervals; balanced accuracy and AUROC with intervals from resampling people; results by CDR level; per-fold rows; checkpoint hashes. No per-person rows. |
-| `fold0.pt` ... `fold4.pt` | The five fold models. Together they are the ensemble. Each carries its class names, its slice policy and a notice stating what it was trained on and how it did. |
+| `fold0.pt` ... `fold4.pt` | The five fold models. Together they are the ensemble. Each carries its class names, its slice policy, a notice stating what it was trained on and how it did, and separately the sentence about the attention map, which the analysis adds only to a result that has a map. |
 | `fold<k>_history.json` | Loss per epoch and the selected epoch for each fold. |
 | `private/` | Per-person predictions and the prepared-slice cache. It contains its own `.gitignore`; never commit it. |
 
